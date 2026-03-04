@@ -1,17 +1,19 @@
 import { useState, useCallback } from 'react';
-import { Download, Upload, Users, Package, Code, ArrowLeft } from 'lucide-react';
+import { Download, Upload, Users, Package, Code, ArrowLeft, FlaskConical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { encryptSave } from '@/lib/crypto';
 import { DwellerEditor } from './DwellerEditor';
 import { ResourcesEditor } from './ResourcesEditor';
 import { RawJsonEditor } from './RawJsonEditor';
+import { RecipesEditor } from './RecipesEditor';
 import { toast } from 'sonner';
 
-type Tab = 'dwellers' | 'resources' | 'raw';
+type Tab = 'dwellers' | 'resources' | 'recipes' | 'raw';
 
 const TABS: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'dwellers', label: 'HABITANTS', icon: Users },
   { id: 'resources', label: 'RESSOURCES', icon: Package },
+  { id: 'recipes', label: 'RECHERCHES', icon: FlaskConical },
   { id: 'raw', label: 'BRUT', icon: Code },
 ];
 
@@ -110,10 +112,13 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
       <main className="flex-1 overflow-y-auto p-4">
         <div className="max-w-4xl mx-auto">
           {activeTab === 'dwellers' && (
-            <DwellerEditor dwellers={dwellers} onChange={updateDwellers} />
+            <DwellerEditor dwellers={dwellers} onChange={updateDwellers} saveData={data} />
           )}
           {activeTab === 'resources' && (
             <ResourcesEditor data={data} onChange={setData} />
+          )}
+          {activeTab === 'recipes' && (
+            <RecipesEditor data={data} onChange={setData} />
           )}
           {activeTab === 'raw' && (
             <RawJsonEditor data={data} onChange={setData} />
