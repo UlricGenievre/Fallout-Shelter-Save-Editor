@@ -112,7 +112,7 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
       <main className="flex-1 overflow-y-auto p-4">
         <div className="max-w-4xl mx-auto">
           {activeTab === 'dwellers' && (
-            <DwellerEditor dwellers={dwellers} onChange={updateDwellers} saveData={data} />
+            <DwellerEditor dwellers={dwellers} onChange={updateDwellers} />
           )}
           {activeTab === 'resources' && (
             <ResourcesEditor data={data} onChange={setData} />

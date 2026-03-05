@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { FlaskConical, Sword, Shirt } from 'lucide-react';
+import { FlaskConical, Sword, Shirt, Home, HelpCircle } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
-import { extractItemIds, classifyRecipes, itemIdToLabel } from '@/lib/gameData';
+import { classifyRecipes, getItemLabel } from '@/lib/gameData';
 
 interface RecipesEditorProps {
   data: any;
@@ -13,15 +13,7 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
   const claimedRecipes: string[] = data?.vault?.LunchboxesData?.claimedRecipes || [];
   const claimedSet = useMemo(() => new Set(claimedRecipes), [claimedRecipes]);
 
-  const { weapons: knownWeapons, outfits: knownOutfits } = useMemo(() => extractItemIds(data), [data]);
-
-  const classified = useMemo(() => {
-    return classifyRecipes(
-      recipes,
-      new Set(knownWeapons),
-      new Set(knownOutfits)
-    );
-  }, [recipes, knownWeapons, knownOutfits]);
+  const classified = useMemo(() => classifyRecipes(recipes), [recipes]);
 
   const toggleClaimed = (id: string) => {
     const updated = { ...data };
@@ -54,7 +46,7 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
                 onCheckedChange={() => toggleClaimed(id)}
               />
               <span className="text-sm truncate" title={id}>
-                {itemIdToLabel(id)}
+                {getItemLabel(id)}
               </span>
               <span className="text-xs text-muted-foreground ml-auto shrink-0">{id}</span>
             </label>
@@ -83,7 +75,8 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
 
       {renderSection('ARMES', <Sword className="w-4 h-4 text-primary" />, classified.weapons)}
       {renderSection('TENUES', <Shirt className="w-4 h-4 text-primary" />, classified.outfits)}
-      {renderSection('AUTRE', <FlaskConical className="w-4 h-4 text-muted-foreground" />, classified.other)}
+      {renderSection('THÈMES', <Home className="w-4 h-4 text-muted-foreground" />, classified.themes)}
+      {renderSection('INCONNU', <HelpCircle className="w-4 h-4 text-muted-foreground" />, classified.unknown)}
     </div>
   );
 }

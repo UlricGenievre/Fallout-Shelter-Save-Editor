@@ -1,8 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { ChevronDown, ChevronRight, User, Heart, Shield, Zap, Brain, Dumbbell, Footprints, Clover, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { extractItemIds, itemIdToLabel } from '@/lib/gameData';
+import { ALL_WEAPONS, ALL_OUTFITS, getItemLabel } from '@/lib/gameData';
 
 const STAT_NAMES = ['S', 'P', 'E', 'C', 'I', 'A', 'L', '?'];
 const STAT_ICONS = [Dumbbell, Search, Shield, Heart, Brain, Footprints, Clover, Zap];
@@ -10,14 +10,11 @@ const STAT_ICONS = [Dumbbell, Search, Shield, Heart, Brain, Footprints, Clover, 
 interface DwellerEditorProps {
   dwellers: any[];
   onChange: (dwellers: any[]) => void;
-  saveData: any;
 }
 
-export function DwellerEditor({ dwellers, onChange, saveData }: DwellerEditorProps) {
+export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-
-  const { weapons, outfits } = useMemo(() => extractItemIds(saveData), [saveData]);
 
   const updateDweller = (index: number, path: string, value: any) => {
     const updated = [...dwellers];
@@ -86,17 +83,11 @@ export function DwellerEditor({ dwellers, onChange, saveData }: DwellerEditorPro
                   <div className="grid grid-cols-2 gap-3 pt-3">
                     <div>
                       <label className="text-xs text-muted-foreground font-display">PRÉNOM</label>
-                      <Input
-                        value={dweller.name}
-                        onChange={(e) => updateDweller(dweller._idx, 'name', e.target.value)}
-                      />
+                      <Input value={dweller.name} onChange={(e) => updateDweller(dweller._idx, 'name', e.target.value)} />
                     </div>
                     <div>
                       <label className="text-xs text-muted-foreground font-display">NOM</label>
-                      <Input
-                        value={dweller.lastName}
-                        onChange={(e) => updateDweller(dweller._idx, 'lastName', e.target.value)}
-                      />
+                      <Input value={dweller.lastName} onChange={(e) => updateDweller(dweller._idx, 'lastName', e.target.value)} />
                     </div>
                   </div>
 
@@ -170,12 +161,14 @@ export function DwellerEditor({ dwellers, onChange, saveData }: DwellerEditorPro
                         onValueChange={(val) => updateDweller(dweller._idx, 'equipedWeapon.id', val)}
                       >
                         <SelectTrigger className="h-9 text-xs">
-                          <SelectValue placeholder="Aucune arme" />
+                          <SelectValue placeholder="Aucune arme">
+                            {dweller.equipedWeapon?.id ? getItemLabel(dweller.equipedWeapon.id) : 'Aucune arme'}
+                          </SelectValue>
                         </SelectTrigger>
                         <SelectContent className="max-h-60">
-                          {weapons.map((id) => (
-                            <SelectItem key={id} value={id} className="text-xs">
-                              {itemIdToLabel(id)}
+                          {ALL_WEAPONS.map((w) => (
+                            <SelectItem key={w.id} value={w.id} className="text-xs">
+                              {w.label}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -188,12 +181,14 @@ export function DwellerEditor({ dwellers, onChange, saveData }: DwellerEditorPro
                         onValueChange={(val) => updateDweller(dweller._idx, 'equipedOutfit.id', val)}
                       >
                         <SelectTrigger className="h-9 text-xs">
-                          <SelectValue placeholder="Aucune tenue" />
+                          <SelectValue placeholder="Aucune tenue">
+                            {dweller.equipedOutfit?.id ? getItemLabel(dweller.equipedOutfit.id) : 'Aucune tenue'}
+                          </SelectValue>
                         </SelectTrigger>
                         <SelectContent className="max-h-60">
-                          {outfits.map((id) => (
-                            <SelectItem key={id} value={id} className="text-xs">
-                              {itemIdToLabel(id)}
+                          {ALL_OUTFITS.map((o) => (
+                            <SelectItem key={o.id} value={o.id} className="text-xs">
+                              {o.label}
                             </SelectItem>
                           ))}
                         </SelectContent>
