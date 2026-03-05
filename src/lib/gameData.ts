@@ -1,87 +1,84 @@
-// Utility to extract weapon and outfit IDs from save data
-
-export type ItemType = 'Weapon' | 'Outfit';
+import itemsData from '@/data/items.json';
 
 export interface GameItem {
   id: string;
-  type: ItemType;
+  label: string;
+  category: string;
+  rarity?: string;
+}
+
+// Build lookup maps from static JSON
+const weaponMap = new Map<string, GameItem>(itemsData.weapons.map(w => [w.id, w]));
+const outfitMap = new Map<string, GameItem>(itemsData.outfits.map(o => [o.id, o]));
+const themeMap = new Map<string, GameItem>(itemsData.themes.map(t => [t.id, t]));
+
+/** All known weapon IDs */
+export const ALL_WEAPONS: GameItem[] = itemsData.weapons;
+/** All known outfit IDs */
+export const ALL_OUTFITS: GameItem[] = itemsData.outfits;
+/** All known theme/room IDs */
+export const ALL_THEMES: GameItem[] = itemsData.themes;
+
+/** Get a human-readable label for any item ID */
+export function getItemLabel(id: string): string {
+  return weaponMap.get(id)?.label
+    ?? outfitMap.get(id)?.label
+    ?? themeMap.get(id)?.label
+    ?? itemIdToLabel(id);
+}
+
+/** Get item type: 'weapon', 'outfit', 'theme', or 'unknown' */
+export function getItemType(id: string): 'weapon' | 'outfit' | 'theme' | 'unknown' {
+  if (weaponMap.has(id)) return 'weapon';
+  if (outfitMap.has(id)) return 'outfit';
+  if (themeMap.has(id)) return 'theme';
+  return 'unknown';
 }
 
 /**
- * Recursively scan the entire save JSON to find all items with type "Weapon" or "Outfit".
- * Returns deduplicated sets of weapon IDs and outfit IDs.
+ * Classify recipes into weapons, outfits, themes and unknown.
  */
-export function extractItemIds(data: any): { weapons: string[]; outfits: string[] } {
-  const weaponSet = new Set<string>();
-  const outfitSet = new Set<string>();
-
-  function scan(obj: any) {
-    if (!obj || typeof obj !== 'object') return;
-
-    if (Array.isArray(obj)) {
-      for (const item of obj) scan(item);
-      return;
-    }
-
-    // Check if this object is an item with id + type
-    if (obj.id && typeof obj.id === 'string' && obj.type) {
-      if (obj.type === 'Weapon') weaponSet.add(obj.id);
-      else if (obj.type === 'Outfit') outfitSet.add(obj.id);
-    }
-
-    for (const key of Object.keys(obj)) {
-      scan(obj[key]);
-    }
-  }
-
-  scan(data);
-
-  return {
-    weapons: [...weaponSet].sort(),
-    outfits: [...outfitSet].sort(),
-  };
-}
-
-/**
- * Classify recipes into weapons, outfits, and other (themes/rooms).
- */
-export function classifyRecipes(
-  recipes: string[],
-  knownWeapons: Set<string>,
-  knownOutfits: Set<string>
-): { weapons: string[]; outfits: string[]; other: string[] } {
+export function classifyRecipes(recipes: string[]): {
+  weapons: string[];
+  outfits: string[];
+  themes: string[];
+  unknown: string[];
+} {
   const weapons: string[] = [];
   const outfits: string[] = [];
-  const other: string[] = [];
+  const themes: string[] = [];
+  const unknown: string[] = [];
   const seen = new Set<string>();
 
   for (const id of recipes) {
     if (seen.has(id)) continue;
     seen.add(id);
-
-    if (knownWeapons.has(id)) weapons.push(id);
-    else if (knownOutfits.has(id)) outfits.push(id);
-    else other.push(id);
+    const type = getItemType(id);
+    if (type === 'weapon') weapons.push(id);
+    else if (type === 'outfit') outfits.push(id);
+    else if (type === 'theme') themes.push(id);
+    else unknown.push(id);
   }
 
-  return { weapons: weapons.sort(), outfits: outfits.sort(), other: other.sort() };
+  return {
+    weapons: weapons.sort(),
+    outfits: outfits.sort(),
+    themes: themes.sort(),
+    unknown: unknown.sort(),
+  };
 }
 
 /**
- * Convert a camelCase/PascalCase item ID to a human-readable label.
- * e.g. "032Pistol_Rusty" → ".32 Pistol (Rusty)"
- *      "LaserRifle_Tuned" → "Laser Rifle (Tuned)"
+ * Fallback: Convert a camelCase/PascalCase item ID to a human-readable label.
  */
 export function itemIdToLabel(id: string): string {
   const parts = id.split('_');
   const base = parts[0];
   const variant = parts.slice(1).join(' ');
 
-  // Insert spaces before capitals
   let label = base.replace(/([a-z])([A-Z])/g, '$1 $2')
     .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2');
 
-  // Handle leading numbers like "032"
   if (/^\d+/.test(label)) {
     label = '.' + label.replace(/^0+/, '');
   }
