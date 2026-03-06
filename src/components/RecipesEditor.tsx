@@ -9,20 +9,23 @@ interface RecipesEditorProps {
 }
 
 export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
-  const recipes: string[] = data?.vault?.survivalW?.recipes || [];
-  const claimedRecipes: string[] = data?.vault?.survivalW?.claimedRecipes || [];
+  const recipes: string[] = data?.vault?.survivalW?.recipes || data?.survivalW?.recipes || [];
+  const claimedRecipes: string[] = data?.vault?.survivalW?.claimedRecipes || data?.survivalW?.claimedRecipes || [];
   const claimedSet = useMemo(() => new Set(claimedRecipes), [claimedRecipes]);
 
   const classified = useMemo(() => classifyRecipes(recipes), [recipes]);
 
+  const getSurvivalW = (d: any) => d?.vault?.survivalW || d?.survivalW;
+
   const toggleClaimed = (id: string) => {
     const updated = { ...data };
-    const current: string[] = updated.vault.survivalW.claimedRecipes || [];
+    const sw = getSurvivalW(updated);
+    const current: string[] = sw.claimedRecipes || [];
 
     if (current.includes(id)) {
-      updated.vault.survivalW.claimedRecipes = current.filter((r: string) => r !== id);
+      sw.claimedRecipes = current.filter((r: string) => r !== id);
     } else {
-      updated.vault.survivalW.claimedRecipes = [...current, id];
+      sw.claimedRecipes = [...current, id];
     }
     onChange(updated);
   };
