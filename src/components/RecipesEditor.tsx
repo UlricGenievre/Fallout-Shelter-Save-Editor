@@ -9,20 +9,20 @@ interface RecipesEditorProps {
 }
 
 export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
-  const recipes: string[] = data?.vault?.LunchboxesData?.recipes || [];
-  const claimedRecipes: string[] = data?.vault?.LunchboxesData?.claimedRecipes || [];
+  const recipes: string[] = data?.vault?.survivalW?.recipes || [];
+  const claimedRecipes: string[] = data?.vault?.survivalW?.claimedRecipes || [];
   const claimedSet = useMemo(() => new Set(claimedRecipes), [claimedRecipes]);
 
   const classified = useMemo(() => classifyRecipes(recipes), [recipes]);
 
   const toggleClaimed = (id: string) => {
     const updated = { ...data };
-    const current: string[] = updated.vault.LunchboxesData.claimedRecipes || [];
+    const current: string[] = updated.vault.survivalW.claimedRecipes || [];
 
     if (current.includes(id)) {
-      updated.vault.LunchboxesData.claimedRecipes = current.filter((r: string) => r !== id);
+      updated.vault.survivalW.claimedRecipes = current.filter((r: string) => r !== id);
     } else {
-      updated.vault.LunchboxesData.claimedRecipes = [...current, id];
+      updated.vault.survivalW.claimedRecipes = [...current, id];
     }
     onChange(updated);
   };
@@ -59,7 +59,7 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
   if (recipes.length === 0) {
     return (
       <div className="text-muted-foreground text-sm font-display">
-        Aucune recette trouvée dans la sauvegarde.
+        Aucune recette trouvée dans vault.survivalW.recipes.
       </div>
     );
   }
@@ -69,7 +69,7 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
       <div className="flex items-center gap-3">
         <FlaskConical className="w-5 h-5 text-primary" />
         <h2 className="text-xl font-display pip-text-glow">
-          RECHERCHES ({recipes.length} recettes, {claimedRecipes.length} réclamées)
+          RECETTES ({recipes.length} recettes, {claimedRecipes.length} réclamées)
         </h2>
       </div>
 
