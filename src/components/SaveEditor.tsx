@@ -13,7 +13,7 @@ type Tab = 'dwellers' | 'resources' | 'recipes' | 'raw';
 const TABS: { id: Tab; label: string; icon: typeof Users }[] = [
   { id: 'dwellers', label: 'HABITANTS', icon: Users },
   { id: 'resources', label: 'RESSOURCES', icon: Package },
-  { id: 'recipes', label: 'RECHERCHES', icon: FlaskConical },
+  { id: 'recipes', label: 'RECETTES', icon: FlaskConical },
   { id: 'raw', label: 'BRUT', icon: Code },
 ];
 
