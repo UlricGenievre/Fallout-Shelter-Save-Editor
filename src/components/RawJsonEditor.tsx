@@ -93,7 +93,7 @@ function JsonNode({
         )}
         {expanded && value.length > 50 && (
           <div className="text-xs text-muted-foreground pl-4 py-1">
-            Tableau trop grand ({value.length} éléments) - modifiez via les onglets dédiés
+            Array too large ({value.length} items) — edit via the dedicated tabs
           </div>
         )}
       </div>
@@ -136,7 +136,7 @@ export function RawJsonEditor({ data, onChange }: RawJsonEditorProps) {
     <div className="space-y-2">
       <div className="flex items-center gap-3 mb-4">
         <Code className="w-5 h-5 text-primary" />
-        <h2 className="text-xl font-display pip-text-glow">DONNÉES BRUTES</h2>
+        <h2 className="text-xl font-display pip-text-glow">RAW DATA</h2>
       </div>
 
       <div className="max-h-[70vh] overflow-y-auto text-foreground space-y-0">
