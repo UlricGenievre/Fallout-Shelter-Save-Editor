@@ -7,10 +7,10 @@ interface ResourcesEditorProps {
 }
 
 const RESOURCE_CONFIG = [
-  { key: 'Nuka', label: 'Capsules', icon: Package },
-  { key: 'Food', label: 'Nourriture', icon: UtensilsCrossed },
-  { key: 'Water', label: 'Eau', icon: Droplets },
-  { key: 'Energy', label: 'Énergie', icon: Zap },
+  { key: 'Nuka', label: 'Caps', icon: Package },
+  { key: 'Food', label: 'Food', icon: UtensilsCrossed },
+  { key: 'Water', label: 'Water', icon: Droplets },
+  { key: 'Energy', label: 'Energy', icon: Zap },
   { key: 'StimPack', label: 'Stimpaks', icon: Pill },
   { key: 'RadAway', label: 'RadAway', icon: Radiation },
   { key: 'NukaColaQuantum', label: 'Nuka Quantum', icon: FlaskConical },
@@ -20,12 +20,11 @@ const RESOURCE_CONFIG = [
 ];
 
 export function ResourcesEditor({ data, onChange }: ResourcesEditorProps) {
-  // Find the vault storage resources - they're in the vault.storage.resources path
   const storage = data?.vault?.storage;
   if (!storage?.resources) {
     return (
       <div className="text-muted-foreground text-sm font-display">
-        Aucune ressource trouvée dans la sauvegarde.
+        No resources found in the save file.
       </div>
     );
   }
@@ -42,7 +41,7 @@ export function ResourcesEditor({ data, onChange }: ResourcesEditorProps) {
     <div className="space-y-4">
       <div className="flex items-center gap-3">
         <Package className="w-5 h-5 text-primary" />
-        <h2 className="text-xl font-display pip-text-glow">RESSOURCES</h2>
+        <h2 className="text-xl font-display pip-text-glow">RESOURCES</h2>
       </div>
 
       <div className="grid grid-cols-2 gap-3">

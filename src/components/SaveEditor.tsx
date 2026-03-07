@@ -11,10 +11,10 @@ import { toast } from 'sonner';
 type Tab = 'dwellers' | 'resources' | 'recipes' | 'raw';
 
 const TABS: { id: Tab; label: string; icon: typeof Users }[] = [
-  { id: 'dwellers', label: 'HABITANTS', icon: Users },
-  { id: 'resources', label: 'RESSOURCES', icon: Package },
-  { id: 'recipes', label: 'RECETTES', icon: FlaskConical },
-  { id: 'raw', label: 'BRUT', icon: Code },
+  { id: 'dwellers', label: 'DWELLERS', icon: Users },
+  { id: 'resources', label: 'RESOURCES', icon: Package },
+  { id: 'recipes', label: 'RECIPES', icon: FlaskConical },
+  { id: 'raw', label: 'RAW', icon: Code },
 ];
 
 interface SaveEditorProps {
@@ -45,7 +45,7 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
     a.download = fileName.replace('.sav', '.json');
     a.click();
     URL.revokeObjectURL(url);
-    toast.success('Fichier JSON téléchargé');
+    toast.success('JSON file downloaded');
   }, [data, fileName]);
 
   const downloadEncrypted = useCallback(async () => {
@@ -60,10 +60,10 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
       a.download = fileName.endsWith('.sav') ? fileName : fileName.replace('.json', '.sav');
       a.click();
       URL.revokeObjectURL(url);
-      toast.success('Fichier .sav chiffré téléchargé');
+      toast.success('Encrypted .sav file downloaded');
     } catch (e) {
       console.error(e);
-      toast.error('Erreur lors du chiffrement');
+      toast.error('Encryption error');
     } finally {
       setSaving(false);
     }
@@ -71,14 +71,13 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
 
   return (
     <div className="flex flex-col h-screen">
-      {/* Header */}
       <header className="border-b border-border px-4 py-3 flex items-center gap-4 bg-card/50 scanline">
         <Button variant="ghost" size="icon" onClick={onBack}>
           <ArrowLeft className="w-4 h-4" />
         </Button>
         <div className="flex-1">
           <h1 className="font-display text-lg pip-text-glow tracking-wider">{fileName}</h1>
-          <p className="text-xs text-muted-foreground">{dwellers.length} habitants</p>
+          <p className="text-xs text-muted-foreground">{dwellers.length} dwellers</p>
         </div>
         <Button variant="outline" size="sm" onClick={downloadJson}>
           <Download className="w-3.5 h-3.5 mr-1.5" />
@@ -86,11 +85,10 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
         </Button>
         <Button size="sm" onClick={downloadEncrypted} disabled={saving}>
           <Upload className="w-3.5 h-3.5 mr-1.5" />
-          {saving ? 'Chiffrement...' : '.SAV'}
+          {saving ? 'Encrypting...' : '.SAV'}
         </Button>
       </header>
 
-      {/* Tabs */}
       <nav className="flex border-b border-border bg-card/30">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button
@@ -108,7 +106,6 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
         ))}
       </nav>
 
-      {/* Content */}
       <main className="flex-1 overflow-y-auto p-4">
         <div className="max-w-4xl mx-auto">
           {activeTab === 'dwellers' && (
