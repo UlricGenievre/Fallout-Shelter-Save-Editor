@@ -38,11 +38,11 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
     <div className="space-y-3">
       <div className="flex items-center gap-3 mb-4">
         <User className="w-5 h-5 text-primary" />
-        <h2 className="text-xl font-display pip-text-glow">HABITANTS ({dwellers.length})</h2>
+        <h2 className="text-xl font-display pip-text-glow">DWELLERS ({dwellers.length})</h2>
       </div>
 
       <Input
-        placeholder="Rechercher un habitant..."
+        placeholder="Search dwellers..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className="mb-4"
@@ -79,27 +79,25 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
 
               {isExpanded && (
                 <div className="px-3 pb-3 space-y-4 border-t border-border bg-card/50">
-                  {/* Identity */}
                   <div className="grid grid-cols-2 gap-3 pt-3">
                     <div>
-                      <label className="text-xs text-muted-foreground font-display">PRÉNOM</label>
+                      <label className="text-xs text-muted-foreground font-display">FIRST NAME</label>
                       <Input value={dweller.name} onChange={(e) => updateDweller(dweller._idx, 'name', e.target.value)} />
                     </div>
                     <div>
-                      <label className="text-xs text-muted-foreground font-display">NOM</label>
+                      <label className="text-xs text-muted-foreground font-display">LAST NAME</label>
                       <Input value={dweller.lastName} onChange={(e) => updateDweller(dweller._idx, 'lastName', e.target.value)} />
                     </div>
                   </div>
 
-                  {/* Health & Happiness */}
                   <div className="grid grid-cols-3 gap-3">
                     <div>
-                      <label className="text-xs text-muted-foreground font-display">VIE</label>
+                      <label className="text-xs text-muted-foreground font-display">HEALTH</label>
                       <Input type="number" value={dweller.health?.healthValue ?? 0}
                         onChange={(e) => updateDweller(dweller._idx, 'health.healthValue', parseFloat(e.target.value) || 0)} />
                     </div>
                     <div>
-                      <label className="text-xs text-muted-foreground font-display">VIE MAX</label>
+                      <label className="text-xs text-muted-foreground font-display">MAX HEALTH</label>
                       <Input type="number" value={dweller.health?.maxHealth ?? 0}
                         onChange={(e) => updateDweller(dweller._idx, 'health.maxHealth', parseFloat(e.target.value) || 0)} />
                     </div>
@@ -112,12 +110,12 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
 
                   <div className="grid grid-cols-3 gap-3">
                     <div>
-                      <label className="text-xs text-muted-foreground font-display">BONHEUR</label>
+                      <label className="text-xs text-muted-foreground font-display">HAPPINESS</label>
                       <Input type="number" min={0} max={100} value={dweller.happiness?.happinessValue ?? 0}
                         onChange={(e) => updateDweller(dweller._idx, 'happiness.happinessValue', parseFloat(e.target.value) || 0)} />
                     </div>
                     <div>
-                      <label className="text-xs text-muted-foreground font-display">NIVEAU</label>
+                      <label className="text-xs text-muted-foreground font-display">LEVEL</label>
                       <Input type="number" min={1} max={50} value={dweller.experience?.currentLevel ?? 1}
                         onChange={(e) => updateDweller(dweller._idx, 'experience.currentLevel', parseInt(e.target.value) || 1)} />
                     </div>
@@ -128,7 +126,6 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                     </div>
                   </div>
 
-                  {/* SPECIAL Stats */}
                   <div>
                     <label className="text-xs text-muted-foreground font-display block mb-2">S.P.E.C.I.A.L.</label>
                     <div className="grid grid-cols-4 gap-2">
@@ -152,17 +149,16 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                     </div>
                   </div>
 
-                  {/* Equipment - Dropdowns */}
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-xs text-muted-foreground font-display">ARME</label>
+                      <label className="text-xs text-muted-foreground font-display">WEAPON</label>
                       <Select
                         value={dweller.equipedWeapon?.id ?? ''}
                         onValueChange={(val) => updateDweller(dweller._idx, 'equipedWeapon.id', val)}
                       >
                         <SelectTrigger className="h-9 text-xs">
-                          <SelectValue placeholder="Aucune arme">
-                            {dweller.equipedWeapon?.id ? getItemLabel(dweller.equipedWeapon.id) : 'Aucune arme'}
+                          <SelectValue placeholder="No weapon">
+                            {dweller.equipedWeapon?.id ? getItemLabel(dweller.equipedWeapon.id) : 'No weapon'}
                           </SelectValue>
                         </SelectTrigger>
                         <SelectContent className="max-h-60">
@@ -175,14 +171,14 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                       </Select>
                     </div>
                     <div>
-                      <label className="text-xs text-muted-foreground font-display">TENUE</label>
+                      <label className="text-xs text-muted-foreground font-display">OUTFIT</label>
                       <Select
                         value={dweller.equipedOutfit?.id ?? ''}
                         onValueChange={(val) => updateDweller(dweller._idx, 'equipedOutfit.id', val)}
                       >
                         <SelectTrigger className="h-9 text-xs">
-                          <SelectValue placeholder="Aucune tenue">
-                            {dweller.equipedOutfit?.id ? getItemLabel(dweller.equipedOutfit.id) : 'Aucune tenue'}
+                          <SelectValue placeholder="No outfit">
+                            {dweller.equipedOutfit?.id ? getItemLabel(dweller.equipedOutfit.id) : 'No outfit'}
                           </SelectValue>
                         </SelectTrigger>
                         <SelectContent className="max-h-60">

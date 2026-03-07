@@ -19,20 +19,18 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
       const text = await file.text();
 
       if (file.name.endsWith('.sav')) {
-        // Decrypt .sav file
         const decrypted = await decryptSave(text);
         const json = JSON.parse(decrypted);
         onDataLoaded(json, file.name);
       } else if (file.name.endsWith('.json')) {
-        // Direct JSON
         const json = JSON.parse(text);
         onDataLoaded(json, file.name);
       } else {
-        setError('Format non supporté. Utilisez un fichier .sav ou .json');
+        setError('Unsupported format. Please use a .sav or .json file.');
       }
     } catch (e) {
       console.error(e);
-      setError('Erreur lors du déchiffrement/parsing du fichier. Vérifiez que le fichier est valide.');
+      setError('Error decrypting/parsing the file. Please check that it is valid.');
     } finally {
       setLoading(false);
     }
@@ -56,7 +54,7 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
           VAULT-TEC SAVE EDITOR
         </h1>
         <p className="text-muted-foreground text-lg">
-          Déchiffrer, modifier et réencoder vos sauvegardes Fallout Shelter
+          Decrypt, edit and re-encode your Fallout Shelter save files
         </p>
       </div>
 
@@ -69,15 +67,15 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
         {loading ? (
           <div className="animate-flicker">
             <FileText className="w-12 h-12 text-primary" />
-            <p className="text-foreground font-display mt-3">DÉCHIFFREMENT EN COURS...</p>
+            <p className="text-foreground font-display mt-3">DECRYPTING...</p>
           </div>
         ) : (
           <>
             <Upload className="w-12 h-12 text-muted-foreground" />
             <div className="text-center space-y-1">
-              <p className="text-foreground font-display">GLISSEZ VOTRE FICHIER ICI</p>
-              <p className="text-muted-foreground text-sm">ou cliquez pour sélectionner</p>
-              <p className="text-muted-foreground text-xs mt-2">.sav (chiffré) ou .json (déchiffré)</p>
+              <p className="text-foreground font-display">DROP YOUR FILE HERE</p>
+              <p className="text-muted-foreground text-sm">or click to browse</p>
+              <p className="text-muted-foreground text-xs mt-2">.sav (encrypted) or .json (decrypted)</p>
             </div>
           </>
         )}

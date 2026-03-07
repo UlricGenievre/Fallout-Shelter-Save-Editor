@@ -62,7 +62,7 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
   if (recipes.length === 0) {
     return (
       <div className="text-muted-foreground text-sm font-display">
-        Aucune recette trouvée dans vault.survivalW.recipes.
+        No recipes found in vault.survivalW.recipes.
       </div>
     );
   }
@@ -72,14 +72,14 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
       <div className="flex items-center gap-3">
         <FlaskConical className="w-5 h-5 text-primary" />
         <h2 className="text-xl font-display pip-text-glow">
-          RECETTES ({recipes.length} recettes, {claimedRecipes.length} réclamées)
+          RECIPES ({recipes.length} recipes, {claimedRecipes.length} claimed)
         </h2>
       </div>
 
-      {renderSection('ARMES', <Sword className="w-4 h-4 text-primary" />, classified.weapons)}
-      {renderSection('TENUES', <Shirt className="w-4 h-4 text-primary" />, classified.outfits)}
-      {renderSection('THÈMES', <Home className="w-4 h-4 text-muted-foreground" />, classified.themes)}
-      {renderSection('INCONNU', <HelpCircle className="w-4 h-4 text-muted-foreground" />, classified.unknown)}
+      {renderSection('WEAPONS', <Sword className="w-4 h-4 text-primary" />, classified.weapons)}
+      {renderSection('OUTFITS', <Shirt className="w-4 h-4 text-primary" />, classified.outfits)}
+      {renderSection('THEMES', <Home className="w-4 h-4 text-muted-foreground" />, classified.themes)}
+      {renderSection('UNKNOWN', <HelpCircle className="w-4 h-4 text-muted-foreground" />, classified.unknown)}
     </div>
   );
 }
