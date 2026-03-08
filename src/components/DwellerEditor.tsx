@@ -67,9 +67,16 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
     if (d.experience) {
       d.experience.currentLevel = 50;
       d.experience.lastLevelUpdated = 50;
+      d.experience.experienceValue = 2916000;
+    }
+    const endurance = d.stats?.stats?.[STAT_OFFSET + 2]?.value ?? 1;
+    const optimal = 105 + (2.5 + 0.5 * (endurance + 7)) * 49;
+    if (d.health) {
+      d.health.healthValue = optimal;
+      d.health.maxHealth = optimal;
     }
     onChange(updated);
-    toast.success('Dweller set to level 50');
+    toast.success(`Dweller set to Lv.50 — HP: ${Math.round(optimal)} (E=${endurance})`);
   };
 
   const maxAllSpecial = (index: number) => {
