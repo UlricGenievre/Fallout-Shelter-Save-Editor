@@ -130,12 +130,34 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
         <h2 className="text-xl font-display pip-text-glow">DWELLERS ({dwellers.length})</h2>
       </div>
 
-      <Input
-        placeholder="Search dwellers..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="mb-4"
-      />
+      <div className="flex items-center gap-2 mb-4">
+        <Input
+          placeholder="Search dwellers..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="flex-1"
+        />
+        <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortOption)}>
+          <SelectTrigger className="w-32">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="name">Name</SelectItem>
+            <SelectItem value="level">Level</SelectItem>
+            {STAT_NAMES.map(s => (
+              <SelectItem key={s} value={s}>{s}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => setSortDesc(!sortDesc)}
+          title={sortDesc ? 'Descending' : 'Ascending'}
+        >
+          {sortDesc ? '↓' : '↑'}
+        </Button>
+      </div>
 
       <div className="space-y-1 max-h-[70vh] overflow-y-auto pr-1">
         {filtered.map((dweller) => {
