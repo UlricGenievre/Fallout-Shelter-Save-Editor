@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronRight, User, Heart, Shield, Zap, Brain, Dumbbell, Footprints, Clover, Search, RotateCcw, HeartPulse } from 'lucide-react';
+import { ChevronDown, ChevronRight, User, Heart, Shield, Zap, Brain, Dumbbell, Footprints, Clover, Search, RotateCcw, HeartPulse, ArrowUp, Star } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ALL_WEAPONS, ALL_OUTFITS, getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
 import { toast } from 'sonner';
-const STAT_NAMES = ['S', 'P', 'E', 'C', 'I', 'A', 'L', '?'];
-const STAT_ICONS = [Dumbbell, Search, Shield, Heart, Brain, Footprints, Clover, Zap];
+// Stats array in save: index 0 is unused, real SPECIAL starts at index 1
+const STAT_OFFSET = 1;
+const STAT_NAMES = ['S', 'P', 'E', 'C', 'I', 'A', 'L'];
+const STAT_ICONS = [Dumbbell, Search, Shield, Heart, Brain, Footprints, Clover];
 
 interface DwellerEditorProps {
   dwellers: any[];
@@ -48,9 +50,8 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
   const optimizeHealth = (index: number) => {
     const updated = [...dwellers];
     const d = updated[index];
-    const endurance = d.stats?.stats?.[2]?.value ?? 1;
+    const endurance = d.stats?.stats?.[STAT_OFFSET + 2]?.value ?? 1; // E is 3rd SPECIAL (index 2 + offset)
     const level = d.experience?.currentLevel ?? 1;
-    // Health = 105 + (2.5 + 0.5 * (E + 7)) * (LVL - 1)
     const optimal = 105 + (2.5 + 0.5 * (endurance + 7)) * (level - 1);
     if (d.health) {
       d.health.healthValue = optimal;
@@ -58,6 +59,31 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
     }
     onChange(updated);
     toast.success(`Health optimized: ${Math.round(optimal)} (E=${endurance}, Lv.${level})`);
+  };
+
+  const setLevel50 = (index: number) => {
+    const updated = [...dwellers];
+    const d = updated[index];
+    if (d.experience) {
+      d.experience.currentLevel = 50;
+      d.experience.lastLevelUpdated = 50;
+    }
+    onChange(updated);
+    toast.success('Dweller set to level 50');
+  };
+
+  const maxAllSpecial = (index: number) => {
+    const updated = [...dwellers];
+    const d = updated[index];
+    if (d.stats?.stats) {
+      for (let i = 0; i < 7; i++) {
+        if (d.stats.stats[STAT_OFFSET + i]) {
+          d.stats.stats[STAT_OFFSET + i].value = 10;
+        }
+      }
+    }
+    onChange(updated);
+    toast.success('All S.P.E.C.I.A.L. set to 10');
   };
 
   const filtered = dwellers
@@ -132,6 +158,24 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                         </TooltipTrigger>
                         <TooltipContent>Set HP based on E stat: 105 + (2.5 + 0.5×(E+7)) × (LVL-1)</TooltipContent>
                       </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="sm" onClick={() => setLevel50(dweller._idx)}>
+                            <ArrowUp className="w-3.5 h-3.5 mr-1.5" />
+                            Lv.50
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Set dweller to level 50</TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="sm" onClick={() => maxAllSpecial(dweller._idx)}>
+                            <Star className="w-3.5 h-3.5 mr-1.5" />
+                            Max SPECIAL
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Set all S.P.E.C.I.A.L. stats to 10</TooltipContent>
+                      </Tooltip>
                     </TooltipProvider>
                   </div>
 
@@ -185,17 +229,19 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                   <div>
                     <label className="text-xs text-muted-foreground font-display block mb-2">S.P.E.C.I.A.L.</label>
                     <div className="grid grid-cols-4 gap-2">
-                      {dweller.stats?.stats?.map((stat: any, si: number) => {
-                        if (si >= 7) return null;
+                      {STAT_NAMES.map((name, si) => {
+                        const realIndex = STAT_OFFSET + si;
+                        const stat = dweller.stats?.stats?.[realIndex];
+                        if (!stat) return null;
                         const Icon = STAT_ICONS[si];
                         return (
                           <div key={si} className="flex items-center gap-1.5">
                             <Icon className="w-3.5 h-3.5 text-primary shrink-0" />
-                            <span className="text-xs font-display w-3">{STAT_NAMES[si]}</span>
+                            <span className="text-xs font-display w-3">{name}</span>
                             <Input type="number" min={1} max={10} value={stat.value}
                               onChange={(e) => {
                                 const updated = [...dwellers];
-                                updated[dweller._idx].stats.stats[si].value = parseInt(e.target.value) || 1;
+                                updated[dweller._idx].stats.stats[realIndex].value = parseInt(e.target.value) || 1;
                                 onChange(updated);
                               }}
                               className="h-7 text-xs" />
