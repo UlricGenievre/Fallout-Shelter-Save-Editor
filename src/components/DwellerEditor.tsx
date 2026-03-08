@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronRight, User, Heart, Shield, Zap, Brain, Dumbbell, Footprints, Clover, Search } from 'lucide-react';
+import { ChevronDown, ChevronRight, User, Heart, Shield, Zap, Brain, Dumbbell, Footprints, Clover, Search, RotateCcw, HeartPulse } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ALL_WEAPONS, ALL_OUTFITS, getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
-
+import { toast } from 'sonner';
 const STAT_NAMES = ['S', 'P', 'E', 'C', 'I', 'A', 'L', '?'];
 const STAT_ICONS = [Dumbbell, Search, Shield, Heart, Brain, Footprints, Clover, Zap];
 
@@ -25,6 +27,37 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
     }
     obj[keys[keys.length - 1]] = value;
     onChange(updated);
+  };
+
+  const resetToLevel1 = (index: number) => {
+    const updated = [...dwellers];
+    const d = updated[index];
+    if (d.experience) {
+      d.experience.currentLevel = 1;
+      d.experience.lastLevelUpdated = 1;
+      d.experience.experienceValue = 0;
+    }
+    if (d.health) {
+      d.health.healthValue = 105;
+      d.health.maxHealth = 105;
+    }
+    onChange(updated);
+    toast.success('Dweller reset to level 1');
+  };
+
+  const optimizeHealth = (index: number) => {
+    const updated = [...dwellers];
+    const d = updated[index];
+    const endurance = d.stats?.stats?.[2]?.value ?? 1;
+    const level = d.experience?.currentLevel ?? 1;
+    // Health = 105 + (2.5 + 0.5 * (E + 7)) * (LVL - 1)
+    const optimal = 105 + (2.5 + 0.5 * (endurance + 7)) * (level - 1);
+    if (d.health) {
+      d.health.healthValue = optimal;
+      d.health.maxHealth = optimal;
+    }
+    onChange(updated);
+    toast.success(`Health optimized: ${Math.round(optimal)} (E=${endurance}, Lv.${level})`);
   };
 
   const filtered = dwellers
@@ -79,7 +112,30 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
 
               {isExpanded && (
                 <div className="px-3 pb-3 space-y-4 border-t border-border bg-card/50">
-                  <div className="grid grid-cols-2 gap-3 pt-3">
+                  <div className="flex items-center gap-2 pt-3">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="sm" onClick={() => resetToLevel1(dweller._idx)}>
+                            <RotateCcw className="w-3.5 h-3.5 mr-1.5" />
+                            Reset Lv.1
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Reset to level 1, 105 HP, 0 XP</TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="sm" onClick={() => optimizeHealth(dweller._idx)}>
+                            <HeartPulse className="w-3.5 h-3.5 mr-1.5" />
+                            Optimize HP
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Set HP based on E stat: 105 + (2.5 + 0.5×(E+7)) × (LVL-1)</TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-xs text-muted-foreground font-display">FIRST NAME</label>
                       <Input value={dweller.name} onChange={(e) => updateDweller(dweller._idx, 'name', e.target.value)} />
