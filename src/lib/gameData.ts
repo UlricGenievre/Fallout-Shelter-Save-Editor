@@ -30,6 +30,22 @@ const themeMap = new Map<string, GameItem>(itemsData.themes.map(t => [t.id, t]))
 
 /** All known weapon IDs */
 export const ALL_WEAPONS: GameItem[] = itemsData.weapons;
+
+/** Weapon category display order matching the wiki */
+const WEAPON_CATEGORY_ORDER = ['Melee', 'Pistol', 'Energy Pistol', 'Rifle', 'Energy Rifle', 'Shotgun', 'Heavy'];
+
+/** Weapons grouped by category, ordered like the wiki */
+export const WEAPONS_BY_CATEGORY: { category: string; items: GameItem[] }[] = (() => {
+  const grouped = new Map<string, GameItem[]>();
+  for (const w of itemsData.weapons) {
+    const cat = w.category || 'Other';
+    if (!grouped.has(cat)) grouped.set(cat, []);
+    grouped.get(cat)!.push(w);
+  }
+  return WEAPON_CATEGORY_ORDER
+    .filter(c => grouped.has(c))
+    .map(c => ({ category: c, items: grouped.get(c)! }));
+})();
 /** All known outfit IDs */
 export const ALL_OUTFITS: GameItem[] = itemsData.outfits;
 /** All known theme/room IDs */
