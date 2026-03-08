@@ -6,8 +6,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ALL_WEAPONS, ALL_OUTFITS, getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
 import { toast } from 'sonner';
-const STAT_NAMES = ['S', 'P', 'E', 'C', 'I', 'A', 'L', '?'];
-const STAT_ICONS = [Dumbbell, Search, Shield, Heart, Brain, Footprints, Clover, Zap];
+// Stats array in save: index 0 is unused, real SPECIAL starts at index 1
+const STAT_OFFSET = 1;
+const STAT_NAMES = ['S', 'P', 'E', 'C', 'I', 'A', 'L'];
+const STAT_ICONS = [Dumbbell, Search, Shield, Heart, Brain, Footprints, Clover];
 
 interface DwellerEditorProps {
   dwellers: any[];
