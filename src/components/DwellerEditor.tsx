@@ -16,9 +16,13 @@ interface DwellerEditorProps {
   onChange: (dwellers: any[]) => void;
 }
 
+type SortOption = 'name' | 'level' | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L';
+
 export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState<SortOption>('name');
+  const [sortDesc, setSortDesc] = useState(false);
 
   const updateDweller = (index: number, path: string, value: any) => {
     const updated = [...dwellers];
