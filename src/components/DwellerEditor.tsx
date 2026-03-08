@@ -50,9 +50,8 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
   const optimizeHealth = (index: number) => {
     const updated = [...dwellers];
     const d = updated[index];
-    const endurance = d.stats?.stats?.[2]?.value ?? 1;
+    const endurance = d.stats?.stats?.[STAT_OFFSET + 2]?.value ?? 1; // E is 3rd SPECIAL (index 2 + offset)
     const level = d.experience?.currentLevel ?? 1;
-    // Health = 105 + (2.5 + 0.5 * (E + 7)) * (LVL - 1)
     const optimal = 105 + (2.5 + 0.5 * (endurance + 7)) * (level - 1);
     if (d.health) {
       d.health.healthValue = optimal;
@@ -60,6 +59,31 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
     }
     onChange(updated);
     toast.success(`Health optimized: ${Math.round(optimal)} (E=${endurance}, Lv.${level})`);
+  };
+
+  const setLevel50 = (index: number) => {
+    const updated = [...dwellers];
+    const d = updated[index];
+    if (d.experience) {
+      d.experience.currentLevel = 50;
+      d.experience.lastLevelUpdated = 50;
+    }
+    onChange(updated);
+    toast.success('Dweller set to level 50');
+  };
+
+  const maxAllSpecial = (index: number) => {
+    const updated = [...dwellers];
+    const d = updated[index];
+    if (d.stats?.stats) {
+      for (let i = 0; i < 7; i++) {
+        if (d.stats.stats[STAT_OFFSET + i]) {
+          d.stats.stats[STAT_OFFSET + i].value = 10;
+        }
+      }
+    }
+    onChange(updated);
+    toast.success('All S.P.E.C.I.A.L. set to 10');
   };
 
   const filtered = dwellers
