@@ -112,7 +112,30 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
 
               {isExpanded && (
                 <div className="px-3 pb-3 space-y-4 border-t border-border bg-card/50">
-                  <div className="grid grid-cols-2 gap-3 pt-3">
+                  <div className="flex items-center gap-2 pt-3">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="sm" onClick={() => resetToLevel1(dweller._idx)}>
+                            <RotateCcw className="w-3.5 h-3.5 mr-1.5" />
+                            Reset Lv.1
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Reset to level 1, 105 HP, 0 XP</TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="sm" onClick={() => optimizeHealth(dweller._idx)}>
+                            <HeartPulse className="w-3.5 h-3.5 mr-1.5" />
+                            Optimize HP
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Set HP based on E stat: 105 + (2.5 + 0.5×(E+7)) × (LVL-1)</TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-xs text-muted-foreground font-display">FIRST NAME</label>
                       <Input value={dweller.name} onChange={(e) => updateDweller(dweller._idx, 'name', e.target.value)} />
