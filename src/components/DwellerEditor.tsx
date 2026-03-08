@@ -162,13 +162,18 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                           </SelectValue>
                         </SelectTrigger>
                         <SelectContent className="max-h-60">
-                          {ALL_WEAPONS.map((w) => (
-                            <SelectItem key={w.id} value={w.id} className="text-xs">
-                              <span className="flex items-center justify-between gap-2 w-full">
-                                <span className="truncate">{w.label}</span>
-                                {w.damage && <span className="text-muted-foreground shrink-0 ml-1">⚔ {w.damage}</span>}
-                              </span>
-                            </SelectItem>
+                          {WEAPONS_BY_CATEGORY.map((group) => (
+                            <SelectGroup key={group.category}>
+                              <SelectLabel className="text-[10px] uppercase tracking-wider text-muted-foreground font-display">{group.category}</SelectLabel>
+                              {group.items.map((w) => (
+                                <SelectItem key={w.id} value={w.id} className="text-xs">
+                                  <span className="flex items-center justify-between gap-2 w-full">
+                                    <span className="truncate">{w.label}</span>
+                                    {w.damage && <span className="text-muted-foreground shrink-0 ml-1">⚔ {w.damage}</span>}
+                                  </span>
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
                           ))}
                         </SelectContent>
                       </Select>
