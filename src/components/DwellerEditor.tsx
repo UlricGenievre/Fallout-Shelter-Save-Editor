@@ -16,9 +16,13 @@ interface DwellerEditorProps {
   onChange: (dwellers: any[]) => void;
 }
 
+type SortOption = 'name' | 'level' | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L';
+
 export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState<SortOption>('name');
+  const [sortDesc, setSortDesc] = useState(false);
 
   const updateDweller = (index: number, path: string, value: any) => {
     const updated = [...dwellers];
@@ -93,11 +97,30 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
     toast.success('All S.P.E.C.I.A.L. set to 10');
   };
 
+  const getStatValue = (d: any, stat: string): number => {
+    const statIndex = STAT_NAMES.indexOf(stat);
+    if (statIndex === -1) return 0;
+    return d.stats?.stats?.[STAT_OFFSET + statIndex]?.value ?? 0;
+  };
+
   const filtered = dwellers
     .map((d, i) => ({ ...d, _idx: i }))
     .filter(d => {
       const name = `${d.name} ${d.lastName}`.toLowerCase();
       return name.includes(searchTerm.toLowerCase());
+    })
+    .sort((a, b) => {
+      let cmp = 0;
+      if (sortBy === 'name') {
+        const nameA = `${a.name} ${a.lastName}`.toLowerCase();
+        const nameB = `${b.name} ${b.lastName}`.toLowerCase();
+        cmp = nameA.localeCompare(nameB);
+      } else if (sortBy === 'level') {
+        cmp = (a.experience?.currentLevel ?? 0) - (b.experience?.currentLevel ?? 0);
+      } else {
+        cmp = getStatValue(a, sortBy) - getStatValue(b, sortBy);
+      }
+      return sortDesc ? -cmp : cmp;
     });
 
   return (
@@ -107,12 +130,34 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
         <h2 className="text-xl font-display pip-text-glow">DWELLERS ({dwellers.length})</h2>
       </div>
 
-      <Input
-        placeholder="Search dwellers..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="mb-4"
-      />
+      <div className="flex items-center gap-2 mb-4">
+        <Input
+          placeholder="Search dwellers..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="flex-1"
+        />
+        <Select value={sortBy} onValueChange={(v) => setSortBy(v as SortOption)}>
+          <SelectTrigger className="w-32">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="name">Name</SelectItem>
+            <SelectItem value="level">Level</SelectItem>
+            {STAT_NAMES.map(s => (
+              <SelectItem key={s} value={s}>{s}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => setSortDesc(!sortDesc)}
+          title={sortDesc ? 'Descending' : 'Ascending'}
+        >
+          {sortDesc ? '↓' : '↑'}
+        </Button>
+      </div>
 
       <div className="space-y-1 max-h-[70vh] overflow-y-auto pr-1">
         {filtered.map((dweller) => {
