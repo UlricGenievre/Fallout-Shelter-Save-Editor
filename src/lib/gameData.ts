@@ -59,6 +59,31 @@ export function getItemLabel(id: string): string {
     ?? itemIdToLabel(id);
 }
 
+// Known weapon ID prefixes / patterns (from save files)
+const WEAPON_ID_PATTERNS = [
+  /^(Melee|Pistol|Rifle|Shotgun|Heavy|Energy|Laser|Plasma|Alien|Minigun|MissileLauncher|FlameGun|GatlingLaser|FatMan|RailwayRifle|Flamer|Gauss|Junk|Institute|HuntingRifle|CombatRifle|CombatShotgun|AssaultRifle|SubmachineGun|AcidSoaker|Broadsider|Cryolator|Deathclaw|DragonsTooth|Shishkebab|RiotShotgun|LeverRifle|Overseers|RevolutionaryBlade|WestTekSaw)/i,
+  /Pistol/i,
+  /Rifle/i,
+  /Shotgun/i,
+  /Sword|Blade|Bat|Knife|Axe|Baton|Club|Hammer|Glove|Fist|Knuckle/i,
+];
+
+// Known outfit ID patterns
+const OUTFIT_ID_PATTERNS = [
+  /^(VaultSuit|Armored|Outfit|Suit|Armor|Uniform|Dress|Coat|Jacket|Robe|Hazmat|PowerArmor|BrotherhoodArmor|RaiderArmor|EnclaveTrooper|Minutemen|VaultTech|Scientist|Military|Mechanic|Surgeon|Nurse|Doctor|Hunter|Explorer|Settler|Ghoul|Wastelander|Nuka|Institute|Railroad|Synth|Courser|Gunner|BoS)/i,
+  /Suit|Armor|Dress|Uniform|Coat|Robe/i,
+];
+
+/**
+ * Heuristic fallback: try to guess the category of an unknown ID by its naming pattern.
+ * Returns 'weapon', 'outfit', 'theme', or 'unknown'.
+ */
+export function guessItemType(id: string): 'weapon' | 'outfit' | 'theme' | 'unknown' {
+  if (WEAPON_ID_PATTERNS.some(p => p.test(id))) return 'weapon';
+  if (OUTFIT_ID_PATTERNS.some(p => p.test(id))) return 'outfit';
+  return 'unknown';
+}
+
 /** Get item type: 'weapon', 'outfit', 'theme', or 'unknown' */
 export function getItemType(id: string): 'weapon' | 'outfit' | 'theme' | 'unknown' {
   if (weaponMap.has(id)) return 'weapon';
@@ -69,6 +94,7 @@ export function getItemType(id: string): 'weapon' | 'outfit' | 'theme' | 'unknow
 
 /**
  * Classify recipes into weapons, outfits, themes and unknown.
+ * Unknown IDs are re-classified via heuristics so the unknown bucket stays empty.
  */
 export function classifyRecipes(recipes: string[]): {
   weapons: string[];
@@ -89,7 +115,13 @@ export function classifyRecipes(recipes: string[]): {
     if (type === 'weapon') weapons.push(id);
     else if (type === 'outfit') outfits.push(id);
     else if (type === 'theme') themes.push(id);
-    else unknown.push(id);
+    else {
+      // Try heuristic classification
+      const guessed = guessItemType(id);
+      if (guessed === 'weapon') weapons.push(id);
+      else if (guessed === 'outfit') outfits.push(id);
+      else unknown.push(id);
+    }
   }
 
   return {
