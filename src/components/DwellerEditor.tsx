@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronDown, ChevronRight, User, Heart, Shield, Zap, Brain, Dumbbell, Footprints, Clover, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ALL_WEAPONS, ALL_OUTFITS, getItemLabel } from '@/lib/gameData';
+import { ALL_WEAPONS, ALL_OUTFITS, getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
 
 const STAT_NAMES = ['S', 'P', 'E', 'C', 'I', 'A', 'L', '?'];
 const STAT_ICONS = [Dumbbell, Search, Shield, Heart, Brain, Footprints, Clover, Zap];
@@ -164,11 +164,17 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                         <SelectContent className="max-h-60">
                           {ALL_WEAPONS.map((w) => (
                             <SelectItem key={w.id} value={w.id} className="text-xs">
-                              {w.label}
+                              <span className="flex items-center justify-between gap-2 w-full">
+                                <span className="truncate">{w.label}</span>
+                                {w.damage && <span className="text-muted-foreground shrink-0 ml-1">⚔ {w.damage}</span>}
+                              </span>
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
+                      {dweller.equipedWeapon?.id && getItem(dweller.equipedWeapon.id)?.damage && (
+                        <p className="text-[10px] text-muted-foreground mt-0.5">⚔ {getItem(dweller.equipedWeapon.id)!.damage} dmg</p>
+                      )}
                     </div>
                     <div>
                       <label className="text-xs text-muted-foreground font-display">OUTFIT</label>
@@ -182,13 +188,22 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                           </SelectValue>
                         </SelectTrigger>
                         <SelectContent className="max-h-60">
-                          {ALL_OUTFITS.map((o) => (
-                            <SelectItem key={o.id} value={o.id} className="text-xs">
-                              {o.label}
-                            </SelectItem>
-                          ))}
+                          {ALL_OUTFITS.map((o) => {
+                            const sp = formatSpecial(o.special);
+                            return (
+                              <SelectItem key={o.id} value={o.id} className="text-xs">
+                                <span className="flex items-center justify-between gap-2 w-full">
+                                  <span className="truncate">{o.label}</span>
+                                  {sp && <span className="text-muted-foreground shrink-0 ml-1">{sp}</span>}
+                                </span>
+                              </SelectItem>
+                            );
+                          })}
                         </SelectContent>
                       </Select>
+                      {dweller.equipedOutfit?.id && formatSpecial(getItem(dweller.equipedOutfit.id)?.special) && (
+                        <p className="text-[10px] text-primary mt-0.5">{formatSpecial(getItem(dweller.equipedOutfit.id)!.special)}</p>
+                      )}
                     </div>
                   </div>
                 </div>

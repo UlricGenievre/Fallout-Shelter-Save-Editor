@@ -5,6 +5,22 @@ export interface GameItem {
   label: string;
   category: string;
   rarity?: string;
+  damage?: string;
+  special?: Partial<Record<'S'|'P'|'E'|'C'|'I'|'A'|'L', number>>;
+}
+
+/** Format SPECIAL bonuses as a short string like "S+3 E+2" */
+export function formatSpecial(special?: GameItem['special']): string {
+  if (!special) return '';
+  return Object.entries(special)
+    .filter(([, v]) => v && v > 0)
+    .map(([k, v]) => `${k}+${v}`)
+    .join(' ');
+}
+
+/** Get full item data by ID */
+export function getItem(id: string): GameItem | undefined {
+  return weaponMap.get(id) ?? outfitMap.get(id) ?? themeMap.get(id);
 }
 
 // Build lookup maps from static JSON
