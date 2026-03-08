@@ -29,6 +29,37 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
     onChange(updated);
   };
 
+  const resetToLevel1 = (index: number) => {
+    const updated = [...dwellers];
+    const d = updated[index];
+    if (d.experience) {
+      d.experience.currentLevel = 1;
+      d.experience.lastLevelUpdated = 1;
+      d.experience.experienceValue = 0;
+    }
+    if (d.health) {
+      d.health.healthValue = 105;
+      d.health.maxHealth = 105;
+    }
+    onChange(updated);
+    toast.success('Dweller reset to level 1');
+  };
+
+  const optimizeHealth = (index: number) => {
+    const updated = [...dwellers];
+    const d = updated[index];
+    const endurance = d.stats?.stats?.[2]?.value ?? 1;
+    const level = d.experience?.currentLevel ?? 1;
+    // Health = 105 + (2.5 + 0.5 * (E + 7)) * (LVL - 1)
+    const optimal = 105 + (2.5 + 0.5 * (endurance + 7)) * (level - 1);
+    if (d.health) {
+      d.health.healthValue = optimal;
+      d.health.maxHealth = optimal;
+    }
+    onChange(updated);
+    toast.success(`Health optimized: ${Math.round(optimal)} (E=${endurance}, Lv.${level})`);
+  };
+
   const filtered = dwellers
     .map((d, i) => ({ ...d, _idx: i }))
     .filter(d => {
