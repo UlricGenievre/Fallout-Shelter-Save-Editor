@@ -158,6 +158,24 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                         </TooltipTrigger>
                         <TooltipContent>Set HP based on E stat: 105 + (2.5 + 0.5×(E+7)) × (LVL-1)</TooltipContent>
                       </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="sm" onClick={() => setLevel50(dweller._idx)}>
+                            <ArrowUp className="w-3.5 h-3.5 mr-1.5" />
+                            Lv.50
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Set dweller to level 50</TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline" size="sm" onClick={() => maxAllSpecial(dweller._idx)}>
+                            <Star className="w-3.5 h-3.5 mr-1.5" />
+                            Max SPECIAL
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Set all S.P.E.C.I.A.L. stats to 10</TooltipContent>
+                      </Tooltip>
                     </TooltipProvider>
                   </div>
 
