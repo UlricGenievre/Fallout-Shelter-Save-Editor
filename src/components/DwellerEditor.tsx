@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronRight, User, Heart, Shield, Zap, Brain, Dumbbell, Footprints, Clover, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ALL_WEAPONS, ALL_OUTFITS, getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ALL_OUTFITS, WEAPONS_BY_CATEGORY, getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
 
 const STAT_NAMES = ['S', 'P', 'E', 'C', 'I', 'A', 'L', '?'];
 const STAT_ICONS = [Dumbbell, Search, Shield, Heart, Brain, Footprints, Clover, Zap];
@@ -162,13 +162,18 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                           </SelectValue>
                         </SelectTrigger>
                         <SelectContent className="max-h-60">
-                          {ALL_WEAPONS.map((w) => (
-                            <SelectItem key={w.id} value={w.id} className="text-xs">
-                              <span className="flex items-center justify-between gap-2 w-full">
-                                <span className="truncate">{w.label}</span>
-                                {w.damage && <span className="text-muted-foreground shrink-0 ml-1">⚔ {w.damage}</span>}
-                              </span>
-                            </SelectItem>
+                          {WEAPONS_BY_CATEGORY.map((group) => (
+                            <SelectGroup key={group.category}>
+                              <SelectLabel className="text-[10px] uppercase tracking-wider text-muted-foreground font-display">{group.category}</SelectLabel>
+                              {group.items.map((w) => (
+                                <SelectItem key={w.id} value={w.id} className="text-xs">
+                                  <span className="flex items-center justify-between gap-2 w-full">
+                                    <span className="truncate">{w.label}</span>
+                                    {w.damage && <span className="text-muted-foreground shrink-0 ml-1">⚔ {w.damage}</span>}
+                                  </span>
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
                           ))}
                         </SelectContent>
                       </Select>
