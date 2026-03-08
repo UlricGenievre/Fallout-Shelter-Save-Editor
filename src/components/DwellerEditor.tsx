@@ -229,17 +229,19 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
                   <div>
                     <label className="text-xs text-muted-foreground font-display block mb-2">S.P.E.C.I.A.L.</label>
                     <div className="grid grid-cols-4 gap-2">
-                      {dweller.stats?.stats?.map((stat: any, si: number) => {
-                        if (si >= 7) return null;
+                      {STAT_NAMES.map((name, si) => {
+                        const realIndex = STAT_OFFSET + si;
+                        const stat = dweller.stats?.stats?.[realIndex];
+                        if (!stat) return null;
                         const Icon = STAT_ICONS[si];
                         return (
                           <div key={si} className="flex items-center gap-1.5">
                             <Icon className="w-3.5 h-3.5 text-primary shrink-0" />
-                            <span className="text-xs font-display w-3">{STAT_NAMES[si]}</span>
+                            <span className="text-xs font-display w-3">{name}</span>
                             <Input type="number" min={1} max={10} value={stat.value}
                               onChange={(e) => {
                                 const updated = [...dwellers];
-                                updated[dweller._idx].stats.stats[si].value = parseInt(e.target.value) || 1;
+                                updated[dweller._idx].stats.stats[realIndex].value = parseInt(e.target.value) || 1;
                                 onChange(updated);
                               }}
                               className="h-7 text-xs" />
