@@ -97,11 +97,30 @@ export function DwellerEditor({ dwellers, onChange }: DwellerEditorProps) {
     toast.success('All S.P.E.C.I.A.L. set to 10');
   };
 
+  const getStatValue = (d: any, stat: string): number => {
+    const statIndex = STAT_NAMES.indexOf(stat);
+    if (statIndex === -1) return 0;
+    return d.stats?.stats?.[STAT_OFFSET + statIndex]?.value ?? 0;
+  };
+
   const filtered = dwellers
     .map((d, i) => ({ ...d, _idx: i }))
     .filter(d => {
       const name = `${d.name} ${d.lastName}`.toLowerCase();
       return name.includes(searchTerm.toLowerCase());
+    })
+    .sort((a, b) => {
+      let cmp = 0;
+      if (sortBy === 'name') {
+        const nameA = `${a.name} ${a.lastName}`.toLowerCase();
+        const nameB = `${b.name} ${b.lastName}`.toLowerCase();
+        cmp = nameA.localeCompare(nameB);
+      } else if (sortBy === 'level') {
+        cmp = (a.experience?.currentLevel ?? 0) - (b.experience?.currentLevel ?? 0);
+      } else {
+        cmp = getStatValue(a, sortBy) - getStatValue(b, sortBy);
+      }
+      return sortDesc ? -cmp : cmp;
     });
 
   return (
