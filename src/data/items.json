@@ -439,6 +439,7 @@
     { "id": "ProfessorSpecial", "label": "Professor Outfit", "category": "Rare", "rarity": "Rare", "special": { "I": 4, "L": 1 } },
     { "id": "AlistairSpecial", "label": "Tenpenny's Suit", "category": "Legendary", "rarity": "Legendary", "special": { "P": 2, "C": 2, "I": 2, "L": 1 } },
     { "id": "RothchildSpecial", "label": "Scribe Rothchild's Robe", "category": "Legendary", "rarity": "Legendary", "special": { "P": 2, "E": 1, "C": 2, "I": 2 } },
+    { "id": "CromwellSpecial", "label": "Confessor Cromwell's Rags", "category": "Legendary", "rarity": "Legendary", "special": { "P": 2, "E": 2, "I": 1, "L": 2 } },
 
     { "id": "RottedDuster", "label": "Sheriff's Duster", "category": "Legendary", "rarity": "Legendary", "special": { "P": 2, "E": 5 } },
     { "id": "WilzigsTravelwear", "label": "Wilzig's Travelwear", "category": "Legendary", "rarity": "Legendary", "special": { "P": 4, "E": 2, "A": 2, "L": 4 } },
