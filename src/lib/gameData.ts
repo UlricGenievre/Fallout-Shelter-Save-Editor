@@ -74,11 +74,17 @@ const OUTFIT_ID_PATTERNS = [
   /Suit|Armor|Dress|Uniform|Coat|Robe/i,
 ];
 
+// Known theme/room ID patterns
+const THEME_ID_PATTERNS = [
+  /^(LivingQuarters|Cafeteria)/i,
+];
+
 /**
  * Heuristic fallback: try to guess the category of an unknown ID by its naming pattern.
  * Returns 'weapon', 'outfit', 'theme', or 'unknown'.
  */
 export function guessItemType(id: string): 'weapon' | 'outfit' | 'theme' | 'unknown' {
+  if (THEME_ID_PATTERNS.some(p => p.test(id))) return 'theme';
   if (WEAPON_ID_PATTERNS.some(p => p.test(id))) return 'weapon';
   if (OUTFIT_ID_PATTERNS.some(p => p.test(id))) return 'outfit';
   return 'unknown';
