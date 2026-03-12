@@ -23,8 +23,9 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
   const getSurvivalW = (d: any) => d?.vault?.survivalW || d?.survivalW;
   const sw = getSurvivalW(data);
 
-  const claimedRecipes: string[] = sw?.claimedRecipes || [];
-  const collectedThemes: string[] = sw?.collectedThemes?.themeList || [];
+  const claimedRecipes: string[] = (sw?.claimedRecipes || []).filter((x: any) => typeof x === 'string');
+  const rawThemeList: any[] = sw?.collectedThemes?.themeList || [];
+  const collectedThemes: string[] = rawThemeList.map((t: any) => typeof t === 'string' ? t : t?.id || t?.themeId || String(t)).filter(Boolean);
   const claimedSet = useMemo(() => new Set(claimedRecipes), [claimedRecipes]);
   const collectedThemeSet = useMemo(() => new Set(collectedThemes), [collectedThemes]);
 
