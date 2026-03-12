@@ -262,12 +262,12 @@
     { "id": "MissilLauncher_Guided", "label": "Guided Missile Launcher", "category": "Heavy", "rarity": "Legendary", "damage": "20-24" },
     { "id": "MissilLauncher_MissLauncher", "label": "Miss Launcher", "category": "Heavy", "rarity": "Legendary", "damage": "20-25" },
 
-    { "id": "FatMan_Rusty", "label": "Rusty Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22" },
-    { "id": "FatMan", "label": "Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-23" },
-    { "id": "FatMan_Enhanced", "label": "Enhanced Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-24" },
-    { "id": "FatMan_Hardened", "label": "Hardened Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-25" },
-    { "id": "FatMan_Guided", "label": "Guided Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-26" },
-    { "id": "FatMan_MIRV", "label": "MIRV", "category": "Heavy", "rarity": "Legendary", "damage": "22-27" },
+    { "id": "Fatman_Rusty", "label": "Rusty Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22" },
+    { "id": "Fatman", "label": "Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-23" },
+    { "id": "Fatman_Enhanced", "label": "Enhanced Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-24" },
+    { "id": "Fatman_Hardened", "label": "Hardened Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-25" },
+    { "id": "Fatman_Guided", "label": "Guided Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-26" },
+    { "id": "Fatman_MIRV", "label": "MIRV", "category": "Heavy", "rarity": "Legendary", "damage": "22-27" },
 
     { "id": "GatlingLaser_Rusty", "label": "Rusty Gatling Laser", "category": "Heavy", "rarity": "Legendary", "damage": "21" },
     { "id": "GatlingLaser", "label": "Gatling Laser", "category": "Heavy", "rarity": "Legendary", "damage": "21-22" },
