@@ -469,7 +469,7 @@
     { "id": "CafeteriaMinutemen", "label": "Minutemen Diner", "category": "Room" },
     { "id": "LivingQuartersMinutemen", "label": "Minutemen Living Quarters", "category": "Room" },
     { "id": "CafeteriaBrotherOfSteel", "label": "BoS Diner", "category": "Room" },
-    { "id": "LivingQuartersBrotherOfSteel", "label": "BoS Living Quarters", "category": "Room" },
+    { "id": "LivingQuartersBrotherOfStell", "label": "BoS Living Quarters", "category": "Room" },
     { "id": "CafeteriaInstitute", "label": "Institute Diner", "category": "Room" },
     { "id": "LivingQuartersInstitute", "label": "Institute Living Quarters", "category": "Room" },
     { "id": "CafeteriaRailroad", "label": "Railroad Diner", "category": "Room" },
