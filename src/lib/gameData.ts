@@ -142,6 +142,7 @@ export function classifyRecipes(recipes: string[]): {
  * Fallback: Convert a camelCase/PascalCase item ID to a human-readable label.
  */
 export function itemIdToLabel(id: string): string {
+  if (typeof id !== 'string') return String(id);
   const parts = id.split('_');
   const base = parts[0];
   const variant = parts.slice(1).join(' ');
