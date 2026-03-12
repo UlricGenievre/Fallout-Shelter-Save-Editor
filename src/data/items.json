@@ -14,7 +14,7 @@
     { "id": "Melee_Pickaxe", "label": "Pickaxe", "category": "Melee", "rarity": "Rare", "damage": "11-21" },
     { "id": "Melee_PoolCue", "label": "Pool Cue", "category": "Melee", "rarity": "Rare", "damage": "0-8" },
     { "id": "Melee_FireHydrantBat", "label": "Fire Hydrant Bat", "category": "Melee", "rarity": "Legendary", "damage": "19-31" },
-    { "id": "Melee_RelentlessRaiderSword", "label": "Relentless Raider Sword", "category": "Melee", "rarity": "Legendary", "damage": "16-28" },
+    { "id": "Melee_RaiderSword", "label": "Relentless Raider Sword", "category": "Melee", "rarity": "Legendary", "damage": "16-28" },
     { "id": "Melee_SuperSledge", "label": "Super Sledge", "category": "Melee", "rarity": "Legendary", "damage": "18-32" },
     { "id": "GrognaksAxe", "label": "Grognak's Axe", "category": "Melee", "rarity": "Legendary", "damage": "18-26" },
 
