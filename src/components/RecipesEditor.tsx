@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { FlaskConical, Sword, Shirt, Home, HelpCircle } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
-import { classifyRecipes, getItemLabel, getItem, formatSpecial, WEAPONS_BY_CATEGORY } from '@/lib/gameData';
+import { getItemLabel, getItem, formatSpecial, ALL_WEAPONS, ALL_OUTFITS, ALL_THEMES, WEAPONS_BY_CATEGORY, getItemType } from '@/lib/gameData';
 
 interface RecipesEditorProps {
   data: any;
@@ -20,19 +20,52 @@ const TABS: { id: RecipeTab; label: string; icon: typeof Sword }[] = [
 export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
   const [activeTab, setActiveTab] = useState<RecipeTab>('weapons');
 
-  const recipes: string[] = data?.vault?.survivalW?.recipes || data?.survivalW?.recipes || [];
-  const claimedRecipes: string[] = data?.vault?.survivalW?.claimedRecipes || data?.survivalW?.claimedRecipes || [];
-  const claimedSet = useMemo(() => new Set(claimedRecipes), [claimedRecipes]);
-  const recipeSet = useMemo(() => new Set(recipes), [recipes]);
-  const classified = useMemo(() => classifyRecipes(recipes), [recipes]);
-
   const getSurvivalW = (d: any) => d?.vault?.survivalW || d?.survivalW;
+  const sw = getSurvivalW(data);
+
+  const claimedRecipes: string[] = sw?.claimedRecipes || [];
+  const collectedThemes: string[] = sw?.collectedThemes?.themeList || [];
+  const claimedSet = useMemo(() => new Set(claimedRecipes), [claimedRecipes]);
+  const collectedThemeSet = useMemo(() => new Set(collectedThemes), [collectedThemes]);
+
+  // Known item IDs from items.json
+  const knownIds = useMemo(() => {
+    const s = new Set<string>();
+    ALL_WEAPONS.forEach(w => s.add(w.id));
+    ALL_OUTFITS.forEach(o => s.add(o.id));
+    ALL_THEMES.forEach(t => s.add(t.id));
+    return s;
+  }, []);
+
+  // Unknown = IDs in claimedRecipes or collectedThemes that aren't in items.json
+  const unknownIds = useMemo(() => {
+    const unknown: string[] = [];
+    const seen = new Set<string>();
+    for (const id of [...claimedRecipes, ...collectedThemes]) {
+      if (!seen.has(id) && !knownIds.has(id)) {
+        seen.add(id);
+        unknown.push(id);
+      }
+    }
+    return unknown.sort();
+  }, [claimedRecipes, collectedThemes, knownIds]);
 
   const toggleClaimed = (id: string) => {
     const updated = { ...data };
-    const sw = getSurvivalW(updated);
-    const current: string[] = sw.claimedRecipes || [];
-    sw.claimedRecipes = current.includes(id)
+    const s = getSurvivalW(updated);
+    const current: string[] = s.claimedRecipes || [];
+    s.claimedRecipes = current.includes(id)
+      ? current.filter((r: string) => r !== id)
+      : [...current, id];
+    onChange(updated);
+  };
+
+  const toggleTheme = (id: string) => {
+    const updated = { ...data };
+    const s = getSurvivalW(updated);
+    if (!s.collectedThemes) s.collectedThemes = { themeList: [] };
+    const current: string[] = s.collectedThemes.themeList || [];
+    s.collectedThemes.themeList = current.includes(id)
       ? current.filter((r: string) => r !== id)
       : [...current, id];
     onChange(updated);
@@ -61,32 +94,43 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
     );
   };
 
-  const renderGenericItem = (id: string) => (
+  const renderThemeItem = (id: string) => (
     <label key={id} className="flex items-center gap-2 px-2 py-1.5 rounded-sm hover:bg-secondary/50 transition-colors cursor-pointer">
-      <Checkbox checked={claimedSet.has(id)} onCheckedChange={() => toggleClaimed(id)} />
+      <Checkbox checked={collectedThemeSet.has(id)} onCheckedChange={() => toggleTheme(id)} />
+      <span className="text-sm truncate" title={id}>{getItemLabel(id)}</span>
+    </label>
+  );
+
+  const renderUnknownItem = (id: string) => (
+    <label key={id} className="flex items-center gap-2 px-2 py-1.5 rounded-sm hover:bg-secondary/50 transition-colors cursor-pointer">
+      <Checkbox checked={claimedSet.has(id) || collectedThemeSet.has(id)} disabled />
       <span className="text-sm truncate" title={id}>{getItemLabel(id)}</span>
       <span className="text-xs text-muted-foreground ml-auto shrink-0 font-mono">{id}</span>
     </label>
   );
 
-  if (recipes.length === 0) {
-    return <div className="text-muted-foreground text-sm font-display">No recipes found in vault.survivalW.recipes.</div>;
-  }
+  const weaponCount = ALL_WEAPONS.length;
+  const outfitCount = ALL_OUTFITS.length;
+  const themeCount = ALL_THEMES.length;
 
-  const visibleTabs = TABS.filter(t => t.id !== 'unknown' || classified.unknown.length > 0);
+  const visibleTabs = TABS.filter(t => t.id !== 'unknown' || unknownIds.length > 0);
   const counts: Record<RecipeTab, number> = {
-    weapons: classified.weapons.length,
-    outfits: classified.outfits.length,
-    themes: classified.themes.length,
-    unknown: classified.unknown.length,
+    weapons: weaponCount,
+    outfits: outfitCount,
+    themes: themeCount,
+    unknown: unknownIds.length,
   };
+
+  const claimedWeaponCount = ALL_WEAPONS.filter(w => claimedSet.has(w.id)).length;
+  const claimedOutfitCount = ALL_OUTFITS.filter(o => claimedSet.has(o.id)).length;
+  const collectedThemeCount = ALL_THEMES.filter(t => collectedThemeSet.has(t.id)).length;
 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
         <FlaskConical className="w-5 h-5 text-primary" />
         <h2 className="text-xl font-display pip-text-glow">
-          RECIPES ({recipes.length} total, {claimedRecipes.length} claimed)
+          RECIPES ({claimedWeaponCount + claimedOutfitCount} claimed, {collectedThemeCount} themes collected)
         </h2>
       </div>
 
@@ -108,64 +152,42 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
         ))}
       </nav>
 
-      {/* WEAPONS tab */}
+      {/* WEAPONS tab - all weapons from items.json */}
       {activeTab === 'weapons' && (
         <div className="space-y-4">
-          {WEAPONS_BY_CATEGORY.map((group) => {
-            const groupIds = group.items.filter(w => recipeSet.has(w.id)).map(w => w.id);
-            // Also include heuristic-classified weapons not in known map
-            const extraIds = classified.weapons.filter(id =>
-              !WEAPONS_BY_CATEGORY.some(g => g.items.some(w => w.id === id)) &&
-              group.category === 'Other'
-            );
-            const allIds = [...groupIds, ...extraIds];
-            if (allIds.length === 0) return null;
-            return (
-              <div key={group.category} className="space-y-1">
-                <h4 className="text-xs uppercase tracking-wider text-muted-foreground font-display mb-1 px-2">
-                  {group.category} ({allIds.length})
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
-                  {allIds.map(renderWeaponItem)}
-                </div>
+          {WEAPONS_BY_CATEGORY.map((group) => (
+            <div key={group.category} className="space-y-1">
+              <h4 className="text-xs uppercase tracking-wider text-muted-foreground font-display mb-1 px-2">
+                {group.category} ({group.items.length})
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                {group.items.map(w => renderWeaponItem(w.id))}
               </div>
-            );
-          })}
-          {/* Heuristic-guessed weapons not in any known category */}
-          {(() => {
-            const knownIds = new Set(WEAPONS_BY_CATEGORY.flatMap(g => g.items.map(w => w.id)));
-            const extras = classified.weapons.filter(id => !knownIds.has(id));
-            if (!extras.length) return null;
-            return (
-              <div className="space-y-1">
-                <h4 className="text-xs uppercase tracking-wider text-muted-foreground font-display mb-1 px-2">Other ({extras.length})</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">{extras.map(renderWeaponItem)}</div>
-              </div>
-            );
-          })()}
+            </div>
+          ))}
         </div>
       )}
 
-      {/* OUTFITS tab */}
+      {/* OUTFITS tab - all outfits from items.json */}
       {activeTab === 'outfits' && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
-          {classified.outfits.map(renderOutfitItem)}
+          {ALL_OUTFITS.map(o => renderOutfitItem(o.id))}
         </div>
       )}
 
-      {/* THEMES tab */}
+      {/* THEMES tab - all themes from items.json */}
       {activeTab === 'themes' && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
-          {classified.themes.map(renderGenericItem)}
+          {ALL_THEMES.map(t => renderThemeItem(t.id))}
         </div>
       )}
 
-      {/* UNKNOWN tab (only shown if non-empty) */}
-      {activeTab === 'unknown' && classified.unknown.length > 0 && (
+      {/* UNKNOWN tab */}
+      {activeTab === 'unknown' && unknownIds.length > 0 && (
         <div className="space-y-2">
-          <p className="text-xs text-muted-foreground">Ces IDs n'ont pas pu être classifiés. Merci de les signaler pour enrichir la base de données.</p>
+          <p className="text-xs text-muted-foreground">Ces IDs sont présents dans la sauvegarde mais absents de la base de données. Merci de les signaler.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
-            {classified.unknown.map(renderGenericItem)}
+            {unknownIds.map(renderUnknownItem)}
           </div>
         </div>
       )}
