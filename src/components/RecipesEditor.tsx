@@ -23,8 +23,9 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
   const getSurvivalW = (d: any) => d?.vault?.survivalW || d?.survivalW;
   const sw = getSurvivalW(data);
 
-  const claimedRecipes: string[] = sw?.claimedRecipes || [];
-  const collectedThemes: string[] = sw?.collectedThemes?.themeList || [];
+  const claimedRecipes: string[] = (sw?.claimedRecipes || []).filter((x: any) => typeof x === 'string');
+  const rawThemeList: any[] = sw?.collectedThemes?.themeList || [];
+  const collectedThemes: string[] = rawThemeList.map((t: any) => typeof t === 'string' ? t : t?.id || t?.themeId || String(t)).filter(Boolean);
   const claimedSet = useMemo(() => new Set(claimedRecipes), [claimedRecipes]);
   const collectedThemeSet = useMemo(() => new Set(collectedThemes), [collectedThemes]);
 
@@ -98,6 +99,7 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
     <label key={id} className="flex items-center gap-2 px-2 py-1.5 rounded-sm hover:bg-secondary/50 transition-colors cursor-pointer">
       <Checkbox checked={collectedThemeSet.has(id)} onCheckedChange={() => toggleTheme(id)} />
       <span className="text-sm truncate" title={id}>{getItemLabel(id)}</span>
+      <span className="text-xs text-muted-foreground ml-auto shrink-0 font-mono">{id}</span>
     </label>
   );
 
