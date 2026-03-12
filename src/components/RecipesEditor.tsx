@@ -99,6 +99,7 @@ export function RecipesEditor({ data, onChange }: RecipesEditorProps) {
     <label key={id} className="flex items-center gap-2 px-2 py-1.5 rounded-sm hover:bg-secondary/50 transition-colors cursor-pointer">
       <Checkbox checked={collectedThemeSet.has(id)} onCheckedChange={() => toggleTheme(id)} />
       <span className="text-sm truncate" title={id}>{getItemLabel(id)}</span>
+      <span className="text-xs text-muted-foreground ml-auto shrink-0 font-mono">{id}</span>
     </label>
   );
 
