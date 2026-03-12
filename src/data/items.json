@@ -462,9 +462,17 @@
     { "id": "PowerArmor_MkVI", "label": "X-01 Mk VI Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 5, "P": 1, "E": 1 } }
   ],
   "themes": [
-    { "id": "CafeteriaVault33", "label": "Cafeteria (Vault 33)", "category": "Room" },
-    { "id": "LivingQuartersVault33", "label": "Living Quarters (Vault 33)", "category": "Room" },
-    { "id": "CafeteriaAnniversary", "label": "Cafeteria (Anniversary)", "category": "Room" },
-    { "id": "LivingQuartersAnniversary", "label": "Living Quarters (Anniversary)", "category": "Room" }
+    { "id": "CafeteriaVault33", "label": "Vault 33 Diner", "category": "Room" },
+    { "id": "LivingQuartersVault33", "label": "Vault 33 Living Quarters", "category": "Room" },
+    { "id": "CafeteriaAnniversary", "label": "Party Diner", "category": "Room" },
+    { "id": "LivingQuartersAnniversary", "label": "Party Living Quarters", "category": "Room" },
+    { "id": "CafeteriaMinutemen", "label": "Minutemen Diner", "category": "Room" },
+    { "id": "LivingQuartersMinutemen", "label": "Minutemen Living Quarters", "category": "Room" },
+    { "id": "CafeteriaBrotherOfSteel", "label": "BoS Diner", "category": "Room" },
+    { "id": "LivingQuartersBrotherOfSteel", "label": "BoS Living Quarters", "category": "Room" },
+    { "id": "CafeteriaInstitute", "label": "Institute Diner", "category": "Room" },
+    { "id": "LivingQuartersInstitute", "label": "Institute Living Quarters", "category": "Room" },
+    { "id": "CafeteriaRailroad", "label": "Railroad Diner", "category": "Room" },
+    { "id": "LivingQuartersRailroad", "label": "Railroad Living Quarters", "category": "Room" }
   ]
 }
