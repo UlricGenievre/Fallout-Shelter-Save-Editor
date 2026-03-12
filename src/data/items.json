@@ -42,7 +42,7 @@
     { "id": "032Pistol_Enhanced", "label": "Enhanced .32 Pistol", "category": "Pistol", "rarity": "Common", "damage": "1-3" },
     { "id": "032Pistol_Hardened", "label": "Hardened .32 Pistol", "category": "Pistol", "rarity": "Rare", "damage": "1-4" },
     { "id": "032Pistol_ArmorPiercing", "label": "Armor Piercing .32 Pistol", "category": "Pistol", "rarity": "Rare", "damage": "1-5" },
-    { "id": "032Pistol_WildBill", "label": "Wild Bill's Sidearm", "category": "Pistol", "rarity": "Legendary", "damage": "1-6" },
+    { "id": "032Pistol_WildBillsSidearm", "label": "Wild Bill's Sidearm", "category": "Pistol", "rarity": "Legendary", "damage": "1-6" },
 
     { "id": "Pistol_Rusty", "label": "Rusty 10mm Pistol", "category": "Pistol", "rarity": "Common", "damage": "2" },
     { "id": "Pistol", "label": "10mm Pistol", "category": "Pistol", "rarity": "Common", "damage": "2-3" },
