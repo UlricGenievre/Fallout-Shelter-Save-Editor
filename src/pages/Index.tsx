@@ -9,6 +9,12 @@ const Index = () => {
   const handleDataLoaded = useCallback((data: any, name: string) => {
     setSaveData(data);
     setFileName(name);
+    try {
+      localStorage.setItem('vault-tec-last-save', JSON.stringify(data));
+      localStorage.setItem('vault-tec-last-name', name);
+    } catch (e) {
+      console.warn('Failed to save to localStorage', e);
+    }
   }, []);
 
   const handleBack = useCallback(() => {

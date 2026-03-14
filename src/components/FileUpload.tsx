@@ -1,7 +1,10 @@
-import { useCallback, useState } from 'react';
-import { Upload, FileText, AlertCircle } from 'lucide-react';
+import { useCallback, useState, useEffect } from 'react';
+import { Upload, FileText, AlertCircle, RotateCcw, Trash2 } from 'lucide-react';
 import { decryptSave } from '@/lib/crypto';
 import { Button } from '@/components/ui/button';
+
+const STORAGE_KEY = 'vault-tec-last-save';
+const STORAGE_NAME_KEY = 'vault-tec-last-name';
 
 interface FileUploadProps {
   onDataLoaded: (data: any, fileName: string) => void;
@@ -10,6 +13,16 @@ interface FileUploadProps {
 export function FileUpload({ onDataLoaded }: FileUploadProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasLastSave, setHasLastSave] = useState(false);
+  const [lastName, setLastName] = useState('');
+
+  useEffect(() => {
+    const name = localStorage.getItem(STORAGE_NAME_KEY);
+    if (name && localStorage.getItem(STORAGE_KEY)) {
+      setHasLastSave(true);
+      setLastName(name);
+    }
+  }, []);
 
   const handleFile = useCallback(async (file: File) => {
     setLoading(true);
@@ -35,6 +48,27 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
       setLoading(false);
     }
   }, [onDataLoaded]);
+
+  const loadLastSave = useCallback(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const name = localStorage.getItem(STORAGE_NAME_KEY);
+      if (raw && name) {
+        const json = JSON.parse(raw);
+        onDataLoaded(json, name);
+      }
+    } catch (e) {
+      console.error(e);
+      setError('Failed to load last save from storage.');
+    }
+  }, [onDataLoaded]);
+
+  const clearLastSave = useCallback(() => {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STORAGE_NAME_KEY);
+    setHasLastSave(false);
+    setLastName('');
+  }, []);
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -87,6 +121,18 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
           className="hidden"
         />
       </div>
+
+      {hasLastSave && (
+        <div className="flex items-center gap-3">
+          <Button variant="outline" onClick={loadLastSave} className="font-display tracking-wider">
+            <RotateCcw className="w-4 h-4 mr-2" />
+            REOPEN: {lastName}
+          </Button>
+          <Button variant="ghost" size="icon" onClick={clearLastSave} className="text-muted-foreground hover:text-destructive">
+            <Trash2 className="w-4 h-4" />
+          </Button>
+        </div>
+      )}
 
       {error && (
         <div className="flex items-center gap-2 text-destructive text-sm">
