@@ -28,6 +28,7 @@ A web-based tool for editing Fallout Shelter save files (.sav). Decrypt, modify,
 
 - [Node.js](https://nodejs.org/) (v18 or higher recommended)
 - [npm](https://www.npmjs.com/) (installed with Node.js)
+- *Optional:* [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) (to run without local Node.js installation)
 
 ### Installation
 
@@ -39,35 +40,87 @@ A web-based tool for editing Fallout Shelter save files (.sav). Decrypt, modify,
 
 2.  Install dependencies:
     ```sh
+    # With Local Node.js
     npm install
+
+    # Or with Docker
+    cd .docker
+    docker compose run --rm npm install
     ```
 
 ### Development
 
 Start the development server with auto-reloading:
 ```sh
+# With Local Node.js
 npm run dev
+
+# Or with Docker
+cd .docker
+docker compose up dev
 ```
-The application will be available at `http://localhost:8080` (or the port specified in the terminal).
+The application will be available at `http://localhost:8080`.
 
 ### Production Build
 
 Create an optimized production build:
 ```sh
+# With Local Node.js
 npm run build
+
+# Or with Docker
+cd .docker
+docker compose run --rm npm run build
 ```
 Preview the production build locally:
 ```sh
+# With Local Node.js
 npm run preview
+
+# Or with Docker
+cd .docker
+docker compose run --rm --service-ports npm run preview
 ```
 
 ## Available Scripts
 
 - `npm run dev`: Starts the Vite development server.
+    ```sh
+    # With Docker:
+    cd .docker
+    docker compose up dev
+    ```
 - `npm run build`: Builds the app for production.
+    ```sh
+    # With Docker:
+    cd .docker
+    docker compose run --rm npm run build
+    ```
 - `npm run lint`: Runs ESLint to check for code quality issues.
+    ```sh
+    # With Docker:
+    cd .docker
+    docker compose run --rm npm run lint
+    ```
 - `npm run test`: Runs unit tests with Vitest.
+    ```sh
+    # With Docker:
+    cd .docker
+    docker compose run --rm npm test
+    ```
 - `npm run test:watch`: Runs tests in watch mode.
+    ```sh
+    # With Docker:
+    cd .docker
+    docker compose run --rm npm run test:watch
+    ```
+
+All scripts can be run via Docker by prefixing them with:
+```sh
+cd .docker
+docker compose run --rm npm <command>
+```
+For example: `docker compose run --rm npm run lint`
 
 ## Project Structure
 
@@ -94,7 +147,12 @@ Currently, this project does not require any specific environment variables for 
 
 Tests are written using Vitest and React Testing Library. To run the tests:
 ```sh
+# With Local Node.js
 npm run test
+
+# Or with Docker
+cd .docker
+docker compose run --rm npm test
 ```
 
 ## Lovable
