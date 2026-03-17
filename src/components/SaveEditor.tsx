@@ -1,6 +1,14 @@
 import { useState, useCallback } from 'react';
-import { Download, Upload, Users, Package, Code, ArrowLeft, FlaskConical } from 'lucide-react';
+import { Download, Upload, Users, Package, Code, ArrowLeft, FlaskConical, FileJson, FileType } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { encryptSave } from '@/lib/crypto';
 import { DwellerEditor } from './DwellerEditor';
 import { ResourcesEditor } from './ResourcesEditor';
@@ -46,6 +54,7 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
     a.click();
     URL.revokeObjectURL(url);
     toast.success('JSON file downloaded');
+    setOpen(false);
   }, [data, fileName]);
 
   const downloadEncrypted = useCallback(async () => {
@@ -61,6 +70,7 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
       a.click();
       URL.revokeObjectURL(url);
       toast.success('Encrypted .sav file downloaded');
+      setOpen(false);
     } catch (e) {
       console.error(e);
       toast.error('Encryption error');
@@ -68,6 +78,8 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
       setSaving(false);
     }
   }, [data, fileName]);
+
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="flex flex-col h-screen">
@@ -79,14 +91,37 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
           <h1 className="font-display text-lg pip-text-glow tracking-wider">{fileName}</h1>
           <p className="text-xs text-muted-foreground">{dwellers.length} dwellers</p>
         </div>
-        <Button variant="outline" size="sm" onClick={downloadJson}>
-          <Download className="w-3.5 h-3.5 mr-1.5" />
-          JSON
-        </Button>
-        <Button size="sm" onClick={downloadEncrypted} disabled={saving}>
-          <Upload className="w-3.5 h-3.5 mr-1.5" />
-          {saving ? 'Encrypting...' : '.SAV'}
-        </Button>
+        
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button size="sm" disabled={saving} aria-label="Download save file">
+              <Download className="w-3.5 h-3.5" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="font-display tracking-wider pip-text-glow">EXPORT FORMAT</DialogTitle>
+            </DialogHeader>
+            <div className="grid grid-cols-2 gap-4 py-4">
+              <Button 
+                variant="outline" 
+                className="flex flex-col items-center gap-2 h-24"
+                onClick={downloadJson}
+              >
+                <FileJson className="w-8 h-8 text-primary" />
+                <span>JSON</span>
+              </Button>
+              <Button 
+                variant="outline" 
+                className="flex flex-col items-center gap-2 h-24"
+                onClick={downloadEncrypted}
+              >
+                <FileType className="w-8 h-8 text-primary" />
+                <span>.SAV</span>
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </header>
 
       <nav className="flex border-b border-border bg-card/30">
