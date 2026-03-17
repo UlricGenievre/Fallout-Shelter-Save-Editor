@@ -1,73 +1,110 @@
-# Welcome to your Lovable project
+# Fallout Shelter Save Editor
 
-## Project info
+A web-based tool for editing Fallout Shelter save files (.sav). Decrypt, modify, and re-encrypt your vault data with ease.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Features
 
-## How can I edit this code?
+- **Save Decryption/Encryption**: Support for AES-256-CBC encryption used by Fallout Shelter.
+- **Resource Management**: Edit Caps, Nuka-Cola Quantum, Food, Water, and Power.
+- **Dweller Editor**: Modify dweller stats (S.P.E.C.I.A.L.), health, level, and more.
+- **Recipe Management**: Unlock and manage crafting recipes.
+- **Raw JSON Editor**: Advanced editing via direct JSON manipulation.
+- **Responsive Design**: Built with Tailwind CSS and shadcn/ui for a modern, mobile-friendly interface.
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Framework**: [React](https://reactjs.org/) (v18)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Language**: [TypeScript](https://www.typescript.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **State Management**: [TanStack Query](https://tanstack.com/query/latest) (React Query)
+- **Forms**: [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
+- **Testing**: [Vitest](https://vitest.dev/)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [npm](https://www.npmjs.com/) (installed with Node.js)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1.  Clone the repository:
+    ```sh
+    git clone <repository-url>
+    cd Fallout-Shelter-Save-Editor
+    ```
 
-Follow these steps:
+2.  Install dependencies:
+    ```sh
+    npm install
+    ```
 
+### Development
+
+Start the development server with auto-reloading:
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
+The application will be available at `http://localhost:8080` (or the port specified in the terminal).
 
-**Edit a file directly in GitHub**
+### Production Build
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Create an optimized production build:
+```sh
+npm run build
+```
+Preview the production build locally:
+```sh
+npm run preview
+```
 
-**Use GitHub Codespaces**
+## Available Scripts
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- `npm run dev`: Starts the Vite development server.
+- `npm run build`: Builds the app for production.
+- `npm run lint`: Runs ESLint to check for code quality issues.
+- `npm run test`: Runs unit tests with Vitest.
+- `npm run test:watch`: Runs tests in watch mode.
 
-## What technologies are used for this project?
+## Project Structure
 
-This project is built with:
+```text
+├── public/          # Static assets
+├── src/
+│   ├── components/  # Reusable UI components (including shadcn/ui)
+│   ├── data/        # Static data and JSON files (e.g., items.json)
+│   ├── hooks/       # Custom React hooks
+│   ├── lib/         # Utility functions (crypto, game logic, etc.)
+│   ├── pages/       # Page components (Index, NotFound)
+│   ├── test/        # Test configuration and setup
+│   ├── App.tsx      # Main application component
+│   └── main.tsx     # Application entry point
+├── package.json     # Project dependencies and scripts
+└── vite.config.ts   # Vite configuration
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Environment Variables
 
-## How can I deploy this project?
+Currently, this project does not require any specific environment variables for local development.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## Testing
 
-## Can I connect a custom domain to my Lovable project?
+Tests are written using Vitest and React Testing Library. To run the tests:
+```sh
+npm run test
+```
 
-Yes, you can!
+## Lovable
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+This project was initially generated or can be edited with [Lovable](https://lovable.dev/).
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## License
+
+TODO
+
+---
+
+*Disclaimer: This tool is not affiliated with Bethesda Game Studios. Always back up your save files before editing.*
