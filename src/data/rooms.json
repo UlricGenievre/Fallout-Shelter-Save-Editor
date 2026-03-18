@@ -1,0 +1,32 @@
+{
+  "rooms": [
+    { "type": "Entrance", "name": "Vault Door" },
+    { "type": "FakeWasteland", "name": "Wasteland" },
+    { "type": "Elevator", "name": "Elevator" },
+    { "type": "LivingQuarters", "name": "Living Room" },
+    { "type": "Cafeteria", "name": "Diner" },
+    { "type": "WaterPlant", "name": "Water Treatment" },
+    { "type": "Geothermal", "name": "Power Generator" },
+    { "type": "NukaCola", "name": "Nuka-Cola Bottler" },
+    { "type": "Storage", "name": "Storage" },
+    { "type": "WeaponFactory", "name": "Weapon Workshop" },
+    { "type": "MedBay", "name": "Medical Bay" },
+    { "type": "Bar", "name": "Lounge" },
+    { "type": "Gym", "name": "Weight Room" },
+    { "type": "Hydroponic", "name": "Garden" },
+    { "type": "Casino", "name": "Game Room" },
+    { "type": "Dojo", "name": "Athletics Room" },
+    { "type": "Radio", "name": "Radio Station" },
+    { "type": "ScienceLab", "name": "Science Lab" },
+    { "type": "Armory", "name": "Armory" },
+    { "type": "BarberShop", "name": "Barbershop" },
+    { "type": "Overseer", "name": "Overseer's Office" },
+    { "type": "OutfitFactory", "name": "Outfit Workshop" },
+    { "type": "DesignFactory", "name": "Theme Workshop" },
+    { "type": "Classroom", "name": "Classroom" },
+    { "type": "SuperRoom2", "name": "Super Reactor" },
+    { "type": "Energy2", "name": "Nuclear Reactor" },
+    { "type": "Water2", "name": "Water Purifier" }
+  ]
+}
+

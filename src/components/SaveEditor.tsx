@@ -1,29 +1,23 @@
 import { useState, useCallback } from 'react';
-import { Download, Upload, Users, Package, Code, ArrowLeft, FlaskConical, FileJson, FileType } from 'lucide-react';
+import { Download, ArrowLeft, FileJson, FileType, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { encryptSave } from '@/lib/crypto';
-import { DwellerEditor } from './DwellerEditor';
-import { ResourcesEditor } from './ResourcesEditor';
-import { RawJsonEditor } from './RawJsonEditor';
-import { RecipesEditor } from './RecipesEditor';
+import { CommonEditor } from './CommonEditor';
+import { VaultEditor } from './VaultEditor';
 import { toast } from 'sonner';
-
-type Tab = 'dwellers' | 'resources' | 'recipes' | 'raw';
-
-const TABS: { id: Tab; label: string; icon: typeof Users }[] = [
-  { id: 'dwellers', label: 'DWELLERS', icon: Users },
-  { id: 'resources', label: 'RESOURCES', icon: Package },
-  { id: 'recipes', label: 'RECIPES', icon: FlaskConical },
-  { id: 'raw', label: 'RAW', icon: Code },
-];
 
 interface SaveEditorProps {
   initialData: any;
@@ -33,17 +27,11 @@ interface SaveEditorProps {
 
 export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
   const [data, setData] = useState<any>(initialData);
-  const [activeTab, setActiveTab] = useState<Tab>('dwellers');
+  const [isVaultMode, setIsVaultMode] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const dwellers = data?.dwellers?.dwellers || [];
-
-  const updateDwellers = useCallback((newDwellers: any[]) => {
-    setData((prev: any) => ({
-      ...prev,
-      dwellers: { ...prev.dwellers, dwellers: newDwellers }
-    }));
-  }, []);
+  const dwellersCount = data?.dwellers?.dwellers?.length || 0;
 
   const downloadJson = useCallback(() => {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -79,8 +67,6 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
     }
   }, [data, fileName]);
 
-  const [open, setOpen] = useState(false);
-
   return (
     <div className="flex flex-col h-screen">
       <header className="border-b border-border px-4 py-3 flex items-center gap-4 bg-card/50 scanline">
@@ -89,8 +75,27 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
         </Button>
         <div className="flex-1">
           <h1 className="font-display text-lg pip-text-glow tracking-wider">{fileName}</h1>
-          <p className="text-xs text-muted-foreground">{dwellers.length} dwellers</p>
+          <p className="text-xs text-muted-foreground">{dwellersCount} dwellers</p>
         </div>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                size="sm"
+                variant="outline"
+                className={isVaultMode ? "bg-primary text-primary-foreground" : ""}
+                onClick={() => setIsVaultMode(!isVaultMode)}
+                aria-label="Toggle Vault mode"
+              >
+                <Home className="w-3.5 h-3.5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{isVaultMode ? "Back to Editor" : "Vault Mode"}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
         
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
@@ -123,39 +128,13 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
           </DialogContent>
         </Dialog>
       </header>
-
-      <nav className="flex border-b border-border bg-card/30">
-        {TABS.map(({ id, label, icon: Icon }) => (
-          <button
-            key={id}
-            onClick={() => setActiveTab(id)}
-            className={`flex items-center gap-2 px-4 py-2.5 text-sm font-display transition-colors border-b-2 ${
-              activeTab === id
-                ? 'border-primary text-primary pip-text-glow'
-                : 'border-transparent text-muted-foreground hover:text-foreground'
-            }`}
-          >
-            <Icon className="w-4 h-4" />
-            {label}
-          </button>
-        ))}
-      </nav>
-
-      <main className="flex-1 overflow-y-auto p-4">
-        <div className="max-w-4xl mx-auto">
-          {activeTab === 'dwellers' && (
-            <DwellerEditor dwellers={dwellers} onChange={updateDwellers} />
-          )}
-          {activeTab === 'resources' && (
-            <ResourcesEditor data={data} onChange={setData} />
-          )}
-          {activeTab === 'recipes' && (
-            <RecipesEditor data={data} onChange={setData} />
-          )}
-          {activeTab === 'raw' && (
-            <RawJsonEditor data={data} onChange={setData} />
-          )}
-        </div>
+      
+      <main className="flex-1 overflow-y-auto">
+        {isVaultMode ? (
+          <VaultEditor data={data} />
+        ) : (
+          <CommonEditor data={data} setData={setData} />
+        )}
       </main>
     </div>
   );
