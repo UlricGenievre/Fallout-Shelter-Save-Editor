@@ -1,4 +1,4 @@
-import { getItemLabel } from '@/lib/gameData';
+import { getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
 
 interface DwellerCardProps {
   dweller: any;
@@ -10,6 +10,11 @@ export function DwellerCard({ dweller }: DwellerCardProps) {
   const outfit = dweller.equipedOutfit?.id || '';
   const weapon = dweller.equipedWeapon?.id || '';
   const specialStats = dweller.stats?.stats || [];
+
+  const outfitItem = getItem(outfit);
+  const weaponItem = getItem(weapon);
+  const outfitBonus = outfitItem ? formatSpecial(outfitItem.special) : '';
+  const weaponDamage = weaponItem?.damage || '';
 
   return (
     <div className="border border-border rounded-lg p-4 bg-card/50">
@@ -42,18 +47,20 @@ export function DwellerCard({ dweller }: DwellerCardProps) {
           </div>
         </div>
 
-        <div className="flex-shrink-0 space-y-1">
-          <div>
+        <div className="flex-shrink-0 space-y-2">
+          <div className="flex justify-between items-center gap-2">
             <p className="text-xs font-semibold truncate" title={getItemLabel(outfit)}>
               <span className="text-xs text-muted-foreground font-display">OUTFIT : </span>
               {getItemLabel(outfit) || 'None'}
             </p>
+            {outfitBonus && <p className="text-[10px] text-primary font-display mt-0.5">{outfitBonus}</p>}
           </div>
-          <div>
+          <div className="flex justify-between items-center gap-2">
             <p className="text-xs font-semibold truncate" title={getItemLabel(weapon)}>
               <span className="text-xs text-muted-foreground font-display">WEAPON : </span>
               {getItemLabel(weapon) || 'None'}
             </p>
+            {weaponDamage && <p className="text-[10px] text-primary font-display mt-0.5">DMG: {weaponDamage}</p>}
           </div>
         </div>
       </div>
