@@ -15,8 +15,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { encryptSave } from '@/lib/crypto';
-import { CommonEditor } from './CommonEditor';
-import { VaultEditor } from './VaultEditor';
+import { CommonEditor } from '../editors/CommonEditor';
+import { VaultEditor } from '../vault/VaultEditor';
 import { toast } from 'sonner';
 
 interface SaveEditorProps {
@@ -27,7 +27,7 @@ interface SaveEditorProps {
 
 export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
   const [data, setData] = useState<any>(initialData);
-  const [isVaultMode, setIsVaultMode] = useState(false);
+  const [isVaultMode, setIsVaultMode] = useState(true);
   const [saving, setSaving] = useState(false);
   const [open, setOpen] = useState(false);
 

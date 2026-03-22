@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import roomsData from '@/data/rooms.json';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { getItemLabel } from '@/lib/gameData';
+import { DwellerCard } from '../shared/DwellerCard';
 
 interface Room {
   type: string;
@@ -36,7 +36,7 @@ const getRoomColor = (room: Room): string => {
   if (room.type === 'FakeWasteland') {
     return 'bg-amber-700 hover:bg-amber-800';
   }
-  
+
   // Color based on class only
   const roomClass = room.class || 'NoClass';
   return ROOM_CLASS_COLORS[roomClass] || 'bg-slate-600 hover:bg-slate-700';
@@ -86,7 +86,7 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
 
   const getRoomDwellers = (room: Room) => {
     if (!room.dwellers || !dwellers) return [];
-    return room.dwellers.map(serializeId => 
+    return room.dwellers.map(serializeId =>
       dwellers.find(d => d.serializeId === serializeId)
     ).filter(Boolean);
   };
@@ -107,10 +107,8 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
   return (
     <div className="w-full h-full p-6 overflow-auto">
       <div className="mb-6">
-        <h2 className="font-display text-2xl pip-text-glow tracking-widest mb-2">VAULT LAYOUT</h2>
-        <p className="text-sm text-muted-foreground">
-          Total rooms: {rooms.length} | Grid: {maxRow + 1} rows × {maxCol + 1} columns
-        </p>
+        <h2 className="font-display text-2xl pip-text-glow tracking-widest mb-2">VAULT LAYOUT ({rooms.length} rooms)
+        </h2>
       </div>
 
       <div className="border border-border rounded-lg bg-card/30 p-4 overflow-x-auto">
@@ -208,7 +206,7 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
             <div className="w-4 h-4 rounded bg-amber-700" />
             <span className="text-muted-foreground">Wasteland</span>
           </div>
-          
+
           {/* All room classes */}
           {Object.entries(ROOM_CLASS_COLORS).map(([className, colorClass]) => (
             <div key={className} className="flex items-center gap-2 text-sm">
@@ -237,66 +235,9 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
                 <p className="text-sm text-muted-foreground">No dwellers in this room</p>
               ) : (
                 <div className="grid grid-cols-1 gap-4">
-                  {getRoomDwellers(selectedRoom).map(dweller => {
-                    const level = dweller.experience?.currentLevel || 1;
-                    const maxHp = dweller.health?.maxHealth || 0;
-                    const outfit = dweller.equipedOutfit?.id || '';
-                    const weapon = dweller.equipedWeapon?.id || '';
-                    const specialStats = dweller.stats?.stats || [];
-
-                    return (
-                      <div key={dweller.serializeId} className="border border-border rounded-lg p-4 bg-card/50">
-                        <div className="grid grid-cols-[200px_100px_1fr_200px] gap-4 items-center">
-                          <div className="flex-shrink-0">
-                            <h4 className="font-semibold text-sm">{dweller.name} {dweller.lastName}</h4>
-                            <p className="text-xs text-muted-foreground">Level {level}</p>
-                          </div>
-
-                          <div className="flex-shrink-0 text-center">
-                            <span className="text-xs text-muted-foreground font-display block">HP MAX</span>
-                            <p className="text-sm font-semibold">{Math.round(maxHp)}</p>
-                          </div>
-
-                          <div className="flex-shrink-0">
-                            <div className="grid grid-cols-7 gap-1">
-                              {['S', 'P', 'E', 'C', 'I', 'A', 'L'].map((statName, index) => {
-                                const statValue = specialStats[index + 1]?.value || 0;
-                                return (
-                                  <div key={statName} className="flex flex-col items-center gap-1">
-                                    <span className="text-xs font-display">{statName}</span>
-                                    <div className="w-4 h-8 bg-muted rounded-sm overflow-hidden flex flex-col-reverse">
-                                      {Array.from({ length: 10 }, (_, i) => (
-                                        <div
-                                          key={i}
-                                          className={`flex-1 w-full ${i < statValue ? 'bg-primary' : 'bg-muted-foreground/20'}`}
-                                        />
-                                      ))}
-                                    </div>
-                                    <span className="text-xs font-semibold">{statValue}</span>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-
-                          <div className="flex-shrink-0 space-y-1">
-                            <div className="flex justify-between items-center gap-2">
-                              <span className="text-xs text-muted-foreground font-display">OUTFIT</span>
-                              <p className="text-xs font-semibold truncate max-w-[120px]" title={getItemLabel(outfit)}>
-                                {getItemLabel(outfit) || 'None'}
-                              </p>
-                            </div>
-                            <div className="flex justify-between items-center gap-2">
-                              <span className="text-xs text-muted-foreground font-display">WEAPON</span>
-                              <p className="text-xs font-semibold truncate max-w-[120px]" title={getItemLabel(weapon)}>
-                                {getItemLabel(weapon) || 'None'}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                  {getRoomDwellers(selectedRoom).map(dweller => (
+                    <DwellerCard key={dweller.serializeId} dweller={dweller} />
+                  ))}
                 </div>
               )}
             </div>

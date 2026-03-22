@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { FileUpload } from '@/components/FileUpload';
-import { SaveEditor } from '@/components/SaveEditor';
+import { FileUpload } from '@/components/core/FileUpload';
+import { SaveEditor } from '@/components/core/SaveEditor';
 
 const Index = () => {
   const [saveData, setSaveData] = useState<any>(null);
