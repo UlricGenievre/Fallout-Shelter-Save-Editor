@@ -114,7 +114,7 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
       <div className="border border-border rounded-lg bg-card/30 p-4 overflow-x-auto">
         <table className="border-collapse gap-0">
           <tbody>
-            {Array.from({ length: maxRow + 1 }).map((_, rowIndex) => (
+            {Array.from({ length: maxRow + 2 }).map((_, rowIndex) => (
               <tr key={`row-${rowIndex}`}>
                 <td className="w-12 text-right pr-3 text-xs text-muted-foreground py-1">
                   {rowIndex}
