@@ -8,471 +8,1803 @@
     "lastUpdated": "2026-03-08"
   },
   "weapons": [
-    { "id": "Melee_BaseballBat", "label": "Baseball Bat", "category": "Melee", "rarity": "Rare", "damage": "5-15" },
-    { "id": "Melee_ButcherKnife", "label": "Butcher Knife", "category": "Melee", "rarity": "Rare", "damage": "8-18" },
-    { "id": "Melee_KitchenKnife", "label": "Kitchen Knife", "category": "Melee", "rarity": "Rare", "damage": "3-11" },
-    { "id": "Melee_Pickaxe", "label": "Pickaxe", "category": "Melee", "rarity": "Rare", "damage": "11-21" },
-    { "id": "Melee_PoolCue", "label": "Pool Cue", "category": "Melee", "rarity": "Rare", "damage": "0-8" },
-    { "id": "Melee_FireHydrantBat", "label": "Fire Hydrant Bat", "category": "Melee", "rarity": "Legendary", "damage": "19-31" },
-    { "id": "Melee_RaiderSword", "label": "Relentless Raider Sword", "category": "Melee", "rarity": "Legendary", "damage": "16-28" },
-    { "id": "Melee_SuperSledge", "label": "Super Sledge", "category": "Melee", "rarity": "Legendary", "damage": "18-32" },
-    { "id": "GrognaksAxe", "label": "Grognak's Axe", "category": "Melee", "rarity": "Legendary", "damage": "18-26" },
-
-    { "id": "Ripper_Rusty", "label": "Rusty Ripper", "category": "Melee", "rarity": "Rare", "damage": "10-15" },
-    { "id": "Ripper", "label": "Ripper", "category": "Melee", "rarity": "Rare", "damage": "11-16" },
-    { "id": "Ripper_Enhanced", "label": "Enhanced Ripper", "category": "Melee", "rarity": "Rare", "damage": "12-17" },
-    { "id": "Ripper_Hardened", "label": "Hardened Ripper", "category": "Melee", "rarity": "Rare", "damage": "13-18" },
-
-    { "id": "SurgicalRipper_Rusty", "label": "Rusty Surgical Ripper", "category": "Melee", "rarity": "Rare", "damage": "12" },
-    { "id": "SurgicalRipper", "label": "Surgical Ripper", "category": "Melee", "rarity": "Rare", "damage": "13-14" },
-    { "id": "SurgicalRipper_Enhanced", "label": "Enhanced Surgical Ripper", "category": "Melee", "rarity": "Rare", "damage": "14-15" },
-    { "id": "SurgicalRipper_Hardened", "label": "Hardened Surgical Ripper", "category": "Melee", "rarity": "Rare", "damage": "16-17" },
-
-    { "id": "PowerFist_Rusty", "label": "Rusty Power Fist", "category": "Melee", "rarity": "Legendary", "damage": "12-17" },
-    { "id": "PowerFist", "label": "Power Fist", "category": "Melee", "rarity": "Legendary", "damage": "13-18" },
-    { "id": "PowerFist_Enhanced", "label": "Enhanced Power Fist", "category": "Melee", "rarity": "Legendary", "damage": "14-19" },
-    { "id": "PowerFist_Hardened", "label": "Hardened Power Fist", "category": "Melee", "rarity": "Legendary", "damage": "15-20" },
-    { "id": "PowerFist_EdsCustom", "label": "Ed's Custom Power Fist", "category": "Melee", "rarity": "Legendary", "damage": "16-22" },
-
-    { "id": "UltraciteSword1", "label": "Ultracite Sword I", "category": "Melee", "rarity": "Legendary", "damage": "3-6" },
-    { "id": "UltraciteSword2", "label": "Ultracite Sword II", "category": "Melee", "rarity": "Legendary" },
-
-    { "id": "032Pistol_Rusty", "label": "Rusty .32 Pistol", "category": "Pistol", "rarity": "Common", "damage": "1" },
-    { "id": "032Pistol", "label": ".32 Pistol", "category": "Pistol", "rarity": "Common", "damage": "1-2" },
-    { "id": "032Pistol_Enhanced", "label": "Enhanced .32 Pistol", "category": "Pistol", "rarity": "Common", "damage": "1-3" },
-    { "id": "032Pistol_Hardened", "label": "Hardened .32 Pistol", "category": "Pistol", "rarity": "Rare", "damage": "1-4" },
-    { "id": "032Pistol_ArmorPiercing", "label": "Armor Piercing .32 Pistol", "category": "Pistol", "rarity": "Rare", "damage": "1-5" },
-    { "id": "032Pistol_WildBillsSidearm", "label": "Wild Bill's Sidearm", "category": "Pistol", "rarity": "Legendary", "damage": "1-6" },
-
-    { "id": "Pistol_Rusty", "label": "Rusty 10mm Pistol", "category": "Pistol", "rarity": "Common", "damage": "2" },
-    { "id": "Pistol", "label": "10mm Pistol", "category": "Pistol", "rarity": "Common", "damage": "2-3" },
-    { "id": "Pistol_Enhanced", "label": "Enhanced 10mm Pistol", "category": "Pistol", "rarity": "Common", "damage": "2-4" },
-    { "id": "Pistol_Hardened", "label": "Hardened 10mm Pistol", "category": "Pistol", "rarity": "Rare", "damage": "2-5" },
-    { "id": "Pistol_ArmorPiercing", "label": "Armor Piercing 10mm Pistol", "category": "Pistol", "rarity": "Rare", "damage": "2-6" },
-    { "id": "Pistol_LoneWanderer", "label": "Lone Wanderer", "category": "Pistol", "rarity": "Legendary", "damage": "2-7" },
-
-    { "id": "Magnum_Rusty", "label": "Rusty Scoped .44", "category": "Pistol", "rarity": "Common", "damage": "3" },
-    { "id": "Magnum", "label": "Scoped .44", "category": "Pistol", "rarity": "Common", "damage": "3-4" },
-    { "id": "Magnum_Enhanced", "label": "Enhanced Scoped .44", "category": "Pistol", "rarity": "Common", "damage": "3-5" },
-    { "id": "Magnum_Hardened", "label": "Hardened Scoped .44", "category": "Pistol", "rarity": "Rare", "damage": "3-6" },
-    { "id": "Magnum_ArmorPiercing", "label": "Armor Piercing Scoped .44", "category": "Pistol", "rarity": "Rare", "damage": "3-7" },
-    { "id": "Magnum_Blackhawk", "label": "Blackhawk", "category": "Pistol", "rarity": "Legendary", "damage": "3-8" },
-
-    { "id": "PipePistol", "label": "Pipe Pistol", "category": "Pistol", "rarity": "Common", "damage": "1-3" },
-    { "id": "PipePistol_HairTrigger", "label": "Hair Trigger Pipe Pistol", "category": "Pistol", "rarity": "Common", "damage": "2-5" },
-    { "id": "PipePistol_Heavy", "label": "Heavy Pipe Pistol", "category": "Pistol", "rarity": "Common", "damage": "3-7" },
-    { "id": "PipePistol_Scoped", "label": "Scoped Pipe Pistol", "category": "Pistol", "rarity": "Rare", "damage": "4-9" },
-    { "id": "PipePistol_Auto", "label": "Auto Pipe Pistol", "category": "Pistol", "rarity": "Rare", "damage": "5-11" },
-    { "id": "PipePistol_LittleBrother", "label": "Little Brother", "category": "Pistol", "rarity": "Legendary", "damage": "6-13" },
-
-    { "id": "TranqPistol_Rusty", "label": "Rusty Tranq Gun", "category": "Pistol", "rarity": "Rare", "damage": "1-10" },
-    { "id": "TranqPistol", "label": "Tranq Gun", "category": "Pistol", "rarity": "Rare", "damage": "2-12" },
-    { "id": "TranqPistol_Enhanced", "label": "Enhanced Tranq Gun", "category": "Pistol", "rarity": "Rare", "damage": "4-12" },
-    { "id": "TranqPistol_Hardened", "label": "Hardened Tranq Gun", "category": "Pistol", "rarity": "Rare", "damage": "6-12" },
-
-    { "id": "T60Pistol_Rusty", "label": "Rusty T60 Pistol", "category": "Pistol", "rarity": "Rare", "damage": "9-13" },
-    { "id": "T60Pistol", "label": "T60 Pistol", "category": "Pistol", "rarity": "Rare", "damage": "10-14" },
-    { "id": "T60Pistol_Enhanced", "label": "Enhanced T60 Pistol", "category": "Pistol", "rarity": "Rare", "damage": "11-14" },
-    { "id": "T60Pistol_Hardened", "label": "Hardened T60 Pistol", "category": "Pistol", "rarity": "Rare", "damage": "12-15" },
-    { "id": "T60Pistol_ArmorPiercing", "label": "Armor Piercing T60 Pistol", "category": "Pistol", "rarity": "Rare", "damage": "13-16" },
-
-    { "id": "GaussPistol_Rusty", "label": "Rusty Gauss Pistol", "category": "Pistol", "rarity": "Rare", "damage": "12" },
-    { "id": "GaussPistol_Focused", "label": "Focused Gauss Pistol", "category": "Pistol", "rarity": "Rare", "damage": "13" },
-    { "id": "GaussPistol_Enhanced", "label": "Enhanced Gauss Pistol", "category": "Pistol", "rarity": "Rare", "damage": "14" },
-    { "id": "GaussPistol_Hardened", "label": "Hardened Gauss Pistol", "category": "Pistol", "rarity": "Rare", "damage": "15" },
-
-    { "id": "LaserPistol_Rusty", "label": "Rusty Laser Pistol", "category": "Energy Pistol", "rarity": "Common", "damage": "7" },
-    { "id": "LaserPistol", "label": "Laser Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "7-8" },
-    { "id": "LaserPistol_Tuned", "label": "Tuned Laser Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "7-9" },
-    { "id": "LaserPistol_Focused", "label": "Focused Laser Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "7-10" },
-    { "id": "LaserPistol_Amplified", "label": "Amplified Laser Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "7-11" },
-    { "id": "LaserPistol_SmugglersEnd", "label": "Smuggler's End", "category": "Energy Pistol", "rarity": "Legendary", "damage": "7-12" },
-
-    { "id": "PlasmaPistol_Rusty", "label": "Rusty Plasma Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "11" },
-    { "id": "PlasmaPistol", "label": "Plasma Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "11-12" },
-    { "id": "PlasmaPistol_Tuned", "label": "Tuned Plasma Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "11-13" },
-    { "id": "PlasmaPistol_Focused", "label": "Focused Plasma Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "11-14" },
-    { "id": "PlasmaPistol_Amplified", "label": "Amplified Plasma Pistol", "category": "Energy Pistol", "rarity": "Legendary", "damage": "11-15" },
-    { "id": "PlasmaPistol_Novasurge", "label": "MPXL Novasurge", "category": "Energy Pistol", "rarity": "Legendary", "damage": "11-16" },
-
-    { "id": "InstitutePistol", "label": "Institute Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "9-11" },
-    { "id": "InstitutePistol_Incendiary", "label": "Incendiary Institute Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "10-13" },
-    { "id": "InstitutePistol_Improved", "label": "Improved Institute Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "11-15" },
-    { "id": "InstitutePistol_Scoped", "label": "Scoped Institute Pistol", "category": "Energy Pistol", "rarity": "Rare", "damage": "12-17" },
-    { "id": "InstitutePistol_Scattered", "label": "Scattered Institute Pistol", "category": "Energy Pistol", "rarity": "Legendary", "damage": "13-19" },
-    { "id": "InstitutePistol_Apotheosis", "label": "Apotheosis", "category": "Energy Pistol", "rarity": "Legendary", "damage": "14-21" },
-
-    { "id": "AlienBlaster_Rusty", "label": "Rusty Alien Blaster", "category": "Energy Pistol", "rarity": "Legendary", "damage": "18" },
-    { "id": "AlienBlaster", "label": "Alien Blaster", "category": "Energy Pistol", "rarity": "Legendary", "damage": "18-19" },
-    { "id": "AlienBlaster_Tuned", "label": "Tuned Alien Blaster", "category": "Energy Pistol", "rarity": "Legendary", "damage": "18-20" },
-    { "id": "AlienBlaster_Focused", "label": "Focused Alien Blaster", "category": "Energy Pistol", "rarity": "Legendary", "damage": "18-21" },
-    { "id": "AlienBlaster_Amplified", "label": "Amplified Alien Blaster", "category": "Energy Pistol", "rarity": "Legendary", "damage": "18-22" },
-    { "id": "AlienBlaster_Destabilizer", "label": "Destabilizer", "category": "Energy Pistol", "rarity": "Legendary", "damage": "18-23" },
-
-    { "id": "AssaultronHead_Rusty", "label": "Rusty Assaultron Head", "category": "Energy Pistol", "rarity": "Rare", "damage": "7-11" },
-    { "id": "AssaultronHead", "label": "Assaultron Head", "category": "Energy Pistol", "rarity": "Rare", "damage": "8-12" },
-    { "id": "AssaultronHead_Enhanced", "label": "Enhanced Assaultron Head", "category": "Energy Pistol", "rarity": "Rare", "damage": "9-13" },
-    { "id": "AssaultronHead_Hardened", "label": "Hardened Assaultron Head", "category": "Energy Pistol", "rarity": "Rare", "damage": "10-14" },
-
-    { "id": "BBGun_Rusty", "label": "Rusty BB Gun", "category": "Rifle", "rarity": "Common", "damage": "0-1" },
-    { "id": "BBGun", "label": "BB Gun", "category": "Rifle", "rarity": "Common", "damage": "0-2" },
-    { "id": "BBGun_Enhanced", "label": "Enhanced BB Gun", "category": "Rifle", "rarity": "Common", "damage": "0-3" },
-    { "id": "BBGun_Hardened", "label": "Hardened BB Gun", "category": "Rifle", "rarity": "Rare", "damage": "0-4" },
-    { "id": "BBGun_ArmorPiercing", "label": "Armor Piercing BB Gun", "category": "Rifle", "rarity": "Rare", "damage": "0-5" },
-    { "id": "BBGun_RedRocket", "label": "Red Rocket", "category": "Rifle", "rarity": "Legendary", "damage": "0-6" },
-
-    { "id": "HuntingRifle_Rusty", "label": "Rusty Hunting Rifle", "category": "Rifle", "rarity": "Common", "damage": "5" },
-    { "id": "HuntingRifle", "label": "Hunting Rifle", "category": "Rifle", "rarity": "Common", "damage": "5-6" },
-    { "id": "HuntingRifle_Enhanced", "label": "Enhanced Hunting Rifle", "category": "Rifle", "rarity": "Common", "damage": "5-7" },
-    { "id": "HuntingRifle_Hardened", "label": "Hardened Hunting Rifle", "category": "Rifle", "rarity": "Rare", "damage": "5-8" },
-    { "id": "HuntingRifle_ArmorPiercing", "label": "Armor Piercing Hunting Rifle", "category": "Rifle", "rarity": "Rare", "damage": "5-9" },
-    { "id": "HuntingRifle_OlPainless", "label": "Ol' Painless", "category": "Rifle", "rarity": "Legendary", "damage": "5-10" },
-
-    { "id": "Rifle_Rusty", "label": "Rusty Lever-Action Rifle", "category": "Rifle", "rarity": "Common", "damage": "4" },
-    { "id": "Rifle", "label": "Lever-Action Rifle", "category": "Rifle", "rarity": "Common", "damage": "4-5" },
-    { "id": "Rifle_Enhanced", "label": "Enhanced Lever-Action Rifle", "category": "Rifle", "rarity": "Common", "damage": "4-6" },
-    { "id": "Rifle_Hardened", "label": "Hardened Lever-Action Rifle", "category": "Rifle", "rarity": "Rare", "damage": "4-7" },
-    { "id": "Rifle_ArmorPiercing", "label": "Armor Piercing Lever-Action Rifle", "category": "Rifle", "rarity": "Rare", "damage": "4-8" },
-    { "id": "Rifle_LincolnsRepeater", "label": "Lincoln's Repeater", "category": "Rifle", "rarity": "Legendary", "damage": "4-9" },
-
-    { "id": "AssaultRifle_Rusty", "label": "Rusty Assault Rifle", "category": "Rifle", "rarity": "Rare", "damage": "8" },
-    { "id": "AssaultRifle", "label": "Assault Rifle", "category": "Rifle", "rarity": "Rare", "damage": "8-9" },
-    { "id": "AssaultRifle_Enhanced", "label": "Enhanced Assault Rifle", "category": "Rifle", "rarity": "Rare", "damage": "8-10" },
-    { "id": "AssaultRifle_Hardened", "label": "Hardened Assault Rifle", "category": "Rifle", "rarity": "Rare", "damage": "8-11" },
-    { "id": "AssaultRifle_ArmorPiercing", "label": "Armor Piercing Assault Rifle", "category": "Rifle", "rarity": "Rare", "damage": "8-12" },
-    { "id": "AssaultRifle_Infiltrator", "label": "Infiltrator", "category": "Rifle", "rarity": "Legendary", "damage": "8-13" },
-
-    { "id": "SniperRifle_Rusty", "label": "Rusty Sniper Rifle", "category": "Rifle", "rarity": "Rare", "damage": "10" },
-    { "id": "SniperRifle", "label": "Sniper Rifle", "category": "Rifle", "rarity": "Rare", "damage": "10-11" },
-    { "id": "SniperRifle_Enhanced", "label": "Enhanced Sniper Rifle", "category": "Rifle", "rarity": "Rare", "damage": "10-12" },
-    { "id": "SniperRifle_Hardened", "label": "Hardened Sniper Rifle", "category": "Rifle", "rarity": "Rare", "damage": "10-13" },
-    { "id": "SniperRifle_ArmorPiercing", "label": "Armor Piercing Sniper Rifle", "category": "Rifle", "rarity": "Rare", "damage": "10-14" },
-    { "id": "SniperRifle_VictoryRifle", "label": "Victory Rifle", "category": "Rifle", "rarity": "Legendary", "damage": "10-15" },
-
-    { "id": "PipeRifle", "label": "Pipe Rifle", "category": "Rifle", "rarity": "Common", "damage": "5-7" },
-    { "id": "PipeRifle_Calibrated", "label": "Calibrated Pipe Rifle", "category": "Rifle", "rarity": "Rare", "damage": "6-9" },
-    { "id": "PipeRifle_Long", "label": "Long Pipe Rifle", "category": "Rifle", "rarity": "Rare", "damage": "7-11" },
-    { "id": "PipeRifle_NightVision", "label": "Night-Vision Pipe Rifle", "category": "Rifle", "rarity": "Rare", "damage": "8-13" },
-    { "id": "PipeRifle_Bayoneted", "label": "Bayoneted Pipe Rifle", "category": "Rifle", "rarity": "Rare", "damage": "9-15" },
-    { "id": "PipeRifle_BigSister", "label": "Big Sister", "category": "Rifle", "rarity": "Legendary", "damage": "10-17" },
-
-    { "id": "BOSAssaultRifle_Rusty", "label": "Rusty BOS Assault Rifle", "category": "Rifle", "rarity": "Rare", "damage": "15" },
-    { "id": "BOSAssaultRifle", "label": "BOS Assault Rifle", "category": "Rifle", "rarity": "Rare", "damage": "16" },
-    { "id": "BOSAssaultRifle_Enhanced", "label": "Enhanced BOS Assault Rifle", "category": "Rifle", "rarity": "Rare", "damage": "16-18" },
-    { "id": "BOSAssaultRifle_Hardened", "label": "Hardened BOS Assault Rifle", "category": "Rifle", "rarity": "Rare", "damage": "17-19" },
-    { "id": "BOSAssaultRifle_ArmorPiercing", "label": "Armor Piercing BOS Assault Rifle", "category": "Rifle", "rarity": "Rare", "damage": "19-21" },
-
-    { "id": "Railgun_Rusty", "label": "Rusty Railway Rifle", "category": "Rifle", "rarity": "Rare", "damage": "14" },
-    { "id": "Railgun", "label": "Railway Rifle", "category": "Rifle", "rarity": "Rare", "damage": "14-15" },
-    { "id": "Railgun_Enhanced", "label": "Enhanced Railway Rifle", "category": "Rifle", "rarity": "Rare", "damage": "14-16" },
-    { "id": "Railgun_Hardened", "label": "Hardened Railway Rifle", "category": "Rifle", "rarity": "Legendary", "damage": "14-17" },
-    { "id": "Railgun_Accelerated", "label": "Accelerated Railway Rifle", "category": "Rifle", "rarity": "Legendary", "damage": "14-18" },
-    { "id": "Railgun_Railmaster", "label": "Railmaster", "category": "Rifle", "rarity": "Legendary", "damage": "14-19" },
-
-    { "id": "GaussRifle_Rusty", "label": "Rusty Gauss Rifle", "category": "Rifle", "rarity": "Rare", "damage": "16" },
-    { "id": "GaussRifle", "label": "Gauss Rifle", "category": "Rifle", "rarity": "Rare", "damage": "16-17" },
-    { "id": "GaussRifle_Enhanced", "label": "Enhanced Gauss Rifle", "category": "Rifle", "rarity": "Legendary", "damage": "16-18" },
-    { "id": "GaussRifle_Hardened", "label": "Hardened Gauss Rifle", "category": "Rifle", "rarity": "Legendary", "damage": "16-19" },
-    { "id": "GaussRifle_Accelerated", "label": "Accelerated Gauss Rifle", "category": "Rifle", "rarity": "Legendary", "damage": "16-20" },
-    { "id": "GaussRifle_Magnetron", "label": "Magnetron 4000", "category": "Rifle", "rarity": "Legendary", "damage": "16-21" },
-
-    { "id": "SawedOffShotgun_Rusty", "label": "Rusty Sawed-Off Shotgun", "category": "Shotgun", "rarity": "Common", "damage": "6" },
-    { "id": "SawedOffShotgun", "label": "Sawed-Off Shotgun", "category": "Shotgun", "rarity": "Common", "damage": "6-7" },
-    { "id": "SawedOffShotgun_Enhanced", "label": "Enhanced Sawed-Off Shotgun", "category": "Shotgun", "rarity": "Common", "damage": "6-8" },
-    { "id": "SawedOffShotgun_Hardened", "label": "Hardened Sawed-Off Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "6-9" },
-    { "id": "SawedOffShotgun_DoubleBarrelled", "label": "Double-Barrel Sawed-Off Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "6-10" },
-    { "id": "SawedOffShotgun_Kneecapper", "label": "Kneecapper", "category": "Shotgun", "rarity": "Legendary", "damage": "6-11" },
-
-    { "id": "Shotgun_Rusty", "label": "Rusty Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "9" },
-    { "id": "Shotgun", "label": "Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "9-10" },
-    { "id": "Shotgun_Enhanced", "label": "Enhanced Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "9-11" },
-    { "id": "Shotgun_Hardened", "label": "Hardened Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "9-12" },
-    { "id": "Shotgun_DoubleBarrelled", "label": "Double-Barrel Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "9-13" },
-    { "id": "Shotgun_FarmersDaughter", "label": "Farmer's Daughter", "category": "Shotgun", "rarity": "Legendary", "damage": "9-14" },
-
-    { "id": "CombatShotgun_Rusty", "label": "Rusty Combat Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "13" },
-    { "id": "CombatShotgun", "label": "Combat Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "13-14" },
-    { "id": "CombatShotgun_Enhanced", "label": "Enhanced Combat Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "13-15" },
-    { "id": "CombatShotgun_Hardened", "label": "Hardened Combat Shotgun", "category": "Shotgun", "rarity": "Rare", "damage": "13-16" },
-    { "id": "CombatShotgun_DoubleBarrelled", "label": "Double-Barrel Combat Shotgun", "category": "Shotgun", "rarity": "Legendary", "damage": "13-17" },
-    { "id": "CombatShotgun_CharonsShotgun", "label": "Charon's Shotgun", "category": "Shotgun", "rarity": "Legendary", "damage": "13-18" },
-
-    { "id": "LaserRifle_Rusty", "label": "Rusty Laser Rifle", "category": "Energy Rifle", "rarity": "Rare", "damage": "12" },
-    { "id": "LaserRifle", "label": "Laser Rifle", "category": "Energy Rifle", "rarity": "Rare", "damage": "12-13" },
-    { "id": "LaserRifle_Tuned", "label": "Tuned Laser Rifle", "category": "Energy Rifle", "rarity": "Rare", "damage": "12-14" },
-    { "id": "LaserRifle_Focused", "label": "Focused Laser Rifle", "category": "Energy Rifle", "rarity": "Rare", "damage": "12-15" },
-    { "id": "LaserRifle_Amplified", "label": "Amplified Laser Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "12-16" },
-    { "id": "LaserRifle_WazerWifle", "label": "Wazer Wifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "12-17" },
-
-    { "id": "PlasmaRifle_Rusty", "label": "Rusty Plasma Rifle", "category": "Energy Rifle", "rarity": "Rare", "damage": "17" },
-    { "id": "PlasmaRifle", "label": "Plasma Rifle", "category": "Energy Rifle", "rarity": "Rare", "damage": "17-18" },
-    { "id": "PlasmaRifle_Tuned", "label": "Tuned Plasma Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "17-19" },
-    { "id": "PlasmaRifle_Focused", "label": "Focused Plasma Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "17-20" },
-    { "id": "PlasmaRifle_Amplified", "label": "Amplified Plasma Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "17-22" },
-    { "id": "PlasmaRifle_MeanGreenMonster", "label": "Mean Green Monster", "category": "Energy Rifle", "rarity": "Legendary", "damage": "17-23" },
-
-    { "id": "InstituteRifle", "label": "Institute Rifle", "category": "Energy Rifle", "rarity": "Rare", "damage": "14-16" },
-    { "id": "InstituteRifle_Excited", "label": "Excited Institute Rifle", "category": "Energy Rifle", "rarity": "Rare", "damage": "15-18" },
-    { "id": "InstituteRifle_Long", "label": "Long Institute Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "16-20" },
-    { "id": "InstituteRifle_NightVision", "label": "Night-Vision Institute Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "17-22" },
-    { "id": "InstituteRifle_Targeting", "label": "Targeting Institute Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "18-24" },
-    { "id": "InstituteRifle_Virgils", "label": "Virgil's Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "19-26" },
-
-    { "id": "PlasmaThrower", "label": "Plasma Thrower", "category": "Energy Rifle", "rarity": "Legendary", "damage": "17-19" },
-    { "id": "PlasmaThrower_Agitated", "label": "Agitated Plasma Thrower", "category": "Energy Rifle", "rarity": "Legendary", "damage": "18-21" },
-    { "id": "PlasmaThrower_Tactical", "label": "Tactical Plasma Thrower", "category": "Energy Rifle", "rarity": "Legendary", "damage": "19-23" },
-    { "id": "PlasmaThrower_Boosted", "label": "Boosted Plasma Thrower", "category": "Energy Rifle", "rarity": "Legendary", "damage": "20-25" },
-    { "id": "PlasmaThrower_Overcharged", "label": "Overcharged Plasma Thrower", "category": "Energy Rifle", "rarity": "Legendary", "damage": "21-27" },
-    { "id": "PlasmaThrower_DragonsMaw", "label": "Dragon's Maw", "category": "Energy Rifle", "rarity": "Legendary", "damage": "22-29" },
-
-    { "id": "PulseRifle_Rusty", "label": "Rusty Pulse Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "17-18" },
-    { "id": "PulseRifle", "label": "Pulse Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "18-19" },
-    { "id": "PulseRifle_Enhanced", "label": "Enhanced Pulse Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "19-20" },
-    { "id": "PulseRifle_Hardened", "label": "Hardened Pulse Rifle", "category": "Energy Rifle", "rarity": "Legendary", "damage": "20-21" },
-
-    { "id": "LaserMusket", "label": "Laser Musket", "category": "Energy Rifle", "rarity": "Legendary", "damage": "10-13" },
-    { "id": "Henrietta", "label": "Henrietta", "category": "Rifle", "rarity": "Legendary", "damage": "13-16" },
-    { "id": "MaresLeg", "label": "Mare's Leg", "category": "Rifle", "rarity": "Legendary", "damage": "9-13" },
-    { "id": "RadiumRifle", "label": "Radium Rifle", "category": "Rifle", "rarity": "Legendary", "damage": "18-22" },
-    { "id": "Cryolator", "label": "Cryolator", "category": "Energy Rifle", "rarity": "Legendary", "damage": "20-24" },
-
-    { "id": "UltraciteGatling1", "label": "Ultracite Gatling I", "category": "Heavy", "rarity": "Legendary" },
-    { "id": "UltraciteGatling2", "label": "Ultracite Gatling II", "category": "Heavy", "rarity": "Legendary" },
-    { "id": "UltracitePlasma1", "label": "Ultracite Plasma I", "category": "Heavy", "rarity": "Legendary", "damage": "6-8" },
-    { "id": "UltracitePlasma2", "label": "Ultracite Plasma II", "category": "Heavy", "rarity": "Legendary" },
-
-    { "id": "Flamer_Rusty", "label": "Rusty Flamer", "category": "Heavy", "rarity": "Rare", "damage": "15" },
-    { "id": "Flamer", "label": "Flamer", "category": "Heavy", "rarity": "Rare", "damage": "15-16" },
-    { "id": "Flamer_Enhanced", "label": "Enhanced Flamer", "category": "Heavy", "rarity": "Rare", "damage": "15-17" },
-    { "id": "Flamer_Hardened", "label": "Hardened Flamer", "category": "Heavy", "rarity": "Rare", "damage": "15-18" },
-    { "id": "Flamer_Pressurized", "label": "Pressurized Flamer", "category": "Heavy", "rarity": "Rare", "damage": "15-19" },
-    { "id": "Flamer_Burnmaster", "label": "Burnmaster", "category": "Heavy", "rarity": "Legendary", "damage": "15-20" },
-
-    { "id": "Minigun_Rusty", "label": "Rusty Minigun", "category": "Heavy", "rarity": "Legendary", "damage": "19" },
-    { "id": "Minigun", "label": "Minigun", "category": "Heavy", "rarity": "Legendary", "damage": "19-20" },
-    { "id": "Minigun_Enhanced", "label": "Enhanced Minigun", "category": "Heavy", "rarity": "Legendary", "damage": "19-21" },
-    { "id": "Minigun_Hardened", "label": "Hardened Minigun", "category": "Heavy", "rarity": "Legendary", "damage": "19-22" },
-    { "id": "Minigun_ArmorPiercing", "label": "Armor Piercing Minigun", "category": "Heavy", "rarity": "Legendary", "damage": "19-23" },
-    { "id": "Minigun_LeadBelcher", "label": "Lead Belcher", "category": "Heavy", "rarity": "Legendary", "damage": "19-24" },
-
-    { "id": "MissilLauncher_Rusty", "label": "Rusty Missile Launcher", "category": "Heavy", "rarity": "Legendary", "damage": "20" },
-    { "id": "MissilLauncher", "label": "Missile Launcher", "category": "Heavy", "rarity": "Legendary", "damage": "20-21" },
-    { "id": "MissilLauncher_Enhanced", "label": "Enhanced Missile Launcher", "category": "Heavy", "rarity": "Legendary", "damage": "20-22" },
-    { "id": "MissilLauncher_Hardened", "label": "Hardened Missile Launcher", "category": "Heavy", "rarity": "Legendary", "damage": "20-23" },
-    { "id": "MissilLauncher_Guided", "label": "Guided Missile Launcher", "category": "Heavy", "rarity": "Legendary", "damage": "20-24" },
-    { "id": "MissilLauncher_MissLauncher", "label": "Miss Launcher", "category": "Heavy", "rarity": "Legendary", "damage": "20-25" },
-
-    { "id": "Fatman_Rusty", "label": "Rusty Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22" },
-    { "id": "Fatman", "label": "Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-23" },
-    { "id": "Fatman_Enhanced", "label": "Enhanced Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-24" },
-    { "id": "Fatman_Hardened", "label": "Hardened Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-25" },
-    { "id": "Fatman_Guided", "label": "Guided Fat Man", "category": "Heavy", "rarity": "Legendary", "damage": "22-26" },
-    { "id": "Fatman_MIRV", "label": "MIRV", "category": "Heavy", "rarity": "Legendary", "damage": "22-27" },
-
-    { "id": "GatlingLaser_Rusty", "label": "Rusty Gatling Laser", "category": "Heavy", "rarity": "Legendary", "damage": "21" },
-    { "id": "GatlingLaser", "label": "Gatling Laser", "category": "Heavy", "rarity": "Legendary", "damage": "21-22" },
-    { "id": "GatlingLaser_Tuned", "label": "Tuned Gatling Laser", "category": "Heavy", "rarity": "Legendary", "damage": "21-23" },
-    { "id": "GatlingLaser_Focused", "label": "Focused Gatling Laser", "category": "Heavy", "rarity": "Legendary", "damage": "21-24" },
-    { "id": "GatlingLaser_Amplified", "label": "Amplified Gatling Laser", "category": "Heavy", "rarity": "Legendary", "damage": "21-25" },
-    { "id": "GatlingLaser_Vengeance", "label": "Vengeance", "category": "Heavy", "rarity": "Legendary", "damage": "21-26" },
-
-    { "id": "JunkJet", "label": "Junk Jet", "category": "Heavy", "rarity": "Rare", "damage": "13-15" },
-    { "id": "JunkJet_RecoilCompensated", "label": "Recoil Compensated Junk Jet", "category": "Heavy", "rarity": "Rare", "damage": "14-17" },
-    { "id": "JunkJet_Tactical", "label": "Tactical Junk Jet", "category": "Heavy", "rarity": "Rare", "damage": "15-19" },
-    { "id": "JunkJet_Electrified", "label": "Electrified Junk Jet", "category": "Heavy", "rarity": "Legendary", "damage": "16-21" },
-    { "id": "JunkJet_Flaming", "label": "Flaming Junk Jet", "category": "Heavy", "rarity": "Legendary", "damage": "17-23" },
-    { "id": "JunkJet_TechniciansRevenge", "label": "Technician's Revenge", "category": "Heavy", "rarity": "Legendary", "damage": "18-25" },
-
-    { "id": "PlasmaCaster_Rusty", "label": "Rusty Plasma Caster", "category": "Heavy", "rarity": "Legendary", "damage": "16-20" },
-    { "id": "PlasmaCaster", "label": "Plasma Caster", "category": "Heavy", "rarity": "Legendary", "damage": "17-21" },
-    { "id": "PlasmaCaster_Enhanced", "label": "Enhanced Plasma Caster", "category": "Heavy", "rarity": "Legendary", "damage": "18-22" },
-    { "id": "PlasmaCaster_Hardened", "label": "Hardened Plasma Caster", "category": "Heavy", "rarity": "Legendary", "damage": "19-23" },
-
-    { "id": "50CalMachineGun_Rusty", "label": "Rusty .50 Cal Machine Gun", "category": "Heavy", "rarity": "Rare", "damage": "10-12" },
-    { "id": "50CalMachineGun", "label": ".50 Cal Machine Gun", "category": "Heavy", "rarity": "Rare", "damage": "11-14" },
-    { "id": "50CalMachineGun_Enhanced", "label": "Enhanced .50 Cal Machine Gun", "category": "Heavy", "rarity": "Rare", "damage": "12-14" },
-    { "id": "50CalMachineGun_Hardened", "label": "Hardened .50 Cal Machine Gun", "category": "Heavy", "rarity": "Rare", "damage": "13-15" },
-    { "id": "50CalMachineGun_ArmorPiercing", "label": "Armor Piercing .50 Cal Machine Gun", "category": "Heavy", "rarity": "Rare", "damage": "15-16" },
-
-    { "id": "GhoulRevolver", "label": "Ghoul Revolver", "category": "Shotgun", "rarity": "Legendary", "damage": "8-12" },
-    { "id": "MountainMomma", "label": "Mountain Momma", "category": "Shotgun", "rarity": "Legendary", "damage": "14-19" },
-    { "id": "AlienDisintegrator_Rusty", "label": "Rusty Alien Disintegrator", "category": "Energy Rifle", "rarity": "Legendary", "damage": "16" },
-    { "id": "AlienDisintegrator", "label": "Alien Disintegrator", "category": "Energy Rifle", "rarity": "Legendary", "damage": "17" },
-    { "id": "AlienDisintegrator_Enhanced", "label": "Enhanced Alien Disintegrator", "category": "Energy Rifle", "rarity": "Legendary", "damage": "18" },
-    { "id": "AlienDisintegrator_Hardened", "label": "Hardened Alien Disintegrator", "category": "Energy Rifle", "rarity": "Legendary", "damage": "19" }
-  ],
-  "outfits": [
-    { "id": "VaultSuit", "label": "Vault Suit", "category": "Tiered", "rarity": "Common" },
-    { "id": "ArmoredVaultSuit", "label": "Armored Vault Suit", "category": "Tiered", "rarity": "Common", "special": { "E": 3 } },
-    { "id": "ArmoredVaultSuit_Sturdy", "label": "Sturdy Vault Suit", "category": "Tiered", "rarity": "Rare", "special": { "E": 5 } },
-    { "id": "ArmoredVaultSuit_Heavy", "label": "Heavy Vault Suit", "category": "Tiered", "rarity": "Legendary", "special": { "E": 7 } },
-
-    { "id": "BattleArmor", "label": "Battle Armor", "category": "Tiered", "rarity": "Common", "special": { "S": 2, "E": 1 } },
-    { "id": "BattleArmor_Sturdy", "label": "Sturdy Battle Armor", "category": "Tiered", "rarity": "Rare", "special": { "S": 3, "E": 2 } },
-    { "id": "BattleArmor_Heavy", "label": "Heavy Battle Armor", "category": "Tiered", "rarity": "Legendary", "special": { "S": 4, "E": 3 } },
-
-    { "id": "CombatArmor", "label": "Combat Armor", "category": "Tiered", "rarity": "Common", "special": { "S": 2, "A": 1 } },
-    { "id": "CombatArmor_Sturdy", "label": "Sturdy Combat Armor", "category": "Tiered", "rarity": "Rare", "special": { "S": 3, "A": 2 } },
-    { "id": "CombatArmor_Heavy", "label": "Heavy Combat Armor", "category": "Tiered", "rarity": "Legendary", "special": { "S": 4, "A": 3 } },
-
-    { "id": "FormalWear", "label": "Formal Wear", "category": "Tiered", "rarity": "Common", "special": { "L": 3 } },
-    { "id": "FormalWear_Fancy", "label": "Fancy Formal Wear", "category": "Tiered", "rarity": "Rare", "special": { "L": 5 } },
-    { "id": "FormalWear_Lucky", "label": "Lucky Formal Wear", "category": "Tiered", "rarity": "Legendary", "special": { "L": 7 } },
-
-    { "id": "HandymanJumpsuit", "label": "Handyman Jumpsuit", "category": "Tiered", "rarity": "Common", "special": { "A": 3 } },
-    { "id": "HandymanJumpsuit_Advanced", "label": "Advanced Jumpsuit", "category": "Tiered", "rarity": "Rare", "special": { "A": 5 } },
-    { "id": "HandymanJumpsuit_Expert", "label": "Expert Jumpsuit", "category": "Tiered", "rarity": "Legendary", "special": { "A": 7 } },
-
-    { "id": "LabCoat", "label": "Lab Coat", "category": "Tiered", "rarity": "Common", "special": { "I": 3 } },
-    { "id": "LabCoat_Advanced", "label": "Advanced Lab Coat", "category": "Tiered", "rarity": "Rare", "special": { "I": 5 } },
-    { "id": "LabCoat_Expert", "label": "Expert Lab Coat", "category": "Tiered", "rarity": "Legendary", "special": { "I": 7 } },
-
-    { "id": "LeatherArmor", "label": "Leather Armor", "category": "Tiered", "rarity": "Common", "special": { "S": 1, "E": 2 } },
-    { "id": "LeatherArmor_Sturdy", "label": "Sturdy Leather Armor", "category": "Tiered", "rarity": "Rare", "special": { "S": 2, "E": 3 } },
-    { "id": "LeatherArmor_Heavy", "label": "Heavy Leather Armor", "category": "Tiered", "rarity": "Legendary", "special": { "S": 3, "E": 4 } },
-
-    { "id": "MilitaryJumpsuit", "label": "Military Fatigues", "category": "Tiered", "rarity": "Common", "special": { "S": 3 } },
-    { "id": "MilitaryJumpsuit_Officer", "label": "Officer Fatigues", "category": "Tiered", "rarity": "Rare", "special": { "S": 5 } },
-    { "id": "MilitaryJumpsuit_Commander", "label": "Commander Fatigues", "category": "Tiered", "rarity": "Legendary", "special": { "S": 7 } },
-
-    { "id": "AllNightware", "label": "Nightwear", "category": "Tiered", "rarity": "Common", "special": { "C": 3 } },
-    { "id": "AllNightware_Naughty", "label": "Naughty Nightwear", "category": "Tiered", "rarity": "Rare", "special": { "C": 5 } },
-    { "id": "AllNightware_Lucky", "label": "Lucky Nightwear", "category": "Tiered", "rarity": "Legendary", "special": { "C": 7 } },
-
-    { "id": "WandererArmor", "label": "Wasteland Gear", "category": "Tiered", "rarity": "Common", "special": { "E": 3 } },
-    { "id": "WandererArmor_Sturdy", "label": "Sturdy Wasteland Gear", "category": "Tiered", "rarity": "Rare", "special": { "E": 5 } },
-    { "id": "WandererArmor_Heavy", "label": "Heavy Wasteland Gear", "category": "Tiered", "rarity": "Legendary", "special": { "E": 7 } },
-
-    { "id": "WastelandSurgeon_Settler", "label": "Wasteland Medic", "category": "Tiered", "rarity": "Common", "special": { "P": 2, "L": 1 } },
-    { "id": "WastelandSurgeon_Doctor", "label": "Wasteland Doctor", "category": "Tiered", "rarity": "Rare", "special": { "P": 3, "L": 2 } },
-    { "id": "WastelandSurgeon", "label": "Wasteland Surgeon", "category": "Tiered", "rarity": "Legendary", "special": { "P": 4, "L": 3 } },
-
-    { "id": "RadiationSuit", "label": "Radiation Suit", "category": "Tiered", "rarity": "Common", "special": { "P": 1, "E": 2 } },
-    { "id": "RadiationSuit_Advanced", "label": "Advanced Radiation Suit", "category": "Tiered", "rarity": "Rare", "special": { "P": 2, "E": 3 } },
-    { "id": "RadiationSuit_Expert", "label": "Expert Radiation Suit", "category": "Tiered", "rarity": "Legendary", "special": { "P": 3, "E": 4 } },
-
-    { "id": "RaiderArmor", "label": "Raider Armor", "category": "Tiered", "rarity": "Common", "special": { "P": 1, "A": 2 } },
-    { "id": "RaiderArmor_Sturdy", "label": "Sturdy Raider Armor", "category": "Tiered", "rarity": "Rare", "special": { "P": 2, "A": 3 } },
-    { "id": "RaiderArmor_Heavy", "label": "Heavy Raider Armor", "category": "Tiered", "rarity": "Legendary", "special": { "P": 3, "A": 4 } },
-
-    { "id": "ScribeRobe_Initiate", "label": "Initiate Robe", "category": "Tiered", "rarity": "Common", "special": { "C": 2, "A": 1 } },
-    { "id": "ScribeRobe", "label": "Scribe Robe", "category": "Tiered", "rarity": "Rare", "special": { "C": 3, "A": 2 } },
-    { "id": "ScribeRobe_Elder", "label": "Elder Robe", "category": "Tiered", "rarity": "Legendary", "special": { "C": 4, "A": 3 } },
-
-    { "id": "HunterGear_Treasure", "label": "Treasure Hunter Gear", "category": "Tiered", "rarity": "Common", "special": { "S": 2, "P": 1 } },
-    { "id": "HunterGear_Bounty", "label": "Bounty Hunter Gear", "category": "Tiered", "rarity": "Rare", "special": { "S": 3, "P": 2 } },
-    { "id": "HunterGear_Mutant", "label": "Mutant Hunter Gear", "category": "Tiered", "rarity": "Legendary", "special": { "S": 4, "P": 3 } },
-
-    { "id": "FlightSuit", "label": "Flight Suit", "category": "Tiered", "rarity": "Common", "special": { "E": 1, "A": 2 } },
-    { "id": "FlightSuit_Advanced", "label": "Advanced Flight Suit", "category": "Tiered", "rarity": "Rare", "special": { "E": 2, "A": 3 } },
-    { "id": "FlightSuit_Expert", "label": "Expert Flight Suit", "category": "Tiered", "rarity": "Legendary", "special": { "E": 3, "A": 4 } },
-
-    { "id": "BOSUniform", "label": "BoS Uniform", "category": "Tiered", "rarity": "Common", "special": { "P": 2, "C": 1 } },
-    { "id": "BOSUniform_Advanced", "label": "Advanced BoS Uniform", "category": "Tiered", "rarity": "Rare", "special": { "P": 3, "C": 2 } },
-    { "id": "BOSUniform_Expert", "label": "Expert BoS Uniform", "category": "Tiered", "rarity": "Legendary", "special": { "P": 4, "C": 3 } },
-
-    { "id": "ScientistScrubs", "label": "Junior Officer Uniform", "category": "Tiered", "rarity": "Common", "special": { "C": 1, "I": 2 } },
-    { "id": "ScientistScrubs_Officer", "label": "Officer Uniform", "category": "Tiered", "rarity": "Rare", "special": { "C": 2, "I": 3 } },
-    { "id": "ScientistScrubs_Commander", "label": "Commander Uniform", "category": "Tiered", "rarity": "Legendary", "special": { "C": 3, "I": 4 } },
-
-    { "id": "RiotGear", "label": "Merc Gear", "category": "Tiered", "rarity": "Common", "special": { "P": 1, "A": 1, "L": 1 } },
-    { "id": "RiotGear_Sturdy", "label": "Sturdy Merc Gear", "category": "Tiered", "rarity": "Rare", "special": { "P": 1, "A": 2, "L": 2 } },
-    { "id": "RiotGear_Heavy", "label": "Heavy Merc Gear", "category": "Tiered", "rarity": "Legendary", "special": { "P": 2, "A": 3, "L": 2 } },
-
-    { "id": "MetalArmor_Sturdy", "label": "Sturdy Metal Armor", "category": "Tiered", "rarity": "Rare", "special": { "S": 3, "L": 2 } },
-    { "id": "MetalArmor_Heavy", "label": "Heavy Metal Armor", "category": "Tiered", "rarity": "Legendary", "special": { "S": 4, "L": 3 } },
-
-    { "id": "InstituteJumper_Advanced", "label": "Advanced Institute Jumper", "category": "Tiered", "rarity": "Rare", "special": { "I": 3, "A": 2 } },
-    { "id": "InstituteJumper_Expert", "label": "Expert Institute Jumper", "category": "Tiered", "rarity": "Legendary", "special": { "I": 4, "A": 3 } },
-
-    { "id": "HazmatSuit", "label": "Hazmat Suit", "category": "Tiered", "rarity": "Common" },
-    { "id": "HazmatSuit_Sturdy", "label": "Sturdy Hazmat Suit", "category": "Tiered", "rarity": "Rare" },
-    { "id": "HazmatSuit_Heavy", "label": "Heavy Hazmat Suit", "category": "Tiered", "rarity": "Legendary" },
-
-    { "id": "UtilityJumpsuit", "label": "Utility Jumpsuit", "category": "Common", "rarity": "Common" },
-    { "id": "UtilityJumpsuit_Sturdy", "label": "Sturdy Utility Jumpsuit", "category": "Common", "rarity": "Rare" },
-
-    { "id": "MechanicJumpsuit", "label": "Mechanic Jumpsuit", "category": "Common", "rarity": "Common", "special": { "S": 1, "C": 1 } },
-    { "id": "PolkaDotDress", "label": "Polka Dot Sundress", "category": "Common", "rarity": "Common", "special": { "S": 1, "I": 1 } },
-    { "id": "CheckeredShirt", "label": "Pre-War Suburbanite", "category": "Common", "rarity": "Common", "special": { "P": 1, "I": 1 } },
-    { "id": "WorkDress", "label": "Rural Schoolmarm", "category": "Common", "rarity": "Common", "special": { "P": 1, "E": 1 } },
-    { "id": "SweaterVest", "label": "Spring Casualwear", "category": "Common", "rarity": "Common", "special": { "E": 1, "A": 1 } },
-    { "id": "SequinDress", "label": "Vault Socialite", "category": "Common", "rarity": "Common", "special": { "C": 1, "A": 1 } },
-    { "id": "Vest", "label": "Bespoke Attire", "category": "Common", "rarity": "Common", "special": { "E": 4 } },
-    { "id": "NinjaSuit", "label": "Ninja Outfit", "category": "Rare", "rarity": "Rare", "special": { "A": 4, "L": 1 } },
-
-    { "id": "BOSCasual", "label": "BOS Casual", "category": "Rare", "rarity": "Rare", "special": { "E": 2, "A": 2 } },
-    { "id": "NCR_Ranger", "label": "NCR Ranger Outfit", "category": "Rare", "rarity": "Rare", "special": { "P": 4, "C": 2 } },
-    { "id": "BowlingShirt", "label": "Bowling Shirt", "category": "Rare", "rarity": "Rare", "special": { "P": 6 } },
-    { "id": "BaseballUniform", "label": "Baseball Uniform", "category": "Rare", "rarity": "Rare", "special": { "A": 4, "L": 1 } },
-    { "id": "LifeguardOutfit", "label": "Lifeguard Outfit", "category": "Rare", "rarity": "Rare", "special": { "P": 4, "L": 1 } },
-    { "id": "Swimsuit", "label": "Swimsuit", "category": "Rare", "rarity": "Rare", "special": { "E": 2, "C": 2, "L": 1 } },
-    { "id": "Vault33Suit", "label": "Vault 33 Suit", "category": "Rare", "rarity": "Rare", "special": { "P": 3, "L": 2 } },
-    { "id": "SodaFountainDress", "label": "Soda Fountain Dress", "category": "Rare", "rarity": "Rare", "special": { "P": 1, "E": 1, "I": 1, "L": 1 } },
-    { "id": "PrewarCowboy", "label": "Prewar Cowboy Costume", "category": "Rare", "rarity": "Rare", "special": { "C": 2, "A": 2 } },
-    { "id": "WeddingDress", "label": "Wedding Dress", "category": "Rare", "rarity": "Rare", "special": { "C": 2, "L": 2 } },
-    { "id": "ActionWeddingDress", "label": "Action Wedding Dress", "category": "Rare", "rarity": "Rare", "special": { "A": 2, "L": 2 } },
-    { "id": "SleazySuit", "label": "Sleazy Suit", "category": "Rare", "rarity": "Rare", "special": { "C": 2, "I": 2 } },
-    { "id": "MaJuneJacket", "label": "Ma June Jacket", "category": "Rare", "rarity": "Rare", "special": { "P": 2, "L": 2 } },
-    { "id": "DooWopOutfit", "label": "Doo-Wop Singer", "category": "Rare", "rarity": "Rare", "special": { "S": 1, "C": 1, "A": 1, "L": 1 } },
-    { "id": "VaultSecurityOutfit", "label": "Vault Security Outfit", "category": "Rare", "rarity": "Rare", "special": { "E": 2, "L": 2 } },
-    { "id": "EnclaveSecurityOutfit", "label": "Enclave Security Outfit", "category": "Rare", "rarity": "Rare", "special": { "S": 2, "E": 2 } },
-
-    { "id": "MoviefanSpecial", "label": "Movie Fan Outfit", "category": "Rare", "rarity": "Rare", "special": { "P": 4, "L": 1 } },
-    { "id": "SlasherSpecial", "label": "Horror Fan Outfit", "category": "Rare", "rarity": "Rare", "special": { "E": 4, "L": 1 } },
-    { "id": "ScifiSpecial", "label": "Sci-Fi Fan Outfit", "category": "Rare", "rarity": "Rare", "special": { "I": 2, "A": 2, "L": 1 } },
-    { "id": "ComedianSpecial", "label": "Comedian Outfit", "category": "Rare", "rarity": "Rare", "special": { "P": 2, "C": 2, "L": 1 } },
-    { "id": "KingSpecial", "label": "Medieval Ruler Outfit", "category": "Rare", "rarity": "Rare", "special": { "P": 2, "C": 2, "L": 1 } },
-    { "id": "EngineerSpecial", "label": "Engineer Outfit", "category": "Rare", "rarity": "Rare", "special": { "E": 2, "I": 2, "L": 1 } },
-    { "id": "SurgeonSpecial", "label": "Surgeon Outfit", "category": "Rare", "rarity": "Rare", "special": { "P": 2, "A": 2, "L": 1 } },
-    { "id": "SoldierSpecial", "label": "Soldier Uniform", "category": "Rare", "rarity": "Rare", "special": { "S": 2, "E": 2, "L": 1 } },
-    { "id": "MayorSpecial", "label": "Mayor Outfit", "category": "Rare", "rarity": "Rare", "special": { "C": 2, "I": 2, "L": 1 } },
-    { "id": "WrestlerSpecial", "label": "Wrestler Outfit", "category": "Rare", "rarity": "Rare", "special": { "S": 2, "E": 2, "L": 1 } },
-    { "id": "SportsfanSpecial", "label": "Sports Fan Outfit", "category": "Rare", "rarity": "Rare", "special": { "S": 4, "L": 1 } },
-    { "id": "GreaserSpecial", "label": "Greaser Outfit", "category": "Rare", "rarity": "Rare", "special": { "C": 2, "A": 2, "L": 1 } },
-    { "id": "BishopSpecial", "label": "Clergy Outfit", "category": "Rare", "rarity": "Rare", "special": { "C": 4, "L": 1 } },
-    { "id": "EmpressSpecial", "label": "Republic Robes", "category": "Rare", "rarity": "Rare", "special": { "C": 4, "L": 1 } },
-    { "id": "KnightSpecial", "label": "Knight Armor", "category": "Rare", "rarity": "Rare", "special": { "S": 2, "P": 2, "L": 1 } },
-    { "id": "LibrarianSpecial", "label": "Librarian Outfit", "category": "Rare", "rarity": "Rare", "special": { "I": 4, "L": 1 } },
-    { "id": "PrinceSpecial", "label": "Nobility Outfit", "category": "Rare", "rarity": "Rare", "special": { "E": 2, "I": 2, "L": 1 } },
-    { "id": "SurvivorSpecial", "label": "Survivor Armor", "category": "Rare", "rarity": "Rare", "special": { "S": 2, "A": 2, "L": 1 } },
-    { "id": "ProfessorSpecial", "label": "Professor Outfit", "category": "Rare", "rarity": "Rare", "special": { "I": 4, "L": 1 } },
-    { "id": "AlistairSpecial", "label": "Tenpenny's Suit", "category": "Legendary", "rarity": "Legendary", "special": { "P": 2, "C": 2, "I": 2, "L": 1 } },
-    { "id": "RothchildSpecial", "label": "Scribe Rothchild's Robe", "category": "Legendary", "rarity": "Legendary", "special": { "P": 2, "E": 1, "C": 2, "I": 2 } },
-    { "id": "CromwellSpecial", "label": "Confessor Cromwell's Rags", "category": "Legendary", "rarity": "Legendary", "special": { "P": 2, "E": 2, "I": 1, "L": 2 } },
-    { "id": "AbrahamSpecial", "label": "Abraham's Relaxedwear", "category": "Legendary", "rarity": "Legendary", "special": { "E": 1, "I": 2, "A": 2, "L": 2 } },
-    { "id": "ButchSpecial", "label": "Tunnel Snakes' Outfit", "category": "Legendary", "rarity": "Legendary", "special": { "P": 2, "E": 1, "C": 2, "A": 2 } },
-    { "id": "PiperSpecial", "label": "Piper's Outfit", "category": "Legendary", "rarity": "Legendary", "special": { "P": 2, "E": 2, "A": 2, "L": 2 } },
-
-    { "id": "RottedDuster", "label": "Sheriff's Duster", "category": "Legendary", "rarity": "Legendary", "special": { "P": 2, "E": 5 } },
-    { "id": "WilzigsTravelwear", "label": "Wilzig's Travelwear", "category": "Legendary", "rarity": "Legendary", "special": { "P": 4, "E": 2, "A": 2, "L": 4 } },
-    { "id": "ScarredPowerArmor", "label": "Scarred Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 4, "P": 2, "E": 4, "C": 2 } },
-
-    { "id": "PowerArmor", "label": "T-60a Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 2, "E": 3 } },
-    { "id": "PowerArmor_T60d", "label": "T-60d Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 2, "E": 4 } },
-    { "id": "PowerArmor_T60f", "label": "T-60f Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 1, "P": 1, "E": 5 } },
-    { "id": "PowerArmor_T45a", "label": "T-45a Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 2, "P": 3 } },
-    { "id": "PowerArmor_T45d", "label": "T-45d Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 2, "P": 4 } },
-    { "id": "PowerArmor_T45f", "label": "T-45f Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 2, "P": 5 } },
-    { "id": "PowerArmor_51a", "label": "T-51a Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 3, "P": 1 } },
-    { "id": "PowerArmor_51d", "label": "T-51d Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 3, "P": 2 } },
-    { "id": "PowerArmor_51f", "label": "T-51f Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 4, "P": 3 } },
-    { "id": "PowerArmor_MkI", "label": "X-01 Mk I Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 3, "P": 1, "E": 1 } },
-    { "id": "PowerArmor_MkIV", "label": "X-01 Mk IV Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 4, "P": 1, "E": 1 } },
-    { "id": "PowerArmor_MkVI", "label": "X-01 Mk VI Power Armor", "category": "Power Armor", "rarity": "Legendary", "special": { "S": 5, "P": 1, "E": 1 } }
+    {
+      "id": "Melee_BaseballBat",
+      "label": "Baseball Bat",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "5-15"
+    },
+    {
+      "id": "Melee_ButcherKnife",
+      "label": "Butcher Knife",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "8-18"
+    },
+    {
+      "id": "Melee_KitchenKnife",
+      "label": "Kitchen Knife",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "3-11"
+    },
+    {
+      "id": "Melee_Pickaxe",
+      "label": "Pickaxe",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "11-21"
+    },
+    {
+      "id": "Melee_PoolCue",
+      "label": "Pool Cue",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "0-8"
+    },
+    {
+      "id": "Melee_FireHydrantBat",
+      "label": "Fire Hydrant Bat",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "19-31"
+    },
+    {
+      "id": "Melee_RaiderSword",
+      "label": "Relentless Raider Sword",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "16-28"
+    },
+    {
+      "id": "Melee_SuperSledge",
+      "label": "Super Sledge",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "18-32"
+    },
+    {
+      "id": "GrognaksAxe",
+      "label": "Grognak's Axe",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "18-26"
+    },
+    {
+      "id": "Ripper_Rusty",
+      "label": "Rusty Ripper",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "10-15"
+    },
+    {
+      "id": "Ripper",
+      "label": "Ripper",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "11-16"
+    },
+    {
+      "id": "Ripper_Enhanced",
+      "label": "Enhanced Ripper",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "12-17"
+    },
+    {
+      "id": "Ripper_Hardened",
+      "label": "Hardened Ripper",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "13-18"
+    },
+    {
+      "id": "SurgicalRipper_Rusty",
+      "label": "Rusty Surgical Ripper",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "12"
+    },
+    {
+      "id": "SurgicalRipper",
+      "label": "Surgical Ripper",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "13-14"
+    },
+    {
+      "id": "SurgicalRipper_Enhanced",
+      "label": "Enhanced Surgical Ripper",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "14-15"
+    },
+    {
+      "id": "SurgicalRipper_Hardened",
+      "label": "Hardened Surgical Ripper",
+      "category": "Melee",
+      "rarity": "Rare",
+      "damage": "16-17"
+    },
+    {
+      "id": "PowerFist_Rusty",
+      "label": "Rusty Power Fist",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "12-17"
+    },
+    {
+      "id": "PowerFist",
+      "label": "Power Fist",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "13-18"
+    },
+    {
+      "id": "PowerFist_Enhanced",
+      "label": "Enhanced Power Fist",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "14-19"
+    },
+    {
+      "id": "PowerFist_Hardened",
+      "label": "Hardened Power Fist",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "15-20"
+    },
+    {
+      "id": "PowerFist_EdsCustom",
+      "label": "Ed's Custom Power Fist",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "16-22"
+    },
+    {
+      "id": "UltraciteSword1",
+      "label": "Ultracite Sword I",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "3-6"
+    },
+    {
+      "id": "UltraciteSword2",
+      "label": "Ultracite Sword II",
+      "category": "Melee",
+      "rarity": "Legendary",
+      "damage": "13-16"
+    },
+    {
+      "id": "032Pistol_Rusty",
+      "label": "Rusty .32 Pistol",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "1"
+    },
+    {
+      "id": "032Pistol",
+      "label": ".32 Pistol",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "1-2"
+    },
+    {
+      "id": "032Pistol_Enhanced",
+      "label": "Enhanced .32 Pistol",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "1-3"
+    },
+    {
+      "id": "032Pistol_Hardened",
+      "label": "Hardened .32 Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "1-4"
+    },
+    {
+      "id": "032Pistol_ArmorPiercing",
+      "label": "Armor Piercing .32 Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "1-5"
+    },
+    {
+      "id": "032Pistol_WildBillsSidearm",
+      "label": "Wild Bill's Sidearm",
+      "category": "Pistol",
+      "rarity": "Legendary",
+      "damage": "1-6"
+    },
+    {
+      "id": "Pistol_Rusty",
+      "label": "Rusty 10mm Pistol",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "2"
+    },
+    {
+      "id": "Pistol",
+      "label": "10mm Pistol",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "2-3"
+    },
+    {
+      "id": "Pistol_Enhanced",
+      "label": "Enhanced 10mm Pistol",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "2-4"
+    },
+    {
+      "id": "Pistol_Hardened",
+      "label": "Hardened 10mm Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "2-5"
+    },
+    {
+      "id": "Pistol_ArmorPiercing",
+      "label": "Armor Piercing 10mm Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "2-6"
+    },
+    {
+      "id": "Pistol_LoneWanderer",
+      "label": "Lone Wanderer",
+      "category": "Pistol",
+      "rarity": "Legendary",
+      "damage": "2-7"
+    },
+    {
+      "id": "Magnum_Rusty",
+      "label": "Rusty Scoped .44",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "3"
+    },
+    {
+      "id": "Magnum",
+      "label": "Scoped .44",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "3-4"
+    },
+    {
+      "id": "Magnum_Enhanced",
+      "label": "Enhanced Scoped .44",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "3-5"
+    },
+    {
+      "id": "Magnum_Hardened",
+      "label": "Hardened Scoped .44",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "3-6"
+    },
+    {
+      "id": "Magnum_ArmorPiercing",
+      "label": "Armor Piercing Scoped .44",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "3-7"
+    },
+    {
+      "id": "Magnum_Blackhawk",
+      "label": "Blackhawk",
+      "category": "Pistol",
+      "rarity": "Legendary",
+      "damage": "3-8"
+    },
+    {
+      "id": "PipePistol",
+      "label": "Pipe Pistol",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "1-3"
+    },
+    {
+      "id": "PipePistol_HairTrigger",
+      "label": "Hair Trigger Pipe Pistol",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "2-5"
+    },
+    {
+      "id": "PipePistol_Heavy",
+      "label": "Heavy Pipe Pistol",
+      "category": "Pistol",
+      "rarity": "Common",
+      "damage": "3-7"
+    },
+    {
+      "id": "PipePistol_Scoped",
+      "label": "Scoped Pipe Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "4-9"
+    },
+    {
+      "id": "PipePistol_Auto",
+      "label": "Auto Pipe Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "5-11"
+    },
+    {
+      "id": "PipePistol_LittleBrother",
+      "label": "Little Brother",
+      "category": "Pistol",
+      "rarity": "Legendary",
+      "damage": "6-13"
+    },
+    {
+      "id": "TranqPistol_Rusty",
+      "label": "Rusty Tranq Gun",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "1-10"
+    },
+    {
+      "id": "TranqPistol",
+      "label": "Tranq Gun",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "2-12"
+    },
+    {
+      "id": "TranqPistol_Enhanced",
+      "label": "Enhanced Tranq Gun",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "4-12"
+    },
+    {
+      "id": "TranqPistol_Hardened",
+      "label": "Hardened Tranq Gun",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "6-12"
+    },
+    {
+      "id": "T60Pistol_Rusty",
+      "label": "Rusty T60 Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "9-13"
+    },
+    {
+      "id": "T60Pistol",
+      "label": "T60 Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "10-14"
+    },
+    {
+      "id": "T60Pistol_Enhanced",
+      "label": "Enhanced T60 Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "11-14"
+    },
+    {
+      "id": "T60Pistol_Hardened",
+      "label": "Hardened T60 Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "12-15"
+    },
+    {
+      "id": "T60Pistol_ArmorPiercing",
+      "label": "Armor Piercing T60 Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "13-16"
+    },
+    {
+      "id": "GaussPistol_Rusty",
+      "label": "Rusty Gauss Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "12"
+    },
+    {
+      "id": "GaussPistol_Focused",
+      "label": "Focused Gauss Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "13"
+    },
+    {
+      "id": "GaussPistol_Enhanced",
+      "label": "Enhanced Gauss Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "14"
+    },
+    {
+      "id": "GaussPistol_Hardened",
+      "label": "Hardened Gauss Pistol",
+      "category": "Pistol",
+      "rarity": "Rare",
+      "damage": "15"
+    },
+    {
+      "id": "LaserPistol_Rusty",
+      "label": "Rusty Laser Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Common",
+      "damage": "7"
+    },
+    {
+      "id": "LaserPistol",
+      "label": "Laser Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "7-8"
+    },
+    {
+      "id": "LaserPistol_Tuned",
+      "label": "Tuned Laser Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "7-9"
+    },
+    {
+      "id": "LaserPistol_Focused",
+      "label": "Focused Laser Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "7-10"
+    },
+    {
+      "id": "LaserPistol_Amplified",
+      "label": "Amplified Laser Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "7-11"
+    },
+    {
+      "id": "LaserPistol_SmugglersEnd",
+      "label": "Smuggler's End",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "7-12"
+    },
+    {
+      "id": "PlasmaPistol_Rusty",
+      "label": "Rusty Plasma Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "11"
+    },
+    {
+      "id": "PlasmaPistol",
+      "label": "Plasma Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "11-12"
+    },
+    {
+      "id": "PlasmaPistol_Tuned",
+      "label": "Tuned Plasma Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "11-13"
+    },
+    {
+      "id": "PlasmaPistol_Focused",
+      "label": "Focused Plasma Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "11-14"
+    },
+    {
+      "id": "PlasmaPistol_Amplified",
+      "label": "Amplified Plasma Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "11-15"
+    },
+    {
+      "id": "PlasmaPistol_Novasurge",
+      "label": "MPXL Novasurge",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "11-16"
+    },
+    {
+      "id": "InstitutePistol",
+      "label": "Institute Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "9-11"
+    },
+    {
+      "id": "InstitutePistol_Incendiary",
+      "label": "Incendiary Institute Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "10-13"
+    },
+    {
+      "id": "InstitutePistol_Improved",
+      "label": "Improved Institute Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "11-15"
+    },
+    {
+      "id": "InstitutePistol_Scoped",
+      "label": "Scoped Institute Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "12-17"
+    },
+    {
+      "id": "InstitutePistol_Scattered",
+      "label": "Scattered Institute Pistol",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "13-19"
+    },
+    {
+      "id": "InstitutePistol_Apotheosis",
+      "label": "Apotheosis",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "14-21"
+    },
+    {
+      "id": "AlienBlaster_Rusty",
+      "label": "Rusty Alien Blaster",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "18"
+    },
+    {
+      "id": "AlienBlaster",
+      "label": "Alien Blaster",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "18-19"
+    },
+    {
+      "id": "AlienBlaster_Tuned",
+      "label": "Tuned Alien Blaster",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "18-20"
+    },
+    {
+      "id": "AlienBlaster_Focused",
+      "label": "Focused Alien Blaster",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "18-21"
+    },
+    {
+      "id": "AlienBlaster_Amplified",
+      "label": "Amplified Alien Blaster",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "18-22"
+    },
+    {
+      "id": "AlienBlaster_Destabilizer",
+      "label": "Destabilizer",
+      "category": "Energy Pistol",
+      "rarity": "Legendary",
+      "damage": "18-23"
+    },
+    {
+      "id": "AssaultronHead_Rusty",
+      "label": "Rusty Assaultron Head",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "7-11"
+    },
+    {
+      "id": "AssaultronHead",
+      "label": "Assaultron Head",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "8-12"
+    },
+    {
+      "id": "AssaultronHead_Enhanced",
+      "label": "Enhanced Assaultron Head",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "9-13"
+    },
+    {
+      "id": "AssaultronHead_Hardened",
+      "label": "Hardened Assaultron Head",
+      "category": "Energy Pistol",
+      "rarity": "Rare",
+      "damage": "10-14"
+    },
+    {
+      "id": "BBGun_Rusty",
+      "label": "Rusty BB Gun",
+      "category": "Rifle",
+      "rarity": "Common",
+      "damage": "0-1"
+    },
+    {
+      "id": "BBGun",
+      "label": "BB Gun",
+      "category": "Rifle",
+      "rarity": "Common",
+      "damage": "0-2"
+    },
+    {
+      "id": "BBGun_Enhanced",
+      "label": "Enhanced BB Gun",
+      "category": "Rifle",
+      "rarity": "Common",
+      "damage": "0-3"
+    },
+    {
+      "id": "BBGun_Hardened",
+      "label": "Hardened BB Gun",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "0-4"
+    },
+    {
+      "id": "BBGun_ArmorPiercing",
+      "label": "Armor Piercing BB Gun",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "0-5"
+    },
+    {
+      "id": "BBGun_RedRocket",
+      "label": "Red Rocket",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "0-6"
+    },
+    {
+      "id": "HuntingRifle_Rusty",
+      "label": "Rusty Hunting Rifle",
+      "category": "Rifle",
+      "rarity": "Common",
+      "damage": "5"
+    },
+    {
+      "id": "HuntingRifle",
+      "label": "Hunting Rifle",
+      "category": "Rifle",
+      "rarity": "Common",
+      "damage": "5-6"
+    },
+    {
+      "id": "HuntingRifle_Enhanced",
+      "label": "Enhanced Hunting Rifle",
+      "category": "Rifle",
+      "rarity": "Common",
+      "damage": "5-7"
+    },
+    {
+      "id": "HuntingRifle_Hardened",
+      "label": "Hardened Hunting Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "5-8"
+    },
+    {
+      "id": "HuntingRifle_ArmorPiercing",
+      "label": "Armor Piercing Hunting Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "5-9"
+    },
+    {
+      "id": "HuntingRifle_OlPainless",
+      "label": "Ol' Painless",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "5-10"
+    },
+    {
+      "id": "Rifle_Rusty",
+      "label": "Rusty Lever-Action Rifle",
+      "category": "Rifle",
+      "rarity": "Common",
+      "damage": "4"
+    },
+    {
+      "id": "Rifle",
+      "label": "Lever-Action Rifle",
+      "category": "Rifle",
+      "rarity": "Common",
+      "damage": "4-5"
+    },
+    {
+      "id": "Rifle_Enhanced",
+      "label": "Enhanced Lever-Action Rifle",
+      "category": "Rifle",
+      "rarity": "Common",
+      "damage": "4-6"
+    },
+    {
+      "id": "Rifle_Hardened",
+      "label": "Hardened Lever-Action Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "4-7"
+    },
+    {
+      "id": "Rifle_ArmorPiercing",
+      "label": "Armor Piercing Lever-Action Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "4-8"
+    },
+    {
+      "id": "Rifle_LincolnsRepeater",
+      "label": "Lincoln's Repeater",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "4-9"
+    },
+    {
+      "id": "AssaultRifle_Rusty",
+      "label": "Rusty Assault Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "8"
+    },
+    {
+      "id": "AssaultRifle",
+      "label": "Assault Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "8-9"
+    },
+    {
+      "id": "AssaultRifle_Enhanced",
+      "label": "Enhanced Assault Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "8-10"
+    },
+    {
+      "id": "AssaultRifle_Hardened",
+      "label": "Hardened Assault Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "8-11"
+    },
+    {
+      "id": "AssaultRifle_ArmorPiercing",
+      "label": "Armor Piercing Assault Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "8-12"
+    },
+    {
+      "id": "AssaultRifle_Infiltrator",
+      "label": "Infiltrator",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "8-13"
+    },
+    {
+      "id": "SniperRifle_Rusty",
+      "label": "Rusty Sniper Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "10"
+    },
+    {
+      "id": "SniperRifle",
+      "label": "Sniper Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "10-11"
+    },
+    {
+      "id": "SniperRifle_Enhanced",
+      "label": "Enhanced Sniper Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "10-12"
+    },
+    {
+      "id": "SniperRifle_Hardened",
+      "label": "Hardened Sniper Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "10-13"
+    },
+    {
+      "id": "SniperRifle_ArmorPiercing",
+      "label": "Armor Piercing Sniper Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "10-14"
+    },
+    {
+      "id": "SniperRifle_VictoryRifle",
+      "label": "Victory Rifle",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "10-15"
+    },
+    {
+      "id": "PipeRifle",
+      "label": "Pipe Rifle",
+      "category": "Rifle",
+      "rarity": "Common",
+      "damage": "5-7"
+    },
+    {
+      "id": "PipeRifle_Calibrated",
+      "label": "Calibrated Pipe Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "6-9"
+    },
+    {
+      "id": "PipeRifle_Long",
+      "label": "Long Pipe Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "7-11"
+    },
+    {
+      "id": "PipeRifle_NightVision",
+      "label": "Night-Vision Pipe Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "8-13"
+    },
+    {
+      "id": "PipeRifle_Bayoneted",
+      "label": "Bayoneted Pipe Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "9-15"
+    },
+    {
+      "id": "PipeRifle_BigSister",
+      "label": "Big Sister",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "10-17"
+    },
+    {
+      "id": "BOSAssaultRifle_Rusty",
+      "label": "Rusty BOS Assault Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "15"
+    },
+    {
+      "id": "BOSAssaultRifle",
+      "label": "BOS Assault Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "16"
+    },
+    {
+      "id": "BOSAssaultRifle_Enhanced",
+      "label": "Enhanced BOS Assault Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "16-18"
+    },
+    {
+      "id": "BOSAssaultRifle_Hardened",
+      "label": "Hardened BOS Assault Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "17-19"
+    },
+    {
+      "id": "BOSAssaultRifle_ArmorPiercing",
+      "label": "Armor Piercing BOS Assault Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "19-21"
+    },
+    {
+      "id": "Railgun_Rusty",
+      "label": "Rusty Railway Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "14"
+    },
+    {
+      "id": "Railgun",
+      "label": "Railway Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "14-15"
+    },
+    {
+      "id": "Railgun_Enhanced",
+      "label": "Enhanced Railway Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "14-16"
+    },
+    {
+      "id": "Railgun_Hardened",
+      "label": "Hardened Railway Rifle",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "14-17"
+    },
+    {
+      "id": "Railgun_Accelerated",
+      "label": "Accelerated Railway Rifle",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "14-18"
+    },
+    {
+      "id": "Railgun_Railmaster",
+      "label": "Railmaster",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "14-19"
+    },
+    {
+      "id": "GaussRifle_Rusty",
+      "label": "Rusty Gauss Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "16"
+    },
+    {
+      "id": "GaussRifle",
+      "label": "Gauss Rifle",
+      "category": "Rifle",
+      "rarity": "Rare",
+      "damage": "16-17"
+    },
+    {
+      "id": "GaussRifle_Enhanced",
+      "label": "Enhanced Gauss Rifle",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "16-18"
+    },
+    {
+      "id": "GaussRifle_Hardened",
+      "label": "Hardened Gauss Rifle",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "16-19"
+    },
+    {
+      "id": "GaussRifle_Accelerated",
+      "label": "Accelerated Gauss Rifle",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "16-20"
+    },
+    {
+      "id": "GaussRifle_Magnetron",
+      "label": "Magnetron 4000",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "16-21"
+    },
+    {
+      "id": "SawedOffShotgun_Rusty",
+      "label": "Rusty Sawed-Off Shotgun",
+      "category": "Shotgun",
+      "rarity": "Common",
+      "damage": "6"
+    },
+    {
+      "id": "SawedOffShotgun",
+      "label": "Sawed-Off Shotgun",
+      "category": "Shotgun",
+      "rarity": "Common",
+      "damage": "6-7"
+    },
+    {
+      "id": "SawedOffShotgun_Enhanced",
+      "label": "Enhanced Sawed-Off Shotgun",
+      "category": "Shotgun",
+      "rarity": "Common",
+      "damage": "6-8"
+    },
+    {
+      "id": "SawedOffShotgun_Hardened",
+      "label": "Hardened Sawed-Off Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "6-9"
+    },
+    {
+      "id": "SawedOffShotgun_DoubleBarrelled",
+      "label": "Double-Barrel Sawed-Off Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "6-10"
+    },
+    {
+      "id": "SawedOffShotgun_Kneecapper",
+      "label": "Kneecapper",
+      "category": "Shotgun",
+      "rarity": "Legendary",
+      "damage": "6-11"
+    },
+    {
+      "id": "Shotgun_Rusty",
+      "label": "Rusty Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "9"
+    },
+    {
+      "id": "Shotgun",
+      "label": "Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "9-10"
+    },
+    {
+      "id": "Shotgun_Enhanced",
+      "label": "Enhanced Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "9-11"
+    },
+    {
+      "id": "Shotgun_Hardened",
+      "label": "Hardened Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "9-12"
+    },
+    {
+      "id": "Shotgun_DoubleBarrelled",
+      "label": "Double-Barrel Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "9-13"
+    },
+    {
+      "id": "Shotgun_FarmersDaughter",
+      "label": "Farmer's Daughter",
+      "category": "Shotgun",
+      "rarity": "Legendary",
+      "damage": "9-14"
+    },
+    {
+      "id": "CombatShotgun_Rusty",
+      "label": "Rusty Combat Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "13"
+    },
+    {
+      "id": "CombatShotgun",
+      "label": "Combat Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "13-14"
+    },
+    {
+      "id": "CombatShotgun_Enhanced",
+      "label": "Enhanced Combat Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "13-15"
+    },
+    {
+      "id": "CombatShotgun_Hardened",
+      "label": "Hardened Combat Shotgun",
+      "category": "Shotgun",
+      "rarity": "Rare",
+      "damage": "13-16"
+    },
+    {
+      "id": "CombatShotgun_DoubleBarrelled",
+      "label": "Double-Barrel Combat Shotgun",
+      "category": "Shotgun",
+      "rarity": "Legendary",
+      "damage": "13-17"
+    },
+    {
+      "id": "CombatShotgun_CharonsShotgun",
+      "label": "Charon's Shotgun",
+      "category": "Shotgun",
+      "rarity": "Legendary",
+      "damage": "13-18"
+    },
+    {
+      "id": "LaserRifle_Rusty",
+      "label": "Rusty Laser Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Rare",
+      "damage": "12"
+    },
+    {
+      "id": "LaserRifle",
+      "label": "Laser Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Rare",
+      "damage": "12-13"
+    },
+    {
+      "id": "LaserRifle_Tuned",
+      "label": "Tuned Laser Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Rare",
+      "damage": "12-14"
+    },
+    {
+      "id": "LaserRifle_Focused",
+      "label": "Focused Laser Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Rare",
+      "damage": "12-15"
+    },
+    {
+      "id": "LaserRifle_Amplified",
+      "label": "Amplified Laser Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "12-16"
+    },
+    {
+      "id": "LaserRifle_WazerWifle",
+      "label": "Wazer Wifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "12-17"
+    },
+    {
+      "id": "PlasmaRifle_Rusty",
+      "label": "Rusty Plasma Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Rare",
+      "damage": "17"
+    },
+    {
+      "id": "PlasmaRifle",
+      "label": "Plasma Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Rare",
+      "damage": "17-18"
+    },
+    {
+      "id": "PlasmaRifle_Tuned",
+      "label": "Tuned Plasma Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "17-19"
+    },
+    {
+      "id": "PlasmaRifle_Focused",
+      "label": "Focused Plasma Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "17-20"
+    },
+    {
+      "id": "PlasmaRifle_Amplified",
+      "label": "Amplified Plasma Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "17-22"
+    },
+    {
+      "id": "PlasmaRifle_MeanGreenMonster",
+      "label": "Mean Green Monster",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "17-23"
+    },
+    {
+      "id": "InstituteRifle",
+      "label": "Institute Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Rare",
+      "damage": "14-16"
+    },
+    {
+      "id": "InstituteRifle_Excited",
+      "label": "Excited Institute Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Rare",
+      "damage": "15-18"
+    },
+    {
+      "id": "InstituteRifle_Long",
+      "label": "Long Institute Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "16-20"
+    },
+    {
+      "id": "InstituteRifle_NightVision",
+      "label": "Night-Vision Institute Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "17-22"
+    },
+    {
+      "id": "InstituteRifle_Targeting",
+      "label": "Targeting Institute Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "18-24"
+    },
+    {
+      "id": "InstituteRifle_Virgils",
+      "label": "Virgil's Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "19-26"
+    },
+    {
+      "id": "PlasmaThrower",
+      "label": "Plasma Thrower",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "17-19"
+    },
+    {
+      "id": "PlasmaThrower_Agitated",
+      "label": "Agitated Plasma Thrower",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "18-21"
+    },
+    {
+      "id": "PlasmaThrower_Tactical",
+      "label": "Tactical Plasma Thrower",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "19-23"
+    },
+    {
+      "id": "PlasmaThrower_Boosted",
+      "label": "Boosted Plasma Thrower",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "20-25"
+    },
+    {
+      "id": "PlasmaThrower_Overcharged",
+      "label": "Overcharged Plasma Thrower",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "21-27"
+    },
+    {
+      "id": "PlasmaThrower_DragonsMaw",
+      "label": "Dragon's Maw",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "22-29"
+    },
+    {
+      "id": "PulseRifle_Rusty",
+      "label": "Rusty Pulse Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "17-18"
+    },
+    {
+      "id": "PulseRifle",
+      "label": "Pulse Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "18-19"
+    },
+    {
+      "id": "PulseRifle_Enhanced",
+      "label": "Enhanced Pulse Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "19-20"
+    },
+    {
+      "id": "PulseRifle_Hardened",
+      "label": "Hardened Pulse Rifle",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "20-21"
+    },
+    {
+      "id": "LaserMusket",
+      "label": "Laser Musket",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "10-13"
+    },
+    {
+      "id": "Henrietta",
+      "label": "Henrietta",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "13-16"
+    },
+    {
+      "id": "MaresLeg",
+      "label": "Mare's Leg",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "9-13"
+    },
+    {
+      "id": "RadiumRifle",
+      "label": "Radium Rifle",
+      "category": "Rifle",
+      "rarity": "Legendary",
+      "damage": "18-22"
+    },
+    {
+      "id": "Cryolator",
+      "label": "Cryolator",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "20-24"
+    },
+    {
+      "id": "UltraciteGatling1",
+      "label": "Ultracite Gatling Laser",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "7-12"
+    },
+    {
+      "id": "UltraciteGatling2",
+      "label": "Maximized Ultracite Gatling Laser",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "20-22"
+    },
+    {
+      "id": "UltracitePlasma1",
+      "label": "Ultracite Plasma Rifle",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "6-8"
+    },
+    {
+      "id": "UltracitePlasma2",
+      "label": "Optimized Ultracite Plasma Rifle",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "16-18"
+    },
+    {
+      "id": "Flamer_Rusty",
+      "label": "Rusty Flamer",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "15"
+    },
+    {
+      "id": "Flamer",
+      "label": "Flamer",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "15-16"
+    },
+    {
+      "id": "Flamer_Enhanced",
+      "label": "Enhanced Flamer",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "15-17"
+    },
+    {
+      "id": "Flamer_Hardened",
+      "label": "Hardened Flamer",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "15-18"
+    },
+    {
+      "id": "Flamer_Pressurized",
+      "label": "Pressurized Flamer",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "15-19"
+    },
+    {
+      "id": "Flamer_Burnmaster",
+      "label": "Burnmaster",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "15-20"
+    },
+    {
+      "id": "Minigun_Rusty",
+      "label": "Rusty Minigun",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "19"
+    },
+    {
+      "id": "Minigun",
+      "label": "Minigun",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "19-20"
+    },
+    {
+      "id": "Minigun_Enhanced",
+      "label": "Enhanced Minigun",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "19-21"
+    },
+    {
+      "id": "Minigun_Hardened",
+      "label": "Hardened Minigun",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "19-22"
+    },
+    {
+      "id": "Minigun_ArmorPiercing",
+      "label": "Armor Piercing Minigun",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "19-23"
+    },
+    {
+      "id": "Minigun_LeadBelcher",
+      "label": "Lead Belcher",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "19-24"
+    },
+    {
+      "id": "MissilLauncher_Rusty",
+      "label": "Rusty Missile Launcher",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "20"
+    },
+    {
+      "id": "MissilLauncher",
+      "label": "Missile Launcher",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "20-21"
+    },
+    {
+      "id": "MissilLauncher_Enhanced",
+      "label": "Enhanced Missile Launcher",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "20-22"
+    },
+    {
+      "id": "MissilLauncher_Hardened",
+      "label": "Hardened Missile Launcher",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "20-23"
+    },
+    {
+      "id": "MissilLauncher_Guided",
+      "label": "Guided Missile Launcher",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "20-24"
+    },
+    {
+      "id": "MissilLauncher_MissLauncher",
+      "label": "Miss Launcher",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "20-25"
+    },
+    {
+      "id": "Fatman_Rusty",
+      "label": "Rusty Fat Man",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "22"
+    },
+    {
+      "id": "Fatman",
+      "label": "Fat Man",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "22-23"
+    },
+    {
+      "id": "Fatman_Enhanced",
+      "label": "Enhanced Fat Man",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "22-24"
+    },
+    {
+      "id": "Fatman_Hardened",
+      "label": "Hardened Fat Man",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "22-25"
+    },
+    {
+      "id": "Fatman_Guided",
+      "label": "Guided Fat Man",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "22-26"
+    },
+    {
+      "id": "Fatman_MIRV",
+      "label": "MIRV",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "22-27"
+    },
+    {
+      "id": "GatlingLaser_Rusty",
+      "label": "Rusty Gatling Laser",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "21"
+    },
+    {
+      "id": "GatlingLaser",
+      "label": "Gatling Laser",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "21-22"
+    },
+    {
+      "id": "GatlingLaser_Tuned",
+      "label": "Tuned Gatling Laser",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "21-23"
+    },
+    {
+      "id": "GatlingLaser_Focused",
+      "label": "Focused Gatling Laser",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "21-24"
+    },
+    {
+      "id": "GatlingLaser_Amplified",
+      "label": "Amplified Gatling Laser",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "21-25"
+    },
+    {
+      "id": "GatlingLaser_Vengeance",
+      "label": "Vengeance",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "21-26"
+    },
+    {
+      "id": "JunkJet",
+      "label": "Junk Jet",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "13-15"
+    },
+    {
+      "id": "JunkJet_RecoilCompensated",
+      "label": "Recoil Compensated Junk Jet",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "14-17"
+    },
+    {
+      "id": "JunkJet_Tactical",
+      "label": "Tactical Junk Jet",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "15-19"
+    },
+    {
+      "id": "JunkJet_Electrified",
+      "label": "Electrified Junk Jet",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "16-21"
+    },
+    {
+      "id": "JunkJet_Flaming",
+      "label": "Flaming Junk Jet",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "17-23"
+    },
+    {
+      "id": "JunkJet_TechniciansRevenge",
+      "label": "Technician's Revenge",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "18-25"
+    },
+    {
+      "id": "PlasmaCaster_Rusty",
+      "label": "Rusty Plasma Caster",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "16-20"
+    },
+    {
+      "id": "PlasmaCaster",
+      "label": "Plasma Caster",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "17-21"
+    },
+    {
+      "id": "PlasmaCaster_Enhanced",
+      "label": "Enhanced Plasma Caster",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "18-22"
+    },
+    {
+      "id": "PlasmaCaster_Hardened",
+      "label": "Hardened Plasma Caster",
+      "category": "Heavy",
+      "rarity": "Legendary",
+      "damage": "19-23"
+    },
+    {
+      "id": "50CalMachineGun_Rusty",
+      "label": "Rusty .50 Cal Machine Gun",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "10-12"
+    },
+    {
+      "id": "50CalMachineGun",
+      "label": ".50 Cal Machine Gun",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "11-14"
+    },
+    {
+      "id": "50CalMachineGun_Enhanced",
+      "label": "Enhanced .50 Cal Machine Gun",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "12-14"
+    },
+    {
+      "id": "50CalMachineGun_Hardened",
+      "label": "Hardened .50 Cal Machine Gun",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "13-15"
+    },
+    {
+      "id": "50CalMachineGun_ArmorPiercing",
+      "label": "Armor Piercing .50 Cal Machine Gun",
+      "category": "Heavy",
+      "rarity": "Rare",
+      "damage": "15-16"
+    },
+    {
+      "id": "GhoulRevolver",
+      "label": "Ghoul Revolver",
+      "category": "Shotgun",
+      "rarity": "Legendary",
+      "damage": "8-12"
+    },
+    {
+      "id": "MountainMomma",
+      "label": "Mountain Momma",
+      "category": "Shotgun",
+      "rarity": "Legendary",
+      "damage": "14-19"
+    },
+    {
+      "id": "AlienDisintegrator_Rusty",
+      "label": "Rusty Alien Disintegrator",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "16"
+    },
+    {
+      "id": "AlienDisintegrator",
+      "label": "Alien Disintegrator",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "17"
+    },
+    {
+      "id": "AlienDisintegrator_Enhanced",
+      "label": "Enhanced Alien Disintegrator",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "18"
+    },
+    {
+      "id": "AlienDisintegrator_Hardened",
+      "label": "Hardened Alien Disintegrator",
+      "category": "Energy Rifle",
+      "rarity": "Legendary",
+      "damage": "19"
+    }
   ],
   "themes": [
-    { "id": "CafeteriaVault33", "label": "Vault 33 Diner", "category": "Room" },
-    { "id": "LivingQuartersVault33", "label": "Vault 33 Living Quarters", "category": "Room" },
-    { "id": "CafeteriaAnniversary", "label": "Party Diner", "category": "Room" },
-    { "id": "LivingQuartersAnniversary", "label": "Party Living Quarters", "category": "Room" },
-    { "id": "CafeteriaMinutemen", "label": "Minutemen Diner", "category": "Room" },
-    { "id": "LivingQuartersMinutemen", "label": "Minutemen Living Quarters", "category": "Room" },
-    { "id": "CafeteriaBrotherOfSteel", "label": "BoS Diner", "category": "Room" },
-    { "id": "LivingQuartersBrotherOfStell", "label": "BoS Living Quarters", "category": "Room" },
-    { "id": "CafeteriaInstitute", "label": "Institute Diner", "category": "Room" },
-    { "id": "LivingQuartersInstitute", "label": "Institute Living Quarters", "category": "Room" },
-    { "id": "CafeteriaRailroad", "label": "Railroad Diner", "category": "Room" },
-    { "id": "LivingQuartersRailroad", "label": "Railroad Living Quarters", "category": "Room" }
+    {
+      "id": "CafeteriaVault33",
+      "label": "Vault 33 Diner",
+      "category": "Room"
+    },
+    {
+      "id": "LivingQuartersVault33",
+      "label": "Vault 33 Living Quarters",
+      "category": "Room"
+    },
+    {
+      "id": "CafeteriaAnniversary",
+      "label": "Party Diner",
+      "category": "Room"
+    },
+    {
+      "id": "LivingQuartersAnniversary",
+      "label": "Party Living Quarters",
+      "category": "Room"
+    },
+    {
+      "id": "CafeteriaMinutemen",
+      "label": "Minutemen Diner",
+      "category": "Room"
+    },
+    {
+      "id": "LivingQuartersMinutemen",
+      "label": "Minutemen Living Quarters",
+      "category": "Room"
+    },
+    {
+      "id": "CafeteriaBrotherOfSteel",
+      "label": "BoS Diner",
+      "category": "Room"
+    },
+    {
+      "id": "LivingQuartersBrotherOfStell",
+      "label": "BoS Living Quarters",
+      "category": "Room"
+    },
+    {
+      "id": "CafeteriaInstitute",
+      "label": "Institute Diner",
+      "category": "Room"
+    },
+    {
+      "id": "LivingQuartersInstitute",
+      "label": "Institute Living Quarters",
+      "category": "Room"
+    },
+    {
+      "id": "CafeteriaRailroad",
+      "label": "Railroad Diner",
+      "category": "Room"
+    },
+    {
+      "id": "LivingQuartersRailroad",
+      "label": "Railroad Living Quarters",
+      "category": "Room"
+    }
   ]
 }

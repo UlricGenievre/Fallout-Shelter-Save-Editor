@@ -1,0 +1,2460 @@
+[
+  {
+    "id": "jumpsuit",
+    "label": "Vault suit",
+    "category": "Tiered",
+    "rarity": "N/A",
+    "resellValue": 0,
+    "totalStats": 0,
+    "gender": "",
+    "craftable": false,
+    "special": {}
+  },
+  {
+    "id": "UtilityJumpsuit",
+    "label": "Armored vault suit",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 3
+    }
+  },
+  {
+    "id": "UtilityJumpsuit_Sturdy",
+    "label": "Sturdy vault suit",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 5
+    }
+  },
+  {
+    "id": "UtilityJumpsuit_Heavy",
+    "label": "Heavy vault suit",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 7
+    }
+  },
+  {
+    "id": "BattleArmor",
+    "label": "Battle armor",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "E": 1
+    }
+  },
+  {
+    "id": "BattleArmor_Sturdy",
+    "label": "Sturdy battle armor",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 3,
+      "E": 2
+    }
+  },
+  {
+    "id": "BattleArmor_Heavy",
+    "label": "Heavy battle armor",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 4,
+      "E": 3
+    }
+  },
+  {
+    "id": "CombatArmor",
+    "label": "Combat armor",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "A": 1
+    }
+  },
+  {
+    "id": "CombatArmor_Sturdy",
+    "label": "Sturdy combat armor",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 3,
+      "A": 2
+    }
+  },
+  {
+    "id": "CombatArmor_Heavy",
+    "label": "Heavy combat armor",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 4,
+      "A": 3
+    }
+  },
+  {
+    "id": "FormalWear",
+    "label": "Formal wear",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "L": 3
+    }
+  },
+  {
+    "id": "FormalWear_Fancy",
+    "label": "Fancy formal wear",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "L": 5
+    }
+  },
+  {
+    "id": "FormalWear_Lucky",
+    "label": "Lucky formal wear",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "L": 7
+    }
+  },
+  {
+    "id": "HandymanJumpsuit",
+    "label": "Handyman jumpsuit",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "A": 3
+    }
+  },
+  {
+    "id": "HandymanJumpsuit_Advanced",
+    "label": "Advanced jumpsuit",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "A": 5
+    }
+  },
+  {
+    "id": "HandymanJumpsuit_Expert",
+    "label": "Expert jumpsuit",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "A": 7
+    }
+  },
+  {
+    "id": "LabCoat",
+    "label": "Lab coat",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "I": 3
+    }
+  },
+  {
+    "id": "LabCoat_Advanced",
+    "label": "Advanced lab coat",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "I": 5
+    }
+  },
+  {
+    "id": "LabCoat_Expert",
+    "label": "Expert lab coat",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "I": 7
+    }
+  },
+  {
+    "id": "WandererArmor",
+    "label": "Leather armor",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 1,
+      "E": 2
+    }
+  },
+  {
+    "id": "WandererArmor_Sturdy",
+    "label": "Sturdy leather armor",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "E": 3
+    }
+  },
+  {
+    "id": "WandererArmor_Heavy",
+    "label": "Heavy leather armor",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 3,
+      "E": 4
+    }
+  },
+  {
+    "id": "RiotGear",
+    "label": "Merc gear",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 1,
+      "A": 1,
+      "L": 1
+    }
+  },
+  {
+    "id": "RiotGear_Sturdy",
+    "label": "Sturdy merc gear",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 1,
+      "A": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "RiotGear_Heavy",
+    "label": "Heavy merc gear",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "A": 3,
+      "L": 2
+    }
+  },
+  {
+    "id": "MilitaryJumpsuit",
+    "label": "Military fatigues",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 3
+    }
+  },
+  {
+    "id": "MilitaryJumpsuit_Officer",
+    "label": "Officer fatigues",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 5
+    }
+  },
+  {
+    "id": "MilitaryJumpsuit_Commander",
+    "label": "Commander fatigues",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 7
+    }
+  },
+  {
+    "id": "AllNightware",
+    "label": "Nightwear",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 3
+    }
+  },
+  {
+    "id": "AllNightware_Naughty",
+    "label": "Naughty nightwear",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 5
+    }
+  },
+  {
+    "id": "AllNightware_Lucky",
+    "label": "Lucky nightwear",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 7
+    }
+  },
+  {
+    "id": "ScientistScrubs",
+    "label": "Junior officer uniform",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 1,
+      "I": 2
+    }
+  },
+  {
+    "id": "ScientistScrubs_Officer",
+    "label": "Officer uniform",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 2,
+      "I": 3
+    }
+  },
+  {
+    "id": "ScientistScrubs_Commander",
+    "label": "Commander uniform",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 3,
+      "I": 4
+    }
+  },
+  {
+    "id": "RadiationSuit",
+    "label": "Radiation suit",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 1,
+      "E": 2
+    }
+  },
+  {
+    "id": "RadiationSuit_Advanced",
+    "label": "Advanced radiation suit",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "E": 3
+    }
+  },
+  {
+    "id": "RadiationSuit_Expert",
+    "label": "Expert radiation suit",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 3,
+      "E": 4
+    }
+  },
+  {
+    "id": "RaiderArmor",
+    "label": "Raider armor",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 1,
+      "A": 2
+    }
+  },
+  {
+    "id": "RaiderArmor_Sturdy",
+    "label": "Sturdy raider armor",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "A": 3
+    }
+  },
+  {
+    "id": "RaiderArmor_Heavy",
+    "label": "Heavy raider armor",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 3,
+      "A": 4
+    }
+  },
+  {
+    "id": "ScribeRobe_Initiate",
+    "label": "Initiate robe",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 2,
+      "A": 1
+    }
+  },
+  {
+    "id": "ScribeRobe",
+    "label": "Scribe robe",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 3,
+      "A": 2
+    }
+  },
+  {
+    "id": "HazmatSuit",
+    "label": "Wasteland gear",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 3
+    }
+  },
+  {
+    "id": "HazmatSuit_Sturdy",
+    "label": "Sturdy wasteland gear",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 5
+    }
+  },
+  {
+    "id": "HazmatSuit_Heavy",
+    "label": "Heavy wasteland gear",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 7
+    }
+  },
+  {
+    "id": "WastelandSurgeon_Settler",
+    "label": "Wasteland medic",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "WastelandSurgeon_Doctor",
+    "label": "Wasteland doctor",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 3,
+      "L": 2
+    }
+  },
+  {
+    "id": "WastelandSurgeon",
+    "label": "Wasteland surgeon",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 4,
+      "L": 3
+    }
+  },
+  {
+    "id": "HunterGear_Treasure",
+    "label": "Treasure hunter gear",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "P": 1
+    }
+  },
+  {
+    "id": "HunterGear_Bounty",
+    "label": "Bounty hunter gear",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 3,
+      "P": 2
+    }
+  },
+  {
+    "id": "HunterGear_Mutant",
+    "label": "Mutant hunter gear",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 4,
+      "P": 3
+    }
+  },
+  {
+    "id": "FlightSuit",
+    "label": "Flight suit",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 1,
+      "A": 2
+    }
+  },
+  {
+    "id": "FlightSuit_Advanced",
+    "label": "Advanced flight suit",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 2,
+      "A": 3
+    }
+  },
+  {
+    "id": "FlightSuit_Expert",
+    "label": "Expert flight suit",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 3,
+      "A": 4
+    }
+  },
+  {
+    "id": "BOSUniform",
+    "label": "BoS uniform",
+    "resellValue": 10,
+    "category": "Tiered",
+    "rarity": "Common",
+    "totalStats": 3,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "C": 1
+    }
+  },
+  {
+    "id": "BOSUniform_Advanced",
+    "label": "Advanced BoS uniform",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 3,
+      "C": 2
+    }
+  },
+  {
+    "id": "BOSUniform_Expert",
+    "label": "Expert BoS uniform",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 4,
+      "C": 3
+    }
+  },
+  {
+    "id": "MetalArmor_Sturdy",
+    "label": "Sturdy metal armor",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 3,
+      "L": 2
+    }
+  },
+  {
+    "id": "MetalArmor_Heavy",
+    "label": "Heavy metal armor",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 4,
+      "L": 3
+    }
+  },
+  {
+    "id": "InstituteJumper_Advanced",
+    "label": "Advanced Institute jumper",
+    "resellValue": 100,
+    "category": "Tiered",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "I": 3,
+      "A": 2
+    }
+  },
+  {
+    "id": "InstituteJumper_Expert",
+    "label": "Expert Institute jumper",
+    "resellValue": 500,
+    "category": "Tiered",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "I": 4,
+      "A": 3
+    }
+  },
+  {
+    "id": "MechanicJumpsuit",
+    "label": "Mechanic jumpsuit",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 2,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "S": 1,
+      "C": 1
+    }
+  },
+  {
+    "id": "RobCoFactoryUniform",
+    "label": "RobCo factory uniform [id unknown]",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 4,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "E": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "PolkaDotDress",
+    "label": "Polka dot sundress",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 2,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "S": 1,
+      "I": 1
+    }
+  },
+  {
+    "id": "SweaterVest",
+    "label": "Pre-War suburbanite",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 2,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 1,
+      "I": 1
+    }
+  },
+  {
+    "id": "WorkDress",
+    "label": "Rural schoolmarm",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 2,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "P": 1,
+      "E": 1
+    }
+  },
+  {
+    "id": "CheckeredShirt",
+    "label": "Spring casualwear",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 2,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "E": 1,
+      "A": 1
+    }
+  },
+  {
+    "id": "SequinDress",
+    "label": "Vault socialite",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 2,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "C": 1,
+      "A": 1
+    }
+  },
+  {
+    "id": "ArgyleSweater",
+    "label": "Accountant outfit",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 4,
+    "gender": "M",
+    "craftable": false,
+    "special": {
+      "P": 4
+    }
+  },
+  {
+    "id": "BusinessDress",
+    "label": "Agent provocateur",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 4,
+    "gender": "F",
+    "craftable": false,
+    "special": {
+      "I": 4
+    }
+  },
+  {
+    "id": "Suspenders",
+    "label": "Bespoke attire",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 4,
+    "gender": "M",
+    "craftable": false,
+    "special": {
+      "E": 4
+    }
+  },
+  {
+    "id": "BusinessSuit",
+    "label": "Business suit",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 4,
+    "gender": "M",
+    "craftable": false,
+    "special": {
+      "C": 4
+    }
+  },
+  {
+    "id": "TiedBlouse",
+    "label": "Country girl",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 4,
+    "gender": "F",
+    "craftable": false,
+    "special": {
+      "S": 4
+    }
+  },
+  {
+    "id": "WaitressUniform",
+    "label": "Waitress uniform",
+    "resellValue": 10,
+    "category": "Common",
+    "rarity": "Common",
+    "totalStats": 4,
+    "gender": "F",
+    "craftable": false,
+    "special": {
+      "A": 4
+    }
+  },
+  {
+    "id": "BOSCasual",
+    "label": "BOS casual [id unknown]",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 2,
+      "A": 2
+    }
+  },
+  {
+    "id": "NCR_Ranger",
+    "label": "NCR Ranger outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 6,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 4,
+      "C": 2
+    }
+  },
+  {
+    "id": "RobCoRdSuit",
+    "label": "RobCo R&D suit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 6,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "E": 2,
+      "I": 4
+    }
+  },
+  {
+    "id": "RobotArmor",
+    "label": "Robot armor",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 6,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "E": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "LoungeShirt",
+    "label": "Bowling shirt",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 6,
+    "gender": "M",
+    "craftable": false,
+    "special": {
+      "P": 6
+    }
+  },
+  {
+    "id": "BishopSpecial",
+    "label": "Clergy outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "C": 4,
+      "L": 1
+    }
+  },
+  {
+    "id": "SwingDress",
+    "label": "Swing dress",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 6,
+    "gender": "F",
+    "craftable": false,
+    "special": {
+      "A": 6
+    }
+  },
+  {
+    "id": "ComedianSpecial",
+    "label": "Comedian outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "C": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "DooWopOutfit",
+    "label": "Doo-wop singer",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "S": 1,
+      "C": 1,
+      "A": 1,
+      "L": 1
+    }
+  },
+  {
+    "id": "BowlingShirt",
+    "label": "Drag racer",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "S": 1,
+      "E": 1,
+      "A": 1,
+      "L": 1
+    }
+  },
+  {
+    "id": "Vest",
+    "label": "Post-War Casanova",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 1,
+      "C": 1,
+      "I": 1,
+      "L": 1
+    }
+  },
+  {
+    "id": "SodaFountainDress",
+    "label": "Soda fountain dress",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "P": 1,
+      "E": 1,
+      "I": 1,
+      "L": 1
+    }
+  },
+  {
+    "id": "SpecialThemeXmas2",
+    "label": "Elf outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "I": 3,
+      "L": 2
+    }
+  },
+  {
+    "id": "EnclaveSecurityOutfit",
+    "label": "Enclave security outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "E": 2
+    }
+  },
+  {
+    "id": "EngineerSpecial",
+    "label": "Engineer outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "E": 2,
+      "I": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "SpecialThemeHalloween",
+    "label": "Ghost costume",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "E": 2,
+      "A": 3
+    }
+  },
+  {
+    "id": "GreaserSpecial",
+    "label": "Greaser outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "C": 2,
+      "A": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "SlasherSpecial",
+    "label": "Horror fan outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "E": 4,
+      "L": 1
+    }
+  },
+  {
+    "id": "KnightSpecial",
+    "label": "Knight armor",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "P": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "LibrarianSpecial",
+    "label": "Librarian outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "I": 4,
+      "L": 1
+    }
+  },
+  {
+    "id": "MayorSpecial",
+    "label": "Mayor outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "C": 2,
+      "I": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "KingSpecial",
+    "label": "Medieval ruler outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "C": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "JacketTshirt",
+    "label": "Motorcycle jacket",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 6,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "S": 6
+    }
+  },
+  {
+    "id": "MoviefanSpecial",
+    "label": "Movie fan outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "P": 4,
+      "L": 1
+    }
+  },
+  {
+    "id": "NinjaSuit",
+    "label": "Ninja outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "A": 4,
+      "L": 1
+    }
+  },
+  {
+    "id": "PrinceSpecial",
+    "label": "Nobility outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "E": 2,
+      "I": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "SpecialThemeThanksGiving",
+    "label": "Pilgrim outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "C": 3,
+      "I": 2
+    }
+  },
+  {
+    "id": "ProfessorSpecial",
+    "label": "Professor outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "I": 4,
+      "L": 1
+    }
+  },
+  {
+    "id": "EmpressSpecial",
+    "label": "Republic robes",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "C": 4,
+      "L": 1
+    }
+  },
+  {
+    "id": "SpecialThemeXmas",
+    "label": "Santa suit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "P": 3,
+      "C": 2
+    }
+  },
+  {
+    "id": "ScifiSpecial",
+    "label": "Sci-fi fan outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "I": 2,
+      "A": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "SpecialThemeHalloween2",
+    "label": "Skeleton costume",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "S": 2,
+      "L": 3
+    }
+  },
+  {
+    "id": "SoldierSpecial",
+    "label": "Soldier uniform",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "E": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "SportsfanSpecial",
+    "label": "Sports fan outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "S": 4,
+      "L": 1
+    }
+  },
+  {
+    "id": "SurgeonSpecial",
+    "label": "Surgeon outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "A": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "SurvivorSpecial",
+    "label": "Survivor armor",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "A": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "WrestlerSpecial",
+    "label": "Wrestler outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "E": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "BaseballUniform",
+    "label": "Baseball uniform",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "A": 4,
+      "L": 1
+    }
+  },
+  {
+    "id": "LifeguardOutfit",
+    "label": "Lifeguard outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 4,
+      "L": 1
+    }
+  },
+  {
+    "id": "Swimsuit",
+    "label": "Swimsuit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 2,
+      "C": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "Vault33Suit",
+    "label": "Vault 33 Suit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 3,
+      "L": 2
+    }
+  },
+  {
+    "id": "MaJuneJacket",
+    "label": "Ma June jacket",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "SleazySuit",
+    "label": "Sleazy suit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 2,
+      "I": 2
+    }
+  },
+  {
+    "id": "PrewarCowboy",
+    "label": "Prewar cowboy costume",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 2,
+      "A": 2
+    }
+  },
+  {
+    "id": "WeddingDress",
+    "label": "Wedding dress",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "ActionWeddingDress",
+    "label": "Action wedding dress",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "A": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "VaultSecurityOutfit",
+    "label": "Vault security outfit",
+    "resellValue": 100,
+    "category": "Rare",
+    "rarity": "Rare",
+    "totalStats": 4,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "MojaveWastelandSurvivor",
+    "label": "Mojave wasteland survivor [id unknown]",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "P": 1,
+      "E": 5,
+      "L": 2
+    }
+  },
+  {
+    "id": "AbrahamSpecial",
+    "label": "Abraham's relaxedwear",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "E": 1,
+      "I": 2,
+      "A": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "FarHarborSpecial",
+    "label": "Tattered longcoat",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "M",
+    "craftable": false,
+    "special": {
+      "S": 2,
+      "E": 2,
+      "C": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "ColonelSpecial",
+    "label": "Autumn's uniform",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "P": 2,
+      "E": 2,
+      "C": 1
+    }
+  },
+  {
+    "id": "BittercupSpecial",
+    "label": "Bittercup's outfit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "P": 2,
+      "E": 2,
+      "C": 1
+    }
+  },
+  {
+    "id": "CromwellSpecial",
+    "label": "Confessor Cromwell's rags",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "E": 2,
+      "I": 1,
+      "L": 2
+    }
+  },
+  {
+    "id": "ScribeRobe_Elder",
+    "label": "Elder robe",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 4,
+      "A": 3
+    }
+  },
+  {
+    "id": "EulogyJonesSpecial",
+    "label": "Eulogy Jones' suit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "C": 2,
+      "I": 1,
+      "L": 2
+    }
+  },
+  {
+    "id": "SynthArmor_Heavy",
+    "label": "Heavy synth armor",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 4,
+      "I": 3
+    }
+  },
+  {
+    "id": "Incognito",
+    "label": "Incognito leisurewear",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 2,
+      "I": 2,
+      "A": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "LucysVaultSuit",
+    "label": "Lucy's vault suit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 3,
+      "E": 2,
+      "L": 3
+    }
+  },
+  {
+    "id": "MoldaversArmor",
+    "label": "Moldaver's armor",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 12,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "P": 2,
+      "E": 4,
+      "L": 4
+    }
+  },
+  {
+    "id": "PrestonSpecial",
+    "label": "Minuteman uniform",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "P": 2,
+      "I": 2,
+      "A": 2
+    }
+  },
+  {
+    "id": "PiperSpecial",
+    "label": "Piper's outfit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "F",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "E": 2,
+      "A": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "RothchildSpecial",
+    "label": "Scribe Rothchild's robe",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "E": 1,
+      "C": 2,
+      "I": 2
+    }
+  },
+  {
+    "id": "LucasSpecial",
+    "label": "Sheriff's duster",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "E": 5
+    }
+  },
+  {
+    "id": "SleekSuit",
+    "label": "Sleek suit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 12,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 2,
+      "I": 2,
+      "A": 4,
+      "L": 4
+    }
+  },
+  {
+    "id": "AlistairSpecial",
+    "label": "Tenpenny's suit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "C": 2,
+      "I": 2,
+      "L": 1
+    }
+  },
+  {
+    "id": "ThreedogSpecial",
+    "label": "Three Dog's outfit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "C": 5
+    }
+  },
+  {
+    "id": "ButchSpecial",
+    "label": "Tunnel Snakes' outfit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "M",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "E": 1,
+      "C": 2,
+      "A": 2
+    }
+  },
+  {
+    "id": "JobinsonsJersey",
+    "label": "Rackie Jobinson's Jersey",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 16,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "S": 4,
+      "P": 4,
+      "C": 4,
+      "A": 4
+    }
+  },
+  {
+    "id": "Detective",
+    "label": "Detective outfit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 16,
+    "gender": "M",
+    "craftable": false,
+    "special": {
+      "P": 4,
+      "E": 4,
+      "I": 4,
+      "L": 4
+    }
+  },
+  {
+    "id": "SantaSuit_Original",
+    "label": "Original Santa suit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 11,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "P": 4,
+      "E": 3,
+      "C": 4
+    }
+  },
+  {
+    "id": "Horseman_DeathJacket",
+    "label": "Death's jacket",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 16,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "P": 4,
+      "E": 4,
+      "A": 4,
+      "L": 4
+    }
+  },
+  {
+    "id": "Horseman_FamineVestment",
+    "label": "Famine's vestment",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 16,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "S": 4,
+      "E": 4,
+      "I": 4,
+      "L": 4
+    }
+  },
+  {
+    "id": "Horseman_PestilencePlating",
+    "label": "Pestilence's plating",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 16,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "E": 4,
+      "C": 4,
+      "I": 4,
+      "A": 4
+    }
+  },
+  {
+    "id": "AlienSpaceSuit",
+    "label": "Alien space suit [id unknown]",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "P": 2,
+      "I": 4,
+      "A": 2
+    }
+  },
+  {
+    "id": "TheGhoulsCoat",
+    "label": "The Ghoul's coat [id unknown]",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "E": 2,
+      "C": 2,
+      "I": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "WilzigsTravelwear",
+    "label": "Wilzig's travelwear",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 12,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 4,
+      "E": 2,
+      "A": 2,
+      "L": 4
+    }
+  },
+  {
+    "id": "LucysYellowDress",
+    "label": "Lucy's yellow dress [id unknown]",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 0,
+    "gender": "",
+    "craftable": true
+  },
+  {
+    "id": "LegateArmor",
+    "label": "Legate armor [id unknown]",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 14,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 4,
+      "E": 6,
+      "C": 4
+    }
+  },
+  {
+    "id": "MrHousesSuit",
+    "label": "Mr. House's suit [id unknown]",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "C": 4,
+      "I": 2,
+      "L": 2
+    }
+  },
+  {
+    "id": "MaximusJacket",
+    "label": "Maximus's jacket [id unknown]",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 12,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "C": 2,
+      "A": 4,
+      "L": 4
+    }
+  },
+  {
+    "id": "BrotherhoodPaladinJacket",
+    "label": "Brotherhood of Steel paladin jacket [id unknown]",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "P": 4,
+      "C": 2
+    }
+  },
+  {
+    "id": "JailhouseRocker",
+    "label": "Jailhouse Rocker [id unknown]",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 8,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "A": 4,
+      "L": 4
+    }
+  },
+  {
+    "id": "PowerArmor",
+    "label": "T-45a power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "P": 3
+    }
+  },
+  {
+    "id": "PowerArmor_T45d",
+    "label": "T-45d power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 6,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "P": 4
+    }
+  },
+  {
+    "id": "PowerArmor_T45f",
+    "label": "T-45f power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "P": 5
+    }
+  },
+  {
+    "id": "PowerArmor_51a",
+    "label": "T-51a power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 4,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 3,
+      "P": 1
+    }
+  },
+  {
+    "id": "PowerArmor_51d",
+    "label": "T-51d power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 3,
+      "P": 2
+    }
+  },
+  {
+    "id": "PowerArmor_51f",
+    "label": "T-51f power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 4,
+      "P": 3
+    }
+  },
+  {
+    "id": "PowerArmor_T60a",
+    "label": "T-60a power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "E": 3
+    }
+  },
+  {
+    "id": "PowerArmor_T60d",
+    "label": "T-60d power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 6,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 2,
+      "E": 4
+    }
+  },
+  {
+    "id": "PowerArmor_T60f",
+    "label": "T-60f power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 1,
+      "P": 1,
+      "E": 5
+    }
+  },
+  {
+    "id": "Horseman_WarArmor",
+    "label": "War's armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 16,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "S": 4,
+      "P": 4,
+      "E": 4,
+      "C": 4
+    }
+  },
+  {
+    "id": "ScarredPowerArmor",
+    "label": "Scarred power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 12,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 4,
+      "P": 2,
+      "E": 4,
+      "C": 2
+    }
+  },
+  {
+    "id": "PowerArmor_MkI",
+    "label": "X-01 Mk I power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 5,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 3,
+      "P": 1,
+      "E": 1
+    }
+  },
+  {
+    "id": "PowerArmor_MkIV",
+    "label": "X-01 Mk IV power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 6,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 4,
+      "P": 1,
+      "E": 1
+    }
+  },
+  {
+    "id": "PowerArmor_MkVI",
+    "label": "X-01 Mk VI power armor",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "S": 5,
+      "P": 1,
+      "E": 1
+    }
+  },
+  {
+    "id": "NCRPowerArmor",
+    "label": "NCR power armor [id unknown]",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 9,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "S": 1,
+      "P": 2,
+      "E": 4,
+      "C": 2
+    }
+  },
+  {
+    "id": "HanksPowerArmor",
+    "label": "Hank's power armor [id unknown]",
+    "resellValue": 500,
+    "category": "Power armor",
+    "rarity": "Legendary",
+    "totalStats": 7,
+    "gender": "",
+    "craftable": false,
+    "special": {
+      "S": 2,
+      "E": 3,
+      "C": 2
+    }
+  }
+]

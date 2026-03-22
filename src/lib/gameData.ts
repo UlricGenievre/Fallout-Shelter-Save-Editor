@@ -1,4 +1,5 @@
 import itemsData from '@/data/items.json';
+import outfitsData from '@/data/outfit.json';
 
 export interface GameItem {
   id: string;
@@ -6,7 +7,7 @@ export interface GameItem {
   category: string;
   rarity?: string;
   damage?: string;
-  special?: Partial<Record<'S'|'P'|'E'|'C'|'I'|'A'|'L', number>>;
+  special?: Partial<Record<'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L', number>>;
 }
 
 /** Format SPECIAL bonuses as a short string like "S+3 E+2" */
@@ -25,7 +26,7 @@ export function getItem(id: string): GameItem | undefined {
 
 // Build lookup maps from static JSON
 const weaponMap = new Map<string, GameItem>(itemsData.weapons.map(w => [w.id, w]));
-const outfitMap = new Map<string, GameItem>(itemsData.outfits.map(o => [o.id, o]));
+const outfitMap = new Map<string, GameItem>(outfitsData.map((o: any) => [o.id, o]));
 const themeMap = new Map<string, GameItem>(itemsData.themes.map(t => [t.id, t]));
 
 /** All known weapon IDs */
@@ -47,7 +48,7 @@ export const WEAPONS_BY_CATEGORY: { category: string; items: GameItem[] }[] = ((
     .map(c => ({ category: c, items: grouped.get(c)! }));
 })();
 /** All known outfit IDs */
-export const ALL_OUTFITS: GameItem[] = itemsData.outfits;
+export const ALL_OUTFITS: GameItem[] = outfitsData as any[];
 /** All known theme/room IDs */
 export const ALL_THEMES: GameItem[] = itemsData.themes;
 
@@ -158,5 +159,5 @@ export function itemIdToLabel(id: string): string {
     label += ` (${variant.replace(/([a-z])([A-Z])/g, '$1 $2')})`;
   }
 
-  return label;
+  return '[' + label + ']';
 }
