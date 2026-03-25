@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Users, Package, Code, FlaskConical } from 'lucide-react';
 import { DwellerEditor } from './DwellerEditor';
 import { ResourcesEditor } from './ResourcesEditor';
@@ -20,7 +21,16 @@ interface CommonEditorProps {
 }
 
 export function CommonEditor({ data, setData }: CommonEditorProps) {
-  const [activeTab, setActiveTab] = useState<Tab>('dwellers');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabParam = searchParams.get('tab') as Tab;
+  const activeTab = TABS.some(t => t.id === tabParam) ? tabParam : 'dwellers';
+
+  const setActiveTab = (id: Tab) => {
+    setSearchParams(prev => {
+      prev.set('tab', id);
+      return prev;
+    });
+  };
 
   const dwellers = data?.dwellers?.dwellers || [];
 

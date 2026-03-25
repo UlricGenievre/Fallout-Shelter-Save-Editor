@@ -76,12 +76,12 @@ export function DwellerCard({ dweller, roomName, roomSpecial }: DwellerCardProps
         </div>
 
         <div className="flex-shrink-0 flex flex-col justify-center items-center h-full border-l border-border/30 pl-4 w-[140px]">
-          <span className="text-xs text-muted-foreground font-display tracking-widest mb-1">
-            ROOM {roomSpecial ? `: ${roomSpecial} (${baseStat}+${bonusStat})` : ''}
-          </span>
-          <span className="text-xs font-semibold text-center leading-tight text-primary pip-text-glow">
+          <p className="text-xs font-semibold text-center leading-tight text-primary pip-text-glow">
             {roomName || 'Wandering'}
-          </span>
+          </p>
+          <p className="text-xs font-semibold text-center leading-tight text-primary pip-text-glow">
+            {roomSpecial ? `${roomSpecial} (${baseStat}+${bonusStat})` : ''}
+          </p>
         </div>
       </div>
     </div>

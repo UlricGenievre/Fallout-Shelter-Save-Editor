@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
-import { Download, ArrowLeft, FileJson, FileType, Home } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { Download, ArrowLeft, FileJson, FileType, Home, Coins } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Tooltip,
@@ -27,11 +28,13 @@ interface SaveEditorProps {
 
 export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
   const [data, setData] = useState<any>(initialData);
-  const [isVaultMode, setIsVaultMode] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const isVaultMode = searchParams.get('mode') !== 'editor';
   const [saving, setSaving] = useState(false);
   const [open, setOpen] = useState(false);
 
   const dwellersCount = data?.dwellers?.dwellers?.length || 0;
+  const capsCount = data?.vault?.storage?.resources?.Nuka || 0;
 
   const downloadJson = useCallback(() => {
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -75,7 +78,14 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
         </Button>
         <div className="flex-1">
           <h1 className="font-display text-lg pip-text-glow tracking-wider">{fileName}</h1>
-          <p className="text-xs text-muted-foreground">{dwellersCount} dwellers</p>
+          <div className="text-xs text-muted-foreground flex items-center gap-2">
+            <span>{dwellersCount} dwellers</span>
+            <span>•</span>
+            <span className="flex items-center gap-1">
+              <Coins className="w-3 h-3 text-primary" />
+              {capsCount} Caps
+            </span>
+          </div>
         </div>
 
         <TooltipProvider>
@@ -85,7 +95,11 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
                 size="sm"
                 variant="outline"
                 className={isVaultMode ? "bg-primary text-primary-foreground" : ""}
-                onClick={() => setIsVaultMode(!isVaultMode)}
+                onClick={() => setSearchParams(prev => {
+                  prev.set('mode', isVaultMode ? 'editor' : 'vault');
+                  prev.delete('tab');
+                  return prev;
+                })}
                 aria-label="Toggle Vault mode"
               >
                 <Home className="w-3.5 h-3.5" />

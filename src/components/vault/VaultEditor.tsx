@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { Box, Home, LayoutGrid, Users } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import { RoomViewer } from './RoomViewer';
 import { VaultDwellers } from './VaultDwellers';
 import { VaultInventory } from './VaultInventory';
@@ -17,7 +17,17 @@ interface VaultEditorProps {
 }
 
 export function VaultEditor({ data }: VaultEditorProps) {
-  const [activeTab, setActiveTab] = useState<Tab>('layout');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabParam = searchParams.get('tab') as Tab;
+  const activeTab = TABS.some(t => t.id === tabParam) ? tabParam : 'layout';
+
+  const setActiveTab = (id: Tab) => {
+    setSearchParams(prev => {
+      prev.set('tab', id);
+      return prev;
+    });
+  };
+
   const rooms = data?.vault?.rooms || [];
   const dwellers = data?.dwellers?.dwellers || [];
   const inventory = data?.vault?.inventory?.items || [];

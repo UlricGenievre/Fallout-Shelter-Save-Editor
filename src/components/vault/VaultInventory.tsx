@@ -121,6 +121,8 @@ export function VaultInventory({ items }: VaultInventoryProps) {
             else if (id === 'junks') tabCount = categories.junks.length;
             else tabCount = categories.themes.length + categories.unknown.length;
 
+            if (id === 'misc' && tabCount === 0) return null;
+
             return (
               <button
                 key={id}

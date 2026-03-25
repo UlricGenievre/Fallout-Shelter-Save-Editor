@@ -1,10 +1,20 @@
 import { useState, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { FileUpload } from '@/components/core/FileUpload';
 import { SaveEditor } from '@/components/core/SaveEditor';
 
 const Index = () => {
-  const [saveData, setSaveData] = useState<any>(null);
-  const [fileName, setFileName] = useState('');
+  const [, setSearchParams] = useSearchParams();
+  const [saveData, setSaveData] = useState<any>(() => {
+    try {
+      const saved = localStorage.getItem('vault-tec-last-save');
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+      console.warn('Failed to load save from localStorage', e);
+      return null;
+    }
+  });
+  const [fileName, setFileName] = useState(() => localStorage.getItem('vault-tec-last-name') || '');
 
   const handleDataLoaded = useCallback((data: any, name: string) => {
     setSaveData(data);
@@ -20,7 +30,10 @@ const Index = () => {
   const handleBack = useCallback(() => {
     setSaveData(null);
     setFileName('');
-  }, []);
+    localStorage.removeItem('vault-tec-last-save');
+    localStorage.removeItem('vault-tec-last-name');
+    setSearchParams({}, { replace: true });
+  }, [setSearchParams]);
 
   if (saveData) {
     return <SaveEditor initialData={saveData} fileName={fileName} onBack={handleBack} />;

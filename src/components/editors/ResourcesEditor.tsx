@@ -1,4 +1,4 @@
-import { Package, Droplets, Zap, UtensilsCrossed, Pill, Radiation, FlaskConical } from 'lucide-react';
+import { Package, Droplets, Zap, UtensilsCrossed, Pill, Radiation, FlaskConical, Coins, Bot, PawPrint } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
 interface ResourcesEditorProps {
@@ -7,7 +7,7 @@ interface ResourcesEditorProps {
 }
 
 const RESOURCE_CONFIG = [
-  { key: 'Nuka', label: 'Caps', icon: Package },
+  { key: 'Nuka', label: 'Caps', icon: Coins },
   { key: 'Food', label: 'Food', icon: UtensilsCrossed },
   { key: 'Water', label: 'Water', icon: Droplets },
   { key: 'Energy', label: 'Energy', icon: Zap },
@@ -15,8 +15,8 @@ const RESOURCE_CONFIG = [
   { key: 'RadAway', label: 'RadAway', icon: Radiation },
   { key: 'NukaColaQuantum', label: 'Nuka Quantum', icon: FlaskConical },
   { key: 'Lunchbox', label: 'Lunchbox', icon: Package },
-  { key: 'MrHandy', label: 'Mr. Handy', icon: Package },
-  { key: 'PetCarrier', label: 'Pet Carrier', icon: Package },
+  { key: 'MrHandy', label: 'Mr. Handy', icon: Bot },
+  { key: 'PetCarrier', label: 'Pet Carrier', icon: PawPrint },
 ];
 
 export function ResourcesEditor({ data, onChange }: ResourcesEditorProps) {
