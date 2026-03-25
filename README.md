@@ -45,7 +45,7 @@ A web-based tool for editing Fallout Shelter save files (.sav). Decrypt, modify,
 
     # Or with Docker
     cd .docker
-    docker compose run --rm npm install
+    docker compose run --rm node npm install
     ```
 
 ### Development
@@ -70,7 +70,7 @@ npm run build
 
 # Or with Docker
 cd .docker
-docker compose run --rm npm run build
+docker compose run --rm node npm run build
 ```
 Preview the production build locally:
 ```sh
@@ -79,7 +79,7 @@ npm run preview
 
 # Or with Docker
 cd .docker
-docker compose run --rm --service-ports npm run preview
+docker compose run --rm --service-ports node npm run preview
 ```
 
 ## Available Scripts
@@ -94,33 +94,33 @@ docker compose run --rm --service-ports npm run preview
     ```sh
     # With Docker:
     cd .docker
-    docker compose run --rm npm run build
+    docker compose run --rm node npm run build
     ```
 - `npm run lint`: Runs ESLint to check for code quality issues.
     ```sh
     # With Docker:
     cd .docker
-    docker compose run --rm npm run lint
+    docker compose run --rm node npm run lint
     ```
 - `npm run test`: Runs unit tests with Vitest.
     ```sh
     # With Docker:
     cd .docker
-    docker compose run --rm npm test
+    docker compose run --rm node npm test
     ```
 - `npm run test:watch`: Runs tests in watch mode.
     ```sh
     # With Docker:
     cd .docker
-    docker compose run --rm npm run test:watch
+    docker compose run --rm node npm run test:watch
     ```
 
 All scripts can be run via Docker by prefixing them with:
 ```sh
 cd .docker
-docker compose run --rm npm <command>
+docker compose run --rm node npm <command>
 ```
-For example: `docker compose run --rm npm run lint`
+For example: `docker compose run --rm node npm run lint`
 
 ## Project Structure
 
@@ -152,7 +152,7 @@ npm run test
 
 # Or with Docker
 cd .docker
-docker compose run --rm npm test
+docker compose run --rm node npm test
 ```
 
 ## Lovable

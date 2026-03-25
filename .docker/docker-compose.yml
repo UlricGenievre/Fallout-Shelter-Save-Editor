@@ -1,15 +1,16 @@
 services:
-  npm:
+  node:
     image: node:20-alpine
+    user: "1000:1000"
     working_dir: /app
     volumes:
       - ..:/app
     ports:
       - "8080:8080"
-    entrypoint: ["npm"]
 
   dev:
     image: node:20-alpine
+    user: "1000:1000"
     working_dir: /app
     volumes:
       - ..:/app
