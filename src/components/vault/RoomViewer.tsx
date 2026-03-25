@@ -235,9 +235,19 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
                 <p className="text-sm text-muted-foreground">No dwellers in this room</p>
               ) : (
                 <div className="grid grid-cols-1 gap-4">
-                  {getRoomDwellers(selectedRoom).map(dweller => (
-                    <DwellerCard key={dweller.serializeId} dweller={dweller} />
-                  ))}
+                  {getRoomDwellers(selectedRoom).map(dweller => {
+                    const roomName = getRoomName(selectedRoom.type);
+                    const roomData: any = roomsData.rooms.find(r => r.type === selectedRoom.type);
+                    const roomSpecial = roomData?.special;
+                    return (
+                      <DwellerCard 
+                        key={dweller.serializeId} 
+                        dweller={dweller} 
+                        roomName={roomName}
+                        roomSpecial={roomSpecial}
+                      />
+                    );
+                  })}
                 </div>
               )}
             </div>

@@ -1,0 +1,2225 @@
+[
+  {
+    "id": "Fist",
+    "label": "Fist",
+    "category": "Melee",
+    "rarity": "N/A",
+    "damage": "1",
+    "avgDamage": 1,
+    "resellValue": 0
+  },
+  {
+    "id": "Melee_BaseballBat",
+    "label": "Baseball bat",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "5-15",
+    "avgDamage": 10,
+    "resellValue": 100
+  },
+  {
+    "id": "Melee_ButcherKnife",
+    "label": "Butcher knife",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "8-18",
+    "avgDamage": 13,
+    "resellValue": 100
+  },
+  {
+    "id": "Melee_KitchenKnife",
+    "label": "Kitchen knife",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "3-11",
+    "avgDamage": 7,
+    "resellValue": 100
+  },
+  {
+    "id": "Melee_Pickaxe",
+    "label": "Pickaxe",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "11-21",
+    "avgDamage": 16,
+    "resellValue": 100
+  },
+  {
+    "id": "Melee_PoolCue",
+    "label": "Pool cue",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "0-8",
+    "avgDamage": 4,
+    "resellValue": 100
+  },
+  {
+    "id": "Melee_FireHydrantBat",
+    "label": "Fire hydrant bat",
+    "category": "Melee",
+    "rarity": "Legendary",
+    "damage": "19-31",
+    "avgDamage": 25,
+    "resellValue": 500
+  },
+  {
+    "id": "Melee_RaiderSword",
+    "label": "Relentless raider sword",
+    "category": "Melee",
+    "rarity": "Legendary",
+    "damage": "16-28",
+    "avgDamage": 22,
+    "resellValue": 500
+  },
+  {
+    "id": "Ripper_Rusty",
+    "label": "Rusty Ripper",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "10-15",
+    "avgDamage": 12.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Ripper",
+    "label": "Ripper",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "11-16",
+    "avgDamage": 13.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Ripper_Enhanced",
+    "label": "Enhanced Ripper",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "12-17",
+    "avgDamage": 14.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Ripper_Hardened",
+    "label": "Hardened Ripper",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "13-18",
+    "avgDamage": 15.5,
+    "resellValue": 100
+  },
+  {
+    "id": "SurgicalRipper_Rusty",
+    "label": "Rusty surgical Ripper",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "12",
+    "avgDamage": 12,
+    "resellValue": 100
+  },
+  {
+    "id": "SurgicalRipper",
+    "label": "Surgical Ripper",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "13-14",
+    "avgDamage": 12.5,
+    "resellValue": 100
+  },
+  {
+    "id": "SurgicalRipper_Enhanced",
+    "label": "Enhanced surgical Ripper",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "14-15",
+    "avgDamage": 14.5,
+    "resellValue": 100
+  },
+  {
+    "id": "SurgicalRipper_Hardened",
+    "label": "Hardened surgical Ripper",
+    "category": "Melee",
+    "rarity": "Rare",
+    "damage": "16-17",
+    "avgDamage": 16.5,
+    "resellValue": 100
+  },
+  {
+    "id": "PowerFist_Rusty",
+    "label": "Rusty power fist",
+    "category": "Melee",
+    "rarity": "Legendary",
+    "damage": "12-17",
+    "avgDamage": 14.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PowerFist",
+    "label": "Power fist",
+    "category": "Melee",
+    "rarity": "Legendary",
+    "damage": "13-18",
+    "avgDamage": 15.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PowerFist_Enhanced",
+    "label": "Enhanced power fist",
+    "category": "Melee",
+    "rarity": "Legendary",
+    "damage": "14-19",
+    "avgDamage": 16.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PowerFist_Hardened",
+    "label": "Hardened power fist",
+    "category": "Melee",
+    "rarity": "Legendary",
+    "damage": "15-20",
+    "avgDamage": 17.5,
+    "resellValue": 500
+  },
+  {
+    "id": "EdSCustomPowerFist",
+    "label": "Ed\u0027s custom power fist",
+    "category": "Melee",
+    "rarity": "Legendary",
+    "damage": "16-22",
+    "avgDamage": 19,
+    "resellValue": 500
+  },
+  {
+    "id": "GrognaksAxe",
+    "label": "Grognak\u0027s axe",
+    "category": "Melee",
+    "rarity": "Legendary",
+    "damage": "18-26",
+    "avgDamage": 22,
+    "resellValue": 500
+  },
+  {
+    "id": "SuperSledge",
+    "label": "Super sledge",
+    "category": "Melee",
+    "rarity": "Legendary",
+    "damage": "18-32",
+    "avgDamage": 25,
+    "resellValue": 100
+  },
+  {
+    "id": "UltraciteSword1",
+    "label": "Ultracite sword",
+    "category": "Melee",
+    "rarity": "Common",
+    "damage": "3-6",
+    "avgDamage": 4.5,
+    "resellValue": 10
+  },
+  {
+    "id": "032Pistol_Rusty",
+    "label": "Rusty .32 pistol",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "1",
+    "avgDamage": 1,
+    "resellValue": 10
+  },
+  {
+    "id": "032Pistol",
+    "label": ".32 pistol",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "1-2",
+    "avgDamage": 1.5,
+    "resellValue": 10
+  },
+  {
+    "id": "032Pistol_Enhanced",
+    "label": "Enhanced .32 pistol",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "1-3",
+    "avgDamage": 2,
+    "resellValue": 10
+  },
+  {
+    "id": "032Pistol_Hardened",
+    "label": "Hardened .32 pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "1-4",
+    "avgDamage": 2.5,
+    "resellValue": 100
+  },
+  {
+    "id": "\"032Pistol_ArmorPiercing\"",
+    "label": "Armor piercing .32 pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "1-5",
+    "avgDamage": 3,
+    "resellValue": 100
+  },
+  {
+    "id": "032Pistol_WildBillsSidearm",
+    "label": "Wild Bill\u0027s Sidearm",
+    "category": "Pistol",
+    "rarity": "Legendary",
+    "damage": "1-6",
+    "avgDamage": 3.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Pistol_Rusty",
+    "label": "Rusty 10mm pistol",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "2",
+    "avgDamage": 2,
+    "resellValue": 10
+  },
+  {
+    "id": "Pistol",
+    "label": "10mm pistol",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "2-3",
+    "avgDamage": 2.5,
+    "resellValue": 10
+  },
+  {
+    "id": "Pistol_Enhanced",
+    "label": "Enhanced 10mm pistol",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "2-4",
+    "avgDamage": 3,
+    "resellValue": 10
+  },
+  {
+    "id": "Pistol_Hardened",
+    "label": "Hardened 10mm pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "2-5",
+    "avgDamage": 3.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Pistol_ArmorPiercing",
+    "label": "Armor piercing 10mm pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "2-6",
+    "avgDamage": 4,
+    "resellValue": 100
+  },
+  {
+    "id": "Pistol_LoneWanderer",
+    "label": "Lone Wanderer",
+    "category": "Pistol",
+    "rarity": "Legendary",
+    "damage": "2-7",
+    "avgDamage": 4.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Magnum_Rusty",
+    "label": "Rusty scoped .44",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "3",
+    "avgDamage": 3,
+    "resellValue": 10
+  },
+  {
+    "id": "Magnum",
+    "label": "Scoped .44",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "3-4",
+    "avgDamage": 3.5,
+    "resellValue": 10
+  },
+  {
+    "id": "Magnum_Enhanced",
+    "label": "Enhanced scoped .44",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "3-5",
+    "avgDamage": 4,
+    "resellValue": 10
+  },
+  {
+    "id": "Magnum_Hardened",
+    "label": "Hardened scoped .44",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "3-6",
+    "avgDamage": 4.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Magnum_ArmorPiercing",
+    "label": "Armor piercing scoped .44",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "3-7",
+    "avgDamage": 5,
+    "resellValue": 100
+  },
+  {
+    "id": "Magnum_Blackhawk",
+    "label": "Blackhawk",
+    "category": "Pistol",
+    "rarity": "Legendary",
+    "damage": "3-8",
+    "avgDamage": 5.5,
+    "resellValue": 500
+  },
+  {
+    "id": "GaussPistol_Rusty",
+    "label": "Rusty Gauss pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "12",
+    "avgDamage": 12,
+    "resellValue": 100
+  },
+  {
+    "id": "GaussPistol_Focused",
+    "label": "Focused Gauss pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "13",
+    "avgDamage": 13,
+    "resellValue": 100
+  },
+  {
+    "id": "GaussPistol_Enhanced",
+    "label": "Enhanced Gauss pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "14",
+    "avgDamage": 14,
+    "resellValue": 100
+  },
+  {
+    "id": "GaussPistol_Hardened",
+    "label": "Hardened Gauss pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "15",
+    "avgDamage": 15,
+    "resellValue": 100
+  },
+  {
+    "id": "PipePistol",
+    "label": "Pipe pistol",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "1-3",
+    "avgDamage": 2,
+    "resellValue": 10
+  },
+  {
+    "id": "PipePistol_HairTrigger",
+    "label": "Hair trigger pipe pistol",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "2-5",
+    "avgDamage": 3.5,
+    "resellValue": 10
+  },
+  {
+    "id": "PipePistol_Heavy",
+    "label": "Heavy pipe pistol",
+    "category": "Pistol",
+    "rarity": "Common",
+    "damage": "3-7",
+    "avgDamage": 5,
+    "resellValue": 10
+  },
+  {
+    "id": "PipePistol_Scoped",
+    "label": "Scoped pipe pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "4-9",
+    "avgDamage": 6.5,
+    "resellValue": 100
+  },
+  {
+    "id": "PipePistol_Auto",
+    "label": "Auto pipe pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "5-11",
+    "avgDamage": 8,
+    "resellValue": 100
+  },
+  {
+    "id": "PipePistol_LittleBrother",
+    "label": "Little Brother",
+    "category": "Pistol",
+    "rarity": "Legendary",
+    "damage": "6-13",
+    "avgDamage": 9.5,
+    "resellValue": 500
+  },
+  {
+    "id": "TranqGun_Rusty",
+    "label": "Rusty tranq gun",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "1-10",
+    "avgDamage": 5.5,
+    "resellValue": 100
+  },
+  {
+    "id": "TranqGun",
+    "label": "Tranq gun",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "2-12",
+    "avgDamage": 7,
+    "resellValue": 100
+  },
+  {
+    "id": "TranqGun_Enhanced",
+    "label": "Enhanced tranq gun",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "4-12",
+    "avgDamage": 8,
+    "resellValue": 100
+  },
+  {
+    "id": "TranqGun_Hardened",
+    "label": "Hardened tranq gun",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "6-12",
+    "avgDamage": 9,
+    "resellValue": 100
+  },
+  {
+    "id": "T60Pistol_Rusty",
+    "label": "Rusty T60 pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "9-13",
+    "avgDamage": 11,
+    "resellValue": 100
+  },
+  {
+    "id": "T60Pistol",
+    "label": "T60 pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "10-14",
+    "avgDamage": 12,
+    "resellValue": 100
+  },
+  {
+    "id": "T60Pistol_Enhanced",
+    "label": "Enhanced T60 pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "11-14",
+    "avgDamage": 12.5,
+    "resellValue": 100
+  },
+  {
+    "id": "T60Pistol_Hardened",
+    "label": "Hardened T60 pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "12-15",
+    "avgDamage": 13.5,
+    "resellValue": 100
+  },
+  {
+    "id": "T60Pistol_ArmorPiercing",
+    "label": "Armor piercing T60 pistol",
+    "category": "Pistol",
+    "rarity": "Rare",
+    "damage": "13-16",
+    "avgDamage": 14.5,
+    "resellValue": 100
+  },
+  {
+    "id": "AssaultRifle_Rusty",
+    "label": "Rusty assault rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "8",
+    "avgDamage": 8,
+    "resellValue": 100
+  },
+  {
+    "id": "AssaultRifle",
+    "label": "Assault rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "8-9",
+    "avgDamage": 8.5,
+    "resellValue": 100
+  },
+  {
+    "id": "AssaultRifle_Enhanced",
+    "label": "Enhanced assault rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "8-10",
+    "avgDamage": 9,
+    "resellValue": 100
+  },
+  {
+    "id": "AssaultRifle_Hardened",
+    "label": "Hardened assault rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "8-11",
+    "avgDamage": 9.5,
+    "resellValue": 100
+  },
+  {
+    "id": "AssaultRifle_ArmorPiercing",
+    "label": "Armor piercing assault rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "8-12",
+    "avgDamage": 10,
+    "resellValue": 100
+  },
+  {
+    "id": "AssaultRifle_Infiltrator",
+    "label": "Infiltrator",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "8-13",
+    "avgDamage": 10.5,
+    "resellValue": 500
+  },
+  {
+    "id": "BBGun_Rusty",
+    "label": "Rusty BB gun",
+    "category": "Rifle",
+    "rarity": "Common",
+    "damage": "0-1",
+    "avgDamage": 0.5,
+    "resellValue": 10
+  },
+  {
+    "id": "BBGun",
+    "label": "BB gun",
+    "category": "Rifle",
+    "rarity": "Common",
+    "damage": "0-2",
+    "avgDamage": 1,
+    "resellValue": 10
+  },
+  {
+    "id": "BBGun_Enhanced",
+    "label": "Enhanced BB gun",
+    "category": "Rifle",
+    "rarity": "Common",
+    "damage": "0-3",
+    "avgDamage": 1.5,
+    "resellValue": 10
+  },
+  {
+    "id": "BBGun_Hardened",
+    "label": "Hardened BB gun",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "0-4",
+    "avgDamage": 2,
+    "resellValue": 100
+  },
+  {
+    "id": "BBGun_ArmorPiercing",
+    "label": "Armor piercing BB gun",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "0-5",
+    "avgDamage": 2.5,
+    "resellValue": 100
+  },
+  {
+    "id": "BBGun_RedRocket",
+    "label": "Red Rocket",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "0-6",
+    "avgDamage": 3,
+    "resellValue": 500
+  },
+  {
+    "id": "BOSAssaultRifle_Rusty",
+    "label": "Rusty BOS assault rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "15",
+    "avgDamage": 15,
+    "resellValue": 100
+  },
+  {
+    "id": "BOSAssaultRifle",
+    "label": "BOS assault rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "16",
+    "avgDamage": 16,
+    "resellValue": 100
+  },
+  {
+    "id": "BOSAssaultRifle_Enhanced",
+    "label": "Enhanced BOS assault rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "16-18",
+    "avgDamage": 17,
+    "resellValue": 100
+  },
+  {
+    "id": "BOSAssaultRifle_Hardened",
+    "label": "Hardened BOS assault rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "17-19",
+    "avgDamage": 18,
+    "resellValue": 100
+  },
+  {
+    "id": "BOSAssaultRifle_ArmorPiercing",
+    "label": "Armor piercing BOS assault rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "19-21",
+    "avgDamage": 20,
+    "resellValue": 100
+  },
+  {
+    "id": "GaussRifle_Rusty",
+    "label": "Rusty Gauss rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "16",
+    "avgDamage": 16,
+    "resellValue": 100
+  },
+  {
+    "id": "GaussRifle",
+    "label": "Gauss rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "16-17",
+    "avgDamage": 16.5,
+    "resellValue": 100
+  },
+  {
+    "id": "GaussRifle_Enhanced",
+    "label": "Enhanced Gauss rifle",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "16-18",
+    "avgDamage": 17,
+    "resellValue": 500
+  },
+  {
+    "id": "GaussRifle_Hardened",
+    "label": "Hardened Gauss rifle",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "16-19",
+    "avgDamage": 17.5,
+    "resellValue": 500
+  },
+  {
+    "id": "GaussRifle_Accelerated",
+    "label": "Accelerated Gauss rifle",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "16-20",
+    "avgDamage": 18,
+    "resellValue": 500
+  },
+  {
+    "id": "GaussRifle_Magnetro4000",
+    "label": "Magnetron 4000",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "16-21",
+    "avgDamage": 18.5,
+    "resellValue": 500
+  },
+  {
+    "id": "LeverActionRifle_Henrietta",
+    "label": "Henrietta",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "13-16",
+    "avgDamage": 14.5,
+    "resellValue": 500
+  },
+  {
+    "id": "HuntingRifle_Rusty",
+    "label": "Rusty hunting rifle",
+    "category": "Rifle",
+    "rarity": "Common",
+    "damage": "5",
+    "avgDamage": 5,
+    "resellValue": 10
+  },
+  {
+    "id": "HuntingRifle",
+    "label": "Hunting rifle",
+    "category": "Rifle",
+    "rarity": "Common",
+    "damage": "5-6",
+    "avgDamage": 5.5,
+    "resellValue": 10
+  },
+  {
+    "id": "HuntingRifle_Enhanced",
+    "label": "Enhanced hunting rifle",
+    "category": "Rifle",
+    "rarity": "Common",
+    "damage": "5-7",
+    "avgDamage": 6,
+    "resellValue": 10
+  },
+  {
+    "id": "HuntingRifle_Hardened",
+    "label": "Hardened hunting rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "5-8",
+    "avgDamage": 6.5,
+    "resellValue": 100
+  },
+  {
+    "id": "HuntingRifle_ArmorPiercing",
+    "label": "Armor piercing hunting rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "5-9",
+    "avgDamage": 7,
+    "resellValue": 100
+  },
+  {
+    "id": "HuntingRifle_OlPainless",
+    "label": "Ol\u0027 Painless",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "5-10",
+    "avgDamage": 7.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Rifle_Rusty",
+    "label": "Rusty lever-action rifle",
+    "category": "Rifle",
+    "rarity": "Common",
+    "damage": "4",
+    "avgDamage": 4,
+    "resellValue": 10
+  },
+  {
+    "id": "Rifle",
+    "label": "Lever-action rifle",
+    "category": "Rifle",
+    "rarity": "Common",
+    "damage": "4-5",
+    "avgDamage": 4.5,
+    "resellValue": 10
+  },
+  {
+    "id": "Rifle_Enhanced",
+    "label": "Enhanced lever-action rifle",
+    "category": "Rifle",
+    "rarity": "Common",
+    "damage": "4-6",
+    "avgDamage": 5,
+    "resellValue": 10
+  },
+  {
+    "id": "Rifle_Hardened",
+    "label": "Hardened lever-action rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "4-7",
+    "avgDamage": 5.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Rifle_ArmorPiercing",
+    "label": "Armor piercing lever-action rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "4-8",
+    "avgDamage": 6,
+    "resellValue": 100
+  },
+  {
+    "id": "Rifle_LincolnsRepeater",
+    "label": "Lincoln\u0027s repeater",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "4-9",
+    "avgDamage": 6.5,
+    "resellValue": 500
+  },
+  {
+    "id": "MaresLeg",
+    "label": "Mare\u0027s Leg",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "9-13",
+    "avgDamage": 11,
+    "resellValue": 500
+  },
+  {
+    "id": "PipeRifle",
+    "label": "Pipe rifle",
+    "category": "Rifle",
+    "rarity": "Common",
+    "damage": "5-7",
+    "avgDamage": 6,
+    "resellValue": 10
+  },
+  {
+    "id": "PipeRifle_Calibrated",
+    "label": "Calibrated pipe rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "6-9",
+    "avgDamage": 7.5,
+    "resellValue": 100
+  },
+  {
+    "id": "PipeRifle_Long",
+    "label": "Long pipe rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "7-11",
+    "avgDamage": 9,
+    "resellValue": 100
+  },
+  {
+    "id": "PipeRifle_NightVision",
+    "label": "Night-vision pipe rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "8-13",
+    "avgDamage": 10.5,
+    "resellValue": 100
+  },
+  {
+    "id": "PipeRifle_Bayoneted",
+    "label": "Bayoneted pipe rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "9-15",
+    "avgDamage": 12,
+    "resellValue": 100
+  },
+  {
+    "id": "PipeRifle_BigSister",
+    "label": "Big Sister",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "10-17",
+    "avgDamage": 13.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Railgun_Rusty",
+    "label": "Rusty railway rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "14",
+    "avgDamage": 14,
+    "resellValue": 100
+  },
+  {
+    "id": "Railgun",
+    "label": "Railway rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "14-15",
+    "avgDamage": 14.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Railgun_Enhanced",
+    "label": "Enhanced railway rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "14-16",
+    "avgDamage": 15,
+    "resellValue": 100
+  },
+  {
+    "id": "Railgun_Hardened",
+    "label": "Hardened railway rifle",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "14-17",
+    "avgDamage": 15.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Railgun_Accelerated",
+    "label": "Accelerated railway rifle",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "14-18",
+    "avgDamage": 16,
+    "resellValue": 500
+  },
+  {
+    "id": "Railgun_Railmaster",
+    "label": "Railmaster",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "14-19",
+    "avgDamage": 16.5,
+    "resellValue": 500
+  },
+  {
+    "id": "SniperRifle_Rusty",
+    "label": "Rusty sniper rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "10",
+    "avgDamage": 10,
+    "resellValue": 100
+  },
+  {
+    "id": "SniperRifle",
+    "label": "Sniper rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "10-11",
+    "avgDamage": 10.5,
+    "resellValue": 100
+  },
+  {
+    "id": "SniperRifle_Enhanced",
+    "label": "Enhanced sniper rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "10-12",
+    "avgDamage": 11,
+    "resellValue": 100
+  },
+  {
+    "id": "SniperRifle_Hardened",
+    "label": "Hardened sniper rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "10-13",
+    "avgDamage": 11.5,
+    "resellValue": 100
+  },
+  {
+    "id": "SniperRifle_ArmorPiercing",
+    "label": "Armor piercing sniper rifle",
+    "category": "Rifle",
+    "rarity": "Rare",
+    "damage": "10-14",
+    "avgDamage": 12,
+    "resellValue": 100
+  },
+  {
+    "id": "SniperRifle_VictoryRifle",
+    "label": "Victory rifle",
+    "category": "Rifle",
+    "rarity": "Legendary",
+    "damage": "10-15",
+    "avgDamage": 12.5,
+    "resellValue": 500
+  },
+  {
+    "id": "CombatShotgun_Rusty",
+    "label": "Rusty combat shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "13",
+    "avgDamage": 13,
+    "resellValue": 100
+  },
+  {
+    "id": "CombatShotgun",
+    "label": "Combat shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "13-14",
+    "avgDamage": 13.5,
+    "resellValue": 100
+  },
+  {
+    "id": "CombatShotgun_Enhanced",
+    "label": "Enhanced combat shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "13-15",
+    "avgDamage": 14,
+    "resellValue": 100
+  },
+  {
+    "id": "CombatShotgun_Hardened",
+    "label": "Hardened combat shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "13-16",
+    "avgDamage": 14.5,
+    "resellValue": 100
+  },
+  {
+    "id": "CombatShotgun_DoubleBarrelled",
+    "label": "Double-barrel combat shotgun",
+    "category": "Shotgun",
+    "rarity": "Legendary",
+    "damage": "13-17",
+    "avgDamage": 15,
+    "resellValue": 500
+  },
+  {
+    "id": "CombatShotgun_CharonsShotgun",
+    "label": "Charon\u0027s shotgun",
+    "category": "Shotgun",
+    "rarity": "Legendary",
+    "damage": "13-18",
+    "avgDamage": 15.5,
+    "resellValue": 500
+  },
+  {
+    "id": "MountainMomma",
+    "label": "Mountain Momma",
+    "category": "Shotgun",
+    "rarity": "Legendary",
+    "damage": "14-19",
+    "avgDamage": 16.5,
+    "resellValue": 500
+  },
+  {
+    "id": "SawedOffShotgun_Rusty",
+    "label": "Rusty sawed-off shotgun",
+    "category": "Shotgun",
+    "rarity": "Common",
+    "damage": "6",
+    "avgDamage": 6,
+    "resellValue": 10
+  },
+  {
+    "id": "SawedOffShotgun",
+    "label": "Sawed-off shotgun",
+    "category": "Shotgun",
+    "rarity": "Common",
+    "damage": "6-7",
+    "avgDamage": 6.5,
+    "resellValue": 10
+  },
+  {
+    "id": "SawedOffShotgun_Enhanced",
+    "label": "Enhanced sawed-off shotgun",
+    "category": "Shotgun",
+    "rarity": "Common",
+    "damage": "6-8",
+    "avgDamage": 7,
+    "resellValue": 10
+  },
+  {
+    "id": "SawedOffShotgun_Hardened",
+    "label": "Hardened sawed-off shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "6-9",
+    "avgDamage": 7.5,
+    "resellValue": 100
+  },
+  {
+    "id": "SawedOffShotgun_DoubleBarrelled",
+    "label": "Double-barrel sawed-off shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "6-10",
+    "avgDamage": 8,
+    "resellValue": 100
+  },
+  {
+    "id": "SawedOffShotgun_Kneecapper",
+    "label": "Kneecapper",
+    "category": "Shotgun",
+    "rarity": "Legendary",
+    "damage": "6-11",
+    "avgDamage": 8.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Shotgun_Rusty",
+    "label": "Rusty shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "9",
+    "avgDamage": 9,
+    "resellValue": 100
+  },
+  {
+    "id": "Shotgun",
+    "label": "Shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "9-10",
+    "avgDamage": 9.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Shotgun_Enhanced",
+    "label": "Enhanced shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "9-11",
+    "avgDamage": 10,
+    "resellValue": 100
+  },
+  {
+    "id": "Shotgun_Hardened",
+    "label": "Hardened shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "9-12",
+    "avgDamage": 10.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Shotgun_DoubleBarrelled",
+    "label": "Double-barrel shotgun",
+    "category": "Shotgun",
+    "rarity": "Rare",
+    "damage": "9-13",
+    "avgDamage": 11,
+    "resellValue": 100
+  },
+  {
+    "id": "Shotgun_FarmersDaughter",
+    "label": "Farmer\u0027s Daughter",
+    "category": "Shotgun",
+    "rarity": "Legendary",
+    "damage": "9-14",
+    "avgDamage": 11.5,
+    "resellValue": 500
+  },
+  {
+    "id": "GhoulRevolver",
+    "label": "Ghoul revolver",
+    "category": "Shotgun",
+    "rarity": "Legendary",
+    "damage": "8-12",
+    "avgDamage": 10,
+    "resellValue": 500
+  },
+  {
+    "id": "AlienBlaster_Rusty",
+    "label": "Rusty alien blaster",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "18",
+    "avgDamage": 18,
+    "resellValue": 500
+  },
+  {
+    "id": "AlienBlaster",
+    "label": "Alien blaster",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "18-19",
+    "avgDamage": 18.5,
+    "resellValue": 500
+  },
+  {
+    "id": "AlienBlaster_Tuned",
+    "label": "Tuned alien blaster",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "18-20",
+    "avgDamage": 19,
+    "resellValue": 500
+  },
+  {
+    "id": "AlienBlaster_Focused",
+    "label": "Focused alien blaster",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "18-21",
+    "avgDamage": 19.5,
+    "resellValue": 500
+  },
+  {
+    "id": "AlienBlaster_Amplified",
+    "label": "Amplified alien blaster",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "18-22",
+    "avgDamage": 20,
+    "resellValue": 500
+  },
+  {
+    "id": "AlienBlaster_Destabilizer",
+    "label": "Destabilizer",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "18-23",
+    "avgDamage": 20.5,
+    "resellValue": 500
+  },
+  {
+    "id": "InstitutePistol",
+    "label": "Institute pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "9-11",
+    "avgDamage": 10,
+    "resellValue": 100
+  },
+  {
+    "id": "InstitutePistol_Incendiary",
+    "label": "Incendiary Institute pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "10-13",
+    "avgDamage": 11.5,
+    "resellValue": 100
+  },
+  {
+    "id": "InstitutePistol_Improved",
+    "label": "Improved Institute pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "11-15",
+    "avgDamage": 13,
+    "resellValue": 100
+  },
+  {
+    "id": "InstitutePistol_Scoped",
+    "label": "Scoped Institute pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "12-17",
+    "avgDamage": 14.5,
+    "resellValue": 100
+  },
+  {
+    "id": "InstitutePistol_Scattered",
+    "label": "Scattered Institute pistol",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "13-19",
+    "avgDamage": 16,
+    "resellValue": 500
+  },
+  {
+    "id": "InstitutePistol_Apotheosis",
+    "label": "Apotheosis",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "14-21",
+    "avgDamage": 17.5,
+    "resellValue": 500
+  },
+  {
+    "id": "LaserPistol_Rusty",
+    "label": "Rusty laser pistol",
+    "category": "Energy Pistol",
+    "rarity": "Common",
+    "damage": "7",
+    "avgDamage": 7,
+    "resellValue": 10
+  },
+  {
+    "id": "LaserPistol",
+    "label": "Laser pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "7-8",
+    "avgDamage": 7.5,
+    "resellValue": 100
+  },
+  {
+    "id": "LaserPistol_Tuned",
+    "label": "Tuned laser pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "7-9",
+    "avgDamage": 8,
+    "resellValue": 100
+  },
+  {
+    "id": "LaserPistol_Focused",
+    "label": "Focused laser pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "7-10",
+    "avgDamage": 8.5,
+    "resellValue": 100
+  },
+  {
+    "id": "LaserPistol_Amplified",
+    "label": "Amplified laser pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "7-11",
+    "avgDamage": 9,
+    "resellValue": 100
+  },
+  {
+    "id": "LaserPistol_SmugglersEnd",
+    "label": "Smuggler\u0027s End",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "7-12",
+    "avgDamage": 9.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaPistol_Rusty",
+    "label": "Rusty plasma pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "11",
+    "avgDamage": 11,
+    "resellValue": 100
+  },
+  {
+    "id": "PlasmaPistol",
+    "label": "Plasma pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "11-12",
+    "avgDamage": 11.5,
+    "resellValue": 100
+  },
+  {
+    "id": "PlasmaPistol_Tuned",
+    "label": "Tuned plasma pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "11-13",
+    "avgDamage": 12,
+    "resellValue": 100
+  },
+  {
+    "id": "PlasmaPistol_Focused",
+    "label": "Focused plasma pistol",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "11-14",
+    "avgDamage": 12.5,
+    "resellValue": 100
+  },
+  {
+    "id": "PlasmaPistol_Amplified",
+    "label": "Amplified plasma pistol",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "11-15",
+    "avgDamage": 13,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaPistol_MPLXNovasurge",
+    "label": "MPXL Novasurge",
+    "category": "Energy Pistol",
+    "rarity": "Legendary",
+    "damage": "11-16",
+    "avgDamage": 13.5,
+    "resellValue": 500
+  },
+  {
+    "id": "AssaultronHead_Rusty",
+    "label": "Rusty Assaultron head",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "7-11",
+    "avgDamage": 9,
+    "resellValue": 100
+  },
+  {
+    "id": "AssaultronHead",
+    "label": "Assaultron head",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "8-12",
+    "avgDamage": 10,
+    "resellValue": 100
+  },
+  {
+    "id": "AssaultronHead_Enhanced",
+    "label": "Enhanced Assaultron head",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "9-13",
+    "avgDamage": 11,
+    "resellValue": 100
+  },
+  {
+    "id": "AssaultronHead_Hardened",
+    "label": "Hardened Assaultron head",
+    "category": "Energy Pistol",
+    "rarity": "Rare",
+    "damage": "10-14",
+    "avgDamage": 12,
+    "resellValue": 100
+  },
+  {
+    "id": "LaserMusket",
+    "label": "Laser musket",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "10-13",
+    "avgDamage": 11.5,
+    "resellValue": 500
+  },
+  {
+    "id": "AlienDisintegrator_Rusty",
+    "label": "Rusty alien disintegrator",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "16",
+    "avgDamage": 16,
+    "resellValue": 500
+  },
+  {
+    "id": "AlienDisintegrator",
+    "label": "Alien disintegrator",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "17",
+    "avgDamage": 17,
+    "resellValue": 500
+  },
+  {
+    "id": "AlienDisintegrator_Enhanced",
+    "label": "Enhanced alien disintegrator",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "18",
+    "avgDamage": 18,
+    "resellValue": 500
+  },
+  {
+    "id": "AlienDisintegrator_Hardened",
+    "label": "Hardened alien disintegrator",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "19",
+    "avgDamage": 19,
+    "resellValue": 500
+  },
+  {
+    "id": "InstituteRifle",
+    "label": "Institute rifle",
+    "category": "Energy Rifle",
+    "rarity": "Rare",
+    "damage": "14-16",
+    "avgDamage": 15,
+    "resellValue": 100
+  },
+  {
+    "id": "InstituteRifle_Excited",
+    "label": "Excited Institute rifle",
+    "category": "Energy Rifle",
+    "rarity": "Rare",
+    "damage": "15-18",
+    "avgDamage": 16.5,
+    "resellValue": 100
+  },
+  {
+    "id": "InstituteRifle_Long",
+    "label": "Long Institute rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "16-20",
+    "avgDamage": 18,
+    "resellValue": 500
+  },
+  {
+    "id": "InstituteRifle_NightVision",
+    "label": "Night-vision Institute rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "17-22",
+    "avgDamage": 19.5,
+    "resellValue": 500
+  },
+  {
+    "id": "InstituteRifle_Targeting",
+    "label": "Targeting Institute rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "18-24",
+    "avgDamage": 21,
+    "resellValue": 500
+  },
+  {
+    "id": "InstituteRifle_VirgilsRifle",
+    "label": "Virgil\u0027s rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "19-26",
+    "avgDamage": 22.5,
+    "resellValue": 500
+  },
+  {
+    "id": "LaserRifle_Rusty",
+    "label": "Rusty laser rifle",
+    "category": "Energy Rifle",
+    "rarity": "Rare",
+    "damage": "12",
+    "avgDamage": 12,
+    "resellValue": 100
+  },
+  {
+    "id": "LaserRifle",
+    "label": "Laser rifle",
+    "category": "Energy Rifle",
+    "rarity": "Rare",
+    "damage": "12-13",
+    "avgDamage": 12.5,
+    "resellValue": 100
+  },
+  {
+    "id": "LaserRifle_Tuned",
+    "label": "Tuned laser rifle",
+    "category": "Energy Rifle",
+    "rarity": "Rare",
+    "damage": "12-14",
+    "avgDamage": 13,
+    "resellValue": 100
+  },
+  {
+    "id": "LaserRifle_Focused",
+    "label": "Focused laser rifle",
+    "category": "Energy Rifle",
+    "rarity": "Rare",
+    "damage": "12-15",
+    "avgDamage": 13.5,
+    "resellValue": 100
+  },
+  {
+    "id": "LaserRifle_Amplified",
+    "label": "Amplified laser rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "12-16",
+    "avgDamage": 14,
+    "resellValue": 500
+  },
+  {
+    "id": "LaserRifle_WaserWifle",
+    "label": "Wazer Wifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "12-17",
+    "avgDamage": 14.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaRifle_Rusty",
+    "label": "Rusty plasma rifle",
+    "category": "Energy Rifle",
+    "rarity": "Rare",
+    "damage": "17",
+    "avgDamage": 17,
+    "resellValue": 100
+  },
+  {
+    "id": "PlasmaRifle",
+    "label": "Plasma rifle",
+    "category": "Energy Rifle",
+    "rarity": "Rare",
+    "damage": "17-18",
+    "avgDamage": 17.5,
+    "resellValue": 100
+  },
+  {
+    "id": "PlasmaRifle_Tuned",
+    "label": "Tuned plasma rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "17-19",
+    "avgDamage": 18,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaRifle_Focused",
+    "label": "Focused plasma rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "17-20",
+    "avgDamage": 18.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaRifle_Amplified",
+    "label": "Amplified plasma rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "17-22",
+    "avgDamage": 19.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaRifle_MeanGreenMonster",
+    "label": "Mean Green Monster",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "17-23",
+    "avgDamage": 20,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaThrower",
+    "label": "Plasma thrower",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "17-19",
+    "avgDamage": 18,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaThrower_Agitated",
+    "label": "Agitated plasma thrower",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "18-21",
+    "avgDamage": 19.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaThrower_Tactical",
+    "label": "Tactical plasma thrower",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "19-23",
+    "avgDamage": 21,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaThrower_Boosted",
+    "label": "Boosted plasma thrower",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "20-25",
+    "avgDamage": 22.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaThrower_Overcharged",
+    "label": "Overcharged plasma thrower",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "21-27",
+    "avgDamage": 24,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaThrower_DragonsMaw",
+    "label": "Dragon\u0027s Maw",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "22-29",
+    "avgDamage": 25.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PulseRifle_Rusty",
+    "label": "Rusty pulse rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "17-18",
+    "avgDamage": 17.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PulseRifle",
+    "label": "Pulse rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "18-19",
+    "avgDamage": 18.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PulseRifle_Enhanced",
+    "label": "Enhanced pulse rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "19-20",
+    "avgDamage": 19.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PulseRifle_Hardened",
+    "label": "Hardened pulse rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "20-21",
+    "avgDamage": 20.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Cryolator",
+    "label": "Cryolator",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "20-24",
+    "avgDamage": 22,
+    "resellValue": 500
+  },
+  {
+    "id": "UltracitePlasmaRifle",
+    "label": "Ultracite plasma rifle",
+    "category": "Energy Rifle",
+    "rarity": "Common",
+    "damage": "6-8",
+    "avgDamage": 7,
+    "resellValue": 10
+  },
+  {
+    "id": "UltracitePlasmaRifle_Optimized",
+    "label": "Optimized Ultracite plasma rifle",
+    "category": "Energy Rifle",
+    "rarity": "Legendary",
+    "damage": "16-18",
+    "avgDamage": 17,
+    "resellValue": 500
+  },
+  {
+    "id": "Fatman_Rusty",
+    "label": "Rusty Fat Man",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "22",
+    "avgDamage": 22,
+    "resellValue": 500
+  },
+  {
+    "id": "Fatman",
+    "label": "Fat Man",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "22-23",
+    "avgDamage": 22.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Fatman_Enhanced",
+    "label": "Enhanced Fat Man",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "22-24",
+    "avgDamage": 23,
+    "resellValue": 500
+  },
+  {
+    "id": "Fatman_Hardened",
+    "label": "Hardened Fat Man",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "22-25",
+    "avgDamage": 23.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Fatman_Guided",
+    "label": "Guided Fat Man",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "22-26",
+    "avgDamage": 24,
+    "resellValue": 500
+  },
+  {
+    "id": "Fatman_Mirv",
+    "label": "MIRV",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "22-27",
+    "avgDamage": 24.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Flamer_Rusty",
+    "label": "Rusty flamer",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "15",
+    "avgDamage": 15,
+    "resellValue": 100
+  },
+  {
+    "id": "Flamer",
+    "label": "Flamer",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "15-16",
+    "avgDamage": 15.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Flamer_Enhanced",
+    "label": "Enhanced flamer",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "15-17",
+    "avgDamage": 16,
+    "resellValue": 100
+  },
+  {
+    "id": "Flamer_Hardened",
+    "label": "Hardened flamer",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "15-18",
+    "avgDamage": 16.5,
+    "resellValue": 100
+  },
+  {
+    "id": "Flamer_Pressurized",
+    "label": "Pressurized flamer",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "15-19",
+    "avgDamage": 17,
+    "resellValue": 100
+  },
+  {
+    "id": "Flamer_Burnmaster",
+    "label": "Burnmaster",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "15-20",
+    "avgDamage": 17.5,
+    "resellValue": 500
+  },
+  {
+    "id": "GatlingLaser_Rusty",
+    "label": "Rusty Gatling laser",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "21",
+    "avgDamage": 21,
+    "resellValue": 500
+  },
+  {
+    "id": "GatlingLaser",
+    "label": "Gatling laser",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "21-22",
+    "avgDamage": 21.5,
+    "resellValue": 500
+  },
+  {
+    "id": "GatlingLaser_Tuned",
+    "label": "Tuned Gatling laser",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "21-23",
+    "avgDamage": 22,
+    "resellValue": 500
+  },
+  {
+    "id": "GatlingLaser_Focused",
+    "label": "Focused Gatling laser",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "21-24",
+    "avgDamage": 22.5,
+    "resellValue": 500
+  },
+  {
+    "id": "GatlingLaser_Amplified",
+    "label": "Amplified Gatling laser",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "21-25",
+    "avgDamage": 23,
+    "resellValue": 500
+  },
+  {
+    "id": "GatlingLaser_Vengeance",
+    "label": "Vengeance",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "21-26",
+    "avgDamage": 23.5,
+    "resellValue": 500
+  },
+  {
+    "id": "JunkJet",
+    "label": "Junk Jet",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "13-15",
+    "avgDamage": 14,
+    "resellValue": 100
+  },
+  {
+    "id": "JunkJet_RecoilCompensated",
+    "label": "Recoil compensated Junk Jet",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "14-17",
+    "avgDamage": 15.5,
+    "resellValue": 100
+  },
+  {
+    "id": "JunkJet_Tactical",
+    "label": "Tactical Junk Jet",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "15-19",
+    "avgDamage": 17,
+    "resellValue": 100
+  },
+  {
+    "id": "JunkJet_Electrified",
+    "label": "Electrified Junk Jet",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "16-21",
+    "avgDamage": 18.5,
+    "resellValue": 500
+  },
+  {
+    "id": "JunkJet_Flaming",
+    "label": "Flaming Junk Jet",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "17-23",
+    "avgDamage": 20,
+    "resellValue": 500
+  },
+  {
+    "id": "JunkJet_TechniciansRevenge",
+    "label": "Technician\u0027s Revenge",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "18-25",
+    "avgDamage": 21.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Minigun_Rusty",
+    "label": "Rusty minigun",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "19",
+    "avgDamage": 19,
+    "resellValue": 500
+  },
+  {
+    "id": "Minigun",
+    "label": "Minigun",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "19-20",
+    "avgDamage": 19.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Minigun_Enhanced",
+    "label": "Enhanced minigun",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "19-21",
+    "avgDamage": 20,
+    "resellValue": 500
+  },
+  {
+    "id": "Minigun_Hardened",
+    "label": "Hardened minigun",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "19-22",
+    "avgDamage": 20.5,
+    "resellValue": 500
+  },
+  {
+    "id": "Minigun_ArmorPiercing",
+    "label": "Armor piercing minigun",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "19-23",
+    "avgDamage": 21,
+    "resellValue": 500
+  },
+  {
+    "id": "Minigun_LeadBelcher",
+    "label": "Lead Belcher",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "19-24",
+    "avgDamage": 21.5,
+    "resellValue": 500
+  },
+  {
+    "id": "MissilLauncher_Rusty",
+    "label": "Rusty missile launcher",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "20",
+    "avgDamage": 20,
+    "resellValue": 500
+  },
+  {
+    "id": "MissilLauncher",
+    "label": "Missile launcher",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "20-21",
+    "avgDamage": 20.5,
+    "resellValue": 500
+  },
+  {
+    "id": "MissilLauncher_Enhanced",
+    "label": "Enhanced missile launcher",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "20-22",
+    "avgDamage": 21,
+    "resellValue": 500
+  },
+  {
+    "id": "MissilLauncher_Hardened",
+    "label": "Hardened missile launcher",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "20-23",
+    "avgDamage": 21.5,
+    "resellValue": 500
+  },
+  {
+    "id": "MissilLauncher_Guided",
+    "label": "Guided missile launcher",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "20-24",
+    "avgDamage": 22,
+    "resellValue": 500
+  },
+  {
+    "id": "MissilLauncher_MissLauncher",
+    "label": "Miss Launcher",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "20-25",
+    "avgDamage": 22.5,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaCaster_Rusty",
+    "label": "Rusty plasma caster",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "16-20",
+    "avgDamage": 18,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaCaster",
+    "label": "Plasma caster",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "17-21",
+    "avgDamage": 19,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaCaster_Enhanced",
+    "label": "Enhanced plasma caster",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "18-22",
+    "avgDamage": 20,
+    "resellValue": 500
+  },
+  {
+    "id": "PlasmaCaster_Hardened",
+    "label": "Hardened plasma caster",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "19-23",
+    "avgDamage": 21,
+    "resellValue": 500
+  },
+  {
+    "id": "50CalMachineGun_Rusty",
+    "label": "Rusty .50 cal machine gun",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "10-12",
+    "avgDamage": 11,
+    "resellValue": 100
+  },
+  {
+    "id": "50CalMachineGun",
+    "label": ".50 cal machine gun",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "11-14",
+    "avgDamage": 12.5,
+    "resellValue": 100
+  },
+  {
+    "id": "50CalMachineGun_Enhanced",
+    "label": "Enhanced .50 cal machine gun",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "12-14",
+    "avgDamage": 13,
+    "resellValue": 100
+  },
+  {
+    "id": "50CalMachineGun_Hardened",
+    "label": "Hardened .50 cal machine gun",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "13-15",
+    "avgDamage": 14,
+    "resellValue": 100
+  },
+  {
+    "id": "50CalMachineGun_ArmorPiercing",
+    "label": "Armor piercing .50 cal machine gun",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "15-16",
+    "avgDamage": 15.5,
+    "resellValue": 100
+  },
+  {
+    "id": "UltraciteGatlingLaser",
+    "label": "Ultracite Gatling laser",
+    "category": "Heavy",
+    "rarity": "Rare",
+    "damage": "7-12",
+    "avgDamage": 9.5,
+    "resellValue": 100
+  },
+  {
+    "id": "UltraciteGatlingLaser_Maximized",
+    "label": "Maximized Ultracite Gatling laser",
+    "category": "Heavy",
+    "rarity": "Legendary",
+    "damage": "20-22",
+    "avgDamage": 21,
+    "resellValue": 500
+  }
+]

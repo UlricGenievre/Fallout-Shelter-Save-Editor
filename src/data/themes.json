@@ -1,0 +1,62 @@
+[
+  {
+    "id": "CafeteriaVault33",
+    "label": "Vault 33 Diner",
+    "category": "Room"
+  },
+  {
+    "id": "LivingQuartersVault33",
+    "label": "Vault 33 Living Quarters",
+    "category": "Room"
+  },
+  {
+    "id": "CafeteriaAnniversary",
+    "label": "Party Diner",
+    "category": "Room"
+  },
+  {
+    "id": "LivingQuartersAnniversary",
+    "label": "Party Living Quarters",
+    "category": "Room"
+  },
+  {
+    "id": "CafeteriaMinutemen",
+    "label": "Minutemen Diner",
+    "category": "Room"
+  },
+  {
+    "id": "LivingQuartersMinutemen",
+    "label": "Minutemen Living Quarters",
+    "category": "Room"
+  },
+  {
+    "id": "CafeteriaBrotherOfSteel",
+    "label": "BoS Diner",
+    "category": "Room"
+  },
+  {
+    "id": "LivingQuartersBrotherOfStell",
+    "label": "BoS Living Quarters",
+    "category": "Room"
+  },
+  {
+    "id": "CafeteriaInstitute",
+    "label": "Institute Diner",
+    "category": "Room"
+  },
+  {
+    "id": "LivingQuartersInstitute",
+    "label": "Institute Living Quarters",
+    "category": "Room"
+  },
+  {
+    "id": "CafeteriaRailroad",
+    "label": "Railroad Diner",
+    "category": "Room"
+  },
+  {
+    "id": "LivingQuartersRailroad",
+    "label": "Railroad Living Quarters",
+    "category": "Room"
+  }
+]

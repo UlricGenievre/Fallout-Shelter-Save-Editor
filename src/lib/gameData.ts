@@ -1,5 +1,7 @@
-import itemsData from '@/data/items.json';
-import outfitsData from '@/data/outfit.json';
+import weaponsData from '@/data/weapons.json';
+import themesData from '@/data/themes.json';
+import outfitsData from '@/data/outfits.json';
+import junksData from '@/data/junks.json';
 
 export interface GameItem {
   id: string;
@@ -7,7 +9,9 @@ export interface GameItem {
   category: string;
   rarity?: string;
   damage?: string;
+  avgDamage?: string;
   special?: Partial<Record<'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L', number>>;
+  resellValue?: number;
 }
 
 /** Format SPECIAL bonuses as a short string like "S+3 E+2" */
@@ -21,16 +25,17 @@ export function formatSpecial(special?: GameItem['special']): string {
 
 /** Get full item data by ID */
 export function getItem(id: string): GameItem | undefined {
-  return weaponMap.get(id) ?? outfitMap.get(id) ?? themeMap.get(id);
+  return weaponMap.get(id) ?? outfitMap.get(id) ?? themeMap.get(id) ?? junkMap.get(id);
 }
 
 // Build lookup maps from static JSON
-const weaponMap = new Map<string, GameItem>(itemsData.weapons.map(w => [w.id, w]));
+const weaponMap = new Map<string, GameItem>(weaponsData.map(w => [w.id, w]));
 const outfitMap = new Map<string, GameItem>(outfitsData.map((o: any) => [o.id, o]));
-const themeMap = new Map<string, GameItem>(itemsData.themes.map(t => [t.id, t]));
+const themeMap = new Map<string, GameItem>(themesData.map(t => [t.id, t]));
+const junkMap = new Map<string, GameItem>(junksData.map(j => [j.id, { ...j, label: j.name, category: 'Junk' } as GameItem]));
 
 /** All known weapon IDs */
-export const ALL_WEAPONS: GameItem[] = itemsData.weapons;
+export const ALL_WEAPONS: GameItem[] = weaponsData;
 
 /** Weapon category display order matching the wiki */
 const WEAPON_CATEGORY_ORDER = ['Melee', 'Pistol', 'Energy Pistol', 'Rifle', 'Energy Rifle', 'Shotgun', 'Heavy'];
@@ -38,7 +43,7 @@ const WEAPON_CATEGORY_ORDER = ['Melee', 'Pistol', 'Energy Pistol', 'Rifle', 'Ene
 /** Weapons grouped by category, ordered like the wiki */
 export const WEAPONS_BY_CATEGORY: { category: string; items: GameItem[] }[] = (() => {
   const grouped = new Map<string, GameItem[]>();
-  for (const w of itemsData.weapons) {
+  for (const w of weaponsData) {
     const cat = w.category || 'Other';
     if (!grouped.has(cat)) grouped.set(cat, []);
     grouped.get(cat)!.push(w);
@@ -50,13 +55,16 @@ export const WEAPONS_BY_CATEGORY: { category: string; items: GameItem[] }[] = ((
 /** All known outfit IDs */
 export const ALL_OUTFITS: GameItem[] = outfitsData as any[];
 /** All known theme/room IDs */
-export const ALL_THEMES: GameItem[] = itemsData.themes;
+export const ALL_THEMES: GameItem[] = themesData;
+/** All known junk IDs */
+export const ALL_JUNKS: GameItem[] = junksData.map(j => ({ ...j, label: j.name, category: 'Junk' })) as any[];
 
 /** Get a human-readable label for any item ID */
 export function getItemLabel(id: string): string {
   return weaponMap.get(id)?.label
     ?? outfitMap.get(id)?.label
     ?? themeMap.get(id)?.label
+    ?? junkMap.get(id)?.label
     ?? itemIdToLabel(id);
 }
 
@@ -84,18 +92,19 @@ const THEME_ID_PATTERNS = [
  * Heuristic fallback: try to guess the category of an unknown ID by its naming pattern.
  * Returns 'weapon', 'outfit', 'theme', or 'unknown'.
  */
-export function guessItemType(id: string): 'weapon' | 'outfit' | 'theme' | 'unknown' {
+export function guessItemType(id: string): 'weapon' | 'outfit' | 'theme' | 'junk' | 'unknown' {
   if (THEME_ID_PATTERNS.some(p => p.test(id))) return 'theme';
   if (WEAPON_ID_PATTERNS.some(p => p.test(id))) return 'weapon';
   if (OUTFIT_ID_PATTERNS.some(p => p.test(id))) return 'outfit';
   return 'unknown';
 }
 
-/** Get item type: 'weapon', 'outfit', 'theme', or 'unknown' */
-export function getItemType(id: string): 'weapon' | 'outfit' | 'theme' | 'unknown' {
+/** Get item type: 'weapon', 'outfit', 'theme', 'junk' or 'unknown' */
+export function getItemType(id: string): 'weapon' | 'outfit' | 'theme' | 'junk' | 'unknown' {
   if (weaponMap.has(id)) return 'weapon';
   if (outfitMap.has(id)) return 'outfit';
   if (themeMap.has(id)) return 'theme';
+  if (junkMap.has(id)) return 'junk';
   return 'unknown';
 }
 
@@ -107,11 +116,13 @@ export function classifyRecipes(recipes: string[]): {
   weapons: string[];
   outfits: string[];
   themes: string[];
+  junks: string[];
   unknown: string[];
 } {
   const weapons: string[] = [];
   const outfits: string[] = [];
   const themes: string[] = [];
+  const junks: string[] = [];
   const unknown: string[] = [];
   const seen = new Set<string>();
 
@@ -122,11 +133,13 @@ export function classifyRecipes(recipes: string[]): {
     if (type === 'weapon') weapons.push(id);
     else if (type === 'outfit') outfits.push(id);
     else if (type === 'theme') themes.push(id);
+    else if (type === 'junk') junks.push(id);
     else {
       // Try heuristic classification
       const guessed = guessItemType(id);
       if (guessed === 'weapon') weapons.push(id);
       else if (guessed === 'outfit') outfits.push(id);
+      else if (guessed === 'junk') junks.push(id);
       else unknown.push(id);
     }
   }
@@ -135,6 +148,7 @@ export function classifyRecipes(recipes: string[]): {
     weapons: weapons.sort(),
     outfits: outfits.sort(),
     themes: themes.sort(),
+    junks: junks.sort(),
     unknown: unknown.sort(),
   };
 }

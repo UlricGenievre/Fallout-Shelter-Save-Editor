@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Home, LayoutGrid, Users } from 'lucide-react';
+import { Box, Home, LayoutGrid, Users } from 'lucide-react';
 import { RoomViewer } from './RoomViewer';
 import { VaultDwellers } from './VaultDwellers';
+import { VaultInventory } from './VaultInventory';
 
-type Tab = 'layout' | 'dwellers';
+type Tab = 'layout' | 'dwellers' | 'inventory';
 
 const TABS: { id: Tab; label: string; icon: typeof Home }[] = [
   { id: 'layout', label: 'LAYOUT', icon: LayoutGrid },
   { id: 'dwellers', label: 'DWELLERS', icon: Users },
+  { id: 'inventory', label: 'INVENTORY', icon: Box as any },
 ];
 
 interface VaultEditorProps {
@@ -18,6 +20,7 @@ export function VaultEditor({ data }: VaultEditorProps) {
   const [activeTab, setActiveTab] = useState<Tab>('layout');
   const rooms = data?.vault?.rooms || [];
   const dwellers = data?.dwellers?.dwellers || [];
+  const inventory = data?.vault?.inventory?.items || [];
 
   if (!data || rooms.length === 0) {
     return (
@@ -55,7 +58,10 @@ export function VaultEditor({ data }: VaultEditorProps) {
           <RoomViewer rooms={rooms} dwellers={dwellers} />
         )}
         {activeTab === 'dwellers' && (
-          <VaultDwellers dwellers={dwellers} />
+          <VaultDwellers dwellers={dwellers} rooms={rooms} />
+        )}
+        {activeTab === 'inventory' && (
+          <VaultInventory items={inventory} />
         )}
       </div>
     </div>

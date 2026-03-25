@@ -2,9 +2,11 @@ import { getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
 
 interface DwellerCardProps {
   dweller: any;
+  roomName?: string;
+  roomSpecial?: string;
 }
 
-export function DwellerCard({ dweller }: DwellerCardProps) {
+export function DwellerCard({ dweller, roomName, roomSpecial }: DwellerCardProps) {
   const level = dweller.experience?.currentLevel || 1;
   const maxHp = dweller.health?.maxHealth || 0;
   const outfit = dweller.equipedOutfit?.id || '';
@@ -15,10 +17,18 @@ export function DwellerCard({ dweller }: DwellerCardProps) {
   const weaponItem = getItem(weapon);
   const outfitBonus = outfitItem ? formatSpecial(outfitItem.special) : '';
   const weaponDamage = weaponItem?.damage || '';
+  const avgDamage = weaponItem?.avgDamage || '';
+
+  const specialLetters = ['S', 'P', 'E', 'C', 'I', 'A', 'L'];
+  const statIndex = roomSpecial ? specialLetters.indexOf(roomSpecial) + 1 : -1;
+  const baseStat = statIndex > 0 ? (specialStats[statIndex]?.value || 0) : 0;
+  const bonusStat = (roomSpecial && outfitItem?.special)
+    ? (outfitItem.special[roomSpecial as keyof typeof outfitItem.special] || 0)
+    : 0;
 
   return (
-    <div className="border border-border rounded-lg p-4 bg-card/50">
-      <div className="grid grid-cols-[1fr_1fr_2fr] gap-4 items-center">
+    <div className="border border-border/60 rounded-lg p-4 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5">
+      <div className="grid grid-cols-[1.5fr_1.5fr_2fr_1fr] gap-4 items-center">
         <div className="flex-shrink-0">
           <h4 className="font-semibold text-sm">{dweller.name} {dweller.lastName}</h4>
           <p className="text-xs font-display">Level {level}</p>
@@ -47,21 +57,31 @@ export function DwellerCard({ dweller }: DwellerCardProps) {
           </div>
         </div>
 
-        <div className="flex-shrink-0 space-y-2">
-          <div className="flex justify-between items-center gap-2">
-            <p className="text-xs font-semibold truncate" title={getItemLabel(outfit)}>
-              <span className="text-xs text-muted-foreground font-display">OUTFIT : </span>
-              {getItemLabel(outfit) || 'None'}
-            </p>
-            {outfitBonus && <p className="text-[10px] text-primary font-display mt-0.5">{outfitBonus}</p>}
+        <div className="flex-shrink-0 grid grid-cols-[2fr_1fr] gap-x-2 gap-y-2 items-center">
+          <p className="text-xs font-semibold truncate text-left" title={getItemLabel(outfit)}>
+            <span className="text-xs text-muted-foreground font-display">OUTFIT : </span>
+            {getItemLabel(outfit) || 'None'}
+          </p>
+          <div className="text-left">
+            {outfitBonus && <p className="text-xs text-primary font-display">{outfitBonus}</p>}
           </div>
-          <div className="flex justify-between items-center gap-2">
-            <p className="text-xs font-semibold truncate" title={getItemLabel(weapon)}>
-              <span className="text-xs text-muted-foreground font-display">WEAPON : </span>
-              {getItemLabel(weapon) || 'None'}
-            </p>
-            {weaponDamage && <p className="text-[10px] text-primary font-display mt-0.5">DMG: {weaponDamage}</p>}
+
+          <p className="text-xs font-semibold truncate text-left" title={getItemLabel(weapon)}>
+            <span className="text-xs text-muted-foreground font-display">WEAPON : </span>
+            {getItemLabel(weapon) || 'None'}
+          </p>
+          <div className="text-left">
+            {weaponDamage && <p className="text-xs text-primary font-display">{avgDamage} ({weaponDamage})</p>}
           </div>
+        </div>
+
+        <div className="flex-shrink-0 flex flex-col justify-center items-center h-full border-l border-border/30 pl-4 w-[140px]">
+          <span className="text-xs text-muted-foreground font-display tracking-widest mb-1">
+            ROOM {roomSpecial ? `: ${roomSpecial} (${baseStat}+${bonusStat})` : ''}
+          </span>
+          <span className="text-xs font-semibold text-center leading-tight text-primary pip-text-glow">
+            {roomName || 'Wandering'}
+          </span>
         </div>
       </div>
     </div>

@@ -1,0 +1,23 @@
+[
+  { "id": "AlarmClock", "name": "Alarm clock", "rarity": "Common", "resellValue": 2 },
+  { "id": "BaseballGlove", "name": "Baseball glove", "rarity": "Common", "resellValue": 2 },
+  { "id": "DuctTape", "name": "Duct tape", "rarity": "Common", "resellValue": 2 },
+  { "id": "Yarn", "name": "Yarn", "rarity": "Common", "resellValue": 2 },
+  { "id": "MagnifyingGlass", "name": "Magnifying glass", "rarity": "Common", "resellValue": 2 },
+  { "id": "DeskFan", "name": "Desk fan", "rarity": "Common", "resellValue": 2 },
+  { "id": "ToyCar", "name": "Toy car", "rarity": "Common", "resellValue": 2 },
+  { "id": "Camera", "name": "Camera", "rarity": "Rare", "resellValue": 50 },
+  { "id": "BrahminHide", "name": "Brahmin hide", "rarity": "Rare", "resellValue": 50 },
+  { "id": "Wonderglue", "name": "Wonderglue", "rarity": "Rare", "resellValue": 50 },
+  { "id": "TeddyBear", "name": "Teddy bear", "rarity": "Rare", "resellValue": 50 },
+  { "id": "Microscope", "name": "Microscope", "rarity": "Rare", "resellValue": 50 },
+  { "id": "Shovel", "name": "Shovel", "rarity": "Rare", "resellValue": 50 },
+  { "id": "Globe", "name": "Globe", "rarity": "Rare", "resellValue": 50 },
+  { "id": "MilitaryCircuitBoard", "name": "Military circuit board", "rarity": "Legendary", "resellValue": 200 },
+  { "id": "YaoGuaiHide", "name": "Yao guai hide", "rarity": "Legendary", "resellValue": 200 },
+  { "id": "MilitaryDuctTape", "name": "Military duct tape", "rarity": "Legendary", "resellValue": 200 },
+  { "id": "TriFoldFlag", "name": "Tri-fold flag", "rarity": "Legendary", "resellValue": 200 },
+  { "id": "ChemistrySet", "name": "Chemistry flask", "rarity": "Legendary", "resellValue": 200 },
+  { "id": "GiddyupButtercup", "name": "Giddyup Buttercup", "rarity": "Legendary", "resellValue": 200 },
+  { "id": "GoldWatch", "name": "Gold watch", "rarity": "Legendary", "resellValue": 200 }
+]
