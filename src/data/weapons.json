@@ -180,7 +180,7 @@
     "resellValue": 500
   },
   {
-    "id": "EdSCustomPowerFist",
+    "id": "PowerFistEd",
     "label": "Ed\u0027s custom power fist",
     "category": "Melee",
     "rarity": "Legendary",
@@ -252,7 +252,7 @@
     "resellValue": 100
   },
   {
-    "id": "\"032Pistol_ArmorPiercing\"",
+    "id": "032Pistol_ArmorPiercing",
     "label": "Armor piercing .32 pistol",
     "category": "Pistol",
     "rarity": "Rare",
@@ -468,7 +468,7 @@
     "resellValue": 500
   },
   {
-    "id": "TranqGun_Rusty",
+    "id": "TranqPistol_Rusty",
     "label": "Rusty tranq gun",
     "category": "Pistol",
     "rarity": "Rare",
@@ -477,7 +477,7 @@
     "resellValue": 100
   },
   {
-    "id": "TranqGun",
+    "id": "TranqPistol",
     "label": "Tranq gun",
     "category": "Pistol",
     "rarity": "Rare",
@@ -486,7 +486,7 @@
     "resellValue": 100
   },
   {
-    "id": "TranqGun_Enhanced",
+    "id": "TranqPistol_Enhanced",
     "label": "Enhanced tranq gun",
     "category": "Pistol",
     "rarity": "Rare",
@@ -495,7 +495,7 @@
     "resellValue": 100
   },
   {
-    "id": "TranqGun_Hardened",
+    "id": "TranqPistol_Hardened",
     "label": "Hardened tranq gun",
     "category": "Pistol",
     "rarity": "Rare",

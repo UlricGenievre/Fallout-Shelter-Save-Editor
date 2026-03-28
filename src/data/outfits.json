@@ -1686,6 +1686,22 @@
     }
   },
   {
+    "id": "OverseerClaffsJumpsuit",
+    "label": "Pioneer overseer suit",
+    "resellValue": 500,
+    "category": "Legendary",
+    "rarity": "Legendary",
+    "totalStats": 14,
+    "gender": "",
+    "craftable": true,
+    "special": {
+      "P": 2,
+      "E": 3,
+      "C": 4,
+      "I": 5
+    }
+  },
+  {
     "id": "MojaveWastelandSurvivor",
     "label": "Mojave wasteland survivor [id unknown]",
     "resellValue": 500,
