@@ -83,7 +83,7 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
             <span>•</span>
             <span className="flex items-center gap-1">
               <Coins className="w-3 h-3 text-primary" />
-              {capsCount} Caps
+              {Math.round(capsCount).toLocaleString()} Caps
             </span>
           </div>
         </div>
