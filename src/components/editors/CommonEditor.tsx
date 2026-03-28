@@ -43,7 +43,7 @@ export function CommonEditor({ data, setData }: CommonEditorProps) {
 
   return (
     <>
-      <nav className="flex border-b border-border bg-card/30">
+      <nav className="flex justify-center border-b border-border bg-card/30">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button
             key={id}

@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react';
 import { classifyRecipes, getItem, getItemLabel, formatSpecial } from '@/lib/gameData';
-import { Sword, Shirt, Trash2, HelpCircle } from 'lucide-react';
+import { Sword, Shirt, Trash2, HelpCircle, Coins } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface VaultInventoryProps {
   items: any[];
+  onSellItem?: (itemId: string, amount: number, resellValue: number) => void;
 }
 
 type InvTab = 'weapons' | 'outfits' | 'junks' | 'misc';
@@ -15,7 +17,7 @@ const INV_TABS = [
   { id: 'misc', label: 'MISC', icon: HelpCircle },
 ] as const;
 
-export function VaultInventory({ items }: VaultInventoryProps) {
+export function VaultInventory({ items, onSellItem }: VaultInventoryProps) {
   const [activeTab, setActiveTab] = useState<InvTab>('weapons');
 
   const { counts, categories } = useMemo(() => {
@@ -67,10 +69,10 @@ export function VaultInventory({ items }: VaultInventoryProps) {
           
           return (
             <div key={id} className="border border-border/60 rounded-lg p-3 sm:p-4 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5">
-              <div className="grid grid-cols-1 sm:grid-cols-[auto_3fr_1.5fr_1fr] gap-4 items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-[auto_3fr_1.5fr_1fr_auto] gap-4 items-center">
                 <div className="flex-shrink-0 flex items-center justify-start sm:justify-center sm:border-r border-border/30 pb-2 sm:pb-0 sm:pr-4">
                   <div className="bg-primary/20 text-primary font-display font-bold px-3 py-1.5 rounded text-sm min-w-[50px] text-center border border-primary/30">
-                    x{count}
+                    x{count || 0}
                   </div>
                 </div>
 
@@ -92,7 +94,21 @@ export function VaultInventory({ items }: VaultInventoryProps) {
                 </div>
                 
                 <div className="flex flex-col justify-center text-left">
-                  {resell !== undefined && <span className="text-sm text-yellow-500 font-display">CAPS: {resell}</span>}
+                  {resell !== undefined && (
+                    <span className="flex items-center text-sm text-yellow-500 font-display">
+                      <Coins className="w-4 h-4 mr-1.5" />
+                      {resell}
+                    </span>
+                  )}
+                </div>
+                
+                <div className="flex justify-end gap-2">
+                  {resell !== undefined && onSellItem && (
+                    <>
+                      <Button variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onSellItem(id, 1, resell)}>Sell 1</Button>
+                      <Button variant="outline" size="sm" className="h-8 px-2 text-xs" disabled={(count || 0) < 10} onClick={() => onSellItem(id, 10, resell)}>Sell 10</Button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -110,10 +126,10 @@ export function VaultInventory({ items }: VaultInventoryProps) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="px-6 pt-6 pb-0 shrink-0">
-        <h2 className="font-display text-2xl pip-text-glow tracking-widest mb-4">VAULT INVENTORY</h2>
+      <div className="px-6 pt-6 pb-0 shrink-0 flex flex-col items-center">
+        <h2 className="font-display text-2xl pip-text-glow tracking-widest mb-4 text-center">VAULT INVENTORY</h2>
         
-        <div className="flex space-x-1 sm:space-x-2 border-b border-border/50 overflow-x-auto pb-[1px]">
+        <div className="flex justify-center space-x-1 sm:space-x-2 border-b border-border/50 overflow-x-auto pb-[1px] w-full max-w-5xl">
           {INV_TABS.map(({ id, label, icon: Icon }) => {
             let tabCount = 0;
             if (id === 'weapons') tabCount = categories.weapons.length;

@@ -145,7 +145,7 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
       
       <main className="flex-1 overflow-y-auto">
         {isVaultMode ? (
-          <VaultEditor data={data} />
+          <VaultEditor data={data} setData={setData} />
         ) : (
           <CommonEditor data={data} setData={setData} />
         )}

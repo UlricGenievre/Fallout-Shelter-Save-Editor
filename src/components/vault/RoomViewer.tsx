@@ -106,13 +106,14 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
 
   return (
     <div className="w-full h-full p-6 overflow-auto">
-      <div className="mb-6">
+      <div className="mb-6 text-center">
         <h2 className="font-display text-2xl pip-text-glow tracking-widest mb-2">VAULT LAYOUT ({rooms.length} rooms)
         </h2>
       </div>
 
       <div className="border border-border rounded-lg bg-card/30 p-4 overflow-x-auto">
-        <table className="border-collapse gap-0">
+        <div className="mx-auto w-max flex flex-col">
+          <table className="border-collapse gap-0">
           <tbody>
             {Array.from({ length: maxRow + 2 }).map((_, rowIndex) => (
               <tr key={`row-${rowIndex}`}>
@@ -195,12 +196,13 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
             </div>
           ))}
         </div>
+        </div>
       </div>
 
       {/* Legend */}
-      <div className="mt-6">
-        <h3 className="font-display text-sm pip-text-glow mb-3">ROOM CLASSES & SPECIAL</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+      <div className="mt-8 flex flex-col items-center">
+        <h3 className="font-display text-sm pip-text-glow mb-3 text-center">ROOM CLASSES & SPECIAL</h3>
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 max-w-4xl">
           {/* Special room type */}
           <div className="flex items-center gap-2 text-sm">
             <div className="w-4 h-4 rounded bg-amber-700" />

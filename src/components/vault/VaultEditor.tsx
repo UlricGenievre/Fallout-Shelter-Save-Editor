@@ -14,9 +14,10 @@ const TABS: { id: Tab; label: string; icon: typeof Home }[] = [
 
 interface VaultEditorProps {
   data?: any;
+  setData?: (data: any) => void;
 }
 
-export function VaultEditor({ data }: VaultEditorProps) {
+export function VaultEditor({ data, setData }: VaultEditorProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const tabParam = searchParams.get('tab') as Tab;
   const activeTab = TABS.some(t => t.id === tabParam) ? tabParam : 'layout';
@@ -26,6 +27,34 @@ export function VaultEditor({ data }: VaultEditorProps) {
       prev.set('tab', id);
       return prev;
     });
+  };
+
+  const handleSellItem = (itemId: string, amount: number, resellValue: number) => {
+    if (!setData || !data) return;
+    const newData = JSON.parse(JSON.stringify(data));
+    
+    // Add caps
+    const capsGain = amount * resellValue;
+    if (newData.vault?.storage?.resources) {
+      if (typeof newData.vault.storage.resources.Nuka !== 'number') {
+        newData.vault.storage.resources.Nuka = 0;
+      }
+      newData.vault.storage.resources.Nuka += capsGain;
+    }
+    
+    // Remove items
+    if (newData.vault?.inventory?.items) {
+      const items = newData.vault.inventory.items;
+      let removed = 0;
+      for (let i = items.length - 1; i >= 0 && removed < amount; i--) {
+        const id = typeof items[i] === 'string' ? items[i] : items[i].id;
+        if (id === itemId) {
+          items.splice(i, 1);
+          removed++;
+        }
+      }
+    }
+    setData(newData);
   };
 
   const rooms = data?.vault?.rooms || [];
@@ -46,7 +75,7 @@ export function VaultEditor({ data }: VaultEditorProps) {
 
   return (
     <div className="flex flex-col h-full">
-      <nav className="flex border-b border-border bg-card/30 shrink-0">
+      <nav className="flex justify-center border-b border-border bg-card/30 shrink-0">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
@@ -71,7 +100,7 @@ export function VaultEditor({ data }: VaultEditorProps) {
           <VaultDwellers dwellers={dwellers} rooms={rooms} />
         )}
         {activeTab === 'inventory' && (
-          <VaultInventory items={inventory} />
+          <VaultInventory items={inventory} onSellItem={handleSellItem} />
         )}
       </div>
     </div>
