@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Download, ArrowLeft, FileJson, FileType, Home, Coins } from 'lucide-react';
+import { Download, ArrowLeft, FileJson, FileType, Terminal, Eye, Coins } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Tooltip,
@@ -88,29 +88,27 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
           </div>
         </div>
 
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                size="sm"
-                variant="outline"
-                className={isVaultMode ? "bg-primary text-primary-foreground" : ""}
-                onClick={() => setSearchParams(prev => {
-                  prev.set('mode', isVaultMode ? 'editor' : 'vault');
-                  prev.delete('tab');
-                  return prev;
-                })}
-                aria-label="Toggle Vault mode"
-              >
-                <Home className="w-3.5 h-3.5" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{isVaultMode ? "Back to Editor" : "Vault Mode"}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        
+        <Button
+          size="sm"
+          variant={isVaultMode ? "outline" : "default"}
+          className="gap-2 font-display tracking-wider"
+          onClick={() => setSearchParams(prev => {
+            prev.set('mode', isVaultMode ? 'editor' : 'vault');
+            prev.delete('tab');
+            return prev;
+          })}
+        >
+          {isVaultMode ? (
+            <>
+              <Terminal className="w-4 h-4" />
+            </>
+          ) : (
+            <>
+              <Eye className="w-4 h-4" />
+            </>
+          )}
+        </Button>
+
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button size="sm" disabled={saving} aria-label="Download save file">
@@ -122,16 +120,16 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
               <DialogTitle className="font-display tracking-wider pip-text-glow">EXPORT FORMAT</DialogTitle>
             </DialogHeader>
             <div className="grid grid-cols-2 gap-4 py-4">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="flex flex-col items-center gap-2 h-24"
                 onClick={downloadJson}
               >
                 <FileJson className="w-8 h-8 text-primary" />
                 <span>JSON</span>
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="flex flex-col items-center gap-2 h-24"
                 onClick={downloadEncrypted}
               >
@@ -142,7 +140,7 @@ export function SaveEditor({ initialData, fileName, onBack }: SaveEditorProps) {
           </DialogContent>
         </Dialog>
       </header>
-      
+
       <main className="flex-1 overflow-y-auto">
         {isVaultMode ? (
           <VaultEditor data={data} setData={setData} />
