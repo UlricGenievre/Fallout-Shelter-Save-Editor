@@ -30,8 +30,6 @@ const Index = () => {
   const handleBack = useCallback(() => {
     setSaveData(null);
     setFileName('');
-    localStorage.removeItem('vault-tec-last-save');
-    localStorage.removeItem('vault-tec-last-name');
     setSearchParams({}, { replace: true });
   }, [setSearchParams]);
 

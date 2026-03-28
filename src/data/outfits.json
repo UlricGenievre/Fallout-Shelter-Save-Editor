@@ -2122,8 +2122,8 @@
     }
   },
   {
-    "id": "TheGhoulsCoat",
-    "label": "The Ghoul's coat [id unknown]",
+    "id": "RottedDuster",
+    "label": "The Ghoul's coat",
     "resellValue": 500,
     "category": "Legendary",
     "rarity": "Legendary",

@@ -49,18 +49,30 @@ export function FileUpload({ onDataLoaded }: FileUploadProps) {
     }
   }, [onDataLoaded]);
 
-  const loadLastSave = useCallback(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      const name = localStorage.getItem(STORAGE_NAME_KEY);
-      if (raw && name) {
-        const json = JSON.parse(raw);
-        onDataLoaded(json, name);
+  const loadLastSave = useCallback((e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setLoading(true);
+    setError(null);
+
+    // Defer the synchronous read/parse to allow the UI to show the loading state
+    setTimeout(() => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const name = localStorage.getItem(STORAGE_NAME_KEY);
+        if (raw && name) {
+          const json = JSON.parse(raw);
+          onDataLoaded(json, name);
+        } else {
+          setLoading(false);
+          setError("Impossible de récupérer la sauvegarde depuis le cache du navigateur.");
+        }
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+        setError('Échec de la lecture de la sauvegarde locale (données corrompues).');
       }
-    } catch (e) {
-      console.error(e);
-      setError('Failed to load last save from storage.');
-    }
+    }, 50);
   }, [onDataLoaded]);
 
   const clearLastSave = useCallback(() => {
