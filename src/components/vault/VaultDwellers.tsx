@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { DwellerCard } from '../shared/DwellerCard';
+import { WeaponPickerDialog } from '../shared/WeaponPickerDialog';
 import { ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { getItem } from '@/lib/gameData';
 import roomsData from '@/data/rooms.json';
@@ -7,6 +8,8 @@ import roomsData from '@/data/rooms.json';
 interface VaultDwellersProps {
   dwellers: any[];
   rooms: any[];
+  inventory: any[];
+  onEquipWeapon?: (targetDwellerId: number, newWeaponId: string, sourceDwellerId?: number) => void;
 }
 
 type SortField = 'name' | 'level' | 'hp' | 'room' | 'damage' | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L';
@@ -14,11 +17,12 @@ type SortDirection = 'asc' | 'desc';
 
 const SPECIAL_KEYS = ['S', 'P', 'E', 'C', 'I', 'A', 'L'] as const;
 
-export function VaultDwellers({ dwellers, rooms }: VaultDwellersProps) {
+export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: VaultDwellersProps) {
   const [sortConfig, setSortConfig] = useState<{ field: SortField; direction: SortDirection }>({
     field: 'name',
     direction: 'asc',
   });
+  const [weaponPickerDwellerId, setWeaponPickerDwellerId] = useState<number | null>(null);
 
   const handleSort = (field: SortField) => {
     setSortConfig(prev => ({
@@ -197,10 +201,30 @@ export function VaultDwellers({ dwellers, rooms }: VaultDwellersProps) {
               dweller={dweller}
               roomName={rInfo?.name}
               roomSpecial={rInfo?.special}
+              onEditWeapon={() => setWeaponPickerDwellerId(dweller.serializeId)}
             />
           );
         })}
       </div>
+
+      {/* Weapon picker modal */}
+      {weaponPickerDwellerId !== null && (() => {
+        const pickerDweller = dwellers.find(d => d.serializeId === weaponPickerDwellerId);
+        if (!pickerDweller) return null;
+        return (
+          <WeaponPickerDialog
+            open
+            onClose={() => setWeaponPickerDwellerId(null)}
+            dweller={pickerDweller}
+            allDwellers={dwellers}
+            inventory={inventory}
+            dwellerRooms={dwellerRooms}
+            onEquip={(newWeaponId, sourceDwellerId) =>
+              onEquipWeapon?.(weaponPickerDwellerId, newWeaponId, sourceDwellerId)
+            }
+          />
+        );
+      })()}
     </div>
   );
 }

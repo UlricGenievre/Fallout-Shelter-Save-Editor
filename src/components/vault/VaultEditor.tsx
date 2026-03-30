@@ -57,6 +57,49 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
     setData(newData);
   };
 
+  const handleEquipWeapon = (
+    targetDwellerId: number,
+    newWeaponId: string,
+    sourceDwellerId?: number,
+  ) => {
+    if (!setData || !data) return;
+    const newData = JSON.parse(JSON.stringify(data));
+    const allDwellers: any[] = newData.dwellers?.dwellers || [];
+
+    const target = allDwellers.find((d: any) => d.serializeId === targetDwellerId);
+    if (!target) return;
+
+    const previousWeaponId: string = target.equipedWeapon?.id || '';
+
+    if (sourceDwellerId !== undefined) {
+      // --- SWAP: weapon comes from another dweller ---
+      const source = allDwellers.find((d: any) => d.serializeId === sourceDwellerId);
+      if (source) {
+        if (!source.equipedWeapon) source.equipedWeapon = {};
+        source.equipedWeapon.id = previousWeaponId; // source gets target's old weapon
+      }
+    } else {
+      // --- FROM INVENTORY OR UNEQUIP ---
+      const items: any[] = newData.vault?.inventory?.items || [];
+      if (newWeaponId) {
+        // Remove one occurrence of the chosen weapon from inventory
+        const idx = items.findIndex(
+          (item: any) => (typeof item === 'string' ? item : item?.id) === newWeaponId,
+        );
+        if (idx !== -1) items.splice(idx, 1);
+      }
+      // Return previous weapon to inventory
+      if (previousWeaponId) {
+        items.push(previousWeaponId);
+      }
+    }
+
+    if (!target.equipedWeapon) target.equipedWeapon = {};
+    target.equipedWeapon.id = newWeaponId;
+
+    setData(newData);
+  };
+
   const rooms = data?.vault?.rooms || [];
   const dwellers = data?.dwellers?.dwellers || [];
   const inventory = data?.vault?.inventory?.items || [];
@@ -97,7 +140,12 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
           <RoomViewer rooms={rooms} dwellers={dwellers} />
         )}
         {activeTab === 'dwellers' && (
-          <VaultDwellers dwellers={dwellers} rooms={rooms} />
+        <VaultDwellers
+            dwellers={dwellers}
+            rooms={rooms}
+            inventory={inventory}
+            onEquipWeapon={handleEquipWeapon}
+          />
         )}
         {activeTab === 'inventory' && (
           <VaultInventory items={inventory} onSellItem={handleSellItem} />

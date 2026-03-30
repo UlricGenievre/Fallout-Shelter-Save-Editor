@@ -1,12 +1,14 @@
 import { getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
+import { Pencil } from 'lucide-react';
 
 interface DwellerCardProps {
   dweller: any;
   roomName?: string;
   roomSpecial?: string;
+  onEditWeapon?: () => void;
 }
 
-export function DwellerCard({ dweller, roomName, roomSpecial }: DwellerCardProps) {
+export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon }: DwellerCardProps) {
   const level = dweller.experience?.currentLevel || 1;
   const maxHp = dweller.health?.maxHealth || 0;
   const outfit = dweller.equipedOutfit?.id || '';
@@ -66,10 +68,21 @@ export function DwellerCard({ dweller, roomName, roomSpecial }: DwellerCardProps
             {outfitBonus && <p className="text-xs text-primary font-display">{outfitBonus}</p>}
           </div>
 
-          <p className="text-xs font-semibold truncate text-left" title={getItemLabel(weapon)}>
-            <span className="text-xs text-muted-foreground font-display">WEAPON : </span>
-            {getItemLabel(weapon) || 'None'}
-          </p>
+          <div className="flex items-center gap-1 min-w-0">
+            <p className="text-xs font-semibold truncate text-left" title={getItemLabel(weapon)}>
+              <span className="text-xs text-muted-foreground font-display">WEAPON : </span>
+              {getItemLabel(weapon) || 'None'}
+            </p>
+            {onEditWeapon && (
+              <button
+                onClick={onEditWeapon}
+                className="shrink-0 text-muted-foreground/40 hover:text-primary transition-colors"
+                title="Change weapon"
+              >
+                <Pencil className="w-3 h-3" />
+              </button>
+            )}
+          </div>
           <div className="text-left">
             {weaponDamage && <p className="text-xs text-primary font-display">{avgDamage} ({weaponDamage})</p>}
           </div>
