@@ -89,17 +89,17 @@ export function InventoryWeapons({ ids, counts, onSellItem }: InventoryWeaponsPr
     <div className="flex flex-col">
       <div className="hidden sm:grid grid-cols-[80px_3fr_1.5fr_1fr_140px] gap-4 px-4 pb-3 mb-2 border-b border-border/40">
         <div className="flex justify-center border-r border-transparent pr-4">
-          <SortButton field="quantity" label="Qté" align="center" />
+          <SortButton field="quantity" label="Qty" align="center" />
         </div>
         <div className="flex gap-6">
-          <SortButton field="name" label="Nom" />
-          <SortButton field="rarity" label="Rareté" />
+          <SortButton field="name" label="Name" />
+          <SortButton field="rarity" label="Rarity" />
         </div>
         <div className="flex items-center">
-          <SortButton field="damage" label="Dégâts" align="left" />
+          <SortButton field="damage" label="Damage" align="left" />
         </div>
         <div className="flex items-center">
-          <SortButton field="value" label="Valeur" align="left" />
+          <SortButton field="value" label="Value" align="left" />
         </div>
         <div className="flex justify-end items-center text-[11px] font-display uppercase tracking-wider text-muted-foreground/70 mr-1">
           Actions

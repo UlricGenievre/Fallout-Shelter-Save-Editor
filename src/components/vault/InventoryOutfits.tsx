@@ -50,7 +50,7 @@ export function InventoryOutfits({ ids, counts, onSellItem }: InventoryOutfitsPr
       <button
         onClick={() => handleSort(field)}
         className="flex items-center justify-center w-full text-xs font-display font-medium text-muted-foreground hover:text-foreground transition-colors"
-        title={`Trier par ${field}`}
+        title={`Sort by ${field}`}
       >
         <span className={`flex justify-center items-center w-6 h-6 rounded-md cursor-pointer ${isActive ? 'text-primary bg-primary/10 border border-primary/30' : 'hover:bg-muted/30'}`}>
           {field}
@@ -108,11 +108,11 @@ export function InventoryOutfits({ ids, counts, onSellItem }: InventoryOutfitsPr
     <div className="flex flex-col">
       <div className="hidden sm:grid grid-cols-[80px_minmax(100px,2fr)_repeat(7,20px)_minmax(60px,1fr)_140px] gap-2 md:gap-3 px-2 md:px-4 pb-3 mb-2 border-b border-border/40">
         <div className="flex justify-center border-r border-transparent pr-2 md:pr-4">
-          <SortButton field="quantity" label="Qté" align="center" />
+          <SortButton field="quantity" label="Qty" align="center" />
         </div>
         <div className="flex flex-wrap gap-2 md:gap-4 shrink-0 overflow-hidden">
-          <SortButton field="name" label="Nom" />
-          <SortButton field="rarity" label="Rareté" />
+          <SortButton field="name" label="Name" />
+          <SortButton field="rarity" label="Rarity" />
         </div>
 
         {SPECIAL_KEYS.map(key => (
@@ -120,7 +120,7 @@ export function InventoryOutfits({ ids, counts, onSellItem }: InventoryOutfitsPr
         ))}
 
         <div className="flex items-center pl-2 md:pl-4">
-          <SortButton field="value" label="Valeur" align="left" />
+          <SortButton field="value" label="Value" align="left" />
         </div>
         <div className="flex justify-end items-center text-[10px] md:text-[11px] font-display uppercase tracking-wider text-muted-foreground/70 mr-1">
           Actions
