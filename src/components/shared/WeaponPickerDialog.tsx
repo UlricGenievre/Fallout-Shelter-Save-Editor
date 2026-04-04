@@ -112,7 +112,7 @@ export function WeaponPickerDialog({
                 {getItemLabel(currentWeaponId) || 'None'}
               </p>
               {currentWeaponItem?.damage && (
-                <p className="text-xs text-muted-foreground font-display">
+                <p className="text-xs font-display text-primary">
                   {currentWeaponItem.avgDamage} ({currentWeaponItem.damage})
                 </p>
               )}

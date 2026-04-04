@@ -76,7 +76,7 @@ export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon }: Dw
             {onEditWeapon && (
               <button
                 onClick={onEditWeapon}
-                className="shrink-0 text-muted-foreground/40 hover:text-primary transition-colors"
+                className="shrink-0 text-yellow-100 hover:text-amber-400 transition-colors"
                 title="Change weapon"
               >
                 <Pencil className="w-3 h-3" />
