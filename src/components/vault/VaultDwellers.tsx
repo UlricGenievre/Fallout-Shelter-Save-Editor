@@ -202,7 +202,7 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
 
       {/* Barre de tri — alignée sur DwellerCard [1.5fr_1.5fr_2.2fr_1fr] */}
       <div className="max-w-5xl mx-auto mb-3">
-        <div className="hidden sm:grid grid-cols-[1.5fr_1.5fr_2.2fr_1fr] gap-4 px-4 pb-3 border-b border-border/40 items-center">
+        <div className="hidden sm:grid grid-cols-[1.5fr_1.5fr_2.2fr_1fr] gap-4 px-4 py-3 -mt-3 border-b border-border/40 items-center sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           {/* Col 1 : Nom, Lvl, HP */}
           <div className="grid grid-cols-3 gap-2">
             <SortButton field="name" label="Name" />

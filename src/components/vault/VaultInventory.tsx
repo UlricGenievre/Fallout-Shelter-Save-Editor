@@ -90,7 +90,7 @@ export function VaultInventory({ items, onSellItem, dwellers, rooms, onEquipWeap
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto p-6">
+      <div className="flex-1 overflow-auto p-6 pt-0">
         <div className="max-w-5xl mx-auto pb-10">
           {activeTab === 'weapons' && <InventoryWeapons ids={currentIds} counts={counts} onSellItem={onSellItem} dwellers={dwellers} rooms={rooms} onEquipWeapon={onEquipWeapon} />}
           {activeTab === 'outfits' && <InventoryOutfits ids={currentIds} counts={counts} onSellItem={onSellItem} dwellers={dwellers} rooms={rooms} onEquipOutfit={onEquipOutfit} />}

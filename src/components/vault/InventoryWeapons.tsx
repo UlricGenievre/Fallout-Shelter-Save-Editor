@@ -92,7 +92,7 @@ export function InventoryWeapons({ ids, counts, onSellItem, dwellers, rooms, onE
 
   return (
     <div className="flex flex-col">
-      <div className="hidden sm:grid grid-cols-[80px_3fr_1.5fr_1fr_200px] gap-4 px-4 pb-3 mb-2 border-b border-border/40">
+      <div className="hidden sm:grid grid-cols-[80px_3fr_1.5fr_1fr_200px] gap-4 px-4 py-3 -mt-3 mb-2 border-b border-border/40 sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="flex justify-center border-r border-transparent pr-4">
           <SortButton field="quantity" label="Qty" align="center" />
         </div>

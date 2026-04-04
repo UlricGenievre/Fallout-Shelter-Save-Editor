@@ -111,7 +111,7 @@ export function InventoryOutfits({ ids, counts, onSellItem, dwellers, rooms, onE
 
   return (
     <div className="flex flex-col">
-      <div className="hidden sm:grid grid-cols-[80px_minmax(100px,2fr)_repeat(7,20px)_minmax(60px,1fr)_200px] gap-2 md:gap-3 px-2 md:px-4 pb-3 mb-2 border-b border-border/40">
+      <div className="hidden sm:grid grid-cols-[80px_minmax(100px,2fr)_repeat(7,20px)_minmax(60px,1fr)_200px] gap-2 md:gap-3 px-2 md:px-4 py-3 -mt-3 mb-2 border-b border-border/40 sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="flex justify-center border-r border-transparent pr-2 md:pr-4">
           <SortButton field="quantity" label="Qty" align="center" />
         </div>
