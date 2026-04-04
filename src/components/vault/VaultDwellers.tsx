@@ -12,7 +12,9 @@ interface VaultDwellersProps {
   onEquipWeapon?: (targetDwellerId: number, newWeaponId: string, sourceDwellerId?: number) => void;
 }
 
-type SortField = 'name' | 'level' | 'hp' | 'room' | 'damage' | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L';
+type SortField = 'name' | 'level' | 'hp' | 'room' | 'roomS' | 'roomP' | 'roomE' | 'roomC' | 'roomI' | 'roomA' | 'roomL' | 'damage' | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L';
+const ROOM_SORT_KEYS = ['roomS', 'roomP', 'roomE', 'roomC', 'roomI', 'roomA', 'roomL'] as const;
+type RoomSortKey = (typeof ROOM_SORT_KEYS)[number];
 type SortDirection = 'asc' | 'desc';
 
 const SPECIAL_KEYS = ['S', 'P', 'E', 'C', 'I', 'A', 'L'] as const;
@@ -88,12 +90,16 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
   };
 
   const dwellerRooms = useMemo(() => {
-    const map = new Map<number, { name: string; special: string }>();
+    const map = new Map<number, { name: string; special: string; category: string }>();
     const roomInfoMap = new Map((roomsData.rooms as any[]).map(r => [r.type, r]));
     rooms?.forEach(room => {
       room.dwellers?.forEach((id: number) => {
         const roomInfo = roomInfoMap.get(room.type);
-        map.set(id, { name: roomInfo?.name || room.type, special: roomInfo?.special || '' });
+        map.set(id, {
+          name: roomInfo?.name || room.type,
+          special: roomInfo?.special || '',
+          category: roomInfo?.category || '',
+        });
       });
     });
     return map;
@@ -126,6 +132,34 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
           const roomA = dwellerRooms.get(a.serializeId)?.name || 'Wandering';
           const roomB = dwellerRooms.get(b.serializeId)?.name || 'Wandering';
           comparison = roomA.localeCompare(roomB);
+          break;
+        }
+        case 'roomS':
+        case 'roomP':
+        case 'roomE':
+        case 'roomC':
+        case 'roomI':
+        case 'roomA':
+        case 'roomL': {
+          const targetStat = sortConfig.field.slice(4); // ex: 'roomE' -> 'E'
+          const statIdx = specialLetters.indexOf(targetStat) + 1;
+          const rInfoA = dwellerRooms.get(a.serializeId);
+          const rInfoB = dwellerRooms.get(b.serializeId);
+          const aInRoom = rInfoA?.special === targetStat ? 1 : 0;
+          const bInRoom = rInfoB?.special === targetStat ? 1 : 0;
+          // Groupe 1 (dans la bonne salle) avant groupe 2 (les autres)
+          if (aInRoom !== bInRoom) {
+            return bInRoom - aInRoom;
+          }
+          // Au sein du même groupe : tri par valeur de stat
+          // Pour les salles Training, on inverse la valeur (priorité aux stats les plus basses)
+          const rawA = aInRoom ? (a.stats?.stats?.[statIdx]?.value || 0) : 0;
+          const rawB = bInRoom ? (b.stats?.stats?.[statIdx]?.value || 0) : 0;
+          const isTrainingA = aInRoom && rInfoA?.category === 'Training';
+          const isTrainingB = bInRoom && rInfoB?.category === 'Training';
+          const valA = isTrainingA ? -rawA : rawA;
+          const valB = isTrainingB ? -rawB : rawB;
+          comparison = valA - valB;
           break;
         }
         case 'S':
@@ -186,8 +220,38 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
             <SortButton field="damage" label="Damage" />
           </div>
           {/* Col 4 : Assigned room */}
-          <div className="flex justify-end items-center">
+          <div className="flex flex-col items-end gap-1">
             <SortButton field="room" label="Room" align="right" />
+            <div className="flex gap-0">
+              {ROOM_SORT_KEYS.map(rk => {
+                const letter = rk.slice(4); // 'roomE' -> 'E'
+                const isActive = sortConfig.field === rk;
+                return (
+                  <button
+                    key={rk}
+                    onClick={() => handleSort(rk)}
+                    title={`Trier par salle de stat ${letter}`}
+                    className="flex items-center justify-center text-xs font-display font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <span
+                      className={`flex justify-center items-center w-5 h-5 rounded cursor-pointer ${
+                        isActive
+                          ? 'text-primary bg-primary/10 border border-primary/30'
+                          : 'hover:bg-muted/30'
+                      }`}
+                    >
+                      {letter}
+                      {isActive &&
+                        (sortConfig.direction === 'asc' ? (
+                          <ArrowUp className="w-2 h-2 ml-[1px]" />
+                        ) : (
+                          <ArrowDown className="w-2 h-2 ml-[1px]" />
+                        ))}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
