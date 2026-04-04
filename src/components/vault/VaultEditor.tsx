@@ -143,6 +143,47 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
     setData(newData);
   };
 
+  const handleMoveDweller = (
+    dwellerId: number,
+    sourceRoomIndex: number | null,
+    targetRoomIndex: number | null,
+    bumpedDwellerId?: number,
+    isSwap?: boolean
+  ) => {
+    if (!setData || !data) return;
+    const newData = JSON.parse(JSON.stringify(data));
+    const allRooms = newData.vault?.rooms || [];
+
+    // 1. Remove from source
+    if (sourceRoomIndex !== null && allRooms[sourceRoomIndex]) {
+      allRooms[sourceRoomIndex].dwellers = (allRooms[sourceRoomIndex].dwellers || []).filter(
+        (id: number) => id !== dwellerId
+      );
+    }
+
+    // 2. Handle bumped dweller
+    if (bumpedDwellerId !== undefined && targetRoomIndex !== null && allRooms[targetRoomIndex]) {
+      allRooms[targetRoomIndex].dwellers = (allRooms[targetRoomIndex].dwellers || []).filter(
+        (id: number) => id !== bumpedDwellerId
+      );
+
+      if (isSwap && sourceRoomIndex !== null && allRooms[sourceRoomIndex]) {
+        if (!allRooms[sourceRoomIndex].dwellers) allRooms[sourceRoomIndex].dwellers = [];
+        allRooms[sourceRoomIndex].dwellers.push(bumpedDwellerId);
+      }
+    }
+
+    // 3. Add to target
+    if (targetRoomIndex !== null && allRooms[targetRoomIndex]) {
+      if (!allRooms[targetRoomIndex].dwellers) allRooms[targetRoomIndex].dwellers = [];
+      if (!allRooms[targetRoomIndex].dwellers.includes(dwellerId)) {
+        allRooms[targetRoomIndex].dwellers.push(dwellerId);
+      }
+    }
+
+    setData(newData);
+  };
+
   const rooms = data?.vault?.rooms || [];
   const dwellers = data?.dwellers?.dwellers || [];
   const inventory = data?.vault?.inventory?.items || [];
@@ -180,7 +221,11 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
 
       <div className="flex-1 overflow-hidden relative">
         {activeTab === 'layout' && (
-          <RoomViewer rooms={rooms} dwellers={dwellers} />
+          <RoomViewer 
+            rooms={rooms} 
+            dwellers={dwellers} 
+            onMoveDweller={handleMoveDweller}
+          />
         )}
         {activeTab === 'dwellers' && (
         <VaultDwellers

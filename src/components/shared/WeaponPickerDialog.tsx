@@ -242,9 +242,9 @@ export function WeaponPickerDialog({
                         </div>
                       </div>
                       <Button
-                        variant={isCurrent ? 'secondary' : 'outline'}
+                        variant={isCurrent ? 'secondary' : 'default'}
                         size="sm"
-                        className="h-7 text-xs shrink-0"
+                        className={`h-7 px-1.5 text-xs shrink-0 ${!isCurrent ? 'border border-primary hover:bg-background hover:text-primary transition-colors' : ''}`}
                         disabled={isCurrent}
                         onClick={() => handleEquip(weaponId, owner.serializeId)}
                       >
@@ -372,9 +372,9 @@ function WeaponRow({
         </div>
       </div>
       <Button
-        variant={isCurrent ? 'secondary' : 'outline'}
+        variant={isCurrent ? 'secondary' : 'default'}
         size="sm"
-        className="h-7 text-xs shrink-0"
+        className={`h-7 px-1.5 text-xs shrink-0 ${!isCurrent ? 'border border-primary hover:bg-background hover:text-primary transition-colors' : ''}`}
         disabled={isCurrent}
         onClick={onEquip}
       >

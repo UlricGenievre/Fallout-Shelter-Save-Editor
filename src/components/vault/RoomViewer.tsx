@@ -2,6 +2,10 @@ import { useMemo, useState } from 'react';
 import roomsData from '@/data/rooms.json';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { DwellerCard } from '../shared/DwellerCard';
+import { RoomPickerDialog } from '../shared/RoomPickerDialog';
+import { RoomConflictDialog } from '../shared/RoomConflictDialog';
+import { Button } from '@/components/ui/button';
+import { ArrowRightLeft } from 'lucide-react';
 
 interface Room {
   type: string;
@@ -12,12 +16,13 @@ interface Room {
   power?: boolean;
   broken?: boolean;
   class?: string;
-  dwellers?: string[];
+  dwellers?: number[];
 }
 
 interface RoomViewerProps {
   rooms: Room[];
   dwellers: any[];
+  onMoveDweller?: (dwellerId: number, sourceRoomIndex: number | null, targetRoomIndex: number | null, bumpedDwellerId?: number, isSwap?: boolean) => void;
 }
 
 const ROOM_CLASS_COLORS: Record<string, string> = {
@@ -53,9 +58,17 @@ const getRoomName = (type: string): string => {
   return roomNameMap.get(type) || type;
 };
 
-export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
+export function RoomViewer({ rooms, dwellers, onMoveDweller }: RoomViewerProps) {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const activeRoom = useMemo(() => {
+    if (!selectedRoom) return null;
+    return rooms.find(r => r.row === selectedRoom.row && r.col === selectedRoom.col) || null;
+  }, [rooms, selectedRoom]);
+
+  const [movingDwellerId, setMovingDwellerId] = useState<number | null>(null);
+  const [pickerTargetRoomIndex, setPickerTargetRoomIndex] = useState<number | null>(null);
 
   const { maxRow, maxCol, grid } = useMemo(() => {
     if (!rooms || rooms.length === 0) {
@@ -112,7 +125,7 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
       </div>
 
       <div className="border border-border rounded-lg bg-card/30 p-4 overflow-x-auto">
-        <div 
+        <div
           className="mx-auto w-full min-w-[600px] flex flex-col"
           style={{ maxWidth: `calc(3rem + ${(maxCol + 1) * 4}rem)` }}
         >
@@ -124,75 +137,75 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
               ))}
             </colgroup>
             <tbody>
-            {Array.from({ length: maxRow + 2 }).map((_, rowIndex) => (
-              <tr key={`row-${rowIndex}`}>
-                <td className="text-right pr-2 sm:pr-3 text-[10px] sm:text-xs text-muted-foreground py-1 truncate">
-                  {rowIndex}
-                </td>
-                {Array.from({ length: maxCol + 1 }).map((_, colIndex) => {
-                  const key = `${rowIndex}-${colIndex}`;
-                  const room = grid.get(key);
+              {Array.from({ length: maxRow + 2 }).map((_, rowIndex) => (
+                <tr key={`row-${rowIndex}`}>
+                  <td className="text-right pr-2 sm:pr-3 text-[10px] sm:text-xs text-muted-foreground py-1 truncate">
+                    {rowIndex}
+                  </td>
+                  {Array.from({ length: maxCol + 1 }).map((_, colIndex) => {
+                    const key = `${rowIndex}-${colIndex}`;
+                    const room = grid.get(key);
 
-                  // Skip cells that are part of a larger room already rendered
-                  if (
-                    room &&
-                    colIndex > 0 &&
-                    grid.get(`${rowIndex}-${colIndex - 1}`) === room
-                  ) {
-                    return null;
-                  }
+                    // Skip cells that are part of a larger room already rendered
+                    if (
+                      room &&
+                      colIndex > 0 &&
+                      grid.get(`${rowIndex}-${colIndex - 1}`) === room
+                    ) {
+                      return null;
+                    }
 
-                  if (!room) {
+                    if (!room) {
+                      return (
+                        <td
+                          key={`cell-${rowIndex}-${colIndex}`}
+                          className="border border-border bg-background/50 h-12 sm:h-16 empty-cell"
+                        />
+                      );
+                    }
+
+                    const width = getRoomWidth(room.type, room.mergeLevel);
+
                     return (
                       <td
                         key={`cell-${rowIndex}-${colIndex}`}
-                        className="border border-border bg-background/50 h-12 sm:h-16 empty-cell"
-                      />
-                    );
-                  }
-
-                  const width = getRoomWidth(room.type, room.mergeLevel);
-
-                  return (
-                    <td
-                      key={`cell-${rowIndex}-${colIndex}`}
-                      colSpan={width}
-                      className={`border border-border p-1 md:p-1.5 h-12 sm:h-16 cursor-help transition-colors overflow-hidden relative ${getRoomColor(
-                        room
-                      )}`}
-                      title={`${getRoomName(room.type)} (Level ${room.level || 1})${room.dwellers ? ` - ${room.dwellers.length} dwellers` : ' - 0 dwellers'}${room.power === false ? ' - NO POWER' : ''}${room.broken ? ' - BROKEN' : ''}`}
-                      onClick={() => handleRoomClick(room)}
-                    >
-                      {room.type === 'FakeWasteland' || room.type === 'Elevator' ? (
-                        <div className="text-[10px] sm:text-xs text-white font-semibold break-words flex items-center justify-center h-full">
-                          <span className={`${room.type === 'Elevator' ? 'truncate w-full text-center' : ''}`}>{getRoomName(room.type)}</span>
-                        </div>
-                      ) : (
-                        <div className="flex justify-between items-start h-full overflow-hidden">
-                          <div className="flex-1 min-w-0 pr-1">
-                            <div className="text-[10px] sm:text-xs text-white font-semibold truncate">
-                              {getRoomName(room.type)}
+                        colSpan={width}
+                        className={`border border-border p-1 md:p-1.5 h-12 sm:h-16 cursor-help transition-colors overflow-hidden relative ${getRoomColor(
+                          room
+                        )}`}
+                        title={`${getRoomName(room.type)} (Level ${room.level || 1})${room.dwellers ? ` - ${room.dwellers.length} dwellers` : ' - 0 dwellers'}${room.power === false ? ' - NO POWER' : ''}${room.broken ? ' - BROKEN' : ''}`}
+                        onClick={() => handleRoomClick(room)}
+                      >
+                        {room.type === 'FakeWasteland' || room.type === 'Elevator' ? (
+                          <div className="text-[10px] sm:text-xs text-white font-semibold break-words flex items-center justify-center h-full">
+                            <span className={`${room.type === 'Elevator' ? 'truncate w-full text-center' : ''}`}>{getRoomName(room.type)}</span>
+                          </div>
+                        ) : (
+                          <div className="flex justify-between items-start h-full overflow-hidden">
+                            <div className="flex-1 min-w-0 pr-1">
+                              <div className="text-[10px] sm:text-xs text-white font-semibold truncate">
+                                {getRoomName(room.type)}
+                              </div>
+                              {room.level && (
+                                <div className="text-[9px] sm:text-[10px] text-white/70 truncate">Lv {room.level}</div>
+                              )}
+                              {room.power === false && (
+                                <div className="text-[9px] sm:text-[10px] text-yellow-300 font-bold truncate">⚠ POWER</div>
+                              )}
+                              {room.broken && (
+                                <div className="text-[9px] sm:text-[10px] text-red-300 font-bold truncate">✗ BROKEN</div>
+                              )}
                             </div>
-                            {room.level && (
-                              <div className="text-[9px] sm:text-[10px] text-white/70 truncate">Lv {room.level}</div>
-                            )}
-                            {room.power === false && (
-                              <div className="text-[9px] sm:text-[10px] text-yellow-300 font-bold truncate">⚠ POWER</div>
-                            )}
-                            {room.broken && (
-                              <div className="text-[9px] sm:text-[10px] text-red-300 font-bold truncate">✗ BROKEN</div>
-                            )}
+                            <div className="text-[10px] sm:text-xs text-white/90 font-bold shrink-0">
+                              👥 {room.dwellers ? room.dwellers.length : 0}
+                            </div>
                           </div>
-                          <div className="text-[10px] sm:text-xs text-white/90 font-bold shrink-0">
-                            👥 {room.dwellers ? room.dwellers.length : 0}
-                          </div>
-                        </div>
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
             </tbody>
           </table>
 
@@ -233,29 +246,44 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
       </div>
 
       {/* Room Details Modal */}
-      {selectedRoom && (
+      {activeRoom && (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto p-6">
             <DialogHeader>
               <DialogTitle className="font-display text-lg">
-                {getRoomName(selectedRoom.type)} (Level {selectedRoom.level})
+                {getRoomName(activeRoom.type)} (Level {activeRoom.level})
               </DialogTitle>
             </DialogHeader>
             <div className="mt-4">
-              {getRoomDwellers(selectedRoom).length === 0 ? (
+              {getRoomDwellers(activeRoom).length === 0 ? (
                 <p className="text-sm text-muted-foreground">No dwellers in this room</p>
               ) : (
                 <div className="grid grid-cols-1 gap-4">
-                  {getRoomDwellers(selectedRoom).map(dweller => {
-                    const roomName = getRoomName(selectedRoom.type);
-                    const roomData: any = roomsData.rooms.find(r => r.type === selectedRoom.type);
+                  {getRoomDwellers(activeRoom).map(dweller => {
+                    const roomName = getRoomName(activeRoom.type);
+                    const roomData: any = roomsData.rooms.find(r => r.type === activeRoom.type);
                     const roomSpecial = roomData?.special;
                     return (
-                      <DwellerCard 
-                        key={dweller.serializeId} 
-                        dweller={dweller} 
+                      <DwellerCard
+                        key={dweller.serializeId}
+                        dweller={dweller}
                         roomName={roomName}
                         roomSpecial={roomSpecial}
+                        action={
+                          onMoveDweller ? (
+                            <Button
+                              variant="default"
+                              size="sm"
+                              className="w-full justify-center h-8 px-2 text-xs flex items-center gap-1.5 border border-primary hover:bg-background hover:text-primary transition-colors"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setMovingDwellerId(dweller.serializeId);
+                              }}
+                            >
+                              <ArrowRightLeft className="w-3 h-3" /> Move
+                            </Button>
+                          ) : undefined
+                        }
                       />
                     );
                   })}
@@ -264,6 +292,62 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
             </div>
           </DialogContent>
         </Dialog>
+      )}
+
+      {movingDwellerId !== null && (
+        <RoomPickerDialog
+          open={true}
+          onClose={() => setMovingDwellerId(null)}
+          dwellerId={movingDwellerId}
+          dwellers={dwellers}
+          rooms={rooms}
+          onSelectRoom={(targetIdx) => {
+            if (targetIdx === null) {
+              // Coffee break directly
+              // We need the source room index
+              const sourceRoomIdx = rooms.findIndex(r => r.dwellers?.includes(movingDwellerId));
+              onMoveDweller?.(movingDwellerId, sourceRoomIdx !== -1 ? sourceRoomIdx : null, null);
+              setMovingDwellerId(null);
+            } else {
+              // Check capacity
+              const targetRoom = rooms[targetIdx];
+              let maxCapacity = 2;
+              if (targetRoom.type === 'Entrance') maxCapacity = 2;
+              else if (targetRoom.type !== 'FakeWasteland') maxCapacity = (targetRoom.mergeLevel || 1) * 2;
+              else maxCapacity = 999;
+
+              if ((targetRoom.dwellers?.length || 0) >= maxCapacity) {
+                // Conflict
+                setPickerTargetRoomIndex(targetIdx);
+              } else {
+                // Have space
+                const sourceRoomIdx = rooms.findIndex(r => r.dwellers?.includes(movingDwellerId));
+                onMoveDweller?.(movingDwellerId, sourceRoomIdx !== -1 ? sourceRoomIdx : null, targetIdx);
+                setMovingDwellerId(null);
+              }
+            }
+          }}
+        />
+      )}
+
+      {movingDwellerId !== null && pickerTargetRoomIndex !== null && (
+        <RoomConflictDialog
+          open={true}
+          onClose={() => {
+            setPickerTargetRoomIndex(null);
+            // keep movingDwellerId so we can pick another room
+          }}
+          dwellerId={movingDwellerId}
+          targetRoomIndex={pickerTargetRoomIndex}
+          dwellers={dwellers}
+          rooms={rooms}
+          onResolve={(kickedId, isSwap) => {
+            const sourceRoomIdx = rooms.findIndex(r => r.dwellers?.includes(movingDwellerId));
+            onMoveDweller?.(movingDwellerId, sourceRoomIdx !== -1 ? sourceRoomIdx : null, pickerTargetRoomIndex, kickedId, isSwap);
+            setPickerTargetRoomIndex(null);
+            setMovingDwellerId(null);
+          }}
+        />
       )}
     </div>
   );

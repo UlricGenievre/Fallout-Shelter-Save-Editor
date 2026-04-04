@@ -186,7 +186,7 @@ export function InventoryOutfits({ ids, counts, onSellItem, dwellers, rooms, onE
                     <Button
                       variant="default"
                       size="sm"
-                      className="h-7 md:h-8 px-1.5 md:px-2 text-[10px] md:text-xs"
+                      className="h-7 md:h-8 px-1.5 md:px-2 text-[10px] md:text-xs border border-primary hover:bg-background hover:text-primary transition-colors"
                       onClick={() => setEquipPickerOutfitId(id)}
                     >
                       Equip

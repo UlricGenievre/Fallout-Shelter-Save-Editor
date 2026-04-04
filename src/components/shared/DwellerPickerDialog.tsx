@@ -46,7 +46,7 @@ export function DwellerPickerDialog({
     if (isWep) {
       return { field: 'damage', direction: 'asc' };
     }
-    
+
     let bestStat = '';
     let maxBonus = 0;
     if (data?.special) {
@@ -58,11 +58,11 @@ export function DwellerPickerDialog({
         }
       }
     }
-    
+
     if (bestStat) {
       return { field: `room${bestStat}` as SortField, direction: 'desc' };
     }
-    
+
     return { field: 'name', direction: 'asc' };
   });
 
@@ -94,10 +94,10 @@ export function DwellerPickerDialog({
       <button
         onClick={() => handleSort(field)}
         className={`flex items-center gap-1.5 text-xs font-display uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors ${align === 'center'
-            ? 'justify-center w-full'
-            : align === 'right'
-              ? 'justify-end w-full'
-              : 'justify-start'
+          ? 'justify-center w-full'
+          : align === 'right'
+            ? 'justify-end w-full'
+            : 'justify-start'
           }`}
       >
         <span className="flex items-center gap-1 cursor-pointer">
@@ -297,8 +297,8 @@ export function DwellerPickerDialog({
                   >
                     <span
                       className={`flex justify-center items-center w-5 h-5 rounded cursor-pointer ${isActive
-                          ? 'text-primary bg-primary/10 border border-primary/30'
-                          : 'hover:bg-muted/30'
+                        ? 'text-primary bg-primary/10 border border-primary/30'
+                        : 'hover:bg-muted/30'
                         }`}
                     >
                       {letter}
