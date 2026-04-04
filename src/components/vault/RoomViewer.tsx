@@ -112,12 +112,21 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
       </div>
 
       <div className="border border-border rounded-lg bg-card/30 p-4 overflow-x-auto">
-        <div className="mx-auto w-max flex flex-col">
-          <table className="border-collapse gap-0">
-          <tbody>
+        <div 
+          className="mx-auto w-full min-w-[600px] flex flex-col"
+          style={{ maxWidth: `calc(3rem + ${(maxCol + 1) * 4}rem)` }}
+        >
+          <table className="w-full table-fixed border-collapse gap-0">
+            <colgroup>
+              <col className="w-8 sm:w-12 shrink-0" />
+              {Array.from({ length: maxCol + 1 }).map((_, i) => (
+                <col key={`col-width-${i}`} />
+              ))}
+            </colgroup>
+            <tbody>
             {Array.from({ length: maxRow + 2 }).map((_, rowIndex) => (
               <tr key={`row-${rowIndex}`}>
-                <td className="w-12 text-right pr-3 text-xs text-muted-foreground py-1">
+                <td className="text-right pr-2 sm:pr-3 text-[10px] sm:text-xs text-muted-foreground py-1 truncate">
                   {rowIndex}
                 </td>
                 {Array.from({ length: maxCol + 1 }).map((_, colIndex) => {
@@ -137,7 +146,7 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
                     return (
                       <td
                         key={`cell-${rowIndex}-${colIndex}`}
-                        className="border border-border bg-background/50 w-16 h-16"
+                        className="border border-border bg-background/50 h-12 sm:h-16 empty-cell"
                       />
                     );
                   }
@@ -148,33 +157,33 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
                     <td
                       key={`cell-${rowIndex}-${colIndex}`}
                       colSpan={width}
-                      className={`border border-border p-1 h-16 min-w-max cursor-help transition-colors ${getRoomColor(
+                      className={`border border-border p-1 md:p-1.5 h-12 sm:h-16 cursor-help transition-colors overflow-hidden relative ${getRoomColor(
                         room
                       )}`}
                       title={`${getRoomName(room.type)} (Level ${room.level || 1})${room.dwellers ? ` - ${room.dwellers.length} dwellers` : ' - 0 dwellers'}${room.power === false ? ' - NO POWER' : ''}${room.broken ? ' - BROKEN' : ''}`}
                       onClick={() => handleRoomClick(room)}
                     >
                       {room.type === 'FakeWasteland' || room.type === 'Elevator' ? (
-                        <div className="text-xs text-white font-semibold break-words">
-                          {getRoomName(room.type)}
+                        <div className="text-[10px] sm:text-xs text-white font-semibold break-words flex items-center justify-center h-full">
+                          <span className={`${room.type === 'Elevator' ? 'truncate w-full text-center' : ''}`}>{getRoomName(room.type)}</span>
                         </div>
                       ) : (
-                        <div className="flex justify-between items-start h-full">
-                          <div className="flex-1">
-                            <div className="text-xs text-white font-semibold break-words">
+                        <div className="flex justify-between items-start h-full overflow-hidden">
+                          <div className="flex-1 min-w-0 pr-1">
+                            <div className="text-[10px] sm:text-xs text-white font-semibold truncate">
                               {getRoomName(room.type)}
                             </div>
                             {room.level && (
-                              <div className="text-xs text-white/70">Lv {room.level}</div>
+                              <div className="text-[9px] sm:text-[10px] text-white/70 truncate">Lv {room.level}</div>
                             )}
                             {room.power === false && (
-                              <div className="text-xs text-yellow-300 font-bold">⚠ NO POWER</div>
+                              <div className="text-[9px] sm:text-[10px] text-yellow-300 font-bold truncate">⚠ POWER</div>
                             )}
                             {room.broken && (
-                              <div className="text-xs text-red-300 font-bold">✗ BROKEN</div>
+                              <div className="text-[9px] sm:text-[10px] text-red-300 font-bold truncate">✗ BROKEN</div>
                             )}
                           </div>
-                          <div className="text-xs text-white/90 font-bold ml-1">
+                          <div className="text-[10px] sm:text-xs text-white/90 font-bold shrink-0">
                             👥 {room.dwellers ? room.dwellers.length : 0}
                           </div>
                         </div>
@@ -184,18 +193,18 @@ export function RoomViewer({ rooms, dwellers }: RoomViewerProps) {
                 })}
               </tr>
             ))}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
 
-        {/* Column headers */}
-        <div className="flex mt-2">
-          <div className="w-12" />
-          {Array.from({ length: maxCol + 1 }).map((_, i) => (
-            <div key={`col-header-${i}`} className="w-16 text-center text-xs text-muted-foreground">
-              {i}
-            </div>
-          ))}
-        </div>
+          {/* Column headers */}
+          <div className="flex mt-2 w-full">
+            <div className="w-8 sm:w-12 shrink-0" />
+            {Array.from({ length: maxCol + 1 }).map((_, i) => (
+              <div key={`col-header-${i}`} className="flex-1 text-center text-[10px] sm:text-xs text-muted-foreground">
+                {i}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
