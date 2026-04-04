@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { getItem, getItemLabel } from '@/lib/gameData';
+import { getItem, getItemLabel, formatSpecial } from '@/lib/gameData';
 import { ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { DwellerCard } from '@/components/shared/DwellerCard';
 import roomsData from '@/data/rooms.json';
@@ -9,8 +9,8 @@ import roomsData from '@/data/rooms.json';
 interface DwellerPickerDialogProps {
   open: boolean;
   onClose: () => void;
-  /** ID de l'arme à équiper (depuis l'inventaire). */
-  weaponId: string;
+  /** ID de l'item à équiper (arme ou outfit depuis l'inventaire). */
+  itemId: string;
   dwellers: any[];
   rooms: any[];
   onEquip: (targetDwellerId: number) => void;
@@ -35,21 +35,43 @@ const RARITY_COLORS: Record<string, string> = {
 export function DwellerPickerDialog({
   open,
   onClose,
-  weaponId,
+  itemId,
   dwellers,
   rooms,
   onEquip,
 }: DwellerPickerDialogProps) {
-  const [sortConfig, setSortConfig] = useState<{ field: SortField; direction: SortDirection }>({
-    field: 'damage',
-    direction: 'asc',
+  const [sortConfig, setSortConfig] = useState<{ field: SortField; direction: SortDirection }>(() => {
+    const data = getItem(itemId);
+    const isWep = data ? ('damage' in data || 'avgDamage' in data) : false;
+    if (isWep) {
+      return { field: 'damage', direction: 'asc' };
+    }
+    
+    let bestStat = '';
+    let maxBonus = 0;
+    if (data?.special) {
+      const keys = ['S', 'P', 'E', 'C', 'I', 'A', 'L'] as const;
+      for (const k of keys) {
+        if (data.special[k] && data.special[k] > maxBonus) {
+          maxBonus = data.special[k];
+          bestStat = k;
+        }
+      }
+    }
+    
+    if (bestStat) {
+      return { field: `room${bestStat}` as SortField, direction: 'desc' };
+    }
+    
+    return { field: 'name', direction: 'asc' };
   });
 
-  const weaponItem = getItem(weaponId);
-  const weaponLabel = getItemLabel(weaponId);
-  const weaponDamage = weaponItem?.avgDamage
-    ? `${weaponItem.avgDamage} (${weaponItem.damage})`
-    : weaponItem?.damage;
+  const itemData = getItem(itemId);
+  const itemLabel = getItemLabel(itemId);
+  const isWeapon = itemData ? ('damage' in itemData || 'avgDamage' in itemData) : false;
+  const itemStats = isWeapon
+    ? (itemData?.avgDamage ? `${itemData.avgDamage} (${itemData.damage})` : itemData?.damage)
+    : formatSpecial(itemData?.special || {});
 
   const handleSort = (field: SortField) => {
     setSortConfig(prev => ({
@@ -216,26 +238,26 @@ export function DwellerPickerDialog({
       <DialogContent className="sm:max-w-5xl max-h-[90vh] flex flex-col gap-3">
         <DialogHeader className="shrink-0">
           <DialogTitle className="font-display tracking-wider pip-text-glow">
-            EQUIP WEAPON
+            {isWeapon ? 'EQUIP WEAPON' : 'EQUIP OUTFIT'}
           </DialogTitle>
         </DialogHeader>
 
-        {/* Weapon being equipped */}
+        {/* Item being equipped */}
         <div className="border border-primary/30 rounded-lg p-3 bg-primary/5 shrink-0 flex items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground font-display uppercase tracking-wider">
-            Weapon to equip
+            {isWeapon ? 'Weapon to equip' : 'Outfit to equip'}
           </p>
           <div className="text-right">
-            <p className="text-sm font-semibold text-primary">{weaponLabel}</p>
-            {weaponDamage && (
-              <p className="text-xs font-display text-primary/80">{weaponDamage}</p>
+            <p className="text-sm font-semibold text-primary">{itemLabel}</p>
+            {itemStats && (
+              <p className="text-xs font-display text-primary/80">{itemStats}</p>
             )}
-            {weaponItem?.rarity && (
+            {itemData?.rarity && (
               <p
-                className={`text-xs font-display ${RARITY_COLORS[weaponItem.rarity] ?? 'text-muted-foreground'
+                className={`text-xs font-display ${RARITY_COLORS[itemData.rarity] ?? 'text-muted-foreground'
                   }`}
               >
-                {weaponItem.rarity}
+                {itemData.rarity}
               </p>
             )}
           </div>

@@ -100,6 +100,49 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
     setData(newData);
   };
 
+  const handleEquipOutfit = (
+    targetDwellerId: number,
+    newOutfitId: string,
+    sourceDwellerId?: number,
+  ) => {
+    if (!setData || !data) return;
+    const newData = JSON.parse(JSON.stringify(data));
+    const allDwellers: any[] = newData.dwellers?.dwellers || [];
+
+    const target = allDwellers.find((d: any) => d.serializeId === targetDwellerId);
+    if (!target) return;
+
+    const previousOutfitId: string = target.equipedOutfit?.id || '';
+
+    if (sourceDwellerId !== undefined) {
+      // --- SWAP: outfit comes from another dweller ---
+      const source = allDwellers.find((d: any) => d.serializeId === sourceDwellerId);
+      if (source) {
+        if (!source.equipedOutfit) source.equipedOutfit = {};
+        source.equipedOutfit.id = previousOutfitId; // source gets target's old outfit
+      }
+    } else {
+      // --- FROM INVENTORY OR UNEQUIP ---
+      const items: any[] = newData.vault?.inventory?.items || [];
+      if (newOutfitId) {
+        // Remove one occurrence of the chosen outfit from inventory
+        const idx = items.findIndex(
+          (item: any) => (typeof item === 'string' ? item : item?.id) === newOutfitId,
+        );
+        if (idx !== -1) items.splice(idx, 1);
+      }
+      // Return previous outfit to inventory
+      if (previousOutfitId) {
+        items.push(previousOutfitId);
+      }
+    }
+
+    if (!target.equipedOutfit) target.equipedOutfit = {};
+    target.equipedOutfit.id = newOutfitId;
+
+    setData(newData);
+  };
+
   const rooms = data?.vault?.rooms || [];
   const dwellers = data?.dwellers?.dwellers || [];
   const inventory = data?.vault?.inventory?.items || [];
@@ -155,6 +198,9 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
             rooms={rooms}
             onEquipWeapon={(targetDwellerId, weaponId) =>
               handleEquipWeapon(targetDwellerId, weaponId)
+            }
+            onEquipOutfit={(targetDwellerId, outfitId) =>
+              handleEquipOutfit(targetDwellerId, outfitId)
             }
           />
         )}

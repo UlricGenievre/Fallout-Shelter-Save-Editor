@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { getItem, getItemLabel } from '@/lib/gameData';
 import { Coins, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { DwellerPickerDialog } from '@/components/shared/DwellerPickerDialog';
 
 interface InventoryOutfitsProps {
   ids: string[];
   counts: Map<string, number>;
   onSellItem?: (itemId: string, amount: number, resellValue: number) => void;
+  dwellers?: any[];
+  rooms?: any[];
+  onEquipOutfit?: (targetDwellerId: number, outfitId: string) => void;
 }
 
 type SortField = 'name' | 'quantity' | 'rarity' | 'value' | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L';
@@ -14,8 +18,9 @@ type SortDirection = 'asc' | 'desc';
 
 const SPECIAL_KEYS = ['S', 'P', 'E', 'C', 'I', 'A', 'L'] as const;
 
-export function InventoryOutfits({ ids, counts, onSellItem }: InventoryOutfitsProps) {
+export function InventoryOutfits({ ids, counts, onSellItem, dwellers, rooms, onEquipOutfit }: InventoryOutfitsProps) {
   const [sortConfig, setSortConfig] = useState<{ field: SortField, direction: SortDirection }>({ field: 'name', direction: 'asc' });
+  const [equipPickerOutfitId, setEquipPickerOutfitId] = useState<string | null>(null);
 
   const handleSort = (field: SortField) => {
     setSortConfig(prev => ({
@@ -106,7 +111,7 @@ export function InventoryOutfits({ ids, counts, onSellItem }: InventoryOutfitsPr
 
   return (
     <div className="flex flex-col">
-      <div className="hidden sm:grid grid-cols-[80px_minmax(100px,2fr)_repeat(7,20px)_minmax(60px,1fr)_140px] gap-2 md:gap-3 px-2 md:px-4 pb-3 mb-2 border-b border-border/40">
+      <div className="hidden sm:grid grid-cols-[80px_minmax(100px,2fr)_repeat(7,20px)_minmax(60px,1fr)_200px] gap-2 md:gap-3 px-2 md:px-4 pb-3 mb-2 border-b border-border/40">
         <div className="flex justify-center border-r border-transparent pr-2 md:pr-4">
           <SortButton field="quantity" label="Qty" align="center" />
         </div>
@@ -136,7 +141,7 @@ export function InventoryOutfits({ ids, counts, onSellItem }: InventoryOutfitsPr
 
           return (
             <div key={id} className="border border-border/60 rounded-lg p-3 sm:p-2 md:p-4 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5">
-              <div className="grid grid-cols-1 sm:grid-cols-[80px_minmax(100px,2fr)_repeat(7,20px)_minmax(60px,1fr)_140px] gap-2 md:gap-3 items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-[80px_minmax(100px,2fr)_repeat(7,20px)_minmax(60px,1fr)_200px] gap-2 md:gap-3 items-center">
                 <div className="flex-shrink-0 flex items-center justify-start sm:justify-center sm:border-r border-border/30 pb-2 sm:pb-0 pr-2 md:pr-4">
                   <div className="bg-primary/20 text-primary font-display font-bold px-2 md:px-3 py-1.5 rounded text-sm min-w-[40px] md:min-w-[50px] text-center border border-primary/30">
                     x{count || 0}
@@ -177,6 +182,16 @@ export function InventoryOutfits({ ids, counts, onSellItem }: InventoryOutfitsPr
                 </div>
 
                 <div className="flex justify-end gap-1 md:gap-2">
+                  {onEquipOutfit && (
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="h-7 md:h-8 px-1.5 md:px-2 text-[10px] md:text-xs"
+                      onClick={() => setEquipPickerOutfitId(id)}
+                    >
+                      Equip
+                    </Button>
+                  )}
                   {resell !== undefined && onSellItem && (
                     <>
                       <Button variant="outline" size="sm" className="h-7 md:h-8 px-1.5 md:px-2 text-[10px] md:text-xs" onClick={() => onSellItem(id, 1, resell)}>Sell 1</Button>
@@ -189,6 +204,20 @@ export function InventoryOutfits({ ids, counts, onSellItem }: InventoryOutfitsPr
           );
         })}
       </div>
+      
+      {equipPickerOutfitId !== null && (
+        <DwellerPickerDialog
+          open
+          onClose={() => setEquipPickerOutfitId(null)}
+          itemId={equipPickerOutfitId}
+          dwellers={dwellers || []}
+          rooms={rooms || []}
+          onEquip={targetDwellerId => {
+            onEquipOutfit?.(targetDwellerId, equipPickerOutfitId);
+            setEquipPickerOutfitId(null);
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -180,7 +180,7 @@ export function InventoryWeapons({ ids, counts, onSellItem, dwellers, rooms, onE
         <DwellerPickerDialog
           open
           onClose={() => setEquipPickerWeaponId(null)}
-          weaponId={equipPickerWeaponId}
+          itemId={equipPickerWeaponId}
           dwellers={dwellers || []}
           rooms={rooms || []}
           onEquip={targetDwellerId => {

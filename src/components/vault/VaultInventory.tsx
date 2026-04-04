@@ -11,6 +11,7 @@ interface VaultInventoryProps {
   dwellers?: any[];
   rooms?: any[];
   onEquipWeapon?: (targetDwellerId: number, weaponId: string) => void;
+  onEquipOutfit?: (targetDwellerId: number, outfitId: string) => void;
 }
 
 type InvTab = 'weapons' | 'outfits' | 'junks' | 'misc';
@@ -22,7 +23,7 @@ const INV_TABS = [
   { id: 'misc', label: 'MISC', icon: HelpCircle },
 ] as const;
 
-export function VaultInventory({ items, onSellItem, dwellers, rooms, onEquipWeapon }: VaultInventoryProps) {
+export function VaultInventory({ items, onSellItem, dwellers, rooms, onEquipWeapon, onEquipOutfit }: VaultInventoryProps) {
   const [activeTab, setActiveTab] = useState<InvTab>('weapons');
 
   const { counts, categories } = useMemo(() => {
@@ -92,7 +93,7 @@ export function VaultInventory({ items, onSellItem, dwellers, rooms, onEquipWeap
       <div className="flex-1 overflow-auto p-6">
         <div className="max-w-5xl mx-auto pb-10">
           {activeTab === 'weapons' && <InventoryWeapons ids={currentIds} counts={counts} onSellItem={onSellItem} dwellers={dwellers} rooms={rooms} onEquipWeapon={onEquipWeapon} />}
-          {activeTab === 'outfits' && <InventoryOutfits ids={currentIds} counts={counts} onSellItem={onSellItem} />}
+          {activeTab === 'outfits' && <InventoryOutfits ids={currentIds} counts={counts} onSellItem={onSellItem} dwellers={dwellers} rooms={rooms} onEquipOutfit={onEquipOutfit} />}
           {activeTab === 'junks' && <InventoryJunks ids={currentIds} counts={counts} onSellItem={onSellItem} emptyMessage="No junk items found." />}
           {activeTab === 'misc' && <InventoryJunks ids={currentIds} counts={counts} onSellItem={onSellItem} emptyMessage="No misc items found." />}
         </div>
