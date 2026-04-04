@@ -1,30 +1,55 @@
 import { useState, useMemo } from 'react';
-import { DwellerCard } from '../shared/DwellerCard';
-import { WeaponPickerDialog } from '../shared/WeaponPickerDialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { getItem, getItemLabel } from '@/lib/gameData';
 import { ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
-import { getItem } from '@/lib/gameData';
+import { DwellerCard } from '@/components/shared/DwellerCard';
 import roomsData from '@/data/rooms.json';
 
-interface VaultDwellersProps {
+interface DwellerPickerDialogProps {
+  open: boolean;
+  onClose: () => void;
+  /** ID de l'arme à équiper (depuis l'inventaire). */
+  weaponId: string;
   dwellers: any[];
   rooms: any[];
-  inventory: any[];
-  onEquipWeapon?: (targetDwellerId: number, newWeaponId: string, sourceDwellerId?: number) => void;
+  onEquip: (targetDwellerId: number) => void;
 }
 
-type SortField = 'name' | 'level' | 'hp' | 'room' | 'roomS' | 'roomP' | 'roomE' | 'roomC' | 'roomI' | 'roomA' | 'roomL' | 'damage' | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L';
-const ROOM_SORT_KEYS = ['roomS', 'roomP', 'roomE', 'roomC', 'roomI', 'roomA', 'roomL'] as const;
-type RoomSortKey = (typeof ROOM_SORT_KEYS)[number];
-type SortDirection = 'asc' | 'desc';
+type SortField =
+  | 'name' | 'level' | 'hp'
+  | 'room' | 'roomS' | 'roomP' | 'roomE' | 'roomC' | 'roomI' | 'roomA' | 'roomL'
+  | 'damage'
+  | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L';
 
+const ROOM_SORT_KEYS = ['roomS', 'roomP', 'roomE', 'roomC', 'roomI', 'roomA', 'roomL'] as const;
+type SortDirection = 'asc' | 'desc';
 const SPECIAL_KEYS = ['S', 'P', 'E', 'C', 'I', 'A', 'L'] as const;
 
-export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: VaultDwellersProps) {
+const RARITY_COLORS: Record<string, string> = {
+  Legendary: 'text-yellow-400',
+  Rare: 'text-blue-400',
+  Common: 'text-green-400',
+};
+
+export function DwellerPickerDialog({
+  open,
+  onClose,
+  weaponId,
+  dwellers,
+  rooms,
+  onEquip,
+}: DwellerPickerDialogProps) {
   const [sortConfig, setSortConfig] = useState<{ field: SortField; direction: SortDirection }>({
-    field: 'name',
+    field: 'damage',
     direction: 'asc',
   });
-  const [weaponPickerDwellerId, setWeaponPickerDwellerId] = useState<number | null>(null);
+
+  const weaponItem = getItem(weaponId);
+  const weaponLabel = getItemLabel(weaponId);
+  const weaponDamage = weaponItem?.avgDamage
+    ? `${weaponItem.avgDamage} (${weaponItem.damage})`
+    : weaponItem?.damage;
 
   const handleSort = (field: SortField) => {
     setSortConfig(prev => ({
@@ -46,7 +71,11 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
     return (
       <button
         onClick={() => handleSort(field)}
-        className={`flex items-center gap-1.5 text-xs font-display uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors ${align === 'center' ? 'justify-center w-full' : align === 'right' ? 'justify-end w-full' : 'justify-start'
+        className={`flex items-center gap-1.5 text-xs font-display uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors ${align === 'center'
+            ? 'justify-center w-full'
+            : align === 'right'
+              ? 'justify-end w-full'
+              : 'justify-start'
           }`}
       >
         <span className="flex items-center gap-1 cursor-pointer">
@@ -89,6 +118,9 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
     );
   };
 
+  /* ------------------------------------------------------------------ */
+  /* dwellerRooms map — même logique que VaultDwellers                   */
+  /* ------------------------------------------------------------------ */
   const dwellerRooms = useMemo(() => {
     const map = new Map<number, { name: string; special: string; category: string }>();
     const roomInfoMap = new Map((roomsData.rooms as any[]).map(r => [r.type, r]));
@@ -105,6 +137,9 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
     return map;
   }, [rooms]);
 
+  /* ------------------------------------------------------------------ */
+  /* Sort — identique à VaultDwellers (avec inversion Training)          */
+  /* ------------------------------------------------------------------ */
   const sortedDwellers = useMemo(() => {
     return [...dwellers].sort((a, b) => {
       let comparison = 0;
@@ -121,10 +156,10 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
           comparison = (a.health?.maxHealth || 0) - (b.health?.maxHealth || 0);
           break;
         case 'damage': {
-          const weaponA = getItem(a.equipedWeapon?.id || '');
-          const weaponB = getItem(b.equipedWeapon?.id || '');
-          const dmgA = parseFloat(weaponA?.avgDamage?.toString() || weaponA?.damage?.toString() || '0') || 0;
-          const dmgB = parseFloat(weaponB?.avgDamage?.toString() || weaponB?.damage?.toString() || '0') || 0;
+          const wA = getItem(a.equipedWeapon?.id || '');
+          const wB = getItem(b.equipedWeapon?.id || '');
+          const dmgA = parseFloat(wA?.avgDamage?.toString() || wA?.damage?.toString() || '0') || 0;
+          const dmgB = parseFloat(wB?.avgDamage?.toString() || wB?.damage?.toString() || '0') || 0;
           comparison = dmgA - dmgB;
           break;
         }
@@ -141,24 +176,17 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
         case 'roomI':
         case 'roomA':
         case 'roomL': {
-          const targetStat = sortConfig.field.slice(4); // ex: 'roomE' -> 'E'
+          const targetStat = sortConfig.field.slice(4);
           const statIdx = specialLetters.indexOf(targetStat) + 1;
           const rInfoA = dwellerRooms.get(a.serializeId);
           const rInfoB = dwellerRooms.get(b.serializeId);
           const aInRoom = rInfoA?.special === targetStat ? 1 : 0;
           const bInRoom = rInfoB?.special === targetStat ? 1 : 0;
-          // Groupe 1 (dans la bonne salle) avant groupe 2 (les autres)
-          if (aInRoom !== bInRoom) {
-            return bInRoom - aInRoom;
-          }
-          // Au sein du même groupe : tri par valeur de stat
-          // Pour les salles Training, on inverse la valeur (priorité aux stats les plus basses)
+          if (aInRoom !== bInRoom) return bInRoom - aInRoom;
           const rawA = aInRoom ? (a.stats?.stats?.[statIdx]?.value || 0) : 0;
           const rawB = bInRoom ? (b.stats?.stats?.[statIdx]?.value || 0) : 0;
-          const isTrainingA = aInRoom && rInfoA?.category === 'Training';
-          const isTrainingB = bInRoom && rInfoB?.category === 'Training';
-          const valA = isTrainingA ? -rawA : rawA;
-          const valB = isTrainingB ? -rawB : rawB;
+          const valA = aInRoom && rInfoA?.category === 'Training' ? -rawA : rawA;
+          const valB = bInRoom && rInfoB?.category === 'Training' ? -rawB : rawB;
           comparison = valA - valB;
           break;
         }
@@ -170,9 +198,8 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
         case 'A':
         case 'L': {
           const statIndex = specialLetters.indexOf(sortConfig.field) + 1;
-          const statA = a.stats?.stats?.[statIndex]?.value || 0;
-          const statB = b.stats?.stats?.[statIndex]?.value || 0;
-          comparison = statA - statB;
+          comparison =
+            (a.stats?.stats?.[statIndex]?.value || 0) - (b.stats?.stats?.[statIndex]?.value || 0);
           break;
         }
       }
@@ -184,25 +211,38 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
     });
   }, [dwellers, sortConfig, dwellerRooms]);
 
-  if (!dwellers || dwellers.length === 0) {
-    return (
-      <div className="flex items-center justify-center p-8 text-muted-foreground">
-        No dwellers found.
-      </div>
-    );
-  }
-
   return (
-    <div className="w-full h-full p-6 overflow-auto">
-      <div className="mb-4 text-center">
-        <h2 className="font-display text-2xl pip-text-glow tracking-widest mb-2">
-          VAULT DWELLERS ({dwellers.length})
-        </h2>
-      </div>
+    <Dialog open={open} onOpenChange={v => !v && onClose()}>
+      <DialogContent className="sm:max-w-5xl max-h-[90vh] flex flex-col gap-3">
+        <DialogHeader className="shrink-0">
+          <DialogTitle className="font-display tracking-wider pip-text-glow">
+            EQUIP WEAPON
+          </DialogTitle>
+        </DialogHeader>
 
-      {/* Barre de tri — alignée sur DwellerCard [1.5fr_1.5fr_2.2fr_1fr] */}
-      <div className="max-w-5xl mx-auto mb-3">
-        <div className="hidden sm:grid grid-cols-[1.5fr_1.5fr_2.2fr_1fr] gap-4 px-4 pb-3 border-b border-border/40 items-center">
+        {/* Weapon being equipped */}
+        <div className="border border-primary/30 rounded-lg p-3 bg-primary/5 shrink-0 flex items-center justify-between gap-4">
+          <p className="text-xs text-muted-foreground font-display uppercase tracking-wider">
+            Weapon to equip
+          </p>
+          <div className="text-right">
+            <p className="text-sm font-semibold text-primary">{weaponLabel}</p>
+            {weaponDamage && (
+              <p className="text-xs font-display text-primary/80">{weaponDamage}</p>
+            )}
+            {weaponItem?.rarity && (
+              <p
+                className={`text-xs font-display ${RARITY_COLORS[weaponItem.rarity] ?? 'text-muted-foreground'
+                  }`}
+              >
+                {weaponItem.rarity}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* Sort bar — même grille que VaultDwellers [1.5fr_1.5fr_2.2fr_1fr] */}
+        <div className="hidden sm:grid grid-cols-[1.5fr_1.5fr_2.2fr_1fr] gap-4 px-4 pb-3 border-b border-border/40 items-center shrink-0">
           {/* Col 1 : Nom, Lvl, HP */}
           <div className="grid grid-cols-3 gap-2">
             <SortButton field="name" label="Name" />
@@ -215,16 +255,16 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
               <SpecialSortButton key={key} field={key} />
             ))}
           </div>
-          {/* Col 3 : Equipped weapon damage */}
+          {/* Col 3 : Damage de l'arme équipée */}
           <div className="flex items-center">
             <SortButton field="damage" label="Damage" />
           </div>
-          {/* Col 4 : Assigned room */}
+          {/* Col 4 : Room + 7 boutons room-stat */}
           <div className="flex flex-col items-end gap-1">
             <SortButton field="room" label="Room" align="right" />
             <div className="flex gap-0">
               {ROOM_SORT_KEYS.map(rk => {
-                const letter = rk.slice(4); // 'roomE' -> 'E'
+                const letter = rk.slice(4);
                 const isActive = sortConfig.field === rk;
                 return (
                   <button
@@ -235,8 +275,8 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
                   >
                     <span
                       className={`flex justify-center items-center w-5 h-5 rounded cursor-pointer ${isActive
-                        ? 'text-primary bg-primary/10 border border-primary/30'
-                        : 'hover:bg-muted/30'
+                          ? 'text-primary bg-primary/10 border border-primary/30'
+                          : 'hover:bg-muted/30'
                         }`}
                     >
                       {letter}
@@ -253,41 +293,26 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="grid grid-cols-1 gap-4 max-w-5xl mx-auto pb-10">
-        {sortedDwellers.map(dweller => {
-          const rInfo = dwellerRooms.get(dweller.serializeId);
-          return (
-            <DwellerCard
-              key={dweller.serializeId}
-              dweller={dweller}
-              roomName={rInfo?.name}
-              roomSpecial={rInfo?.special}
-              onEditWeapon={() => setWeaponPickerDwellerId(dweller.serializeId)}
-            />
-          );
-        })}
-      </div>
-
-      {/* Weapon picker modal */}
-      {weaponPickerDwellerId !== null && (() => {
-        const pickerDweller = dwellers.find(d => d.serializeId === weaponPickerDwellerId);
-        if (!pickerDweller) return null;
-        return (
-          <WeaponPickerDialog
-            open
-            onClose={() => setWeaponPickerDwellerId(null)}
-            dweller={pickerDweller}
-            allDwellers={dwellers}
-            inventory={inventory}
-            dwellerRooms={dwellerRooms}
-            onEquip={(newWeaponId, sourceDwellerId) =>
-              onEquipWeapon?.(weaponPickerDwellerId, newWeaponId, sourceDwellerId)
-            }
-          />
-        );
-      })()}
-    </div>
+        {/* Liste scrollable — même DwellerCard que VaultDwellers */}
+        <div className="overflow-y-auto flex-1 flex flex-col gap-4 pr-1 min-h-0">
+          {sortedDwellers.map(dweller => {
+            const rInfo = dwellerRooms.get(dweller.serializeId);
+            return (
+              <DwellerCard
+                key={dweller.serializeId}
+                dweller={dweller}
+                roomName={rInfo?.name}
+                roomSpecial={rInfo?.special}
+                onClick={() => {
+                  onEquip(dweller.serializeId);
+                  onClose();
+                }}
+              />
+            );
+          })}
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }

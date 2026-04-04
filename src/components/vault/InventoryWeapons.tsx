@@ -2,18 +2,23 @@ import { useState } from 'react';
 import { getItem, getItemLabel } from '@/lib/gameData';
 import { Coins, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { DwellerPickerDialog } from '@/components/shared/DwellerPickerDialog';
 
 interface InventoryWeaponsProps {
   ids: string[];
   counts: Map<string, number>;
   onSellItem?: (itemId: string, amount: number, resellValue: number) => void;
+  dwellers?: any[];
+  rooms?: any[];
+  onEquipWeapon?: (targetDwellerId: number, weaponId: string) => void;
 }
 
 type SortField = 'name' | 'quantity' | 'rarity' | 'value' | 'damage';
 type SortDirection = 'asc' | 'desc';
 
-export function InventoryWeapons({ ids, counts, onSellItem }: InventoryWeaponsProps) {
+export function InventoryWeapons({ ids, counts, onSellItem, dwellers, rooms, onEquipWeapon }: InventoryWeaponsProps) {
   const [sortConfig, setSortConfig] = useState<{ field: SortField, direction: SortDirection }>({ field: 'name', direction: 'asc' });
+  const [equipPickerWeaponId, setEquipPickerWeaponId] = useState<string | null>(null);
 
   const handleSort = (field: SortField) => {
     setSortConfig(prev => ({
@@ -87,7 +92,7 @@ export function InventoryWeapons({ ids, counts, onSellItem }: InventoryWeaponsPr
 
   return (
     <div className="flex flex-col">
-      <div className="hidden sm:grid grid-cols-[80px_3fr_1.5fr_1fr_140px] gap-4 px-4 pb-3 mb-2 border-b border-border/40">
+      <div className="hidden sm:grid grid-cols-[80px_3fr_1.5fr_1fr_200px] gap-4 px-4 pb-3 mb-2 border-b border-border/40">
         <div className="flex justify-center border-r border-transparent pr-4">
           <SortButton field="quantity" label="Qty" align="center" />
         </div>
@@ -116,7 +121,7 @@ export function InventoryWeapons({ ids, counts, onSellItem }: InventoryWeaponsPr
 
           return (
             <div key={id} className="border border-border/60 rounded-lg p-3 sm:p-4 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5">
-              <div className="grid grid-cols-1 sm:grid-cols-[80px_3fr_1.5fr_1fr_140px] gap-4 items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-[80px_3fr_1.5fr_1fr_200px] gap-4 items-center">
                 <div className="flex-shrink-0 flex items-center justify-start sm:justify-center sm:border-r border-border/30 pb-2 sm:pb-0 sm:pr-4">
                   <div className="bg-primary/20 text-primary font-display font-bold px-3 py-1.5 rounded text-sm min-w-[50px] text-center border border-primary/30">
                     x{count || 0}
@@ -148,6 +153,16 @@ export function InventoryWeapons({ ids, counts, onSellItem }: InventoryWeaponsPr
                 </div>
 
                 <div className="flex justify-end gap-2">
+                  {onEquipWeapon && (
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="h-8 px-2 text-xs"
+                      onClick={() => setEquipPickerWeaponId(id)}
+                    >
+                      Equip
+                    </Button>
+                  )}
                   {resell !== undefined && onSellItem && (
                     <>
                       <Button variant="outline" size="sm" className="h-8 px-2 text-xs" onClick={() => onSellItem(id, 1, resell)}>Sell 1</Button>
@@ -160,6 +175,20 @@ export function InventoryWeapons({ ids, counts, onSellItem }: InventoryWeaponsPr
           );
         })}
       </div>
+
+      {equipPickerWeaponId !== null && (
+        <DwellerPickerDialog
+          open
+          onClose={() => setEquipPickerWeaponId(null)}
+          weaponId={equipPickerWeaponId}
+          dwellers={dwellers || []}
+          rooms={rooms || []}
+          onEquip={targetDwellerId => {
+            onEquipWeapon?.(targetDwellerId, equipPickerWeaponId);
+            setEquipPickerWeaponId(null);
+          }}
+        />
+      )}
     </div>
   );
 }

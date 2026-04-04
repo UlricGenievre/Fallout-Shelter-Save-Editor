@@ -148,7 +148,15 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
           />
         )}
         {activeTab === 'inventory' && (
-          <VaultInventory items={inventory} onSellItem={handleSellItem} />
+          <VaultInventory
+            items={inventory}
+            onSellItem={handleSellItem}
+            dwellers={dwellers}
+            rooms={rooms}
+            onEquipWeapon={(targetDwellerId, weaponId) =>
+              handleEquipWeapon(targetDwellerId, weaponId)
+            }
+          />
         )}
       </div>
     </div>

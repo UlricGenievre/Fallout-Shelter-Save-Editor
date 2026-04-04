@@ -1,14 +1,19 @@
 import { getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
 import { Pencil } from 'lucide-react';
+import { type ReactNode } from 'react';
 
 interface DwellerCardProps {
   dweller: any;
   roomName?: string;
   roomSpecial?: string;
   onEditWeapon?: () => void;
+  /** Slot optionnel rendu en bas de la colonne Room. */
+  action?: ReactNode;
+  /** Rend toute la carte cliquable (ex: sélection d'un dweller). */
+  onClick?: () => void;
 }
 
-export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon }: DwellerCardProps) {
+export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, action, onClick }: DwellerCardProps) {
   const level = dweller.experience?.currentLevel || 1;
   const maxHp = dweller.health?.maxHealth || 0;
   const outfit = dweller.equipedOutfit?.id || '';
@@ -29,8 +34,11 @@ export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon }: Dw
     : 0;
 
   return (
-    <div className="border border-border/60 rounded-lg p-4 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5">
-      <div className="grid grid-cols-[1.5fr_1.5fr_2fr_1fr] gap-4 items-center">
+    <div
+      className={`border border-border/60 rounded-lg p-4 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5 ${onClick ? 'cursor-pointer select-none active:scale-[0.995]' : ''}`}
+      onClick={onClick}
+    >
+      <div className="grid grid-cols-[1.5fr_1.5fr_2.2fr_1fr] gap-4 items-center">
         <div className="flex-shrink-0">
           <h4 className="font-semibold text-sm">{dweller.name} {dweller.lastName}</h4>
           <p className="text-xs font-display">Level {level}</p>
@@ -75,7 +83,7 @@ export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon }: Dw
             </p>
             {onEditWeapon && (
               <button
-                onClick={onEditWeapon}
+                onClick={e => { e.stopPropagation(); onEditWeapon(); }}
                 className="shrink-0 text-yellow-100 hover:text-amber-400 transition-colors"
                 title="Change weapon"
               >
@@ -88,13 +96,14 @@ export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon }: Dw
           </div>
         </div>
 
-        <div className="flex-shrink-0 flex flex-col justify-center items-center h-full border-l border-border/30 pl-4 w-[140px]">
+        <div className="flex-shrink-0 flex flex-col justify-center items-center h-full border-l border-border/30 pl-4 w-[140px] gap-1">
           <p className="text-xs font-semibold text-center leading-tight text-primary pip-text-glow">
             {roomName || 'Wandering'}
           </p>
           <p className="text-xs font-semibold text-center leading-tight text-primary pip-text-glow">
             {roomSpecial ? `${roomSpecial} (${baseStat}+${bonusStat})` : ''}
           </p>
+          {action && <div className="w-full mt-0.5">{action}</div>}
         </div>
       </div>
     </div>
