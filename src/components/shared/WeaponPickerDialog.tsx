@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { ReactNode } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { getItem, getItemLabel, getItemType } from '@/lib/gameData';
 import { Search, ChevronDown, ChevronRight, X } from 'lucide-react';
@@ -72,9 +73,15 @@ export function WeaponPickerDialog({
   }, [inventoryWeaponCounts, q]);
 
   const filteredDwellerWeapons = useMemo(() => {
-    return otherDwellerWeapons.filter(
-      ({ weaponId }) => !q || getItemLabel(weaponId).toLowerCase().includes(q),
-    );
+    return otherDwellerWeapons
+      .filter(({ weaponId }) => !q || getItemLabel(weaponId).toLowerCase().includes(q))
+      .sort((a, b) => {
+        const parse = (id: string) => {
+          const item = getItem(id);
+          return parseFloat(item?.avgDamage?.toString() || item?.damage?.toString() || '0') || 0;
+        };
+        return parse(b.weaponId) - parse(a.weaponId); // Strongest first
+      });
   }, [otherDwellerWeapons, q]);
 
   const handleEquip = (weaponId: string, sourceDwellerId?: number) => {
@@ -140,168 +147,170 @@ export function WeaponPickerDialog({
           )}
         </div>
 
-        {/* Scrollable weapon list */}
-        <div className="overflow-y-auto flex-1 flex flex-col gap-1.5 pr-1 min-h-0">
+        {/* Tabs for weapons */}
+        <Tabs defaultValue="inventory" className="flex-1 flex flex-col min-h-0 gap-3">
+          <TabsList className="w-full grid grid-cols-2 bg-muted/20 border border-border/50">
+            <TabsTrigger value="inventory" className="font-display tracking-widest text-xs uppercase data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
+              Inventory ({filteredInventory.length})
+            </TabsTrigger>
+            <TabsTrigger value="equipped" className="font-display tracking-widest text-xs uppercase data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
+              Equipped ({filteredDwellerWeapons.length})
+            </TabsTrigger>
+          </TabsList>
 
-          {/* Unequip / None */}
-          {!q && (
-            <div className="flex items-center justify-between px-3 py-2 rounded-lg border border-border/40 bg-card/20 mb-1">
-              <div>
-                <p className="text-sm font-display text-muted-foreground">NO WEAPON</p>
-                {currentWeaponId && (
-                  <p className="text-xs text-muted-foreground/90">
-                    → {getItemLabel(currentWeaponId)} will be returned to inventory
-                  </p>
-                )}
+          {/* Scrollable weapon list */}
+          <div className="overflow-y-auto flex-1 flex flex-col gap-1.5 pr-1 min-h-0">
+
+            {/* Unequip / None */}
+            {!q && (
+              <div className="flex items-center justify-between px-3 py-2 rounded-lg border border-border/40 bg-card/20 mb-1">
+                <div>
+                  <p className="text-sm font-display text-muted-foreground">NO WEAPON</p>
+                  {currentWeaponId && (
+                    <p className="text-xs text-muted-foreground/90">
+                      → {getItemLabel(currentWeaponId)} will be returned to inventory
+                    </p>
+                  )}
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 text-xs"
+                  disabled={!currentWeaponId}
+                  onClick={() => handleEquip('')}
+                >
+                  Unequip
+                </Button>
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-7 text-xs"
-                disabled={!currentWeaponId}
-                onClick={() => handleEquip('')}
-              >
-                Unequip
-              </Button>
-            </div>
-          )}
+            )}
 
-          {/* In inventory */}
-          {filteredInventory.length > 0 && (
-            <>
-              <SectionHeader label={`In Inventory (${filteredInventory.length})`} />
-              {filteredInventory.map(([id, count]) => (
-                <WeaponRow
-                  key={id}
-                  weaponId={id}
-                  item={getItem(id)}
-                  isCurrent={id === currentWeaponId}
-                  damage={formatDamage(id)}
-                  badge={
-                    <span className="text-xs font-display text-primary bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20">
-                      ×{count} in stock
-                    </span>
-                  }
-                  onEquip={() => handleEquip(id)}
-                />
-              ))}
-            </>
-          )}
+            <TabsContent value="inventory" className="m-0 flex flex-col gap-1.5">
+              {filteredInventory.length > 0 ? (
+                filteredInventory.map(([id, count]) => (
+                  <WeaponRow
+                    key={id}
+                    weaponId={id}
+                    item={getItem(id)}
+                    isCurrent={id === currentWeaponId}
+                    damage={formatDamage(id)}
+                    badge={
+                      <span className="text-xs font-display text-primary bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20">
+                        ×{count} in stock
+                      </span>
+                    }
+                    onEquip={() => handleEquip(id)}
+                  />
+                ))
+              ) : (
+                <div className="flex items-center justify-center py-10 text-muted-foreground text-sm font-display">
+                  {q ? `No weapons found for "${search}"` : "No weapons available in inventory"}
+                </div>
+              )}
+            </TabsContent>
 
-          {/* Equipped by other dwellers */}
-          {filteredDwellerWeapons.length > 0 && (
-            <>
-              <SectionHeader
-                label={`Equipped by another dweller (${filteredDwellerWeapons.length})`}
-              />
-              {filteredDwellerWeapons.map(({ owner, weaponId }) => {
-                const isExpanded = expandedDwellerId === owner.serializeId;
-                const ownerStats = owner.stats?.stats || [];
-                const item = getItem(weaponId);
-                const isCurrent = weaponId === currentWeaponId;
-                const label = getItemLabel(weaponId);
-                const rarity = item?.rarity;
-                const damage = formatDamage(weaponId);
-                return (
-                  <div
-                    key={`${owner.serializeId}-${weaponId}`}
-                    className="border border-border/40 rounded-lg"
-                  >
-                    {/* Weapon row — inlined to avoid height-collapse with overflow-hidden */}
-                    <div className={`flex items-center gap-3 px-3 py-2 rounded-t-lg transition-colors hover:bg-primary/5 ${isCurrent ? 'bg-primary/5' : 'bg-card/20'} ${!isExpanded ? 'rounded-b-lg' : ''}`}>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <p className="text-sm font-semibold truncate">{label}</p>
-                          {item?.category && (
-                            <span className="text-[10px] font-display uppercase shrink-0 border border-primary/20 px-1 rounded">
-                              {item.category}
-                            </span>
-                          )}
-                          {rarity && (
-                            <span className={`text-[10px] font-display uppercase shrink-0 ${RARITY_COLORS[rarity] ?? 'text-muted-foreground'}`}>
-                              {rarity}
-                            </span>
-                          )}
-                          {isCurrent && (
-                            <span className="text-[10px] font-display text-primary/60 uppercase shrink-0">Equipped</span>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-3 mt-0.5 flex-wrap">
-                          {damage && (
-                            <span className="text-xs text-primary font-display shrink-0">{damage}</span>
-                          )}
-                          <button
-                            className="flex items-center gap-1 text-xs font-display text-amber-400/80 hover:text-amber-400 transition-colors"
-                            onClick={() => setExpandedDwellerId(isExpanded ? null : owner.serializeId)}
-                          >
-                            {isExpanded
-                              ? <ChevronDown className="w-3 h-3 shrink-0" />
-                              : <ChevronRight className="w-3 h-3 shrink-0" />}
-                            {owner.name} {owner.lastName} · Lvl {owner.experience?.currentLevel || 1}
-                          </button>
-                        </div>
-                      </div>
-                      <Button
-                        variant={isCurrent ? 'secondary' : 'default'}
-                        size="sm"
-                        className={`h-7 px-1.5 text-xs shrink-0 ${!isCurrent ? 'border border-primary hover:bg-background hover:text-primary transition-colors' : ''}`}
-                        disabled={isCurrent}
-                        onClick={() => handleEquip(weaponId, owner.serializeId)}
-                      >
-                        {isCurrent ? 'Current' : 'Equip'}
-                      </Button>
-                    </div>
-
-                    {/* Expandable dweller info */}
-                    {isExpanded && (
-                      <div className="px-4 py-2.5 bg-amber-400/5 border-t border-border/30 rounded-b-lg flex items-center gap-6 flex-wrap">
-                        <span className="text-xs text-muted-foreground font-display">
-                          HP {Math.round(owner.health?.maxHealth || 0)}
-                        </span>
-                        <div className="grid grid-cols-7 gap-2">
-                          {SPECIAL_LETTERS.map((letter, idx) => {
-                            const val = ownerStats[idx + 1]?.value || 0;
-                            return (
-                              <div key={letter} className="flex flex-col items-center">
-                                <span className="text-[9px] font-display text-muted-foreground">{letter}</span>
-                                <span className="text-xs font-bold text-primary">{val}</span>
-                              </div>
-                            );
-                          })}
-                        </div>
-                        {(() => {
-                          const roomInfo = dwellerRooms?.get(owner.serializeId);
-                          return (
-                            <div className="ml-auto text-xs font-display text-right">
-                              <span className="text-primary pip-text-glow font-semibold">
-                                {roomInfo?.name || 'Wandering'}
+            <TabsContent value="equipped" className="m-0 flex flex-col gap-1.5">
+              {filteredDwellerWeapons.length > 0 ? (
+                filteredDwellerWeapons.map(({ owner, weaponId }) => {
+                  const isExpanded = expandedDwellerId === owner.serializeId;
+                  const ownerStats = owner.stats?.stats || [];
+                  const item = getItem(weaponId);
+                  const isCurrent = weaponId === currentWeaponId;
+                  const label = getItemLabel(weaponId);
+                  const rarity = item?.rarity;
+                  const damage = formatDamage(weaponId);
+                  return (
+                    <div
+                      key={`${owner.serializeId}-${weaponId}`}
+                      className="border border-border/40 rounded-lg"
+                    >
+                      {/* Weapon row — inlined to avoid height-collapse with overflow-hidden */}
+                      <div className={`flex items-center gap-3 px-3 py-2 rounded-t-lg transition-colors hover:bg-primary/5 ${isCurrent ? 'bg-primary/5' : 'bg-card/20'} ${!isExpanded ? 'rounded-b-lg' : ''}`}>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <p className="text-sm font-semibold truncate">{label}</p>
+                            {item?.category && (
+                              <span className="text-[10px] font-display uppercase shrink-0 border border-primary/20 px-1 rounded">
+                                {item.category}
                               </span>
-                              {roomInfo?.special && (
-                                <p className="text-muted-foreground/90">{roomInfo.special}</p>
-                              )}
-                            </div>
-                          );
-                        })()}
+                            )}
+                            {rarity && (
+                              <span className={`text-[10px] font-display uppercase shrink-0 ${RARITY_COLORS[rarity] ?? 'text-muted-foreground'}`}>
+                                {rarity}
+                              </span>
+                            )}
+                            {isCurrent && (
+                              <span className="text-[10px] font-display text-primary/60 uppercase shrink-0">Equipped</span>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-3 mt-0.5 flex-wrap">
+                            {damage && (
+                              <span className="text-xs text-primary font-display shrink-0">{damage}</span>
+                            )}
+                            <button
+                              className="flex items-center gap-1 text-xs font-display text-amber-400/80 hover:text-amber-400 transition-colors"
+                              onClick={() => setExpandedDwellerId(isExpanded ? null : owner.serializeId)}
+                            >
+                              {isExpanded
+                                ? <ChevronDown className="w-3 h-3 shrink-0" />
+                                : <ChevronRight className="w-3 h-3 shrink-0" />}
+                              {owner.name} {owner.lastName} · Lvl {owner.experience?.currentLevel || 1} ·
+                              {(() => {
+                                const roomInfo = dwellerRooms?.get(owner.serializeId);
+                                return (
+                                  <div className="ml-auto text-xs font-display text-right">
+                                    <span className="text-primary pip-text-glow font-semibold">
+                                      {roomInfo?.name || 'Wandering'}
+                                    </span>
+                                    {roomInfo?.special && (
+                                      <p className="text-muted-foreground/90">{roomInfo.special}</p>
+                                    )}
+                                  </div>
+                                );
+                              })()}
+                            </button>
+                          </div>
+                        </div>
+                        <Button
+                          variant={isCurrent ? 'secondary' : 'default'}
+                          size="sm"
+                          className={`h-7 px-1.5 text-xs shrink-0 ${!isCurrent ? 'border border-primary hover:bg-background hover:text-primary transition-colors' : ''}`}
+                          disabled={isCurrent}
+                          onClick={() => handleEquip(weaponId, owner.serializeId)}
+                        >
+                          {isCurrent ? 'Current' : 'Equip'}
+                        </Button>
                       </div>
-                    )}
-                  </div>
-                );
-              })}
-            </>
-          )}
 
-          {/* Empty states */}
-          {filteredInventory.length === 0 && filteredDwellerWeapons.length === 0 && q && (
-            <div className="flex items-center justify-center py-10 text-muted-foreground text-sm font-display">
-              No weapons found for "{search}"
-            </div>
-          )}
-          {filteredInventory.length === 0 && filteredDwellerWeapons.length === 0 && !q && (
-            <div className="flex items-center justify-center py-10 text-muted-foreground text-sm font-display">
-              No weapons available
-            </div>
-          )}
-        </div>
+                      {/* Expandable dweller info */}
+                      {isExpanded && (
+                        <div className="px-4 py-2.5 bg-amber-400/5 border-t border-border/30 rounded-b-lg flex items-center gap-6 flex-wrap">
+                          <span className="text-xs text-muted-foreground font-display">
+                            HP {Math.round(owner.health?.maxHealth || 0)}
+                          </span>
+                          <div className="grid grid-cols-7 gap-2">
+                            {SPECIAL_LETTERS.map((letter, idx) => {
+                              const val = ownerStats[idx + 1]?.value || 0;
+                              return (
+                                <div key={letter} className="flex flex-col items-center">
+                                  <span className="text-[9px] font-display text-muted-foreground">{letter}</span>
+                                  <span className="text-xs font-bold text-primary">{val}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="flex items-center justify-center py-10 text-muted-foreground text-sm font-display">
+                  {q ? `No weapons found for "${search}"` : "No weapons equipped by other dwellers"}
+                </div>
+              )}
+            </TabsContent>
+          </div>
+        </Tabs>
       </DialogContent>
     </Dialog>
   );
@@ -341,7 +350,7 @@ function WeaponRow({
 
   return (
     <div
-      className={`flex items-center gap-3 px-3 py-2 bg-card/20 hover:bg-primary/5 transition-colors ${rounded ? 'rounded-lg' : ''} ${isCurrent ? 'bg-primary/5' : ''}`}
+      className={`border border-border/40 rounded-lg flex items-center gap-3 px-3 py-2 bg-card/20 hover:bg-primary/5 transition-colors ${rounded ? 'rounded-lg' : ''} ${isCurrent ? 'bg-primary/5' : ''}`}
     >
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
