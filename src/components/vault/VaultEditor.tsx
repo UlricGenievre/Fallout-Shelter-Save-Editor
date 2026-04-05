@@ -224,15 +224,18 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
           <RoomViewer 
             rooms={rooms} 
             dwellers={dwellers} 
+            inventory={inventory}
+            onEquipWeapon={handleEquipWeapon}
             onMoveDweller={handleMoveDweller}
           />
         )}
         {activeTab === 'dwellers' && (
-        <VaultDwellers
+          <VaultDwellers
             dwellers={dwellers}
             rooms={rooms}
             inventory={inventory}
             onEquipWeapon={handleEquipWeapon}
+            onMoveDweller={handleMoveDweller}
           />
         )}
         {activeTab === 'inventory' && (

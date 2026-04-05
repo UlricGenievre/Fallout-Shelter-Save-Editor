@@ -1,7 +1,10 @@
 import { useState, useMemo } from 'react';
 import { DwellerCard } from '../shared/DwellerCard';
 import { WeaponPickerDialog } from '../shared/WeaponPickerDialog';
-import { ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
+import { RoomPickerDialog } from '../shared/RoomPickerDialog';
+import { RoomConflictDialog } from '../shared/RoomConflictDialog';
+import { Button } from '@/components/ui/button';
+import { ArrowUpDown, ArrowUp, ArrowDown, ArrowRightLeft } from 'lucide-react';
 import { getItem } from '@/lib/gameData';
 import roomsData from '@/data/rooms.json';
 
@@ -10,6 +13,7 @@ interface VaultDwellersProps {
   rooms: any[];
   inventory: any[];
   onEquipWeapon?: (targetDwellerId: number, newWeaponId: string, sourceDwellerId?: number) => void;
+  onMoveDweller?: (dwellerId: number, sourceRoomIndex: number | null, targetRoomIndex: number | null, bumpedDwellerId?: number, isSwap?: boolean) => void;
 }
 
 type SortField = 'name' | 'level' | 'hp' | 'room' | 'roomS' | 'roomP' | 'roomE' | 'roomC' | 'roomI' | 'roomA' | 'roomL' | 'damage' | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L';
@@ -19,12 +23,14 @@ type SortDirection = 'asc' | 'desc';
 
 const SPECIAL_KEYS = ['S', 'P', 'E', 'C', 'I', 'A', 'L'] as const;
 
-export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: VaultDwellersProps) {
+export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onMoveDweller }: VaultDwellersProps) {
   const [sortConfig, setSortConfig] = useState<{ field: SortField; direction: SortDirection }>({
     field: 'name',
     direction: 'asc',
   });
   const [weaponPickerDwellerId, setWeaponPickerDwellerId] = useState<number | null>(null);
+  const [movingDwellerId, setMovingDwellerId] = useState<number | null>(null);
+  const [pickerTargetRoomIndex, setPickerTargetRoomIndex] = useState<number | null>(null);
 
   const handleSort = (field: SortField) => {
     setSortConfig(prev => ({
@@ -265,6 +271,21 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
               roomName={rInfo?.name}
               roomSpecial={rInfo?.special}
               onEditWeapon={() => setWeaponPickerDwellerId(dweller.serializeId)}
+              action={
+                onMoveDweller ? (
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="w-full justify-center h-8 px-2 text-xs flex items-center gap-1.5 border border-primary hover:bg-background hover:text-primary transition-colors"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setMovingDwellerId(dweller.serializeId);
+                    }}
+                  >
+                    <ArrowRightLeft className="w-3 h-3" /> Move
+                  </Button>
+                ) : undefined
+              }
             />
           );
         })}
@@ -288,6 +309,56 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon }: Vau
           />
         );
       })()}
+
+      {movingDwellerId !== null && (
+        <RoomPickerDialog
+          open={true}
+          onClose={() => setMovingDwellerId(null)}
+          dwellerId={movingDwellerId}
+          dwellers={dwellers}
+          rooms={rooms}
+          onSelectRoom={(targetIdx) => {
+            if (targetIdx === null) {
+              const sourceRoomIdx = rooms.findIndex(r => r.dwellers?.includes(movingDwellerId));
+              onMoveDweller?.(movingDwellerId, sourceRoomIdx !== -1 ? sourceRoomIdx : null, null);
+              setMovingDwellerId(null);
+            } else {
+              const targetRoom = rooms[targetIdx];
+              let maxCapacity = 2;
+              if (targetRoom.type === 'Entrance') maxCapacity = 2;
+              else if (targetRoom.type !== 'FakeWasteland') maxCapacity = (targetRoom.mergeLevel || 1) * 2;
+              else maxCapacity = 999;
+
+              if ((targetRoom.dwellers?.length || 0) >= maxCapacity) {
+                setPickerTargetRoomIndex(targetIdx);
+              } else {
+                const sourceRoomIdx = rooms.findIndex(r => r.dwellers?.includes(movingDwellerId));
+                onMoveDweller?.(movingDwellerId, sourceRoomIdx !== -1 ? sourceRoomIdx : null, targetIdx);
+                setMovingDwellerId(null);
+              }
+            }
+          }}
+        />
+      )}
+
+      {movingDwellerId !== null && pickerTargetRoomIndex !== null && (
+        <RoomConflictDialog
+          open={true}
+          onClose={() => {
+            setPickerTargetRoomIndex(null);
+          }}
+          dwellerId={movingDwellerId}
+          targetRoomIndex={pickerTargetRoomIndex}
+          dwellers={dwellers}
+          rooms={rooms}
+          onResolve={(kickedId, isSwap) => {
+            const sourceRoomIdx = rooms.findIndex(r => r.dwellers?.includes(movingDwellerId));
+            onMoveDweller?.(movingDwellerId, sourceRoomIdx !== -1 ? sourceRoomIdx : null, pickerTargetRoomIndex, kickedId, isSwap);
+            setPickerTargetRoomIndex(null);
+            setMovingDwellerId(null);
+          }}
+        />
+      )}
     </div>
   );
 }

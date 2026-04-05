@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import roomsData from '@/data/rooms.json';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { DwellerCard } from '../shared/DwellerCard';
+import { WeaponPickerDialog } from '../shared/WeaponPickerDialog';
 import { RoomPickerDialog } from '../shared/RoomPickerDialog';
 import { RoomConflictDialog } from '../shared/RoomConflictDialog';
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,8 @@ interface Room {
 interface RoomViewerProps {
   rooms: Room[];
   dwellers: any[];
+  inventory?: any[];
+  onEquipWeapon?: (targetDwellerId: number, newWeaponId: string, sourceDwellerId?: number) => void;
   onMoveDweller?: (dwellerId: number, sourceRoomIndex: number | null, targetRoomIndex: number | null, bumpedDwellerId?: number, isSwap?: boolean) => void;
 }
 
@@ -58,7 +61,7 @@ const getRoomName = (type: string): string => {
   return roomNameMap.get(type) || type;
 };
 
-export function RoomViewer({ rooms, dwellers, onMoveDweller }: RoomViewerProps) {
+export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onMoveDweller }: RoomViewerProps) {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -69,6 +72,23 @@ export function RoomViewer({ rooms, dwellers, onMoveDweller }: RoomViewerProps) 
 
   const [movingDwellerId, setMovingDwellerId] = useState<number | null>(null);
   const [pickerTargetRoomIndex, setPickerTargetRoomIndex] = useState<number | null>(null);
+  const [weaponPickerDwellerId, setWeaponPickerDwellerId] = useState<number | null>(null);
+
+  const dwellerRooms = useMemo(() => {
+    const map = new Map<number, { name: string; special: string; category: string }>();
+    const roomInfoMap = new Map((roomsData.rooms as any[]).map(r => [r.type, r]));
+    rooms?.forEach(room => {
+      room.dwellers?.forEach((id: number) => {
+        const roomInfo = roomInfoMap.get(room.type);
+        map.set(id, {
+          name: roomInfo?.name || room.type,
+          special: roomInfo?.special || '',
+          category: roomInfo?.category || '',
+        });
+      });
+    });
+    return map;
+  }, [rooms]);
 
   const { maxRow, maxCol, grid } = useMemo(() => {
     if (!rooms || rooms.length === 0) {
@@ -269,6 +289,7 @@ export function RoomViewer({ rooms, dwellers, onMoveDweller }: RoomViewerProps) 
                         dweller={dweller}
                         roomName={roomName}
                         roomSpecial={roomSpecial}
+                        onEditWeapon={() => setWeaponPickerDwellerId(dweller.serializeId)}
                         action={
                           onMoveDweller ? (
                             <Button
@@ -293,6 +314,24 @@ export function RoomViewer({ rooms, dwellers, onMoveDweller }: RoomViewerProps) 
           </DialogContent>
         </Dialog>
       )}
+
+      {weaponPickerDwellerId !== null && (() => {
+        const pickerDweller = dwellers.find(d => d.serializeId === weaponPickerDwellerId);
+        if (!pickerDweller) return null;
+        return (
+          <WeaponPickerDialog
+            open
+            onClose={() => setWeaponPickerDwellerId(null)}
+            dweller={pickerDweller}
+            allDwellers={dwellers}
+            inventory={inventory || []}
+            dwellerRooms={dwellerRooms}
+            onEquip={(newWeaponId, sourceDwellerId) =>
+              onEquipWeapon?.(weaponPickerDwellerId, newWeaponId, sourceDwellerId)
+            }
+          />
+        );
+      })()}
 
       {movingDwellerId !== null && (
         <RoomPickerDialog
