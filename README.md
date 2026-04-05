@@ -6,7 +6,9 @@ A web-based tool for editing Fallout Shelter save files (.sav). Decrypt, modify,
 
 - **Save Decryption/Encryption**: Support for AES-256-CBC encryption used by Fallout Shelter.
 - **Resource Management**: Edit Caps, Nuka-Cola Quantum, Food, Water, and Power.
-- **Dweller Editor**: Modify dweller stats (S.P.E.C.I.A.L.), health, level, and more.
+- **Dweller Operations**: Comprehensive editor for dweller stats (S.P.E.C.I.A.L.), health, level, and equipment (weapons/outfits). Support for moving dwellers between rooms.
+- **Inventory Management**: Structured editor for Weapons, Outfits, Junk, and Miscellaneous items with advanced sorting (damage, stats, rarity).
+- **Vault Visualization**: Interactive room viewer to explore vault layout, manage rooms, and monitor dwellers.
 - **Recipe Management**: Unlock and manage crafting recipes.
 - **Raw JSON Editor**: Advanced editing via direct JSON manipulation.
 - **Responsive Design**: Built with Tailwind CSS and shadcn/ui for a modern, mobile-friendly interface.
@@ -125,18 +127,23 @@ For example: `docker compose run --rm node npm run lint`
 ## Project Structure
 
 ```text
-├── public/          # Static assets
+├── public/                # Static assets & icons
 ├── src/
-│   ├── components/  # Reusable UI components (including shadcn/ui)
-│   ├── data/        # Static data and JSON files (e.g., items.json)
-│   ├── hooks/       # Custom React hooks
-│   ├── lib/         # Utility functions (crypto, game logic, etc.)
-│   ├── pages/       # Page components (Index, NotFound)
-│   ├── test/        # Test configuration and setup
-│   ├── App.tsx      # Main application component
-│   └── main.tsx     # Application entry point
-├── package.json     # Project dependencies and scripts
-└── vite.config.ts   # Vite configuration
+│   ├── components/        # UI Components
+│   │   ├── core/          # App-wide layouts and core components
+│   │   ├── editors/       # Special editors (JSON, etc)
+│   │   ├── shared/        # Reusable shared components
+│   │   ├── ui/            # shadcn/ui base library
+│   │   └── vault/         # Vault-specific features (Inventory, Dwellers, Rooms)
+│   ├── data/              # Game metadata (weapons.json, outfits.json, junks.json, etc.)
+│   ├── hooks/             # Custom React hooks
+│   ├── lib/               # Utilities (crypto, game logic, types)
+│   ├── pages/             # Page components
+│   ├── test/              # Vitest setup and unit tests
+│   ├── App.tsx            # Main application component
+│   └── main.tsx           # Application entry point
+├── package.json           # Dependencies and scripts
+└── vite.config.ts         # Vite configuration
 ```
 
 ## Environment Variables
