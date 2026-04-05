@@ -168,7 +168,9 @@ This project was initially generated or can be edited with [Lovable](https://lov
 
 ## License
 
-TODO
+This project is licensed under the [GNU General Public License v3 (GPL v3)](LICENSE).
+
+Copyright (C) 2026 Fallout Shelter Save Editor Contributors
 
 ---
 
