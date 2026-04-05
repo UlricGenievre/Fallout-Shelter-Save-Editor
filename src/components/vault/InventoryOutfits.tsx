@@ -23,10 +23,15 @@ export function InventoryOutfits({ ids, counts, onSellItem, dwellers, rooms, onE
   const [equipPickerOutfitId, setEquipPickerOutfitId] = useState<string | null>(null);
 
   const handleSort = (field: SortField) => {
-    setSortConfig(prev => ({
-      field,
-      direction: prev.field === field && prev.direction === 'asc' ? 'desc' : 'asc'
-    }));
+    setSortConfig(prev => {
+      const isSpecial = SPECIAL_KEYS.includes(field as any);
+      return {
+        field,
+        direction: prev.field === field
+          ? (prev.direction === 'asc' ? 'desc' : 'asc')
+          : (isSpecial ? 'desc' : 'asc')
+      };
+    });
   };
 
   const SortButton = ({ field, label, align = 'left' }: { field: SortField, label: string, align?: 'left' | 'center' | 'right' }) => {
@@ -57,7 +62,7 @@ export function InventoryOutfits({ ids, counts, onSellItem, dwellers, rooms, onE
         className="flex items-center justify-center w-full text-xs font-display font-medium text-muted-foreground hover:text-foreground transition-colors"
         title={`Sort by ${field}`}
       >
-        <span className={`flex justify-center items-center w-6 h-6 rounded-md cursor-pointer ${isActive ? 'text-primary bg-primary/10 border border-primary/30' : 'hover:bg-muted/30'}`}>
+        <span className={`flex justify-center items-center w-6 rounded-md cursor-pointer ${isActive ? 'text-primary bg-primary/10 border border-primary/30' : 'hover:bg-muted/30'}`}>
           {field}
           {isActive && (
             sortConfig.direction === 'asc' ? <ArrowUp className="w-2.5 h-2.5 ml-[1px]" /> : <ArrowDown className="w-2.5 h-2.5 ml-[1px]" />
@@ -111,7 +116,7 @@ export function InventoryOutfits({ ids, counts, onSellItem, dwellers, rooms, onE
 
   return (
     <div className="flex flex-col">
-      <div className="hidden sm:grid grid-cols-[80px_minmax(100px,2fr)_repeat(7,20px)_minmax(60px,1fr)_200px] gap-2 md:gap-3 px-2 md:px-4 py-3 -mt-3 mb-2 border-b border-border/40 sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="hidden sm:grid grid-cols-[80px_minmax(100px,2fr)_repeat(7,20px)_minmax(60px,1fr)_200px] gap-3 px-2 md:px-4 py-3 -mt-3 mb-3 border-b border-border/40 sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="flex justify-center border-r border-transparent pr-2 md:pr-4">
           <SortButton field="quantity" label="Qty" align="center" />
         </div>
@@ -140,7 +145,7 @@ export function InventoryOutfits({ ids, counts, onSellItem, dwellers, rooms, onE
           const rarity = itemData?.rarity;
 
           return (
-            <div key={id} className="border border-border/60 rounded-lg p-3 sm:p-2 md:p-4 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5">
+            <div key={id} className="border border-border/60 rounded-lg p-2 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5">
               <div className="grid grid-cols-1 sm:grid-cols-[80px_minmax(100px,2fr)_repeat(7,20px)_minmax(60px,1fr)_200px] gap-2 md:gap-3 items-center">
                 <div className="flex-shrink-0 flex items-center justify-start sm:justify-center sm:border-r border-border/30 pb-2 sm:pb-0 pr-2 md:pr-4">
                   <div className="bg-primary/20 text-primary font-display font-bold px-2 md:px-3 py-1.5 rounded text-sm min-w-[40px] md:min-w-[50px] text-center border border-primary/30">
@@ -204,7 +209,7 @@ export function InventoryOutfits({ ids, counts, onSellItem, dwellers, rooms, onE
           );
         })}
       </div>
-      
+
       {equipPickerOutfitId !== null && (
         <DwellerPickerDialog
           open

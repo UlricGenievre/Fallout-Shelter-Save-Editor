@@ -26,11 +26,10 @@ export function InventoryJunks({ ids, counts, onSellItem, emptyMessage = "No ite
   const SortButton = ({ field, label, align = 'left' }: { field: SortField, label: string, align?: 'left' | 'center' | 'right' }) => {
     const isActive = sortConfig.field === field;
     return (
-      <button 
+      <button
         onClick={() => handleSort(field)}
-        className={`flex items-center gap-1.5 text-xs font-display uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors ${
-          align === 'center' ? 'justify-center w-full' : align === 'right' ? 'justify-end w-full' : 'justify-start'
-        }`}
+        className={`flex items-center gap-1.5 text-xs font-display uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors ${align === 'center' ? 'justify-center w-full' : align === 'right' ? 'justify-end w-full' : 'justify-start'
+          }`}
       >
         <span className="flex items-center gap-1 cursor-pointer">
           {label}
@@ -55,9 +54,9 @@ export function InventoryJunks({ ids, counts, onSellItem, emptyMessage = "No ite
   const sortedIds = [...ids].sort((a, b) => {
     const itemA = getItem(a);
     const itemB = getItem(b);
-    
+
     let comparison = 0;
-    switch(sortConfig.field) {
+    switch (sortConfig.field) {
       case 'name':
         comparison = getItemLabel(a).localeCompare(getItemLabel(b));
         break;
@@ -74,7 +73,7 @@ export function InventoryJunks({ ids, counts, onSellItem, emptyMessage = "No ite
         comparison = rankA - rankB;
         break;
     }
-    
+
     if (comparison === 0 && sortConfig.field !== 'name') {
       return getItemLabel(a).localeCompare(getItemLabel(b));
     }
@@ -83,7 +82,7 @@ export function InventoryJunks({ ids, counts, onSellItem, emptyMessage = "No ite
 
   return (
     <div className="flex flex-col">
-      <div className="hidden sm:grid grid-cols-[80px_4fr_1.5fr_140px] gap-4 px-4 py-3 -mt-3 mb-2 border-b border-border/40 sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="hidden sm:grid grid-cols-[80px_4fr_1.5fr_140px] gap-4 px-4 py-3 -mt-3 mb-3 border-b border-border/40 sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="flex justify-center border-r border-transparent pr-4">
           <SortButton field="quantity" label="Qty" align="center" />
         </div>
@@ -107,7 +106,7 @@ export function InventoryJunks({ ids, counts, onSellItem, emptyMessage = "No ite
           const rarity = itemData?.rarity;
 
           return (
-            <div key={id} className="border border-border/60 rounded-lg p-3 sm:p-4 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5">
+            <div key={id} className="border border-border/60 rounded-lg p-3 sm:p-2 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5">
               <div className="grid grid-cols-1 sm:grid-cols-[80px_4fr_1.5fr_140px] gap-4 items-center">
                 <div className="flex-shrink-0 flex items-center justify-start sm:justify-center sm:border-r border-border/30 pb-2 sm:pb-0 sm:pr-4">
                   <div className="bg-primary/20 text-primary font-display font-bold px-3 py-1.5 rounded text-sm min-w-[50px] text-center border border-primary/30">

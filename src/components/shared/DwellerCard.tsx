@@ -10,11 +10,13 @@ interface DwellerCardProps {
   onEditOutfit?: () => void;
   /** Slot optionnel rendu en bas de la colonne Room. */
   action?: ReactNode;
+  /** Édite les infos de base du dweller via un dialog. */
+  onEditDweller?: () => void;
   /** Rend toute la carte cliquable (ex: sélection d'un dweller). */
   onClick?: () => void;
 }
 
-export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, onEditOutfit, action, onClick }: DwellerCardProps) {
+export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, onEditOutfit, onEditDweller, action, onClick }: DwellerCardProps) {
   const level = dweller.experience?.currentLevel || 1;
   const maxHp = dweller.health?.maxHealth || 0;
   const outfit = dweller.equipedOutfit?.id || '';
@@ -36,11 +38,14 @@ export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, onEd
 
   return (
     <div
-      className={`border border-border/60 rounded-lg p-4 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5 ${onClick ? 'cursor-pointer select-none active:scale-[0.995]' : ''}`}
+      className={`border border-border/60 rounded-lg p-2 bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 hover:shadow-md hover:shadow-primary/5 ${onClick ? 'cursor-pointer select-none active:scale-[0.995]' : ''}`}
       onClick={onClick}
     >
       <div className="grid grid-cols-[1.5fr_1.5fr_2.2fr_1fr] gap-4 items-center">
-        <div className="flex-shrink-0">
+        <div
+          className={`flex-shrink-0 border border-border/60 rounded-lg p-2 transition-all duration-100 ${onEditDweller ? 'cursor-pointer hover:bg-secondary' : ''}`}
+          onClick={e => { if (onEditDweller) { e.stopPropagation(); onEditDweller(); } }}
+        >
           <h4 className="font-semibold text-sm">{dweller.name} {dweller.lastName}</h4>
           <p className="text-xs font-display">Level {level}</p>
           <p className="text-xs font-display">HP MAX : {Math.round(maxHp)}</p>
@@ -69,38 +74,26 @@ export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, onEd
         </div>
 
         <div className="flex-shrink-0 grid grid-cols-[2fr_1fr] gap-x-2 gap-y-2 items-center">
-          <div className="flex items-center gap-1 min-w-0">
+          <div className={`flex items-center gap-1 min-w-0 text-yellow-100 ${onEditOutfit ? 'cursor-pointer hover:text-amber-400' : ''}`} onClick={e => { e.stopPropagation(); onEditOutfit(); }}>
             <p className="text-xs font-semibold truncate text-left" title={getItemLabel(outfit)}>
               <span className="text-xs text-muted-foreground font-display">OUTFIT : </span>
               {getItemLabel(outfit) || 'None'}
             </p>
             {onEditOutfit && (
-              <button
-                onClick={e => { e.stopPropagation(); onEditOutfit(); }}
-                className="shrink-0 text-yellow-100 hover:text-amber-400 transition-colors"
-                title="Change outfit"
-              >
-                <Pencil className="w-3 h-3" />
-              </button>
+              <Pencil className="w-3 h-3 ml-1" />
             )}
           </div>
           <div className="text-left">
             {outfitBonus && <p className="text-xs text-primary font-display">{outfitBonus}</p>}
           </div>
 
-          <div className="flex items-center gap-1 min-w-0">
+          <div className={`flex items-center gap-1 min-w-0 text-yellow-100 ${onEditWeapon ? 'cursor-pointer hover:text-amber-400' : ''}`} onClick={e => { e.stopPropagation(); onEditWeapon(); }}>
             <p className="text-xs font-semibold truncate text-left" title={getItemLabel(weapon)}>
               <span className="text-xs text-muted-foreground font-display">WEAPON : </span>
               {getItemLabel(weapon) || 'None'}
             </p>
             {onEditWeapon && (
-              <button
-                onClick={e => { e.stopPropagation(); onEditWeapon(); }}
-                className="shrink-0 text-yellow-100 hover:text-amber-400 transition-colors"
-                title="Change weapon"
-              >
-                <Pencil className="w-3 h-3" />
-              </button>
+              <Pencil className="w-3 h-3 ml-1" />
             )}
           </div>
           <div className="text-left">

@@ -184,6 +184,18 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
     setData(newData);
   };
 
+  const handleUpdateDweller = (dwellerId: number, updatedDweller: any) => {
+    if (!setData || !data) return;
+    const newData = JSON.parse(JSON.stringify(data));
+    const allDwellers: any[] = newData.dwellers?.dwellers || [];
+    
+    const idx = allDwellers.findIndex((d: any) => d.serializeId === dwellerId);
+    if (idx !== -1) {
+      allDwellers[idx] = updatedDweller;
+      setData(newData);
+    }
+  };
+
   const rooms = data?.vault?.rooms || [];
   const dwellers = data?.dwellers?.dwellers || [];
   const inventory = data?.vault?.inventory?.items || [];
@@ -228,6 +240,7 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
             onEquipWeapon={handleEquipWeapon}
             onEquipOutfit={handleEquipOutfit}
             onMoveDweller={handleMoveDweller}
+            onUpdateDweller={handleUpdateDweller}
           />
         )}
         {activeTab === 'dwellers' && (
@@ -238,6 +251,7 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
             onEquipWeapon={handleEquipWeapon}
             onEquipOutfit={handleEquipOutfit}
             onMoveDweller={handleMoveDweller}
+            onUpdateDweller={handleUpdateDweller}
           />
         )}
         {activeTab === 'inventory' && (

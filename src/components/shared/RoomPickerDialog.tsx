@@ -200,7 +200,7 @@ export function RoomPickerDialog({
           </div>
 
           <div className="flex flex-col">
-            <div className="hidden sm:grid grid-cols-[3fr_2fr_1fr] gap-4 px-4 py-3 -mt-3 mb-2 border-b border-border/40 sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            <div className="hidden sm:grid grid-cols-[3fr_2fr_1fr] gap-4 px-4 py-3 -mt-3 mb-3 border-b border-border/40 sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
               <div className="flex justify-start border-x border-transparent gap-[1px]">
                 <div className="flex gap-6">
                   <SortButton field="name" label="Room" />

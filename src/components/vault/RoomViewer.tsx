@@ -6,6 +6,7 @@ import { WeaponPickerDialog } from '../shared/WeaponPickerDialog';
 import { OutfitPickerDialog } from '../shared/OutfitPickerDialog';
 import { RoomPickerDialog } from '../shared/RoomPickerDialog';
 import { RoomConflictDialog } from '../shared/RoomConflictDialog';
+import { DwellerEditDialog } from '../shared/DwellerEditDialog';
 import { Button } from '@/components/ui/button';
 import { ArrowRightLeft } from 'lucide-react';
 
@@ -28,6 +29,7 @@ interface RoomViewerProps {
   onEquipWeapon?: (targetDwellerId: number, newWeaponId: string, sourceDwellerId?: number) => void;
   onEquipOutfit?: (targetDwellerId: number, newOutfitId: string, sourceDwellerId?: number) => void;
   onMoveDweller?: (dwellerId: number, sourceRoomIndex: number | null, targetRoomIndex: number | null, bumpedDwellerId?: number, isSwap?: boolean) => void;
+  onUpdateDweller?: (dwellerId: number, changes: any) => void;
 }
 
 const ROOM_CLASS_COLORS: Record<string, string> = {
@@ -63,7 +65,7 @@ const getRoomName = (type: string): string => {
   return roomNameMap.get(type) || type;
 };
 
-export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipOutfit, onMoveDweller }: RoomViewerProps) {
+export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipOutfit, onMoveDweller, onUpdateDweller }: RoomViewerProps) {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -76,6 +78,7 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
   const [pickerTargetRoomIndex, setPickerTargetRoomIndex] = useState<number | null>(null);
   const [weaponPickerDwellerId, setWeaponPickerDwellerId] = useState<number | null>(null);
   const [outfitPickerDwellerId, setOutfitPickerDwellerId] = useState<number | null>(null);
+  const [editingDwellerId, setEditingDwellerId] = useState<number | null>(null);
 
   const dwellerRooms = useMemo(() => {
     const map = new Map<number, { name: string; special: string; category: string }>();
@@ -294,6 +297,7 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
                         roomSpecial={roomSpecial}
                         onEditWeapon={() => setWeaponPickerDwellerId(dweller.serializeId)}
                         onEditOutfit={() => setOutfitPickerDwellerId(dweller.serializeId)}
+                        onEditDweller={() => setEditingDwellerId(dweller.serializeId)}
                         action={
                           onMoveDweller ? (
                             <Button
@@ -410,6 +414,20 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
           }}
         />
       )}
+
+      {/* Edit Dweller Dialog */}
+      {editingDwellerId !== null && (() => {
+        const d = dwellers.find(d => d.serializeId === editingDwellerId);
+        if (!d) return null;
+        return (
+          <DwellerEditDialog
+            open={true}
+            onClose={() => setEditingDwellerId(null)}
+            dweller={d}
+            onSave={(dwellerId, changes) => onUpdateDweller?.(dwellerId, changes)}
+          />
+        );
+      })()}
     </div>
   );
 }

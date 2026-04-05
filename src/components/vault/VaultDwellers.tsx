@@ -4,6 +4,7 @@ import { WeaponPickerDialog } from '../shared/WeaponPickerDialog';
 import { OutfitPickerDialog } from '../shared/OutfitPickerDialog';
 import { RoomPickerDialog } from '../shared/RoomPickerDialog';
 import { RoomConflictDialog } from '../shared/RoomConflictDialog';
+import { DwellerEditDialog } from '../shared/DwellerEditDialog';
 import { Button } from '@/components/ui/button';
 import { ArrowUpDown, ArrowUp, ArrowDown, ArrowRightLeft } from 'lucide-react';
 import { getItem } from '@/lib/gameData';
@@ -16,6 +17,7 @@ interface VaultDwellersProps {
   onEquipWeapon?: (targetDwellerId: number, newWeaponId: string, sourceDwellerId?: number) => void;
   onEquipOutfit?: (targetDwellerId: number, newOutfitId: string, sourceDwellerId?: number) => void;
   onMoveDweller?: (dwellerId: number, sourceRoomIndex: number | null, targetRoomIndex: number | null, bumpedDwellerId?: number, isSwap?: boolean) => void;
+  onUpdateDweller?: (dwellerId: number, changes: any) => void;
 }
 
 type SortField = 'name' | 'level' | 'hp' | 'room' | 'roomS' | 'roomP' | 'roomE' | 'roomC' | 'roomI' | 'roomA' | 'roomL' | 'damage' | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L';
@@ -25,7 +27,7 @@ type SortDirection = 'asc' | 'desc';
 
 const SPECIAL_KEYS = ['S', 'P', 'E', 'C', 'I', 'A', 'L'] as const;
 
-export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEquipOutfit, onMoveDweller }: VaultDwellersProps) {
+export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEquipOutfit, onMoveDweller, onUpdateDweller }: VaultDwellersProps) {
   const [sortConfig, setSortConfig] = useState<{ field: SortField; direction: SortDirection }>({
     field: 'name',
     direction: 'asc',
@@ -34,12 +36,18 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEqu
   const [outfitPickerDwellerId, setOutfitPickerDwellerId] = useState<number | null>(null);
   const [movingDwellerId, setMovingDwellerId] = useState<number | null>(null);
   const [pickerTargetRoomIndex, setPickerTargetRoomIndex] = useState<number | null>(null);
+  const [editingDwellerId, setEditingDwellerId] = useState<number | null>(null);
 
   const handleSort = (field: SortField) => {
-    setSortConfig(prev => ({
-      field,
-      direction: prev.field === field && prev.direction === 'asc' ? 'desc' : 'asc',
-    }));
+    setSortConfig(prev => {
+      const isSpecial = SPECIAL_KEYS.includes(field as any) || ROOM_SORT_KEYS.includes(field as any);
+      return {
+        field,
+        direction: prev.field === field
+          ? (prev.direction === 'asc' ? 'desc' : 'asc')
+          : (isSpecial ? 'desc' : 'asc')
+      }
+    });
   };
 
   const SortButton = ({
@@ -202,97 +210,100 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEqu
   }
 
   return (
-    <div className="w-full h-full p-6 overflow-auto">
-      <div className="mb-4 text-center">
+    <div className="flex flex-col h-full">
+      <div className="px-6 pt-3 pb-0 shrink-0 flex flex-col items-center">
         <h2 className="font-display text-2xl pip-text-glow tracking-widest mb-2">
           VAULT DWELLERS ({dwellers.length})
         </h2>
       </div>
 
-      {/* Barre de tri — alignée sur DwellerCard [1.5fr_1.5fr_2.2fr_1fr] */}
-      <div className="max-w-5xl mx-auto mb-3">
-        <div className="hidden sm:grid grid-cols-[1.5fr_1.5fr_2.2fr_1fr] gap-4 px-4 py-3 -mt-3 border-b border-border/40 items-center sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          {/* Col 1 : Nom, Lvl, HP */}
-          <div className="grid grid-cols-3 gap-2">
-            <SortButton field="name" label="Name" />
-            <SortButton field="level" label="Lvl" />
-            <SortButton field="hp" label="HP Max" />
-          </div>
-          {/* Col 2 : S.P.E.C.I.A.L. */}
-          <div className="grid grid-cols-7 gap-0 items-center">
-            {SPECIAL_KEYS.map(key => (
-              <SpecialSortButton key={key} field={key} />
-            ))}
-          </div>
-          {/* Col 3 : Equipped weapon damage */}
-          <div className="flex items-center">
-            <SortButton field="damage" label="Damage" />
-          </div>
-          {/* Col 4 : Assigned room */}
-          <div className="flex flex-col items-end gap-1">
-            <SortButton field="room" label="Room" align="right" />
-            <div className="flex gap-0">
-              {ROOM_SORT_KEYS.map(rk => {
-                const letter = rk.slice(4); // 'roomE' -> 'E'
-                const isActive = sortConfig.field === rk;
-                return (
-                  <button
-                    key={rk}
-                    onClick={() => handleSort(rk)}
-                    title={`Trier par salle de stat ${letter}`}
-                    className="flex items-center justify-center text-xs font-display font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <span
-                      className={`flex justify-center items-center w-5 h-5 rounded cursor-pointer ${isActive
-                        ? 'text-primary bg-primary/10 border border-primary/30'
-                        : 'hover:bg-muted/30'
-                        }`}
+      <div className="flex-1 overflow-auto">
+        {/* Barre de tri — alignée sur DwellerCard [1.5fr_1.5fr_2.2fr_1fr] */}
+        <div className="max-w-5xl mx-auto sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="hidden sm:grid grid-cols-[1.5fr_1.5fr_2.2fr_1fr] gap-4 px-4 py-3 border-b border-border/40 items-center">
+            {/* Col 1 : Nom, Lvl, HP */}
+            <div className="grid grid-cols-3 gap-2">
+              <SortButton field="name" label="Name" />
+              <SortButton field="level" label="Lvl" />
+              <SortButton field="hp" label="HP Max" />
+            </div>
+            {/* Col 2 : S.P.E.C.I.A.L. */}
+            <div className="grid grid-cols-7 gap-0 items-center">
+              {SPECIAL_KEYS.map(key => (
+                <SpecialSortButton key={key} field={key} />
+              ))}
+            </div>
+            {/* Col 3 : Equipped weapon damage */}
+            <div className="flex items-center">
+              <SortButton field="damage" label="Damage" />
+            </div>
+            {/* Col 4 : Assigned room */}
+            <div className="flex flex-col items-end gap-1">
+              <SortButton field="room" label="Room" align="right" />
+              <div className="flex gap-0">
+                {ROOM_SORT_KEYS.map(rk => {
+                  const letter = rk.slice(4); // 'roomE' -> 'E'
+                  const isActive = sortConfig.field === rk;
+                  return (
+                    <button
+                      key={rk}
+                      onClick={() => handleSort(rk)}
+                      title={`Trier par salle de stat ${letter}`}
+                      className="flex items-center justify-center text-xs font-display font-medium text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {letter}
-                      {isActive &&
-                        (sortConfig.direction === 'asc' ? (
-                          <ArrowUp className="w-2 h-2 ml-[1px]" />
-                        ) : (
-                          <ArrowDown className="w-2 h-2 ml-[1px]" />
-                        ))}
-                    </span>
-                  </button>
-                );
-              })}
+                      <span
+                        className={`flex justify-center items-center w-5 h-5 rounded cursor-pointer ${isActive
+                          ? 'text-primary bg-primary/10 border border-primary/30'
+                          : 'hover:bg-muted/30'
+                          }`}
+                      >
+                        {letter}
+                        {isActive &&
+                          (sortConfig.direction === 'asc' ? (
+                            <ArrowUp className="w-2 h-2 ml-[1px]" />
+                          ) : (
+                            <ArrowDown className="w-2 h-2 ml-[1px]" />
+                          ))}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="grid grid-cols-1 gap-4 max-w-5xl mx-auto pb-10">
-        {sortedDwellers.map(dweller => {
-          const rInfo = dwellerRooms.get(dweller.serializeId);
-          return (
-            <DwellerCard
-              key={dweller.serializeId}
-              dweller={dweller}
-              roomName={rInfo?.name}
-              roomSpecial={rInfo?.special}
-              onEditWeapon={() => setWeaponPickerDwellerId(dweller.serializeId)}
-              onEditOutfit={() => setOutfitPickerDwellerId(dweller.serializeId)}
-              action={
-                onMoveDweller ? (
-                  <Button
-                    variant="default"
-                    size="sm"
-                    className="w-full justify-center h-8 px-2 text-xs flex items-center gap-1.5 border border-primary hover:bg-background hover:text-primary transition-colors"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setMovingDwellerId(dweller.serializeId);
-                    }}
-                  >
-                    <ArrowRightLeft className="w-3 h-3" /> Move
-                  </Button>
-                ) : undefined
-              }
-            />
-          );
-        })}
+        <div className="grid grid-cols-1 gap-3 max-w-5xl mx-auto pb-10">
+          {sortedDwellers.map(dweller => {
+            const rInfo = dwellerRooms.get(dweller.serializeId);
+            return (
+              <DwellerCard
+                key={dweller.serializeId}
+                dweller={dweller}
+                roomName={rInfo?.name}
+                roomSpecial={rInfo?.special}
+                onEditWeapon={() => setWeaponPickerDwellerId(dweller.serializeId)}
+                onEditOutfit={() => setOutfitPickerDwellerId(dweller.serializeId)}
+                onEditDweller={() => setEditingDwellerId(dweller.serializeId)}
+                action={
+                  onMoveDweller ? (
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="w-full justify-center h-8 px-2 text-xs flex items-center gap-1.5 border border-primary hover:bg-background hover:text-primary transition-colors"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setMovingDwellerId(dweller.serializeId);
+                      }}
+                    >
+                      <ArrowRightLeft className="w-3 h-3" /> Move
+                    </Button>
+                  ) : undefined
+                }
+              />
+            );
+          })}
+        </div>
       </div>
 
       {/* Weapon picker modal */}
@@ -382,6 +393,20 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEqu
           }}
         />
       )}
+
+      {/* Edit dweller modal */}
+      {editingDwellerId !== null && (() => {
+        const d = dwellers.find(d => d.serializeId === editingDwellerId);
+        if (!d) return null;
+        return (
+          <DwellerEditDialog
+            open={true}
+            onClose={() => setEditingDwellerId(null)}
+            dweller={d}
+            onSave={(dwellerId, changes) => onUpdateDweller?.(dwellerId, changes)}
+          />
+        );
+      })()}
     </div>
   );
 }
