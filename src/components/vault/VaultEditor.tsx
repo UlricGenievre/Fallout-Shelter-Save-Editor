@@ -226,6 +226,7 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
             dwellers={dwellers} 
             inventory={inventory}
             onEquipWeapon={handleEquipWeapon}
+            onEquipOutfit={handleEquipOutfit}
             onMoveDweller={handleMoveDweller}
           />
         )}
@@ -235,6 +236,7 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
             rooms={rooms}
             inventory={inventory}
             onEquipWeapon={handleEquipWeapon}
+            onEquipOutfit={handleEquipOutfit}
             onMoveDweller={handleMoveDweller}
           />
         )}

@@ -7,13 +7,14 @@ interface DwellerCardProps {
   roomName?: string;
   roomSpecial?: string;
   onEditWeapon?: () => void;
+  onEditOutfit?: () => void;
   /** Slot optionnel rendu en bas de la colonne Room. */
   action?: ReactNode;
   /** Rend toute la carte cliquable (ex: sélection d'un dweller). */
   onClick?: () => void;
 }
 
-export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, action, onClick }: DwellerCardProps) {
+export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, onEditOutfit, action, onClick }: DwellerCardProps) {
   const level = dweller.experience?.currentLevel || 1;
   const maxHp = dweller.health?.maxHealth || 0;
   const outfit = dweller.equipedOutfit?.id || '';
@@ -68,10 +69,21 @@ export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, acti
         </div>
 
         <div className="flex-shrink-0 grid grid-cols-[2fr_1fr] gap-x-2 gap-y-2 items-center">
-          <p className="text-xs font-semibold truncate text-left" title={getItemLabel(outfit)}>
-            <span className="text-xs text-muted-foreground font-display">OUTFIT : </span>
-            {getItemLabel(outfit) || 'None'}
-          </p>
+          <div className="flex items-center gap-1 min-w-0">
+            <p className="text-xs font-semibold truncate text-left" title={getItemLabel(outfit)}>
+              <span className="text-xs text-muted-foreground font-display">OUTFIT : </span>
+              {getItemLabel(outfit) || 'None'}
+            </p>
+            {onEditOutfit && (
+              <button
+                onClick={e => { e.stopPropagation(); onEditOutfit(); }}
+                className="shrink-0 text-yellow-100 hover:text-amber-400 transition-colors"
+                title="Change outfit"
+              >
+                <Pencil className="w-3 h-3" />
+              </button>
+            )}
+          </div>
           <div className="text-left">
             {outfitBonus && <p className="text-xs text-primary font-display">{outfitBonus}</p>}
           </div>

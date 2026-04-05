@@ -1,19 +1,18 @@
-import { useState, useMemo } from 'react';
-import { ReactNode } from 'react';
+import { useState, useMemo, ReactNode, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { getItem, getItemLabel, getItemType } from '@/lib/gameData';
 import { Search, ChevronDown, ChevronRight, X, ArrowUp, ArrowDown, ArrowUpDown } from 'lucide-react';
 
-interface WeaponPickerDialogProps {
+interface OutfitPickerDialogProps {
   open: boolean;
   onClose: () => void;
   dweller: any;
   allDwellers: any[];
   inventory: any[];
   dwellerRooms?: Map<number, { name: string; special: string; category: string }>;
-  onEquip: (newWeaponId: string, sourceDwellerId?: number) => void;
+  onEquip: (newOutfitId: string, sourceDwellerId?: number) => void;
 }
 
 const RARITY_COLORS: Record<string, string> = {
@@ -22,12 +21,12 @@ const RARITY_COLORS: Record<string, string> = {
   Common: 'text-green-400',
 };
 
-const SPECIAL_LETTERS = ['S', 'P', 'E', 'C', 'I', 'A', 'L'];
+const SPECIAL_LETTERS = ['S', 'P', 'E', 'C', 'I', 'A', 'L'] as const;
 
-type SortField = 'name' | 'quantity' | 'rarity' | 'damage';
+type SortField = 'name' | 'quantity' | 'rarity' | 'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L' | 'totalStats';
 type SortDirection = 'asc' | 'desc';
 
-export function WeaponPickerDialog({
+export function OutfitPickerDialog({
   open,
   onClose,
   dweller,
@@ -35,32 +34,44 @@ export function WeaponPickerDialog({
   inventory,
   dwellerRooms,
   onEquip,
-}: WeaponPickerDialogProps) {
+}: OutfitPickerDialogProps) {
   const [search, setSearch] = useState('');
   const [expandedDwellerId, setExpandedDwellerId] = useState<number | null>(null);
-  const [sortConfig, setSortConfig] = useState<{ field: SortField; direction: SortDirection }>({ field: 'damage', direction: 'desc' });
+  const [sortConfig, setSortConfig] = useState<{ field: SortField; direction: SortDirection }>({ field: 'name', direction: 'asc' });
   const [activeTab, setActiveTab] = useState('inventory');
 
-  const currentWeaponId = dweller?.equipedWeapon?.id || '';
-  const currentWeaponItem = getItem(currentWeaponId);
+  useEffect(() => {
+    if (open) {
+      setSearch('');
+      setExpandedDwellerId(null);
+      setActiveTab('inventory');
+      const roomInfo = dwellerRooms?.get(dweller?.serializeId);
+      if (roomInfo?.special && SPECIAL_LETTERS.includes(roomInfo.special as any)) {
+        setSortConfig({ field: roomInfo.special as SortField, direction: 'desc' });
+      } else {
+        setSortConfig({ field: 'name', direction: 'asc' });
+      }
+    }
+  }, [open, dweller?.serializeId, dwellerRooms]);
 
-  // --- Inventory weapon counts (weapons only) ---
-  const inventoryWeaponCounts = useMemo(() => {
+  const currentOutfitId = dweller?.equipedOutfit?.id || '';
+  const currentOutfitItem = getItem(currentOutfitId);
+
+  const inventoryOutfitCounts = useMemo(() => {
     const counts = new Map<string, number>();
     for (const item of inventory) {
       const id = typeof item === 'string' ? item : item?.id;
       if (!id) continue;
-      if (getItemType(id) !== 'weapon') continue;
+      if (getItemType(id) !== 'outfit') continue;
       counts.set(id, (counts.get(id) || 0) + 1);
     }
     return counts;
   }, [inventory]);
 
-  // --- Other dwellers who have a weapon ---
-  const otherDwellerWeapons = useMemo(() => {
+  const otherDwellerOutfits = useMemo(() => {
     return allDwellers
-      .filter(d => d.serializeId !== dweller?.serializeId && d.equipedWeapon?.id)
-      .map(d => ({ owner: d, weaponId: d.equipedWeapon.id as string }));
+      .filter(d => d.serializeId !== dweller?.serializeId && d.equipedOutfit?.id)
+      .map(d => ({ owner: d, outfitId: d.equipedOutfit.id as string }));
   }, [allDwellers, dweller]);
 
   const q = search.toLowerCase().trim();
@@ -84,9 +95,13 @@ export function WeaponPickerDialog({
         comparison = rankA - rankB;
         break;
       }
-      case 'damage': {
-        const getDmg = (item: any) => parseFloat(item?.avgDamage?.toString() || item?.damage?.toString() || '0') || 0;
-        comparison = getDmg(itemA) - getDmg(itemB);
+      case 'totalStats':
+        comparison = (itemA?.totalStats || 0) - (itemB?.totalStats || 0);
+        break;
+      case 'S': case 'P': case 'E': case 'C': case 'I': case 'A': case 'L': {
+        const statA = itemA?.special?.[sortConfig.field] || 0;
+        const statB = itemB?.special?.[sortConfig.field] || 0;
+        comparison = statA - statB;
         break;
       }
     }
@@ -98,26 +113,26 @@ export function WeaponPickerDialog({
   };
 
   const filteredInventory = useMemo(() => {
-    return Array.from(inventoryWeaponCounts.entries())
+    return Array.from(inventoryOutfitCounts.entries())
       .filter(([id]) => !q || getItemLabel(id).toLowerCase().includes(q))
       .sort((a, b) => sortItems(a[0], b[0], a[1], b[1]));
-  }, [inventoryWeaponCounts, q, sortConfig]);
+  }, [inventoryOutfitCounts, q, sortConfig]);
 
-  const filteredDwellerWeapons = useMemo(() => {
-    return otherDwellerWeapons
-      .filter(({ weaponId }) => !q || getItemLabel(weaponId).toLowerCase().includes(q))
-      .sort((a, b) => sortItems(a.weaponId, b.weaponId, 0, 0));
-  }, [otherDwellerWeapons, q, sortConfig]);
+  const filteredDwellerOutfits = useMemo(() => {
+    return otherDwellerOutfits
+      .filter(({ outfitId }) => !q || getItemLabel(outfitId).toLowerCase().includes(q))
+      .sort((a, b) => sortItems(a.outfitId, b.outfitId, 0, 0));
+  }, [otherDwellerOutfits, q, sortConfig]);
 
-  const handleEquip = (weaponId: string, sourceDwellerId?: number) => {
-    onEquip(weaponId, sourceDwellerId);
+  const handleEquip = (outfitId: string, sourceDwellerId?: number) => {
+    onEquip(outfitId, sourceDwellerId);
     onClose();
   };
 
   const handleSort = (field: SortField) => {
     setSortConfig(prev => ({
       field,
-      direction: prev.field === field && prev.direction === 'asc' ? 'desc' : 'asc'
+      direction: prev.field === field && prev.direction === 'desc' ? 'asc' : 'desc'
     }));
   };
 
@@ -140,35 +155,66 @@ export function WeaponPickerDialog({
     );
   };
 
+  const SpecialSortButton = ({ field }: { field: typeof SPECIAL_LETTERS[number] }) => {
+    const isActive = sortConfig.field === field;
+    return (
+      <button
+        onClick={() => handleSort(field)}
+        className="flex items-center justify-center w-full text-xs font-display font-medium text-muted-foreground hover:text-foreground transition-colors"
+        title={`Sort by ${field}`}
+      >
+        <span className={`flex justify-center items-center w-5 h-5 rounded cursor-pointer ${isActive ? 'text-primary bg-primary/10 border border-primary/30' : 'hover:bg-muted/30'}`}>
+          {field}
+          {isActive && (
+            sortConfig.direction === 'asc' ? <ArrowUp className="w-2 h-2 ml-[1px]" /> : <ArrowDown className="w-2 h-2 ml-[1px]" />
+          )}
+        </span>
+      </button>
+    );
+  };
+
+  const dwellerRoomInfo = dwellerRooms?.get(dweller?.serializeId);
+
   return (
     <Dialog open={open} onOpenChange={v => !v && onClose()}>
       <DialogContent className="sm:max-w-4xl max-h-[85vh] flex flex-col gap-3">
-        <DialogHeader className="shrink-0">
-          <DialogTitle className="font-display tracking-wider pip-text-glow">CHANGE WEAPON</DialogTitle>
+        <DialogHeader className="shrink-0 flex justify-between items-center pr-8">
+          <DialogTitle className="font-display tracking-wider pip-text-glow">CHANGE OUTFIT</DialogTitle>
         </DialogHeader>
 
-        {/* Current dweller context — always visible */}
-        <div className="border border-primary/30 rounded-lg p-3 bg-primary/5 shrink-0">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="font-bold text-sm">
-                {dweller?.name} {dweller?.lastName}
-              </p>
-              <p className="text-xs text-muted-foreground font-display">
-                Level {dweller?.experience?.currentLevel || 1} · HP{' '}
-                {Math.round(dweller?.health?.maxHealth || 0)}
-              </p>
+        {/* Current dweller context */}
+        <div className="border border-primary/30 rounded-lg p-3 bg-primary/5 shrink-0 flex items-center justify-between gap-4">
+          <div>
+            <p className="font-bold text-sm">
+              {dweller?.name} {dweller?.lastName}
+            </p>
+            <div className="text-xs text-muted-foreground font-display flex flex-wrap gap-2">
+              <span>Level {dweller?.experience?.currentLevel || 1}</span>
+              <span>·</span>
+              <span>HP {Math.round(dweller?.health?.maxHealth || 0)}</span>
+              <span>·</span>
+              <span className="text-primary pip-text-glow drop-shadow-[0_0_2px_rgba(250,204,21,0.5)]">
+                {dwellerRoomInfo?.name || 'Wandering'}
+                {dwellerRoomInfo?.special ? ` (${dwellerRoomInfo.special})` : ''}
+              </span>
             </div>
-            <div className="text-right shrink-0">
-              <p className="text-sm font-semibold text-primary">
-                {getItemLabel(currentWeaponId) || 'None'}
-              </p>
-              {currentWeaponItem?.damage && (
-                <p className="text-xs font-display text-primary">
-                  {currentWeaponItem.avgDamage} ({currentWeaponItem.damage})
-                </p>
-              )}
-            </div>
+          </div>
+          <div className="text-right shrink-0">
+            <p className="text-sm font-semibold text-primary">
+              {getItemLabel(currentOutfitId) || 'None'}
+            </p>
+            {currentOutfitItem?.special && (
+              <div className="flex gap-1 justify-end font-display text-xs mt-0.5">
+                {SPECIAL_LETTERS.map(letter => {
+                  const val = currentOutfitItem.special?.[letter];
+                  return val ? (
+                    <span key={letter} className="text-primary bg-primary/10 px-1 rounded">
+                      {letter}+{val}
+                    </span>
+                  ) : null;
+                })}
+              </div>
+            )}
           </div>
         </div>
 
@@ -177,10 +223,10 @@ export function WeaponPickerDialog({
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
           <input
             type="text"
-            placeholder="Search weapons..."
+            placeholder="Search outfits..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="w-full pl-9 pr-9 py-2 text-sm bg-muted/20 border border-border/50 rounded-lg focus:outline-none focus:border-primary/50 font-display placeholder:text-muted-foreground/50"
+            className="w-full pl-9 pr-9 py-2 text-sm bg-muted/20 border border-border/50 rounded-lg focus:outline-none focus:border-primary/50 font-display placeholder:text-muted-foreground/50 h-10"
           />
           {search && (
             <button
@@ -192,19 +238,19 @@ export function WeaponPickerDialog({
           )}
         </div>
 
-        {/* Tabs for weapons */}
+        {/* Tabs for outfits */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col min-h-0 gap-3">
           <TabsList className="w-full grid grid-cols-2 bg-muted/20 border border-border/50">
             <TabsTrigger value="inventory" className="font-display tracking-widest text-xs uppercase data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
               Inventory ({filteredInventory.length})
             </TabsTrigger>
             <TabsTrigger value="equipped" className="font-display tracking-widest text-xs uppercase data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
-              Equipped ({filteredDwellerWeapons.length})
+              Equipped ({filteredDwellerOutfits.length})
             </TabsTrigger>
           </TabsList>
 
-          {/* List Header */}
-          <div className="hidden sm:grid grid-cols-[60px_minmax(100px,2fr)_125px_85px] gap-2 md:gap-3 px-2 md:px-4 py-2 border-b border-border/40 shrink-0 bg-background/95 sticky top-0 z-10">
+          {/* List Header (matches InventoryOutfits grid) */}
+          <div className="hidden sm:grid grid-cols-[60px_minmax(100px,2fr)_repeat(7,20px)_40px_85px] gap-2 md:gap-3 px-2 md:px-4 py-2 border-b border-border/40 shrink-0 bg-background/95 sticky top-0 z-10">
             <div className="flex justify-center border-r border-transparent pr-2 md:pr-4">
               {activeTab === 'inventory' ? <SortButton field="quantity" label="Qty" align="center" /> : <div />}
             </div>
@@ -212,8 +258,11 @@ export function WeaponPickerDialog({
               <SortButton field="name" label="Name" />
               <SortButton field="rarity" label="Rarity" />
             </div>
-            <div className="flex justify-center items-center">
-              <SortButton field="damage" label="Dmg" align="center" />
+            {SPECIAL_LETTERS.map(key => (
+              <SpecialSortButton key={key} field={key} />
+            ))}
+            <div className="flex justify-center items-center px-1">
+              <SortButton field="totalStats" label="Σ" align="center" />
             </div>
             <div className="flex justify-end items-center text-[10px] md:text-[11px] font-display uppercase tracking-wider text-muted-foreground/70 mr-2">
               Actions
@@ -221,15 +270,14 @@ export function WeaponPickerDialog({
           </div>
 
           <div className="overflow-y-auto flex-1 flex flex-col gap-2 pr-1 min-h-0 pb-4">
-
             {/* Unequip / None */}
             {!q && (
-              <div className="flex items-center justify-between px-3 py-2 rounded-lg border border-border/40 bg-card/20 mb-1">
+              <div className="flex items-center justify-between px-3 py-2 rounded-lg border border-border/40 bg-card/20 shrink-0">
                 <div>
-                  <p className="text-sm font-display text-muted-foreground">NO WEAPON</p>
-                  {currentWeaponId && (
+                  <p className="text-sm font-display text-muted-foreground">NO OUTFIT</p>
+                  {currentOutfitId && (
                     <p className="text-xs text-muted-foreground/90">
-                      → {getItemLabel(currentWeaponId)} will be returned to inventory
+                      → {getItemLabel(currentOutfitId)} will be returned to inventory
                     </p>
                   )}
                 </div>
@@ -237,7 +285,7 @@ export function WeaponPickerDialog({
                   variant="outline"
                   size="sm"
                   className="h-7 text-xs"
-                  disabled={!currentWeaponId}
+                  disabled={!currentOutfitId}
                   onClick={() => handleEquip('')}
                 >
                   Unequip
@@ -248,11 +296,11 @@ export function WeaponPickerDialog({
             <TabsContent value="inventory" className="m-0 flex flex-col gap-2">
               {filteredInventory.length > 0 ? (
                 filteredInventory.map(([id, count]) => (
-                  <WeaponRow
+                  <OutfitRow
                     key={id}
-                    weaponId={id}
+                    outfitId={id}
                     item={getItem(id)}
-                    isCurrent={id === currentWeaponId}
+                    isCurrent={id === currentOutfitId}
                     sortField={sortConfig.field}
                     badge={
                       <div className="bg-primary/20 text-primary font-display font-bold px-2 md:px-3 py-1 rounded text-sm min-w-[30px] md:min-w-[40px] text-center border border-primary/30">
@@ -264,18 +312,18 @@ export function WeaponPickerDialog({
                 ))
               ) : (
                 <div className="flex items-center justify-center py-10 text-muted-foreground text-sm font-display">
-                  {q ? "No weapons found matching criteria" : "No weapons available in inventory"}
+                  {q ? "No outfits found matching criteria" : "No outfits available in inventory"}
                 </div>
               )}
             </TabsContent>
 
             <TabsContent value="equipped" className="m-0 flex flex-col gap-2">
-              {filteredDwellerWeapons.length > 0 ? (
-                filteredDwellerWeapons.map(({ owner, weaponId }) => {
+              {filteredDwellerOutfits.length > 0 ? (
+                filteredDwellerOutfits.map(({ owner, outfitId }) => {
                   const isExpanded = expandedDwellerId === owner.serializeId;
                   const ownerStats = owner.stats?.stats || [];
-                  const item = getItem(weaponId);
-                  const isCurrent = weaponId === currentWeaponId;
+                  const item = getItem(outfitId);
+                  const isCurrent = outfitId === currentOutfitId;
 
                   const ownerButton = (
                     <button
@@ -302,11 +350,11 @@ export function WeaponPickerDialog({
 
                   return (
                     <div
-                      key={`${owner.serializeId}-${weaponId}`}
+                      key={`${owner.serializeId}-${outfitId}`}
                       className="border border-border/40 rounded-lg flex flex-col bg-card/40 hover:bg-primary/5 hover:border-primary/50 transition-all duration-300 shadow-sm"
                     >
-                      <WeaponRow
-                        weaponId={weaponId}
+                      <OutfitRow
+                        outfitId={outfitId}
                         item={item}
                         isCurrent={isCurrent}
                         sortField={sortConfig.field}
@@ -314,14 +362,14 @@ export function WeaponPickerDialog({
                         ownerInfo={ownerButton}
                         rounded={false}
                         hideBorder={true}
-                        onEquip={() => handleEquip(weaponId, owner.serializeId)}
+                        onEquip={() => handleEquip(outfitId, owner.serializeId)}
                       />
 
                       {/* Expandable dweller info below the row inside the card */}
                       {isExpanded && (
                         <div className="px-4 py-2.5 bg-amber-400/5 border-t border-border/30 rounded-b-lg flex items-center gap-4 sm:gap-6 flex-wrap">
                           <span className="text-xs text-muted-foreground font-display shrink-0">
-                            HP {Math.round(owner.health?.maxHealth || 0)}
+                            Lvl {owner.experience?.currentLevel || 1}
                           </span>
                           <div className="grid grid-cols-7 gap-1 sm:gap-2">
                             {SPECIAL_LETTERS.map((letter, idx) => {
@@ -354,7 +402,7 @@ export function WeaponPickerDialog({
                 })
               ) : (
                 <div className="flex items-center justify-center py-10 text-muted-foreground text-sm font-display">
-                  {q ? "No weapons found matching criteria" : "No weapons equipped by other dwellers"}
+                  {q ? "No outfits found matching criteria" : "No outfits equipped by other dwellers"}
                 </div>
               )}
             </TabsContent>
@@ -367,8 +415,8 @@ export function WeaponPickerDialog({
 
 // --- Sub-components ---
 
-interface WeaponRowProps {
-  weaponId: string;
+interface OutfitRowProps {
+  outfitId: string;
   item: ReturnType<typeof getItem>;
   isCurrent: boolean;
   sortField?: string | null;
@@ -379,8 +427,8 @@ interface WeaponRowProps {
   onEquip: () => void;
 }
 
-function WeaponRow({
-  weaponId,
+function OutfitRow({
+  outfitId,
   item,
   isCurrent,
   sortField,
@@ -389,26 +437,20 @@ function WeaponRow({
   rounded = true,
   hideBorder = false,
   onEquip,
-}: WeaponRowProps) {
-  const label = getItemLabel(weaponId);
+}: OutfitRowProps) {
+  const label = getItemLabel(outfitId);
   const rarity = item?.rarity;
-  const damage = item?.avgDamage ? `${item.avgDamage} (${item.damage})` : item?.damage || '';
 
   return (
     <div
-      className={`px-3 sm:px-2 md:px-3 py-2 sm:py-1 md:py-2 transition-all duration-300 flex flex-col sm:grid grid-cols-1 sm:grid-cols-[60px_minmax(100px,2fr)_125px_85px] gap-2 md:gap-3 items-center ${hideBorder ? '' : 'border border-border/60 bg-card/40 hover:bg-primary/5 hover:border-primary/50 shadow-sm'} ${rounded ? 'rounded-lg' : ''} ${isCurrent ? 'bg-primary/10' : ''}`}
+      className={`px-3 sm:px-2 md:px-3 py-2 sm:py-1 md:py-2 transition-all duration-300 flex flex-col sm:grid grid-cols-1 sm:grid-cols-[60px_minmax(100px,2fr)_repeat(7,20px)_40px_80px] gap-2 md:gap-3 items-center ${hideBorder ? '' : 'border border-border/60 bg-card/40 hover:bg-primary/5 hover:border-primary/50 shadow-sm'} ${rounded ? 'rounded-lg' : ''} ${isCurrent ? 'bg-primary/10' : ''}`}
     >
       <div className="flex-shrink-0 flex w-full sm:w-auto items-center justify-start sm:justify-center sm:border-r border-border/30 pb-2 sm:pb-0 pr-2 md:pr-4">
         {badge}
       </div>
 
       <div className="flex flex-col min-w-0 pr-2 w-full sm:w-auto self-start sm:self-center">
-        <p className="text-[14px] md:text-[15px] font-bold truncate text-foreground leading-tight" title={label}>{label}
-          {item?.category && (
-            <span className="text-[10px] font-display uppercase shrink-0 border border-primary/20 px-1 rounded ml-2">
-              {item.category}
-            </span>
-          )}</p>
+        <p className="text-[14px] md:text-[15px] font-bold truncate text-foreground leading-tight" title={label}>{label}</p>
         <div className="flex items-center gap-2 flex-wrap min-w-0">
           {rarity && (
             <span className={`text-[10px] md:text-xs font-display uppercase tracking-wider ${rarity === 'Legendary' ? 'text-yellow-400' :
@@ -426,12 +468,26 @@ function WeaponRow({
         </div>
       </div>
 
-      <div className="hidden sm:flex justify-center items-center text-sm font-display font-semibold">
-        {damage ? (
-          <span className={`text-sm ${sortField === 'damage' ? 'text-amber-400' : 'text-primary'}`}>{damage}</span>
-        ) : (
-          <span className="text-muted-foreground/20">-</span>
-        )}
+      <div className="hidden sm:contents">
+        {SPECIAL_LETTERS.map(key => {
+          const val = item?.special?.[key];
+          return (
+            <div key={key} className="flex justify-center items-center text-sm font-display font-semibold">
+              {val ? (
+                <span className={`text-sm ${sortField === key ? 'text-amber-400' : 'text-primary'}`}>+{val}</span>
+              ) : (
+                <span className="text-muted-foreground/20">-</span>
+              )}
+            </div>
+          );
+        })}
+        <div className="flex justify-center items-center text-sm font-display font-semibold">
+          {item?.totalStats ? (
+            <span className={`text-sm ${sortField === 'totalStats' ? 'text-amber-400' : 'text-primary'}`}>+{item.totalStats}</span>
+          ) : (
+            <span className="text-muted-foreground/20">-</span>
+          )}
+        </div>
       </div>
 
       <div className="flex justify-end gap-1 md:gap-2 w-full sm:w-auto">

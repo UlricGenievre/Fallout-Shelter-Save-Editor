@@ -9,9 +9,10 @@ export interface GameItem {
   category: string;
   rarity?: string;
   damage?: string;
-  avgDamage?: string;
+  avgDamage?: string | number;
   special?: Partial<Record<'S' | 'P' | 'E' | 'C' | 'I' | 'A' | 'L', number>>;
   resellValue?: number;
+  totalStats?: number;
 }
 
 /** Format SPECIAL bonuses as a short string like "S+3 E+2" */

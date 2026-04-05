@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { DwellerCard } from '../shared/DwellerCard';
 import { WeaponPickerDialog } from '../shared/WeaponPickerDialog';
+import { OutfitPickerDialog } from '../shared/OutfitPickerDialog';
 import { RoomPickerDialog } from '../shared/RoomPickerDialog';
 import { RoomConflictDialog } from '../shared/RoomConflictDialog';
 import { Button } from '@/components/ui/button';
@@ -13,6 +14,7 @@ interface VaultDwellersProps {
   rooms: any[];
   inventory: any[];
   onEquipWeapon?: (targetDwellerId: number, newWeaponId: string, sourceDwellerId?: number) => void;
+  onEquipOutfit?: (targetDwellerId: number, newOutfitId: string, sourceDwellerId?: number) => void;
   onMoveDweller?: (dwellerId: number, sourceRoomIndex: number | null, targetRoomIndex: number | null, bumpedDwellerId?: number, isSwap?: boolean) => void;
 }
 
@@ -23,12 +25,13 @@ type SortDirection = 'asc' | 'desc';
 
 const SPECIAL_KEYS = ['S', 'P', 'E', 'C', 'I', 'A', 'L'] as const;
 
-export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onMoveDweller }: VaultDwellersProps) {
+export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEquipOutfit, onMoveDweller }: VaultDwellersProps) {
   const [sortConfig, setSortConfig] = useState<{ field: SortField; direction: SortDirection }>({
     field: 'name',
     direction: 'asc',
   });
   const [weaponPickerDwellerId, setWeaponPickerDwellerId] = useState<number | null>(null);
+  const [outfitPickerDwellerId, setOutfitPickerDwellerId] = useState<number | null>(null);
   const [movingDwellerId, setMovingDwellerId] = useState<number | null>(null);
   const [pickerTargetRoomIndex, setPickerTargetRoomIndex] = useState<number | null>(null);
 
@@ -271,6 +274,7 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onMov
               roomName={rInfo?.name}
               roomSpecial={rInfo?.special}
               onEditWeapon={() => setWeaponPickerDwellerId(dweller.serializeId)}
+              onEditOutfit={() => setOutfitPickerDwellerId(dweller.serializeId)}
               action={
                 onMoveDweller ? (
                   <Button
@@ -305,6 +309,25 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onMov
             dwellerRooms={dwellerRooms}
             onEquip={(newWeaponId, sourceDwellerId) =>
               onEquipWeapon?.(weaponPickerDwellerId, newWeaponId, sourceDwellerId)
+            }
+          />
+        );
+      })()}
+
+      {/* Outfit picker modal */}
+      {outfitPickerDwellerId !== null && (() => {
+        const pickerDweller = dwellers.find(d => d.serializeId === outfitPickerDwellerId);
+        if (!pickerDweller) return null;
+        return (
+          <OutfitPickerDialog
+            open
+            onClose={() => setOutfitPickerDwellerId(null)}
+            dweller={pickerDweller}
+            allDwellers={dwellers}
+            inventory={inventory}
+            dwellerRooms={dwellerRooms}
+            onEquip={(newOutfitId, sourceDwellerId) =>
+              onEquipOutfit?.(outfitPickerDwellerId, newOutfitId, sourceDwellerId)
             }
           />
         );
