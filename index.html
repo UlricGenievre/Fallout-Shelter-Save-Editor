@@ -7,8 +7,16 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    
+    // Default consent denied for GDPR compliance
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied'
+    });
 
+    gtag('js', new Date());
     gtag('config', 'G-8PE3CBLWZ9');
   </script>
   <!-- End Google Analytics -->
