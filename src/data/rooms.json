@@ -13,7 +13,18 @@
       "roomSize": "2",
       "capacity": null,
       "output": null,
-      "size": "6"
+      "size": "6",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Entrance_L1_S1.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Entrance_L2_S1.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Entrance_L3_S1.jpg"
+        }
+      }
     },
     {
       "type": "FakeWasteland",
@@ -33,7 +44,12 @@
       "roomSize": "0.35",
       "capacity": null,
       "output": null,
-      "size": "1"
+      "size": "1",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Elevator_L1_S1.jpg"
+        }
+      }
     },
     {
       "type": "LivingQuarters",
@@ -48,7 +64,24 @@
       "roomSize": "1-3",
       "capacity": "2*S/3*(L+4)-2",
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/LivingQuarters_L1_S1.jpg",
+          "2": "/assets/rooms/LivingQuarters_L1_S2.jpg",
+          "3": "/assets/rooms/LivingQuarters_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/LivingQuarters_L2_S1.jpg",
+          "2": "/assets/rooms/LivingQuarters_L2_S2.JPG",
+          "3": "/assets/rooms/LivingQuarters_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/LivingQuarters_L3_S1.jpg",
+          "2": "/assets/rooms/LivingQuarters_L3_S2.JPG",
+          "3": "/assets/rooms/LivingQuarters_L3_S3.JPG"
+        }
+      }
     },
     {
       "type": "Cafeteria",
@@ -63,7 +96,24 @@
       "roomSize": "1-3",
       "capacity": "25*S*(L+1)",
       "output": "(2*S*(L+4))-2",
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Cafeteria_L1_S1.jpg",
+          "2": "/assets/rooms/Cafeteria_L1_S2.jpg",
+          "3": "/assets/rooms/Cafeteria_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Cafeteria_L2_S1.jpg",
+          "2": "/assets/rooms/Cafeteria_L2_S2.jpg",
+          "3": "/assets/rooms/Cafeteria_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Cafeteria_L3_S1.jpg",
+          "2": "/assets/rooms/Cafeteria_L3_S2.jpg",
+          "3": "/assets/rooms/Cafeteria_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "WaterPlant",
@@ -78,7 +128,24 @@
       "roomSize": "1-3",
       "capacity": "25*S*(L+1)",
       "output": "(2*S*(L+4))-2",
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/WaterPlant_L1_S1.jpg",
+          "2": "/assets/rooms/WaterPlant_L1_S2.jpg",
+          "3": "/assets/rooms/WaterPlant_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/WaterPlant_L2_S1.jpg",
+          "2": "/assets/rooms/WaterPlant_L2_S2.jpg",
+          "3": "/assets/rooms/WaterPlant_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/WaterPlant_L3_S1.jpg",
+          "2": "/assets/rooms/WaterPlant_L3_S2.jpg",
+          "3": "/assets/rooms/WaterPlant_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "Geothermal",
@@ -93,7 +160,24 @@
       "roomSize": "1-3",
       "capacity": "25*S*(L+1)",
       "output": "3*S*L+15*2^(S-1)*-8*(S-1)-9+?",
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Geothermal_L1_S1.jpg",
+          "2": "/assets/rooms/Geothermal_L1_S2.jpg",
+          "3": "/assets/rooms/Geothermal_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Geothermal_L2_S1.jpg",
+          "2": "/assets/rooms/Geothermal_L2_S2.jpg",
+          "3": "/assets/rooms/Geothermal_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Geothermal_L3_S1.jpg",
+          "2": "/assets/rooms/Geothermal_L3_S2.jpg",
+          "3": "/assets/rooms/Geothermal_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "NukaCola",
@@ -108,7 +192,24 @@
       "roomSize": "1-3",
       "capacity": "50*S*(L+1)",
       "output": "?",
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/NukaCola_L1_S1.jpg",
+          "2": "/assets/rooms/NukaCola_L1_S2.jpg",
+          "3": "/assets/rooms/NukaCola_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/NukaCola_L2_S1.jpg",
+          "2": "/assets/rooms/NukaCola_L2_S2.jpg",
+          "3": "/assets/rooms/NukaCola_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/NukaCola_L3_S1.jpg",
+          "2": "/assets/rooms/NukaCola_L3_S2.jpg",
+          "3": "/assets/rooms/NukaCola_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "Storage",
@@ -123,7 +224,24 @@
       "roomSize": "1-3",
       "capacity": "5*S*(L+1)",
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Storage_L1_S1.JPG",
+          "2": "/assets/rooms/Storage_L1_S2.jpg",
+          "3": "/assets/rooms/Storage_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Storage_L2_S1.JPG",
+          "2": "/assets/rooms/Storage_L2_S2.jpg",
+          "3": "/assets/rooms/Storage_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Storage_L3_S1.JPG",
+          "2": "/assets/rooms/Storage_L3_S2.JPG",
+          "3": "/assets/rooms/Storage_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "WeaponFactory",
@@ -138,7 +256,18 @@
       "roomSize": "3",
       "capacity": null,
       "output": null,
-      "size": "9"
+      "size": "9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/WeaponFactory_L1_S1.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/WeaponFactory_L2_S1.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/WeaponFactory_L3_S1.jpg"
+        }
+      }
     },
     {
       "type": "MedBay",
@@ -153,7 +282,24 @@
       "roomSize": "1-3",
       "capacity": "10*S",
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/MedBay_L1_S1.jpg",
+          "2": "/assets/rooms/MedBay_L1_S2.jpg",
+          "3": "/assets/rooms/MedBay_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/MedBay_L2_S1.jpg",
+          "2": "/assets/rooms/MedBay_L2_S2.jpg",
+          "3": "/assets/rooms/MedBay_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/MedBay_L3_S1.jpg",
+          "2": "/assets/rooms/MedBay_L3_S2.jpg",
+          "3": "/assets/rooms/MedBay_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "Bar",
@@ -168,7 +314,24 @@
       "roomSize": "1-3",
       "capacity": null,
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Bar_L1_S1.jpg",
+          "2": "/assets/rooms/Bar_L1_S2.jpg",
+          "3": "/assets/rooms/Bar_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Bar_L2_S1.jpg",
+          "2": "/assets/rooms/Bar_L2_S2.jpg",
+          "3": "/assets/rooms/Bar_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Bar_L3_S1.jpg",
+          "2": "/assets/rooms/Bar_L3_S2.jpg",
+          "3": "/assets/rooms/Bar_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "Gym",
@@ -183,7 +346,24 @@
       "roomSize": "1-3",
       "capacity": null,
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Gym_L1_S1.jpg",
+          "2": "/assets/rooms/Gym_L1_S2.jpg",
+          "3": "/assets/rooms/Gym_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Gym_L2_S1.jpg",
+          "2": "/assets/rooms/Gym_L2_S2.jpg",
+          "3": "/assets/rooms/Gym_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Gym_L3_S1.jpg",
+          "2": "/assets/rooms/Gym_L3_S2.jpg",
+          "3": "/assets/rooms/Gym_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "Hydroponic",
@@ -198,7 +378,18 @@
       "roomSize": "1-3",
       "capacity": "25*S*(L+1)",
       "output": "?",
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Hydroponic_L1_S1.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Hydroponic_L2_S1.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Hydroponic_L3_S1.jpg"
+        }
+      }
     },
     {
       "type": "Casino",
@@ -213,7 +404,24 @@
       "roomSize": "1-3",
       "capacity": null,
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Casino_L1_S1.jpg",
+          "2": "/assets/rooms/Casino_L1_S2.jpg",
+          "3": "/assets/rooms/Casino_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Casino_L2_S1.jpg",
+          "2": "/assets/rooms/Casino_L2_S2.jpg",
+          "3": "/assets/rooms/Casino_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Casino_L3_S1.jpg",
+          "2": "/assets/rooms/Casino_L3_S2.jpg",
+          "3": "/assets/rooms/Casino_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "Dojo",
@@ -228,7 +436,24 @@
       "roomSize": "1-3",
       "capacity": null,
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Dojo_L1_S1.jpg",
+          "2": "/assets/rooms/Dojo_L1_S2.jpg",
+          "3": "/assets/rooms/Dojo_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Dojo_L2_S1.jpg",
+          "2": "/assets/rooms/Dojo_L2_S2.jpg",
+          "3": "/assets/rooms/Dojo_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Dojo_L3_S1.jpg",
+          "2": "/assets/rooms/Dojo_L3_S2.jpg",
+          "3": "/assets/rooms/Dojo_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "Radio",
@@ -243,7 +468,24 @@
       "roomSize": "1-3",
       "capacity": null,
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Radio_L1_S1.jpg",
+          "2": "/assets/rooms/Radio_L1_S2.jpg",
+          "3": "/assets/rooms/Radio_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Radio_L2_S1.jpg",
+          "2": "/assets/rooms/Radio_L2_S2.jpg",
+          "3": "/assets/rooms/Radio_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Radio_L3_S1.jpg",
+          "2": "/assets/rooms/Radio_L3_S2.jpg",
+          "3": "/assets/rooms/Radio_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "ScienceLab",
@@ -258,7 +500,24 @@
       "roomSize": "1-3",
       "capacity": "10*S",
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/ScienceLab_L1_S1.jpg",
+          "2": "/assets/rooms/ScienceLab_L1_S2.jpg",
+          "3": "/assets/rooms/ScienceLab_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/ScienceLab_L2_S1.jpg",
+          "2": "/assets/rooms/ScienceLab_L2_S2.jpg",
+          "3": "/assets/rooms/ScienceLab_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/ScienceLab_L3_S1.jpg",
+          "2": "/assets/rooms/ScienceLab_L3_S2.jpg",
+          "3": "/assets/rooms/ScienceLab_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "Armory",
@@ -273,7 +532,18 @@
       "roomSize": "1-3",
       "capacity": null,
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Armory_L1_S1.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Armory_L2_S1.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Armory_L3_S1.jpg"
+        }
+      }
     },
     {
       "type": "BarberShop",
@@ -288,7 +558,15 @@
       "roomSize": "2",
       "capacity": null,
       "output": null,
-      "size": "6"
+      "size": "6",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/BarberShop_L1_S1.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/BarberShop_L2_S1.jpg"
+        }
+      }
     },
     {
       "type": "Overseer",
@@ -303,7 +581,18 @@
       "roomSize": "2",
       "capacity": null,
       "output": null,
-      "size": "6"
+      "size": "6",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Overseer_L1_S1.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Overseer_L2_S1.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Overseer_L3_S1.jpg"
+        }
+      }
     },
     {
       "type": "OutfitFactory",
@@ -318,7 +607,18 @@
       "roomSize": "3",
       "capacity": null,
       "output": null,
-      "size": "9"
+      "size": "9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/OutfitFactory_L1_S1.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/OutfitFactory_L2_S1.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/OutfitFactory_L3_S1.jpg"
+        }
+      }
     },
     {
       "type": "DesignFactory",
@@ -333,7 +633,18 @@
       "roomSize": "3",
       "capacity": null,
       "output": null,
-      "size": "9"
+      "size": "9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/DesignFactory_L1_S1.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/DesignFactory_L2_S1.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/DesignFactory_L3_S1.jpg"
+        }
+      }
     },
     {
       "type": "Classroom",
@@ -348,7 +659,24 @@
       "roomSize": "1-3",
       "capacity": null,
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Classroom_L1_S1.jpg",
+          "2": "/assets/rooms/Classroom_L1_S2.jpg",
+          "3": "/assets/rooms/Classroom_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Classroom_L2_S1.jpg",
+          "2": "/assets/rooms/Classroom_L2_S2.jpg",
+          "3": "/assets/rooms/Classroom_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Classroom_L3_S1.jpg",
+          "2": "/assets/rooms/Classroom_L3_S2.jpg",
+          "3": "/assets/rooms/Classroom_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "SuperRoom2",
@@ -363,7 +691,24 @@
       "roomSize": "1-3",
       "capacity": null,
       "output": null,
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/SuperRoom2_L1_S1.jpg",
+          "2": "/assets/rooms/SuperRoom2_L1_S2.jpg",
+          "3": "/assets/rooms/SuperRoom2_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/SuperRoom2_L2_S1.jpg",
+          "2": "/assets/rooms/SuperRoom2_L2_S2.jpg",
+          "3": "/assets/rooms/SuperRoom2_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/SuperRoom2_L3_S1.jpg",
+          "2": "/assets/rooms/SuperRoom2_L3_S2.jpg",
+          "3": "/assets/rooms/SuperRoom2_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "Energy2",
@@ -378,7 +723,24 @@
       "roomSize": "1-3",
       "capacity": "100*S*(L+1)",
       "output": "~1.3*(3*S*L+15*2^(S-1)*-8*(S-1)-9+?)",
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Energy2_L1_S1.jpg",
+          "2": "/assets/rooms/Energy2_L1_S2.jpg",
+          "3": "/assets/rooms/Energy2_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Energy2_L2_S1.jpg",
+          "2": "/assets/rooms/Energy2_L2_S2.jpg",
+          "3": "/assets/rooms/Energy2_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Energy2_L3_S1.jpg",
+          "2": "/assets/rooms/Energy2_L3_S2.jpg",
+          "3": "/assets/rooms/Energy2_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "Water2",
@@ -393,7 +755,24 @@
       "roomSize": "1-3",
       "capacity": "25*S*(L+1)",
       "output": "?",
-      "size": "3-9"
+      "size": "3-9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/Water2_L1_S1.jpg",
+          "2": "/assets/rooms/Water2_L1_S2.jpg",
+          "3": "/assets/rooms/Water2_L1_S3.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/Water2_L2_S1.jpg",
+          "2": "/assets/rooms/Water2_L2_S2.jpg",
+          "3": "/assets/rooms/Water2_L2_S3.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/Water2_L3_S1.jpg",
+          "2": "/assets/rooms/Water2_L3_S2.jpg",
+          "3": "/assets/rooms/Water2_L3_S3.jpg"
+        }
+      }
     },
     {
       "type": "UltraciteWeaponFactory",
@@ -408,7 +787,18 @@
       "roomSize": "3",
       "capacity": null,
       "output": null,
-      "size": "9"
+      "size": "9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/UltraciteWeaponFactory_L1_S1.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/UltraciteWeaponFactory_L2_S1.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/UltraciteWeaponFactory_L3_S1.jpg"
+        }
+      }
     },
     {
       "type": "UltraciteMine",
@@ -423,7 +813,18 @@
       "roomSize": "3",
       "capacity": null,
       "output": null,
-      "size": "9"
+      "size": "9",
+      "images": {
+        "1": {
+          "1": "/assets/rooms/UltraciteMine_L1_S1.jpg"
+        },
+        "2": {
+          "1": "/assets/rooms/UltraciteMine_L2_S1.jpg"
+        },
+        "3": {
+          "1": "/assets/rooms/UltraciteMine_L3_S1.jpg"
+        }
+      }
     }
   ]
 }

@@ -8,7 +8,9 @@ import { RoomPickerDialog } from '../shared/RoomPickerDialog';
 import { RoomConflictDialog } from '../shared/RoomConflictDialog';
 import { DwellerEditDialog } from '../shared/DwellerEditDialog';
 import { Button } from '@/components/ui/button';
-import { ArrowRightLeft } from 'lucide-react';
+import { ArrowRightLeft, Sparkles, Users } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 
 interface Room {
   type: string;
@@ -54,6 +56,22 @@ const getRoomColor = (room: Room): string => {
   return ROOM_CLASS_COLORS[roomClass] || 'bg-slate-600 hover:bg-slate-700';
 };
 
+const getRoomOverlayColor = (room: Room): string => {
+  if (room.type === 'FakeWasteland') return 'bg-amber-900/60';
+
+  const colors: Record<string, string> = {
+    'Training': 'bg-purple-900/60',
+    'Production': 'bg-blue-900/60',
+    'Facility': 'bg-green-900/60',
+    'Utility': 'bg-orange-900/60',
+    'Consumable': 'bg-red-900/60',
+    'Crafting': 'bg-yellow-900/60',
+    'Quest': 'bg-pink-900/60',
+  };
+
+  return colors[room.class || 'NoClass'] || 'bg-slate-900/60';
+};
+
 const getRoomWidth = (type: string, mergeLevel: number): number => {
   return type === 'Elevator' ? 1 : mergeLevel * 3;
 };
@@ -66,6 +84,7 @@ const getRoomName = (type: string): string => {
 };
 
 export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipOutfit, onMoveDweller, onUpdateDweller }: RoomViewerProps) {
+  const [isMagicMode, setIsMagicMode] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -145,9 +164,18 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
 
   return (
     <div className="w-full h-full p-6 overflow-auto">
-      <div className="mb-6 text-center">
-        <h2 className="font-display text-2xl pip-text-glow tracking-widest mb-2">VAULT LAYOUT ({rooms.length} rooms)
+      <div className="mb-6 relative flex items-center justify-center">
+        <h2 className="font-display text-2xl pip-text-glow tracking-widest uppercase text-center">
+          Vault Layout ({rooms.length} rooms)
         </h2>
+        <div className="absolute right-0 flex items-center gap-3 bg-card/50 px-4 py-2 rounded-full border border-border shadow-sm">
+          <Sparkles className={`w-4 h-4 ${isMagicMode ? 'text-primary animate-pulse' : 'text-muted-foreground'}`} />
+          <Switch
+            id="magic-mode"
+            checked={isMagicMode}
+            onCheckedChange={setIsMagicMode}
+          />
+        </div>
       </div>
 
       <div className="border border-border rounded-lg bg-card/30 p-4 overflow-x-auto">
@@ -192,41 +220,66 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
 
                     const width = getRoomWidth(room.type, room.mergeLevel);
 
+                    const roomInfo = roomsData.rooms.find(r => r.type === room.type) as any;
+                    const imagesForLevel = roomInfo?.images?.[(room.level || 1).toString()];
+                    const imageUrl = isMagicMode && (imagesForLevel?.[(room.mergeLevel || 1).toString()] || imagesForLevel?.["1"]) ||
+                      (isMagicMode && room.type === 'Elevator' && roomInfo?.images?.["1"]?.["1"]);
+
+                    const baseUrl = import.meta.env.BASE_URL || '/';
+                    const fullImageUrl = imageUrl ? (baseUrl + imageUrl).replace(/\/+/g, '/') : undefined;
+
+                    const aspectRatio = room.type === 'Elevator' ? '1/2' : `${(room.mergeLevel || 1) * 3}/2`;
+
                     return (
                       <td
                         key={`cell-${rowIndex}-${colIndex}`}
                         colSpan={width}
-                        className={`border border-border p-1 md:p-1.5 h-12 sm:h-16 cursor-help transition-colors overflow-hidden relative ${getRoomColor(
-                          room
-                        )}`}
+                        className={`border border-border p-1 md:p-1.5 cursor-help transition-all duration-500 overflow-hidden relative group ${isMagicMode
+                          ? getRoomColor(room).split(' ').filter(c => c.startsWith('hover:')).join(' ') + ' bg-transparent p-0 shadow-inner'
+                          : getRoomColor(room) + ' h-12 sm:h-16'
+                          }`}
+                        style={{
+                          backgroundImage: fullImageUrl ? `url("${fullImageUrl}")` : undefined,
+                          backgroundSize: 'contain',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                        }}
                         title={`${getRoomName(room.type)} (Level ${room.level || 1})${room.dwellers ? ` - ${room.dwellers.length} dwellers` : ' - 0 dwellers'}${room.power === false ? ' - NO POWER' : ''}${room.broken ? ' - BROKEN' : ''}`}
                         onClick={() => handleRoomClick(room)}
                       >
-                        {room.type === 'FakeWasteland' || room.type === 'Elevator' ? (
-                          <div className="text-[10px] sm:text-xs text-white font-semibold break-words flex items-center justify-center h-full">
-                            <span className={`${room.type === 'Elevator' ? 'truncate w-full text-center' : ''}`}>{getRoomName(room.type)}</span>
-                          </div>
-                        ) : (
-                          <div className="flex justify-between items-start h-full overflow-hidden">
+                        <div
+                          className={`flex flex-col h-full w-full transition-all duration-500 justify-start`}
+                          style={{
+                            aspectRatio: isMagicMode ? aspectRatio : undefined,
+                            minHeight: isMagicMode ? 'unset' : undefined
+                          }}
+                        >
+                          <div className={`p-1.5 flex justify-between items-start transition-all duration-500 ${isMagicMode ? `${getRoomOverlayColor(room)} backdrop-blur-md rounded-b-sm border-b border-white/10 opacity-0 group-hover:opacity-100` : 'h-full'}`}>
                             <div className="flex-1 min-w-0 pr-1">
-                              <div className="text-[10px] sm:text-xs text-white font-semibold truncate">
+                              <div className="text-[10px] sm:text-xs text-white font-bold truncate drop-shadow-md">
                                 {getRoomName(room.type)}
                               </div>
-                              {room.level && (
-                                <div className="text-[9px] sm:text-[10px] text-white/70 truncate">Lv {room.level}</div>
+                              {room.type !== 'FakeWasteland' && room.type !== 'Elevator' && (
+                                <div className="flex items-center gap-2">
+                                  {room.level && (
+                                    <div className="text-[9px] sm:text-[10px] text-white/90 truncate font-semibold">Lv {room.level}</div>
+                                  )}
+                                </div>
                               )}
                               {room.power === false && (
-                                <div className="text-[9px] sm:text-[10px] text-yellow-300 font-bold truncate">⚠ POWER</div>
+                                <div className="text-[9px] sm:text-[10px] text-yellow-300 font-bold truncate animate-pulse bg-black/40 px-1 rounded inline-block mt-0.5">⚠ POWER</div>
                               )}
                               {room.broken && (
-                                <div className="text-[9px] sm:text-[10px] text-red-300 font-bold truncate">✗ BROKEN</div>
+                                <div className="text-[9px] sm:text-[10px] text-red-300 font-bold truncate animate-pulse bg-black/40 px-1 rounded inline-block mt-0.5">✗ BROKEN</div>
                               )}
                             </div>
-                            <div className="text-[10px] sm:text-xs text-white/90 font-bold shrink-0">
-                              👥 {room.dwellers ? room.dwellers.length : 0}
-                            </div>
+                            {room.type !== 'FakeWasteland' && room.type !== 'Elevator' && (
+                              <div className="text-[10px] sm:text-xs text-white/90 font-bold shrink-0 flex items-center gap-1 drop-shadow-md">
+                                <Users className="w-3 h-3" /> {room.dwellers ? room.dwellers.length : 0}
+                              </div>
+                            )}
                           </div>
-                        )}
+                        </div>
                       </td>
                     );
                   })}
