@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import roomsData from '@/data/rooms.json';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { DwellerCard } from '../shared/DwellerCard';
@@ -32,6 +32,8 @@ interface RoomViewerProps {
   onEquipOutfit?: (targetDwellerId: number, newOutfitId: string, sourceDwellerId?: number) => void;
   onMoveDweller?: (dwellerId: number, sourceRoomIndex: number | null, targetRoomIndex: number | null, bumpedDwellerId?: number, isSwap?: boolean) => void;
   onUpdateDweller?: (dwellerId: number, changes: any) => void;
+  vaultName?: string;
+  onUpdateVaultName?: (newName: string) => void;
 }
 
 const ROOM_CLASS_COLORS: Record<string, string> = {
@@ -83,10 +85,18 @@ const getRoomName = (type: string): string => {
   return roomNameMap.get(type) || type;
 };
 
-export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipOutfit, onMoveDweller, onUpdateDweller }: RoomViewerProps) {
+export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipOutfit, onMoveDweller, onUpdateDweller, vaultName = '000', onUpdateVaultName }: RoomViewerProps) {
   const [isMagicMode, setIsMagicMode] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [editingVaultName, setEditingVaultName] = useState(false);
+  const [localVaultName, setLocalVaultName] = useState(vaultName ?? '000');
+
+  // Sync internal state if prop changes (e.g. from another save file)
+  useEffect(() => {
+    setLocalVaultName(vaultName ?? '000');
+  }, [vaultName]);
 
   const activeRoom = useMemo(() => {
     if (!selectedRoom) return null;
@@ -164,9 +174,47 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
 
   return (
     <div className="w-full h-full p-6 overflow-auto">
-      <div className="mb-6 relative flex items-center justify-center">
-        <h2 className="font-display text-2xl pip-text-glow tracking-widest uppercase text-center">
-          Vault Layout ({rooms.length} rooms)
+      <div className="mb-6 relative flex items-center justify-center min-h-[40px]">
+        <h2 className="font-display text-2xl pip-text-glow tracking-widest uppercase text-center flex items-center gap-3">
+          <span>Vault</span>
+          {editingVaultName ? (
+            <input
+              autoFocus
+              className="bg-black/40 border-b-2 border-primary text-primary outline-none w-[4.5rem] text-center font-display text-2xl animate-in fade-in zoom-in-95 duration-200"
+              value={localVaultName}
+              onChange={(e) => {
+                const val = e.target.value.replace(/\D/g, '').slice(0, 3);
+                setLocalVaultName(val);
+              }}
+              onBlur={() => {
+                setEditingVaultName(false);
+                if (localVaultName.length === 3) {
+                  onUpdateVaultName?.(localVaultName);
+                } else {
+                  setLocalVaultName(vaultName ?? '000');
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.currentTarget.blur();
+                } else if (e.key === 'Escape') {
+                  setLocalVaultName(vaultName ?? '000');
+                  setEditingVaultName(false);
+                }
+              }}
+            />
+          ) : (
+            <span
+              className="cursor-pointer hover:text-primary transition-all duration-300 border-b-2 border-primary/50 hover:border-primary px-1 mt-0.5"
+              onClick={() => setEditingVaultName(true)}
+              title="Click to edit Vault number"
+            >
+              {vaultName}
+            </span>
+          )}
+          <span>
+            ({rooms.length} rooms)
+          </span>
         </h2>
         <div className="absolute right-0 flex items-center gap-3 bg-card/50 px-4 py-2 rounded-full border border-border shadow-sm">
           <Sparkles className={`w-4 h-4 ${isMagicMode ? 'text-primary animate-pulse' : 'text-muted-foreground'}`} />

@@ -259,9 +259,19 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
     }
   };
 
+  const handleUpdateVaultName = (newName: string) => {
+    if (!setData || !data) return;
+    const newData = JSON.parse(JSON.stringify(data));
+    if (newData.vault) {
+      newData.vault.VaultName = newName;
+      setData(newData);
+    }
+  };
+
   const rooms = data?.vault?.rooms || [];
   const dwellers = data?.dwellers?.dwellers || [];
   const inventory = data?.vault?.inventory?.items || [];
+  const vaultName = data?.vault?.VaultName || '000';
 
   if (!data || rooms.length === 0) {
     return (
@@ -300,6 +310,8 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
             rooms={rooms} 
             dwellers={dwellers} 
             inventory={inventory}
+            vaultName={vaultName}
+            onUpdateVaultName={handleUpdateVaultName}
             onEquipWeapon={handleEquipWeapon}
             onEquipOutfit={handleEquipOutfit}
             onMoveDweller={handleMoveDweller}
