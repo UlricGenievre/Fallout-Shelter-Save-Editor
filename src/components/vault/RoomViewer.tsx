@@ -108,10 +108,10 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
   const [weaponPickerDwellerId, setWeaponPickerDwellerId] = useState<number | null>(null);
   const [outfitPickerDwellerId, setOutfitPickerDwellerId] = useState<number | null>(null);
   const [editingDwellerId, setEditingDwellerId] = useState<number | null>(null);
+  const roomInfoMap = new Map((roomsData.rooms as any[]).map(r => [r.type, r]));
 
   const dwellerRooms = useMemo(() => {
     const map = new Map<number, { name: string; special: string; category: string }>();
-    const roomInfoMap = new Map((roomsData.rooms as any[]).map(r => [r.type, r]));
     rooms?.forEach(room => {
       room.dwellers?.forEach((id: number) => {
         const roomInfo = roomInfoMap.get(room.type);
@@ -305,7 +305,7 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
                           <div className={`p-1.5 flex justify-between items-start transition-all duration-500 ${isMagicMode ? `${getRoomOverlayColor(room)} backdrop-blur-md rounded-b-sm border-b border-white/10 opacity-0 group-hover:opacity-100` : 'h-full'}`}>
                             <div className="flex-1 min-w-0 pr-1">
                               <div className="text-[10px] sm:text-xs text-white font-bold truncate drop-shadow-md">
-                                {getRoomName(room.type)}
+                                {getRoomName(room.type)}{roomInfoMap.get(room.type)?.special ? ` (${roomInfoMap.get(room.type)?.special})` : ''}
                               </div>
                               {room.type !== 'FakeWasteland' && room.type !== 'Elevator' && (
                                 <div className="flex items-center gap-2">
