@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { RoomViewer } from './RoomViewer';
 import { VaultDwellers } from './VaultDwellers';
 import { VaultInventory } from './VaultInventory';
+import roomsData from '@/data/rooms.json';
 
 type Tab = 'layout' | 'dwellers' | 'inventory';
 
@@ -153,6 +154,59 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
     if (!setData || !data) return;
     const newData = JSON.parse(JSON.stringify(data));
     const allRooms = newData.vault?.rooms || [];
+    const allDwellers = newData.dwellers?.dwellers || [];
+
+    const isTrainingRoom = (room: any) => {
+      if (!room) return false;
+      return roomsData.rooms.find(r => r.type === room.type)?.category === 'Training';
+    };
+
+    const updateDwellerSavedState = (dId: number, rIdx: number | null, srcRIdx: number | null) => {
+      const dweller = allDwellers.find((d: any) => d.serializeId === dId);
+      if (dweller) {
+        // 1. Update savedRoom index
+        dweller.savedRoom = rIdx ?? -1;
+
+        // 2. Training Rooms Slots Management
+        const sourceRoom = srcRIdx !== null ? allRooms[srcRIdx] : null;
+        const targetRoom = rIdx !== null ? allRooms[rIdx] : null;
+
+        const wasTraining = isTrainingRoom(sourceRoom);
+        const isTraining = isTrainingRoom(targetRoom);
+
+        let movedSlot: any = null;
+
+        // --- Remove from source if was Training ---
+        if (wasTraining && sourceRoom.slots) {
+          const slotIdx = sourceRoom.slots.findIndex((s: any) => s.dwellerId === dId);
+          if (slotIdx !== -1) {
+            movedSlot = sourceRoom.slots[slotIdx];
+            sourceRoom.slots.splice(slotIdx, 1);
+          }
+        }
+
+        // --- Add to target if is Training ---
+        if (isTraining) {
+          if (!targetRoom.slots) targetRoom.slots = [];
+          
+          if (movedSlot) {
+            // Transfer existing slot
+            targetRoom.slots.push(movedSlot);
+          } else {
+            // Create new slot and increment global taskID
+            if (!newData.vault.taskMgr) newData.vault.taskMgr = { id: 0, time: 0, tasks: [] };
+            const newTaskId = (newData.vault.taskMgr.id || 0) + 1;
+            newData.vault.taskMgr.id = newTaskId;
+            
+            targetRoom.slots.push({
+              dwellerId: dId,
+              needLvUp: false,
+              taskID: newTaskId
+            });
+          }
+        }
+      }
+    };
 
     // 1. Remove from source
     if (sourceRoomIndex !== null && allRooms[sourceRoomIndex]) {
@@ -170,6 +224,12 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
       if (isSwap && sourceRoomIndex !== null && allRooms[sourceRoomIndex]) {
         if (!allRooms[sourceRoomIndex].dwellers) allRooms[sourceRoomIndex].dwellers = [];
         allRooms[sourceRoomIndex].dwellers.push(bumpedDwellerId);
+        
+        // Update bumped dweller state (moving to source)
+        updateDwellerSavedState(bumpedDwellerId, sourceRoomIndex, targetRoomIndex);
+      } else {
+        // Bumped to "Coffee Break"
+        updateDwellerSavedState(bumpedDwellerId, null, targetRoomIndex);
       }
     }
 
@@ -180,6 +240,9 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
         allRooms[targetRoomIndex].dwellers.push(dwellerId);
       }
     }
+
+    // 4. Update primary dweller state
+    updateDwellerSavedState(dwellerId, targetRoomIndex, sourceRoomIndex);
 
     setData(newData);
   };
