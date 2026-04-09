@@ -165,11 +165,11 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
       const dweller = allDwellers.find((d: any) => d.serializeId === dId);
       if (dweller) {
         // 1. Update savedRoom index
-        dweller.savedRoom = rIdx ?? -1;
+        const targetRoom = rIdx !== null ? allRooms[rIdx] : null;
+        dweller.savedRoom = targetRoom ? (targetRoom.deserializeID ?? -1) : -1;
 
         // 2. Training Rooms Slots Management
         const sourceRoom = srcRIdx !== null ? allRooms[srcRIdx] : null;
-        const targetRoom = rIdx !== null ? allRooms[rIdx] : null;
 
         const wasTraining = isTrainingRoom(sourceRoom);
         const isTraining = isTrainingRoom(targetRoom);
@@ -188,7 +188,7 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
         // --- Add to target if is Training ---
         if (isTraining) {
           if (!targetRoom.slots) targetRoom.slots = [];
-          
+
           if (movedSlot) {
             // Transfer existing slot
             targetRoom.slots.push(movedSlot);
@@ -197,12 +197,43 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
             if (!newData.vault.taskMgr) newData.vault.taskMgr = { id: 0, time: 0, tasks: [] };
             const newTaskId = (newData.vault.taskMgr.id || 0) + 1;
             newData.vault.taskMgr.id = newTaskId;
-            
+
             targetRoom.slots.push({
               dwellerId: dId,
               needLvUp: false,
               taskID: newTaskId
             });
+          }
+        }
+
+        // 3. HappinessManager synchronization
+        if (!newData.happinessManager) newData.happinessManager = {};
+        let happinessEntry: any = null;
+
+        // --- Remove from source ---
+        if (sourceRoom) {
+          const srcKey = `room${sourceRoom.deserializeID}`;
+          const roomEntries = newData.happinessManager[srcKey];
+          if (roomEntries) {
+            const hIdx = roomEntries.findIndex((e: any) => e.dc === dId);
+            if (hIdx !== -1) {
+              happinessEntry = roomEntries[hIdx];
+              roomEntries.splice(hIdx, 1);
+            }
+          }
+        }
+
+        // --- Add to target ---
+        if (targetRoom) {
+          const targetKey = `room${targetRoom.deserializeID}`;
+          if (!newData.happinessManager[targetKey]) newData.happinessManager[targetKey] = [];
+
+          if (!happinessEntry) {
+            happinessEntry = { type: 3, rh: 0, in: true, dc: dId };
+          }
+
+          if (!newData.happinessManager[targetKey].some((e: any) => e.dc === dId)) {
+            newData.happinessManager[targetKey].push(happinessEntry);
           }
         }
       }
