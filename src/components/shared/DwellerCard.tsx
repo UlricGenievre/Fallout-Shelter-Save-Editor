@@ -1,5 +1,6 @@
 import { getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
-import { Pencil } from 'lucide-react';
+import { Pencil, Baby } from 'lucide-react';
+import { isChild } from '@/lib/dwellerUtils';
 import { type ReactNode } from 'react';
 
 interface DwellerCardProps {
@@ -19,6 +20,7 @@ interface DwellerCardProps {
 export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, onEditOutfit, onEditDweller, action, onClick }: DwellerCardProps) {
   const level = dweller.experience?.currentLevel || 1;
   const maxHp = dweller.health?.maxHealth || 0;
+  const dwellerIsChild = isChild(dweller);
   const outfit = dweller.equipedOutfit?.id || '';
   const weapon = dweller.equipedWeapon?.id || '';
   const specialStats = dweller.stats?.stats || [];
@@ -46,7 +48,12 @@ export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, onEd
           className={`flex-shrink-0 border border-border/60 rounded-lg p-2 transition-all duration-100 ${onEditDweller ? 'cursor-pointer hover:bg-secondary' : ''}`}
           onClick={e => { if (onEditDweller) { e.stopPropagation(); onEditDweller(); } }}
         >
-          <h4 className="font-semibold text-sm">{dweller.name} {dweller.lastName}</h4>
+          <div className="flex items-center gap-2">
+            <h4 className="font-semibold text-sm">{dweller.name} {dweller.lastName}</h4>
+            {dwellerIsChild && (
+              <Baby className="w-4 h-4 text-primary animate-pulse" />
+            )}
+          </div>
           <p className="text-xs font-display">Level {level}</p>
           <p className="text-xs font-display">HP MAX : {Math.round(maxHp)}</p>
         </div>
@@ -74,12 +81,17 @@ export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, onEd
         </div>
 
         <div className="flex-shrink-0 grid grid-cols-[2fr_1fr] gap-x-2 gap-y-2 items-center">
-          <div className={`flex items-center gap-1 min-w-0 text-yellow-100 ${onEditOutfit ? 'cursor-pointer hover:text-amber-400' : ''}`} onClick={e => { e.stopPropagation(); onEditOutfit(); }}>
+          <div className={`flex items-center gap-1 min-w-0 text-yellow-100 ${onEditOutfit && !dwellerIsChild ? 'cursor-pointer hover:text-amber-400' : ''}`} onClick={e => {
+            if (onEditOutfit && !dwellerIsChild) {
+              e.stopPropagation();
+              onEditOutfit();
+            }
+          }}>
             <p className="text-xs font-semibold truncate text-left" title={getItemLabel(outfit)}>
               <span className="text-xs text-muted-foreground font-display">OUTFIT : </span>
               {getItemLabel(outfit) || 'None'}
             </p>
-            {onEditOutfit && (
+            {onEditOutfit && !dwellerIsChild && (
               <Pencil className="w-3 h-3 ml-1" />
             )}
           </div>
@@ -87,12 +99,17 @@ export function DwellerCard({ dweller, roomName, roomSpecial, onEditWeapon, onEd
             {outfitBonus && <p className="text-xs text-primary font-display">{outfitBonus}</p>}
           </div>
 
-          <div className={`flex items-center gap-1 min-w-0 text-yellow-100 ${onEditWeapon ? 'cursor-pointer hover:text-amber-400' : ''}`} onClick={e => { e.stopPropagation(); onEditWeapon(); }}>
+          <div className={`flex items-center gap-1 min-w-0 text-yellow-100 ${onEditWeapon && !dwellerIsChild ? 'cursor-pointer hover:text-amber-400' : ''}`} onClick={e => {
+            if (onEditWeapon && !dwellerIsChild) {
+              e.stopPropagation();
+              onEditWeapon();
+            }
+          }}>
             <p className="text-xs font-semibold truncate text-left" title={getItemLabel(weapon)}>
               <span className="text-xs text-muted-foreground font-display">WEAPON : </span>
               {getItemLabel(weapon) || 'None'}
             </p>
-            {onEditWeapon && (
+            {onEditWeapon && !dwellerIsChild && (
               <Pencil className="w-3 h-3 ml-1" />
             )}
           </div>

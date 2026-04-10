@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { getItem, getItemLabel, getItemType } from '@/lib/gameData';
 import { Search, ChevronDown, ChevronRight, X, ArrowUp, ArrowDown, ArrowUpDown } from 'lucide-react';
+import { isChild } from '@/lib/dwellerUtils';
 
 interface WeaponPickerDialogProps {
   open: boolean;
@@ -59,7 +60,7 @@ export function WeaponPickerDialog({
   // --- Other dwellers who have a weapon ---
   const otherDwellerWeapons = useMemo(() => {
     return allDwellers
-      .filter(d => d.serializeId !== dweller?.serializeId && d.equipedWeapon?.id)
+      .filter(d => d.serializeId !== dweller?.serializeId && d.equipedWeapon?.id && !isChild(d))
       .map(d => ({ owner: d, weaponId: d.equipedWeapon.id as string }));
   }, [allDwellers, dweller]);
 

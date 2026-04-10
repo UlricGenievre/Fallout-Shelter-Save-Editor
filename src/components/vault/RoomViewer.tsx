@@ -8,7 +8,7 @@ import { RoomPickerDialog } from '../shared/RoomPickerDialog';
 import { RoomConflictDialog } from '../shared/RoomConflictDialog';
 import { DwellerEditDialog } from '../shared/DwellerEditDialog';
 import { Button } from '@/components/ui/button';
-import { ArrowRightLeft, Sparkles, Users } from 'lucide-react';
+import { ArrowRightLeft, Sparkles, Users, Search, Home } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 
@@ -34,6 +34,10 @@ interface RoomViewerProps {
   onUpdateDweller?: (dwellerId: number, changes: any) => void;
   vaultName?: string;
   onUpdateVaultName?: (newName: string) => void;
+  movingDwellerId: number | null;
+  onSetMovingDwellerId: (id: number | null) => void;
+  onSelectRoom: (targetIdx: number | null) => void;
+  onOpenRoomPicker: () => void;
 }
 
 const ROOM_CLASS_COLORS: Record<string, string> = {
@@ -85,7 +89,21 @@ const getRoomName = (type: string): string => {
   return roomNameMap.get(type) || type;
 };
 
-export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipOutfit, onMoveDweller, onUpdateDweller, vaultName = '000', onUpdateVaultName }: RoomViewerProps) {
+export function RoomViewer({ 
+  rooms, 
+  dwellers, 
+  inventory, 
+  onEquipWeapon, 
+  onEquipOutfit, 
+  onMoveDweller, 
+  onUpdateDweller, 
+  vaultName = '000', 
+  onUpdateVaultName,
+  movingDwellerId,
+  onSetMovingDwellerId,
+  onSelectRoom,
+  onOpenRoomPicker
+}: RoomViewerProps) {
   const [isMagicMode, setIsMagicMode] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -103,8 +121,6 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
     return rooms.find(r => r.row === selectedRoom.row && r.col === selectedRoom.col) || null;
   }, [rooms, selectedRoom]);
 
-  const [movingDwellerId, setMovingDwellerId] = useState<number | null>(null);
-  const [pickerTargetRoomIndex, setPickerTargetRoomIndex] = useState<number | null>(null);
   const [weaponPickerDwellerId, setWeaponPickerDwellerId] = useState<number | null>(null);
   const [outfitPickerDwellerId, setOutfitPickerDwellerId] = useState<number | null>(null);
   const [editingDwellerId, setEditingDwellerId] = useState<number | null>(null);
@@ -160,6 +176,13 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
   };
 
   const handleRoomClick = (room: Room) => {
+    if (movingDwellerId !== null) {
+      const roomIdx = rooms.findIndex(r => r === room || (r.row === room.row && r.col === room.col));
+      if (roomIdx !== -1) {
+        onSelectRoom(roomIdx);
+      }
+      return;
+    }
     setSelectedRoom(room);
     setIsModalOpen(true);
   };
@@ -174,6 +197,33 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
 
   return (
     <div className="w-full h-full p-6 overflow-auto">
+      {movingDwellerId !== null && (() => {
+        const dweller = dwellers.find(d => d.serializeId === movingDwellerId);
+        return (
+          <div className="mb-4 p-3 bg-primary/10 border border-primary/30 rounded-lg flex items-center justify-between animate-in slide-in-from-top duration-300 shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="bg-primary/20 p-2 rounded-full">
+                <ArrowRightLeft className="w-5 h-5 text-primary animate-pulse" />
+              </div>
+              <div>
+                <p className="text-sm font-bold tracking-wider">MOVING DWELLER</p>
+                <p className="text-xs text-muted-foreground">Select a destination for <span className="text-primary font-bold">{dweller?.name} {dweller?.lastName}</span></p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" className="h-8 border-primary/50 text-xs gap-1.5" onClick={() => onOpenRoomPicker()}>
+                <Search className="w-3.5 h-3.5" /> Search
+              </Button>
+              <Button variant="outline" size="sm" className="h-8 border-primary/50 text-xs gap-1.5" onClick={() => onSelectRoom(null)}>
+                <Home className="w-3.5 h-3.5" /> Coffee Break
+              </Button>
+              <Button variant="ghost" size="sm" className="h-8 text-xs text-muted-foreground" onClick={() => onSetMovingDwellerId(null)}>
+                Cancel
+              </Button>
+            </div>
+          </div>
+        );
+      })()}
       <div className="mb-6 relative flex items-center justify-center min-h-[40px]">
         <h2 className="font-display text-2xl pip-text-glow tracking-widest uppercase text-center flex items-center gap-3">
           <span>Vault</span>
@@ -407,7 +457,8 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
                               className="w-full justify-center h-8 px-2 text-xs flex items-center gap-1.5 border border-primary hover:bg-background hover:text-primary transition-colors"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                setMovingDwellerId(dweller.serializeId);
+                                setIsModalOpen(false); // Close details modal when starting move
+                                onSetMovingDwellerId(dweller.serializeId);
                               }}
                             >
                               <ArrowRightLeft className="w-3 h-3" /> Move
@@ -460,61 +511,6 @@ export function RoomViewer({ rooms, dwellers, inventory, onEquipWeapon, onEquipO
         );
       })()}
 
-      {movingDwellerId !== null && (
-        <RoomPickerDialog
-          open={true}
-          onClose={() => setMovingDwellerId(null)}
-          dwellerId={movingDwellerId}
-          dwellers={dwellers}
-          rooms={rooms}
-          onSelectRoom={(targetIdx) => {
-            if (targetIdx === null) {
-              // Coffee break directly
-              // We need the source room index
-              const sourceRoomIdx = rooms.findIndex(r => r.dwellers?.includes(movingDwellerId));
-              onMoveDweller?.(movingDwellerId, sourceRoomIdx !== -1 ? sourceRoomIdx : null, null);
-              setMovingDwellerId(null);
-            } else {
-              // Check capacity
-              const targetRoom = rooms[targetIdx];
-              let maxCapacity = 2;
-              if (targetRoom.type === 'Entrance') maxCapacity = 2;
-              else if (targetRoom.type !== 'FakeWasteland') maxCapacity = (targetRoom.mergeLevel || 1) * 2;
-              else maxCapacity = 999;
-
-              if ((targetRoom.dwellers?.length || 0) >= maxCapacity) {
-                // Conflict
-                setPickerTargetRoomIndex(targetIdx);
-              } else {
-                // Have space
-                const sourceRoomIdx = rooms.findIndex(r => r.dwellers?.includes(movingDwellerId));
-                onMoveDweller?.(movingDwellerId, sourceRoomIdx !== -1 ? sourceRoomIdx : null, targetIdx);
-                setMovingDwellerId(null);
-              }
-            }
-          }}
-        />
-      )}
-
-      {movingDwellerId !== null && pickerTargetRoomIndex !== null && (
-        <RoomConflictDialog
-          open={true}
-          onClose={() => {
-            setPickerTargetRoomIndex(null);
-            // keep movingDwellerId so we can pick another room
-          }}
-          dwellerId={movingDwellerId}
-          targetRoomIndex={pickerTargetRoomIndex}
-          dwellers={dwellers}
-          rooms={rooms}
-          onResolve={(kickedId, isSwap) => {
-            const sourceRoomIdx = rooms.findIndex(r => r.dwellers?.includes(movingDwellerId));
-            onMoveDweller?.(movingDwellerId, sourceRoomIdx !== -1 ? sourceRoomIdx : null, pickerTargetRoomIndex, kickedId, isSwap);
-            setPickerTargetRoomIndex(null);
-            setMovingDwellerId(null);
-          }}
-        />
-      )}
 
       {/* Edit Dweller Dialog */}
       {editingDwellerId !== null && (() => {

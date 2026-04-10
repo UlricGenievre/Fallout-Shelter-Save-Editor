@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { RotateCcw, HeartPulse, ArrowUp, Star } from 'lucide-react';
 import { ALL_WEAPONS, ALL_OUTFITS, getItemLabel, getItem, formatSpecial } from '@/lib/gameData';
+import { isChild } from '@/lib/dwellerUtils';
 import { toast } from 'sonner';
 
 const STAT_OFFSET = 1;
@@ -28,6 +29,8 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
   }, [open, dweller]);
 
   if (!localDweller) return null;
+
+  const dwellerIsChild = isChild(dweller);
 
   const updateDweller = (path: string, value: any) => {
     const updated = { ...localDweller };
@@ -112,52 +115,54 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
       <DialogContent className="sm:max-w-2xl max-h-[85vh] overflow-y-auto w-full">
         <DialogHeader>
           <DialogTitle className="font-display tracking-wider pip-text-glow uppercase">
-            EDIT DWELLER: {localDweller.name} {localDweller.lastName}
+            EDIT DWELLER: {localDweller.name} {localDweller.lastName} {dwellerIsChild && '(Child)'}
           </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4 pt-2">
           {/* Action buttons */}
-          <div className="flex flex-wrap items-center gap-2">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="outline" size="sm" onClick={resetToLevel1}>
-                    <RotateCcw className="w-3.5 h-3.5 mr-1.5" />
-                    Reset Lv.1
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Reset to level 1, 105 HP, 0 XP</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="outline" size="sm" onClick={optimizeHealth}>
-                    <HeartPulse className="w-3.5 h-3.5 mr-1.5" />
-                    Optimize HP
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Set HP based on current E stat: 105 + (2.5 + 0.5×(E+7)) × (LVL-1)</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="outline" size="sm" onClick={setLevel50}>
-                    <ArrowUp className="w-3.5 h-3.5 mr-1.5" />
-                    Lv.50
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Set dweller to level 50</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="outline" size="sm" onClick={maxAllSpecial}>
-                    <Star className="w-3.5 h-3.5 mr-1.5" />
-                    Max SPECIAL
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Set all S.P.E.C.I.A.L. stats to 10</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
+          {!dwellerIsChild && (
+            <div className="flex flex-wrap items-center gap-2">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="outline" size="sm" onClick={resetToLevel1}>
+                      <RotateCcw className="w-3.5 h-3.5 mr-1.5" />
+                      Reset Lv.1
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Reset to level 1, 105 HP, 0 XP</TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="outline" size="sm" onClick={optimizeHealth}>
+                      <HeartPulse className="w-3.5 h-3.5 mr-1.5" />
+                      Optimize HP
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Set HP based on current E stat: 105 + (2.5 + 0.5×(E+7)) × (LVL-1)</TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="outline" size="sm" onClick={setLevel50}>
+                      <ArrowUp className="w-3.5 h-3.5 mr-1.5" />
+                      Lv.50
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Set dweller to level 50</TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button variant="outline" size="sm" onClick={maxAllSpecial}>
+                      <Star className="w-3.5 h-3.5 mr-1.5" />
+                      Max SPECIAL
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Set all S.P.E.C.I.A.L. stats to 10</TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+          )}
 
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -174,16 +179,19 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
             <div>
               <label className="text-xs text-muted-foreground font-display">HEALTH</label>
               <Input type="number" value={Math.round(localDweller.health?.healthValue ?? 0)}
+                disabled={dwellerIsChild}
                 onChange={(e) => updateDweller('health.healthValue', parseFloat(e.target.value) || 0)} />
             </div>
             <div>
               <label className="text-xs text-muted-foreground font-display">MAX HEALTH</label>
               <Input type="number" value={Math.round(localDweller.health?.maxHealth ?? 0)}
+                disabled={dwellerIsChild}
                 onChange={(e) => updateDweller('health.maxHealth', parseFloat(e.target.value) || 0)} />
             </div>
             <div>
               <label className="text-xs text-muted-foreground font-display">RADIATION</label>
               <Input type="number" value={Math.round(localDweller.health?.radiationValue ?? 0)}
+                disabled={dwellerIsChild}
                 onChange={(e) => updateDweller('health.radiationValue', parseFloat(e.target.value) || 0)} />
             </div>
           </div>
@@ -192,16 +200,19 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
             <div>
               <label className="text-xs text-muted-foreground font-display">HAPPINESS</label>
               <Input type="number" min={0} max={100} value={Math.round(localDweller.happiness?.happinessValue ?? 0)}
+                disabled={dwellerIsChild}
                 onChange={(e) => updateDweller('happiness.happinessValue', parseFloat(e.target.value) || 0)} />
             </div>
             <div>
               <label className="text-xs text-muted-foreground font-display">LEVEL</label>
               <Input type="number" min={1} max={50} value={localDweller.experience?.currentLevel ?? 1}
+                disabled={dwellerIsChild}
                 onChange={(e) => updateDweller('experience.currentLevel', parseInt(e.target.value) || 1)} />
             </div>
             <div>
               <label className="text-xs text-muted-foreground font-display">XP</label>
               <Input type="number" value={localDweller.experience?.experienceValue ?? 0}
+                disabled={dwellerIsChild}
                 onChange={(e) => updateDweller('experience.experienceValue', parseInt(e.target.value) || 0)} />
             </div>
           </div>
@@ -216,6 +227,7 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
                   <div key={name} className="flex flex-col items-center gap-1 bg-card/30 p-0 rounded border border-border/30">
                     <span className="text-lg font-display text-primary">{name}</span>
                     <Input type="number" min={1} max={10} value={stat?.value || 1}
+                      disabled={dwellerIsChild}
                       onChange={(e) => {
                         const val = parseInt(e.target.value) || 1;
                         updateDweller(`stats.stats.${realIndex}.value`, val);
@@ -235,6 +247,7 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
               <Select
                 value={localDweller.equipedWeapon?.id ?? ''}
                 onValueChange={(val) => updateDweller('equipedWeapon.id', val)}
+                disabled={dwellerIsChild}
               >
                 <SelectTrigger className="h-9 text-xs">
                   <SelectValue placeholder="No weapon">
@@ -264,6 +277,7 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
               <Select
                 value={localDweller.equipedOutfit?.id ?? ''}
                 onValueChange={(val) => updateDweller('equipedOutfit.id', val)}
+                disabled={dwellerIsChild}
               >
                 <SelectTrigger className="h-9 text-xs">
                   <SelectValue placeholder="No outfit">

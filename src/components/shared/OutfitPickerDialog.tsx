@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { getItem, getItemLabel, getItemType } from '@/lib/gameData';
 import { Search, ChevronDown, ChevronRight, X, ArrowUp, ArrowDown, ArrowUpDown } from 'lucide-react';
+import { isChild } from '@/lib/dwellerUtils';
 
 interface OutfitPickerDialogProps {
   open: boolean;
@@ -70,7 +71,7 @@ export function OutfitPickerDialog({
 
   const otherDwellerOutfits = useMemo(() => {
     return allDwellers
-      .filter(d => d.serializeId !== dweller?.serializeId && d.equipedOutfit?.id)
+      .filter(d => d.serializeId !== dweller?.serializeId && d.equipedOutfit?.id && !isChild(d))
       .map(d => ({ owner: d, outfitId: d.equipedOutfit.id as string }));
   }, [allDwellers, dweller]);
 

@@ -1,8 +1,11 @@
+import { useState, useCallback } from 'react';
 import { Box, Home, LayoutGrid, Users } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import { RoomViewer } from './RoomViewer';
 import { VaultDwellers } from './VaultDwellers';
 import { VaultInventory } from './VaultInventory';
+import { RoomPickerDialog } from '../shared/RoomPickerDialog';
+import { RoomConflictDialog } from '../shared/RoomConflictDialog';
 import roomsData from '@/data/rooms.json';
 
 type Tab = 'layout' | 'dwellers' | 'inventory';
@@ -23,11 +26,22 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
   const tabParam = searchParams.get('tab') as Tab;
   const activeTab = TABS.some(t => t.id === tabParam) ? tabParam : 'layout';
 
+  const [movingDwellerId, setMovingDwellerIdState] = useState<number | null>(null);
+  const [pickerTargetRoomIndex, setPickerTargetRoomIndex] = useState<number | null>(null);
+  const [isRoomPickerOpen, setIsRoomPickerOpen] = useState(false);
+
   const setActiveTab = (id: Tab) => {
     setSearchParams(prev => {
       prev.set('tab', id);
       return prev;
     });
+  };
+
+  const setMovingDwellerId = (id: number | null) => {
+    setMovingDwellerIdState(id);
+    if (id !== null) {
+      setActiveTab('layout');
+    }
   };
 
   const handleSellItem = (itemId: string, amount: number, resellValue: number) => {
@@ -299,6 +313,39 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
     }
   };
 
+  const handleSelectRoom = (targetIdx: number | null) => {
+    if (targetIdx === null) {
+      // Coffee break directly
+      const sourceRoomIdx = rooms.findIndex((r: any) => r.dwellers?.includes(movingDwellerId));
+      handleMoveDweller(movingDwellerId!, sourceRoomIdx !== -1 ? sourceRoomIdx : null, null);
+      setMovingDwellerId(null);
+      setIsRoomPickerOpen(false);
+    } else {
+      const targetRoom = rooms[targetIdx];
+      let maxCapacity = 2;
+      if (targetRoom.type === 'Entrance') maxCapacity = 2;
+      else if (targetRoom.type !== 'FakeWasteland') maxCapacity = (targetRoom.mergeLevel || 1) * 2;
+      else maxCapacity = 999;
+
+      if ((targetRoom.dwellers?.length || 0) >= maxCapacity) {
+        setPickerTargetRoomIndex(targetIdx);
+        setIsRoomPickerOpen(false);
+      } else {
+        const sourceRoomIdx = rooms.findIndex((r: any) => r.dwellers?.includes(movingDwellerId));
+        handleMoveDweller(movingDwellerId!, sourceRoomIdx !== -1 ? sourceRoomIdx : null, targetIdx);
+        setMovingDwellerId(null);
+        setIsRoomPickerOpen(false);
+      }
+    }
+  };
+
+  const handleResolveConflict = (kickedId: number, isSwap: boolean) => {
+    const sourceRoomIdx = rooms.findIndex((r: any) => r.dwellers?.includes(movingDwellerId));
+    handleMoveDweller(movingDwellerId!, sourceRoomIdx !== -1 ? sourceRoomIdx : null, pickerTargetRoomIndex!, kickedId, isSwap);
+    setPickerTargetRoomIndex(null);
+    setMovingDwellerId(null);
+  };
+
   const rooms = data?.vault?.rooms || [];
   const dwellers = data?.dwellers?.dwellers || [];
   const inventory = data?.vault?.inventory?.items || [];
@@ -347,6 +394,10 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
             onEquipOutfit={handleEquipOutfit}
             onMoveDweller={handleMoveDweller}
             onUpdateDweller={handleUpdateDweller}
+            movingDwellerId={movingDwellerId}
+            onSetMovingDwellerId={setMovingDwellerId}
+            onSelectRoom={handleSelectRoom}
+            onOpenRoomPicker={() => setIsRoomPickerOpen(true)}
           />
         )}
         {activeTab === 'dwellers' && (
@@ -358,6 +409,8 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
             onEquipOutfit={handleEquipOutfit}
             onMoveDweller={handleMoveDweller}
             onUpdateDweller={handleUpdateDweller}
+            movingDwellerId={movingDwellerId}
+            onSetMovingDwellerId={setMovingDwellerId}
           />
         )}
         {activeTab === 'inventory' && (
@@ -375,6 +428,29 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
           />
         )}
       </div>
+
+      {movingDwellerId !== null && isRoomPickerOpen && (
+        <RoomPickerDialog
+          open={true}
+          onClose={() => setIsRoomPickerOpen(false)}
+          dwellerId={movingDwellerId}
+          dwellers={dwellers}
+          rooms={rooms}
+          onSelectRoom={handleSelectRoom}
+        />
+      )}
+
+      {movingDwellerId !== null && pickerTargetRoomIndex !== null && (
+        <RoomConflictDialog
+          open={true}
+          onClose={() => setPickerTargetRoomIndex(null)}
+          dwellerId={movingDwellerId}
+          targetRoomIndex={pickerTargetRoomIndex}
+          dwellers={dwellers}
+          rooms={rooms}
+          onResolve={handleResolveConflict}
+        />
+      )}
     </div>
   );
 }

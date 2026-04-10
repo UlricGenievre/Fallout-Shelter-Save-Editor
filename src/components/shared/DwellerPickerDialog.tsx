@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { getItem, getItemLabel, formatSpecial } from '@/lib/gameData';
 import { ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { DwellerCard } from '@/components/shared/DwellerCard';
+import { isChild } from '@/lib/dwellerUtils';
 import roomsData from '@/data/rooms.json';
 
 interface DwellerPickerDialogProps {
@@ -162,8 +163,12 @@ export function DwellerPickerDialog({
   /* ------------------------------------------------------------------ */
   /* Sort — identique à VaultDwellers (avec inversion Training)          */
   /* ------------------------------------------------------------------ */
+  const filteredDwellers = useMemo(() => {
+    return dwellers.filter(d => !isChild(d));
+  }, [dwellers]);
+
   const sortedDwellers = useMemo(() => {
-    return [...dwellers].sort((a, b) => {
+    return [...filteredDwellers].sort((a, b) => {
       let comparison = 0;
       const specialLetters = ['S', 'P', 'E', 'C', 'I', 'A', 'L'];
 
