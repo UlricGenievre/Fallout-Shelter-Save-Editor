@@ -238,7 +238,7 @@ export function WeaponPickerDialog({
                   size="sm"
                   className="h-7 text-xs"
                   disabled={!currentWeaponId}
-                  onClick={() => handleEquip('')}
+                  onClick={() => handleEquip('Fist')}
                 >
                   Unequip
                 </Button>

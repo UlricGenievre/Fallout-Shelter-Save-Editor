@@ -70,7 +70,7 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
     const target = allDwellers.find((d: any) => d.serializeId === targetDwellerId);
     if (!target) return;
 
-    const previousWeaponId: string = target.equipedWeapon?.id || '';
+    const previousWeaponId: string = target.equipedWeapon?.id || 'Fist';
 
     if (sourceDwellerId !== undefined) {
       // --- SWAP: weapon comes from another dweller ---
@@ -89,14 +89,14 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
         );
         if (idx !== -1) items.splice(idx, 1);
       }
-      // Return previous weapon to inventory
-      if (previousWeaponId) {
+      // Return previous weapon to inventory (except if it was "Fist")
+      if (previousWeaponId && previousWeaponId !== 'Fist') {
         items.push(previousWeaponId);
       }
     }
 
     if (!target.equipedWeapon) target.equipedWeapon = {};
-    target.equipedWeapon.id = newWeaponId;
+    target.equipedWeapon.id = newWeaponId || 'Fist';
 
     setData(newData);
   };
@@ -113,7 +113,7 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
     const target = allDwellers.find((d: any) => d.serializeId === targetDwellerId);
     if (!target) return;
 
-    const previousOutfitId: string = target.equipedOutfit?.id || '';
+    const previousOutfitId: string = target.equipedOutfit?.id || 'jumpsuit';
 
     if (sourceDwellerId !== undefined) {
       // --- SWAP: outfit comes from another dweller ---
@@ -132,14 +132,14 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
         );
         if (idx !== -1) items.splice(idx, 1);
       }
-      // Return previous outfit to inventory
-      if (previousOutfitId) {
+      // Return previous outfit to inventory (except if it was "jumpsuit")
+      if (previousOutfitId && previousOutfitId !== 'jumpsuit') {
         items.push(previousOutfitId);
       }
     }
 
     if (!target.equipedOutfit) target.equipedOutfit = {};
-    target.equipedOutfit.id = newOutfitId;
+    target.equipedOutfit.id = newOutfitId || 'jumpsuit';
 
     setData(newData);
   };

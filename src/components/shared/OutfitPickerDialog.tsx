@@ -286,7 +286,7 @@ export function OutfitPickerDialog({
                   size="sm"
                   className="h-7 text-xs"
                   disabled={!currentOutfitId}
-                  onClick={() => handleEquip('')}
+                  onClick={() => handleEquip('jumpsuit')}
                 >
                   Unequip
                 </Button>
