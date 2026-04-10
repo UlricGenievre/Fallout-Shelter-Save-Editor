@@ -90,13 +90,16 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
       // --- SWAP: weapon comes from another dweller ---
       const source = allDwellers.find((d: any) => d.serializeId === sourceDwellerId);
       if (source) {
-        if (!source.equipedWeapon) source.equipedWeapon = {};
-        source.equipedWeapon.id = previousWeaponId; // source gets target's old weapon
+        if (!source.equipedWeapon) source.equipedWeapon = { type: 'Weapon' };
+        source.equipedWeapon.id = previousWeaponId;
+        source.equipedWeapon.type = 'Weapon';
+        source.equipedWeapon.hasBeenAssigned = false;
+        source.equipedWeapon.hasRandonWeaponBeenAssigned = false;
       }
     } else {
       // --- FROM INVENTORY OR UNEQUIP ---
       const items: any[] = newData.vault?.inventory?.items || [];
-      if (newWeaponId) {
+      if (newWeaponId && newWeaponId !== 'none') {
         // Remove one occurrence of the chosen weapon from inventory
         const idx = items.findIndex(
           (item: any) => (typeof item === 'string' ? item : item?.id) === newWeaponId,
@@ -104,13 +107,21 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
         if (idx !== -1) items.splice(idx, 1);
       }
       // Return previous weapon to inventory (except if it was "Fist")
-      if (previousWeaponId && previousWeaponId !== 'Fist') {
-        items.push(previousWeaponId);
+      if (previousWeaponId && previousWeaponId !== 'Fist' && previousWeaponId !== 'none') {
+        items.push({
+          id: previousWeaponId,
+          type: 'Weapon',
+          hasBeenAssigned: false,
+          hasRandonWeaponBeenAssigned: false
+        });
       }
     }
 
-    if (!target.equipedWeapon) target.equipedWeapon = {};
+    if (!target.equipedWeapon) target.equipedWeapon = { type: 'Weapon' };
     target.equipedWeapon.id = newWeaponId || 'Fist';
+    target.equipedWeapon.type = 'Weapon';
+    target.equipedWeapon.hasBeenAssigned = false;
+    target.equipedWeapon.hasRandonWeaponBeenAssigned = false;
 
     setData(newData);
   };
@@ -133,13 +144,16 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
       // --- SWAP: outfit comes from another dweller ---
       const source = allDwellers.find((d: any) => d.serializeId === sourceDwellerId);
       if (source) {
-        if (!source.equipedOutfit) source.equipedOutfit = {};
-        source.equipedOutfit.id = previousOutfitId; // source gets target's old outfit
+        if (!source.equipedOutfit) source.equipedOutfit = { type: 'Outfit' };
+        source.equipedOutfit.id = previousOutfitId;
+        source.equipedOutfit.type = 'Outfit';
+        source.equipedOutfit.hasBeenAssigned = false;
+        source.equipedOutfit.hasRandonWeaponBeenAssigned = false;
       }
     } else {
       // --- FROM INVENTORY OR UNEQUIP ---
       const items: any[] = newData.vault?.inventory?.items || [];
-      if (newOutfitId) {
+      if (newOutfitId && newOutfitId !== 'none') {
         // Remove one occurrence of the chosen outfit from inventory
         const idx = items.findIndex(
           (item: any) => (typeof item === 'string' ? item : item?.id) === newOutfitId,
@@ -147,13 +161,21 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
         if (idx !== -1) items.splice(idx, 1);
       }
       // Return previous outfit to inventory (except if it was "jumpsuit")
-      if (previousOutfitId && previousOutfitId !== 'jumpsuit') {
-        items.push(previousOutfitId);
+      if (previousOutfitId && previousOutfitId !== 'jumpsuit' && previousOutfitId !== 'none') {
+        items.push({
+          id: previousOutfitId,
+          type: 'Outfit',
+          hasBeenAssigned: false,
+          hasRandonWeaponBeenAssigned: false
+        });
       }
     }
 
-    if (!target.equipedOutfit) target.equipedOutfit = {};
+    if (!target.equipedOutfit) target.equipedOutfit = { type: 'Outfit' };
     target.equipedOutfit.id = newOutfitId || 'jumpsuit';
+    target.equipedOutfit.type = 'Outfit';
+    target.equipedOutfit.hasBeenAssigned = false;
+    target.equipedOutfit.hasRandonWeaponBeenAssigned = false;
 
     setData(newData);
   };
