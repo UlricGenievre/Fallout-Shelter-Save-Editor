@@ -119,7 +119,13 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-4 pt-2">
+        <form 
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSave();
+          }}
+          className="space-y-4 pt-2"
+        >
           {/* Action buttons */}
           {!dwellerIsChild && (
             <div className="flex flex-wrap items-center gap-2">
@@ -306,10 +312,10 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
           </div>
 
           <div className="flex justify-end gap-2 pt-4">
-            <Button variant="outline" onClick={onClose}>Cancel</Button>
-            <Button onClick={handleSave}>Save Changes</Button>
+            <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
+            <Button type="submit">Save Changes</Button>
           </div>
-        </div>
+        </form>
       </DialogContent>
     </Dialog>
   );

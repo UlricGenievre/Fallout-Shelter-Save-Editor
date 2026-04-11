@@ -29,23 +29,32 @@ type SortDirection = 'asc' | 'desc';
 const SPECIAL_KEYS = ['S', 'P', 'E', 'C', 'I', 'A', 'L'] as const;
 
 export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEquipOutfit, onMoveDweller, onUpdateDweller, movingDwellerId, onSetMovingDwellerId }: VaultDwellersProps) {
-  const [sortConfig, setSortConfig] = useState<{ field: SortField; direction: SortDirection }>({
-    field: 'name',
-    direction: 'asc',
-  });
+  const [sortConfigs, setSortConfigs] = useState<Array<{ field: SortField; direction: SortDirection }>>([
+    { field: 'name', direction: 'asc' },
+  ]);
   const [weaponPickerDwellerId, setWeaponPickerDwellerId] = useState<number | null>(null);
   const [outfitPickerDwellerId, setOutfitPickerDwellerId] = useState<number | null>(null);
   const [editingDwellerId, setEditingDwellerId] = useState<number | null>(null);
 
   const handleSort = (field: SortField) => {
-    setSortConfig(prev => {
+    setSortConfigs(prev => {
       const isSpecial = SPECIAL_KEYS.includes(field as any) || ROOM_SORT_KEYS.includes(field as any);
-      return {
-        field,
-        direction: prev.field === field
-          ? (prev.direction === 'asc' ? 'desc' : 'asc')
-          : (isSpecial ? 'desc' : 'asc')
+      const existingIdx = prev.findIndex(c => c.field === field);
+      
+      if (existingIdx === 0) {
+        // Toggle direction of primary sort
+        const newConfigs = [...prev];
+        newConfigs[0] = { ...newConfigs[0], direction: newConfigs[0].direction === 'asc' ? 'desc' : 'asc' };
+        return newConfigs;
       }
+
+      // New primary sort
+      const newConfigs = [
+        { field, direction: isSpecial ? 'desc' as const : 'asc' as const },
+        ...prev.filter(c => c.field !== field)
+      ].slice(0, 3);
+
+      return newConfigs;
     });
   };
 
@@ -58,21 +67,29 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEqu
     label: string;
     align?: 'left' | 'center' | 'right';
   }) => {
-    const isActive = sortConfig.field === field;
+    const sortIdx = sortConfigs.findIndex(c => c.field === field);
+    const isActive = sortIdx !== -1;
+    const isPrimary = sortIdx === 0;
+    const config = sortConfigs[sortIdx];
+
     return (
       <button
         onClick={() => handleSort(field)}
-        className={`flex items-center gap-1.5 text-xs font-display uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors ${align === 'center' ? 'justify-center w-full' : align === 'right' ? 'justify-end w-full' : 'justify-start'
-          }`}
+        className={`flex items-center gap-1.5 text-xs font-display uppercase tracking-wider transition-colors ${
+          align === 'center' ? 'justify-center w-full' : align === 'right' ? 'justify-end w-full' : 'justify-start'
+        } ${isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
       >
         <span className="flex items-center gap-1 cursor-pointer">
           {label}
           {isActive ? (
-            sortConfig.direction === 'asc' ? (
-              <ArrowUp className="w-3 h-3 text-primary" />
-            ) : (
-              <ArrowDown className="w-3 h-3 text-primary" />
-            )
+            <span className="flex items-center">
+              {config.direction === 'asc' ? (
+                <ArrowUp className={`w-3 h-3 ${isPrimary ? 'text-primary' : 'text-primary/40'}`} />
+              ) : (
+                <ArrowDown className={`w-3 h-3 ${isPrimary ? 'text-primary' : 'text-primary/40'}`} />
+              )}
+              {isActive && !isPrimary && <span className="text-[8px] ml-0.5 opacity-50">{sortIdx + 1}</span>}
+            </span>
           ) : (
             <ArrowUpDown className="w-3 h-3 opacity-40 hover:opacity-100 transition-opacity" />
           )}
@@ -82,24 +99,34 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEqu
   };
 
   const SpecialSortButton = ({ field }: { field: (typeof SPECIAL_KEYS)[number] }) => {
-    const isActive = sortConfig.field === field;
+    const sortIdx = sortConfigs.findIndex(c => c.field === field);
+    const isActive = sortIdx !== -1;
+    const isPrimary = sortIdx === 0;
+    const config = sortConfigs[sortIdx];
+
     return (
       <button
         onClick={() => handleSort(field)}
         className="flex items-center justify-center w-full text-xs font-display font-medium text-muted-foreground hover:text-foreground transition-colors"
-        title={`Sort by ${field}`}
+        title={`Sort by ${field}${isActive ? ` (Level ${sortIdx + 1})` : ''}`}
       >
         <span
-          className={`flex justify-center items-center w-6 h-6 rounded-md cursor-pointer ${isActive ? 'text-primary bg-primary/10 border border-primary/30' : 'hover:bg-muted/30'
-            }`}
+          className={`relative flex justify-center items-center w-6 h-6 rounded-md cursor-pointer ${
+            isPrimary ? 'text-primary bg-primary/10 border border-primary/30' : 
+            isActive ? 'text-primary/60 bg-primary/5 border border-primary/10' : 'hover:bg-muted/30'
+          }`}
         >
           {field}
-          {isActive &&
-            (sortConfig.direction === 'asc' ? (
-              <ArrowUp className="w-2.5 h-2.5 ml-[1px]" />
-            ) : (
-              <ArrowDown className="w-2.5 h-2.5 ml-[1px]" />
-            ))}
+          {isActive && (
+            <span className="absolute -top-1 -right-1 flex items-center">
+              {config.direction === 'asc' ? (
+                <ArrowUp className={`w-2 h-2 ${isPrimary ? 'text-primary' : 'text-primary/40'}`} />
+              ) : (
+                <ArrowDown className={`w-2 h-2 ${isPrimary ? 'text-primary' : 'text-primary/40'}`} />
+              )}
+              {!isPrimary && <span className="text-[7px] ml-0.5 opacity-70">{sortIdx + 1}</span>}
+            </span>
+          )}
         </span>
       </button>
     );
@@ -121,54 +148,50 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEqu
     return map;
   }, [rooms]);
 
-  const sortedDwellers = useMemo(() => {
-    return [...dwellers].sort((a, b) => {
-      let comparison = 0;
-      const specialLetters = ['S', 'P', 'E', 'C', 'I', 'A', 'L'];
+  const compareByField = (a: any, b: any, field: SortField, direction: SortDirection): number => {
+    let comparison = 0;
+    const specialLetters = ['S', 'P', 'E', 'C', 'I', 'A', 'L'];
 
-      switch (sortConfig.field) {
-        case 'name':
-          comparison = `${a.name} ${a.lastName}`.localeCompare(`${b.name} ${b.lastName}`);
-          break;
-        case 'level':
-          comparison = (a.experience?.currentLevel || 1) - (b.experience?.currentLevel || 1);
-          break;
-        case 'hp':
-          comparison = (a.health?.maxHealth || 0) - (b.health?.maxHealth || 0);
-          break;
-        case 'damage': {
-          const weaponA = getItem(a.equipedWeapon?.id || '');
-          const weaponB = getItem(b.equipedWeapon?.id || '');
-          const dmgA = parseFloat(weaponA?.avgDamage?.toString() || weaponA?.damage?.toString() || '0') || 0;
-          const dmgB = parseFloat(weaponB?.avgDamage?.toString() || weaponB?.damage?.toString() || '0') || 0;
-          comparison = dmgA - dmgB;
-          break;
-        }
-        case 'room': {
-          const roomA = dwellerRooms.get(a.serializeId)?.name || 'Wandering';
-          const roomB = dwellerRooms.get(b.serializeId)?.name || 'Wandering';
-          comparison = roomA.localeCompare(roomB);
-          break;
-        }
-        case 'roomS':
-        case 'roomP':
-        case 'roomE':
-        case 'roomC':
-        case 'roomI':
-        case 'roomA':
-        case 'roomL': {
-          const targetStat = sortConfig.field.slice(4); // ex: 'roomE' -> 'E'
-          const statIdx = specialLetters.indexOf(targetStat) + 1;
-          const rInfoA = dwellerRooms.get(a.serializeId);
-          const rInfoB = dwellerRooms.get(b.serializeId);
-          const aInRoom = rInfoA?.special === targetStat ? 1 : 0;
-          const bInRoom = rInfoB?.special === targetStat ? 1 : 0;
-          // Groupe 1 (dans la bonne salle) avant groupe 2 (les autres)
-          if (aInRoom !== bInRoom) {
-            return bInRoom - aInRoom;
-          }
-          // Au sein du même groupe : tri par valeur de stat
-          // Pour les salles Training, on inverse la valeur (priorité aux stats les plus basses)
+    switch (field) {
+      case 'name':
+        comparison = `${a.name} ${a.lastName}`.localeCompare(`${b.name} ${b.lastName}`);
+        break;
+      case 'level':
+        comparison = (a.experience?.currentLevel || 1) - (b.experience?.currentLevel || 1);
+        break;
+      case 'hp':
+        comparison = (a.health?.maxHealth || 0) - (b.health?.maxHealth || 0);
+        break;
+      case 'damage': {
+        const weaponA = getItem(a.equipedWeapon?.id || '');
+        const weaponB = getItem(b.equipedWeapon?.id || '');
+        const dmgA = parseFloat(weaponA?.avgDamage?.toString() || weaponA?.damage?.toString() || '0') || 0;
+        const dmgB = parseFloat(weaponB?.avgDamage?.toString() || weaponB?.damage?.toString() || '0') || 0;
+        comparison = dmgA - dmgB;
+        break;
+      }
+      case 'room': {
+        const roomA = dwellerRooms.get(a.serializeId)?.name || 'Wandering';
+        const roomB = dwellerRooms.get(b.serializeId)?.name || 'Wandering';
+        comparison = roomA.localeCompare(roomB);
+        break;
+      }
+      case 'roomS':
+      case 'roomP':
+      case 'roomE':
+      case 'roomC':
+      case 'roomI':
+      case 'roomA':
+      case 'roomL': {
+        const targetStat = field.slice(4); // ex: 'roomE' -> 'E'
+        const statIdx = specialLetters.indexOf(targetStat) + 1;
+        const rInfoA = dwellerRooms.get(a.serializeId);
+        const rInfoB = dwellerRooms.get(b.serializeId);
+        const aInRoom = rInfoA?.special === targetStat ? 1 : 0;
+        const bInRoom = rInfoB?.special === targetStat ? 1 : 0;
+        if (aInRoom !== bInRoom) {
+          comparison = bInRoom - aInRoom;
+        } else {
           const rawA = aInRoom ? (a.stats?.stats?.[statIdx]?.value || 0) : 0;
           const rawB = bInRoom ? (b.stats?.stats?.[statIdx]?.value || 0) : 0;
           const isTrainingA = aInRoom && rInfoA?.category === 'Training';
@@ -176,29 +199,37 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEqu
           const valA = isTrainingA ? -rawA : rawA;
           const valB = isTrainingB ? -rawB : rawB;
           comparison = valA - valB;
-          break;
         }
-        case 'S':
-        case 'P':
-        case 'E':
-        case 'C':
-        case 'I':
-        case 'A':
-        case 'L': {
-          const statIndex = specialLetters.indexOf(sortConfig.field) + 1;
-          const statA = a.stats?.stats?.[statIndex]?.value || 0;
-          const statB = b.stats?.stats?.[statIndex]?.value || 0;
-          comparison = statA - statB;
-          break;
-        }
+        break;
       }
+      case 'S':
+      case 'P':
+      case 'E':
+      case 'C':
+      case 'I':
+      case 'A':
+      case 'L': {
+        const statIndex = specialLetters.indexOf(field) + 1;
+        const statA = a.stats?.stats?.[statIndex]?.value || 0;
+        const statB = b.stats?.stats?.[statIndex]?.value || 0;
+        comparison = statA - statB;
+        break;
+      }
+    }
 
-      if (comparison === 0 && sortConfig.field !== 'name') {
-        return `${a.name} ${a.lastName}`.localeCompare(`${b.name} ${b.lastName}`);
+    return direction === 'asc' ? comparison : -comparison;
+  };
+
+  const sortedDwellers = useMemo(() => {
+    return [...dwellers].sort((a, b) => {
+      for (const config of sortConfigs) {
+        const result = compareByField(a, b, config.field, config.direction);
+        if (result !== 0) return result;
       }
-      return sortConfig.direction === 'asc' ? comparison : -comparison;
+      // Ultimate fallback: name
+      return `${a.name} ${a.lastName}`.localeCompare(`${b.name} ${b.lastName}`);
     });
-  }, [dwellers, sortConfig, dwellerRooms]);
+  }, [dwellers, sortConfigs, dwellerRooms]);
 
   if (!dwellers || dwellers.length === 0) {
     return (
@@ -242,27 +273,34 @@ export function VaultDwellers({ dwellers, rooms, inventory, onEquipWeapon, onEqu
               <div className="flex gap-0">
                 {ROOM_SORT_KEYS.map(rk => {
                   const letter = rk.slice(4); // 'roomE' -> 'E'
-                  const isActive = sortConfig.field === rk;
+                  const sortIdx = sortConfigs.findIndex(c => c.field === rk);
+                  const isActive = sortIdx !== -1;
+                  const isPrimary = sortIdx === 0;
+
                   return (
                     <button
                       key={rk}
                       onClick={() => handleSort(rk)}
-                      title={`Trier par salle de stat ${letter}`}
+                      title={`Trier par salle de stat ${letter}${isActive ? ` (Niveau ${sortIdx + 1})` : ''}`}
                       className="flex items-center justify-center text-xs font-display font-medium text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <span
-                        className={`flex justify-center items-center w-5 h-5 rounded cursor-pointer ${isActive
-                          ? 'text-primary bg-primary/10 border border-primary/30'
+                        className={`flex justify-center items-center w-5 h-5 rounded cursor-pointer relative ${isActive
+                          ? (isPrimary ? 'text-primary bg-primary/10 border border-primary/30' : 'text-primary/60 bg-primary/5 border border-primary/10')
                           : 'hover:bg-muted/30'
                           }`}
                       >
                         {letter}
-                        {isActive &&
-                          (sortConfig.direction === 'asc' ? (
-                            <ArrowUp className="w-2 h-2 ml-[1px]" />
-                          ) : (
-                            <ArrowDown className="w-2 h-2 ml-[1px]" />
-                          ))}
+                        {isActive && (
+                          <span className="absolute -top-1 -right-1 flex items-center">
+                            {sortConfigs[sortIdx].direction === 'asc' ? (
+                              <ArrowUp className={`w-2 h-2 ${isPrimary ? 'text-primary' : 'text-primary/40'}`} />
+                            ) : (
+                              <ArrowDown className={`w-2 h-2 ${isPrimary ? 'text-primary' : 'text-primary/40'}`} />
+                            )}
+                            {!isPrimary && <span className="text-[6px] ml-0.5 opacity-70">{sortIdx + 1}</span>}
+                          </span>
+                        )}
                       </span>
                     </button>
                   );
