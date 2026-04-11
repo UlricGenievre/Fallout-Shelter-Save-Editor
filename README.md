@@ -4,14 +4,23 @@ A web-based tool for editing Fallout Shelter save files (.sav). Decrypt, modify,
 
 ## Features
 
-- **Save Decryption/Encryption**: Support for AES-256-CBC encryption used by Fallout Shelter.
+- **Save Decryption/Encryption**: Support for AES-256-CBC encryption used by Fallout Shelter (including .sav and .sav.bkP files).
 - **Resource Management**: Edit Caps, Nuka-Cola Quantum, Food, Water, and Power.
-- **Dweller Operations**: Comprehensive editor for dweller stats (S.P.E.C.I.A.L.), health, level, and equipment (weapons/outfits). Support for moving dwellers between rooms.
+- **Improved Dweller Editor**: Enhanced dweller management with **Quick Actions**:
+    - **Optimize HP**: Automatically calculate and apply optimal health stats based on Current Level and Endurance.
+    - **Quick Promotions**: Instantly promote dwellers to Level 50 or reset them to Level 1.
+    - **Max SPECIAL**: One-click maxing of all S.P.E.C.I.A.L. stats.
+    - **Equip & Move**: Seamlessly equip weapons/outfits and move dwellers between rooms.
+- **Safety & Integrity**:
+    - **Child Safeguards**: Intelligent restrictions for child dwellers to prevent game logic errors.
+    - **Safe Equipment Handling**: Structured JSON objects for weapons/outfits to prevent save file corruption.
 - **Inventory Management**: Structured editor for Weapons, Outfits, Junk, and Miscellaneous items with advanced sorting (damage, stats, rarity).
 - **Vault Visualization**: Interactive room viewer to explore vault layout, manage rooms, and monitor dwellers.
+- **Advanced Sorting**: Comprehensive sorting of dwellers by Name, Level, Health, Damage, or Assigned Room (including stat-based room sorting).
 - **Recipe Management**: Unlock and manage crafting recipes.
-- **Raw JSON Editor**: Advanced editing via direct JSON manipulation.
+- **Raw JSON Editor**: Advanced editing via direct JSON manipulation for power users.
 - **Responsive Design**: Built with Tailwind CSS and shadcn/ui for a modern, mobile-friendly interface.
+- **Privacy First**: Integrated Vault-Tec Consent Protocol for anonymous telemetry management.
 
 ## Tech Stack
 
