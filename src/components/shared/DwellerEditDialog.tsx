@@ -106,7 +106,12 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
   };
 
   const handleSave = () => {
-    onSave(dweller.serializeId, localDweller);
+    const finalDweller = {
+      ...localDweller,
+      name: (localDweller.name || '').trim(),
+      lastName: (localDweller.lastName || '').trim()
+    };
+    onSave(dweller.serializeId, finalDweller);
     onClose();
   };
 
@@ -132,7 +137,7 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="sm" onClick={resetToLevel1}>
+                    <Button type="button" variant="outline" size="sm" onClick={resetToLevel1}>
                       <RotateCcw className="w-3.5 h-3.5 mr-1.5" />
                       Reset Lv.1
                     </Button>
@@ -141,7 +146,7 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="sm" onClick={optimizeHealth}>
+                    <Button type="button" variant="outline" size="sm" onClick={optimizeHealth}>
                       <HeartPulse className="w-3.5 h-3.5 mr-1.5" />
                       Optimize HP
                     </Button>
@@ -150,7 +155,7 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="sm" onClick={setLevel50}>
+                    <Button type="button" variant="outline" size="sm" onClick={setLevel50}>
                       <ArrowUp className="w-3.5 h-3.5 mr-1.5" />
                       Lv.50
                     </Button>
@@ -159,7 +164,7 @@ export function DwellerEditDialog({ open, onClose, dweller, onSave }: DwellerEdi
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="outline" size="sm" onClick={maxAllSpecial}>
+                    <Button type="button" variant="outline" size="sm" onClick={maxAllSpecial}>
                       <Star className="w-3.5 h-3.5 mr-1.5" />
                       Max SPECIAL
                     </Button>
