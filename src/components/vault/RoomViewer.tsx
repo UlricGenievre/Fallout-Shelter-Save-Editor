@@ -34,11 +34,14 @@ interface RoomViewerProps {
   onUpdateDweller?: (dwellerId: number, changes: any) => void;
   vaultName?: string;
   onUpdateVaultName?: (newName: string) => void;
+  onUpdateRooms?: (newRooms: Room[]) => void;
   movingDwellerId: number | null;
   onSetMovingDwellerId: (id: number | null) => void;
   onSelectRoom: (targetIdx: number | null) => void;
   onOpenRoomPicker: () => void;
 }
+
+import { VaultLayoutEditor } from './VaultLayoutEditor';
 
 const ROOM_CLASS_COLORS: Record<string, string> = {
   'Training': 'bg-purple-500 hover:bg-purple-600',
@@ -99,12 +102,14 @@ export function RoomViewer({
   onUpdateDweller, 
   vaultName = '000', 
   onUpdateVaultName,
+  onUpdateRooms,
   movingDwellerId,
   onSetMovingDwellerId,
   onSelectRoom,
   onOpenRoomPicker
 }: RoomViewerProps) {
   const [isMagicMode, setIsMagicMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -195,6 +200,20 @@ export function RoomViewer({
     );
   }
 
+  if (isEditMode) {
+    return (
+      <VaultLayoutEditor
+        initialRooms={rooms}
+        onSave={(newRooms) => {
+          onUpdateRooms?.(newRooms);
+          setIsEditMode(false);
+        }}
+        onCancel={() => setIsEditMode(false)}
+        vaultName={vaultName}
+      />
+    );
+  }
+
   return (
     <div className="w-full h-full p-6 overflow-auto">
       {movingDwellerId !== null && (() => {
@@ -266,13 +285,24 @@ export function RoomViewer({
             ({rooms.length} rooms)
           </span>
         </h2>
-        <div className="absolute right-0 flex items-center gap-3 bg-card/50 px-4 py-2 rounded-full border border-border shadow-sm">
-          <Sparkles className={`w-4 h-4 ${isMagicMode ? 'text-primary animate-pulse' : 'text-muted-foreground'}`} />
-          <Switch
-            id="magic-mode"
-            checked={isMagicMode}
-            onCheckedChange={setIsMagicMode}
-          />
+        <div className="absolute right-0 flex items-center gap-3">
+          <div className="flex items-center gap-3 bg-card/50 px-4 py-2 rounded-full border border-border shadow-sm">
+            <span className="text-sm font-display text-muted-foreground">EDIT MODE</span>
+            <Switch
+              id="layout-edit-mode"
+              checked={isEditMode}
+              onCheckedChange={setIsEditMode}
+              disabled={movingDwellerId !== null}
+            />
+          </div>
+          <div className="flex items-center gap-3 bg-card/50 px-4 py-2 rounded-full border border-border shadow-sm">
+            <Sparkles className={`w-4 h-4 ${isMagicMode ? 'text-primary animate-pulse' : 'text-muted-foreground'}`} />
+            <Switch
+              id="magic-mode"
+              checked={isMagicMode}
+              onCheckedChange={setIsMagicMode}
+            />
+          </div>
         </div>
       </div>
 

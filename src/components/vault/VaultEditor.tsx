@@ -335,6 +335,17 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
     }
   };
 
+  const handleUpdateRooms = (newRooms: any[]) => {
+    if (!setData || !data) return;
+    const newData = JSON.parse(JSON.stringify(data));
+    if (newData.vault) {
+      // Re-link dwellers' savedRoom properties based on new layout ?
+      // If we move rooms around, their `deserializeID` stays the same. `Room` holds the same instance conceptually.
+      newData.vault.rooms = newRooms;
+      setData(newData);
+    }
+  };
+
   const handleSelectRoom = (targetIdx: number | null) => {
     if (targetIdx === null) {
       // Coffee break directly
@@ -412,6 +423,7 @@ export function VaultEditor({ data, setData }: VaultEditorProps) {
             inventory={inventory}
             vaultName={vaultName}
             onUpdateVaultName={handleUpdateVaultName}
+            onUpdateRooms={handleUpdateRooms}
             onEquipWeapon={handleEquipWeapon}
             onEquipOutfit={handleEquipOutfit}
             onMoveDweller={handleMoveDweller}
